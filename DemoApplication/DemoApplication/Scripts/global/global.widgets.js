@@ -1,5 +1,4 @@
-﻿/// <reference path="lib/jquery-ui/jquery-ui-1.8.24.js" />
-// draggable blocks //
+﻿// draggable blocks //
 $(".sortableContent .column").sortable({
     connectWith: ".sortableContent .column",
     items: "> .widget",

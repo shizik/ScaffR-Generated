@@ -1,0 +1,80 @@
+﻿@model DemoApplication.Models.Users.UserViewModel
+
+@{
+    Layout = "~/Views/Users/_AdminUserLayout.cshtml";
+}
+
+<div class="row-fluid">
+    <div class="span9">
+        <h4>Company</h4>
+        <ul>
+            <li>
+                <input type="checkbox" />
+                <span class="task">Fill out New Hire W-4
+                </span>
+                <span class="assignment">
+                    <span class="assigned-to">Christine Alexander</span>
+                    <span class="assignment-date">5/13/13</span>
+                    <span class="days">20 days</span>
+                </span>
+            </li>
+            <li>
+                <input type="checkbox" />
+                Full out New Hire I-9
+            </li>
+        </ul>
+        <button type="button" class="btn btn-large">
+            Add New Task
+            <i class="icon-plus"></i>
+        </button>
+    </div>
+    <div class="span3">
+
+        <div class="well">
+            <h4>Apply Templates</h4>
+            <a href="#">Manage Templates</a>
+            <ul>
+                <li>
+                    <a href="#">Template 1</a>                    
+                </li>
+                <li>
+                    <a href="#">Template 2</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="well">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Show Tasks by Assignee
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">asdf</a>
+                    </li>
+                </ul>
+            </div>
+            <br />
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">View Tasks Due
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">asdf</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="well">
+            <h4>Comments</h4>
+            <button type="button" class="btn">
+                Add Comment
+            <i class="icon-plus"></i>
+            </button>
+        </div>
+
+
+
+    </div>
+</div>

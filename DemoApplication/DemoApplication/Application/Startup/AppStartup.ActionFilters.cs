@@ -33,7 +33,7 @@ namespace DemoApplication.Application.Startup
         /// </summary>
         public static void ActionFilters()
         {
-            GlobalFilters.Filters.Add(new CustomHandleErrorAttribute());
+            //GlobalFilters.Filters.Add(new CustomHandleErrorAttribute());
             GlobalFilters.Filters.Add(new CustomAuthorizeAttribute());
             GlobalFilters.Filters.Add(new FillDropDowns());
             GlobalFilters.Filters.Add(new ShowPageHeadingText(true));

@@ -14,6 +14,7 @@ namespace DemoApplication.Application
     #region
 
     using System.Web.Mvc;
+    using Engine;
     using Extensions.ErrorHandlingHelpers;
     using ModelBinders;
 
@@ -41,6 +42,9 @@ namespace DemoApplication.Application
 
             // Add my MVC Provider
             ModelBinderProviders.BinderProviders.Add(new EFModelBinderProviderMvc());
+
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new AngularRazorViewEngine());
         }
     }
 }

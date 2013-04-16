@@ -1,0 +1,5 @@
+﻿*
+
+[references]
+~/scripts/lib/angular
+~/scripts/lib/bootstrap

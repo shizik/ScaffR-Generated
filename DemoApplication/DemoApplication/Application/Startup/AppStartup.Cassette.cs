@@ -30,15 +30,14 @@ namespace DemoApplication.Application.Startup
         /// <param name="configurable">The configurable.</param>
 		public void Configure(BundleCollection configurable)
 		{
-			configurable.AddPerSubDirectory<ScriptBundle>("Scripts", new FileSearch()
-			{
-				SearchOption = SearchOption.TopDirectoryOnly
-			});
-		
-			configurable.Add<StylesheetBundle>("content/less/site.less");
-
-			configurable.AddPerSubDirectory<ScriptBundle>("Scripts/lib");
-
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/global");
+			configurable.AddPerSubDirectory<ScriptBundle>("scripts/lib");
+            configurable.AddPerIndividualFile<ScriptBundle>("scripts/custom", null, bundle => bundle.PageLocation = "custom");
+            configurable.AddPerIndividualFile<ScriptBundle>("scripts/controllers", null, bundle => bundle.PageLocation = "bottom");
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/services", null, bundle => bundle.PageLocation = "custom");
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/directives", null, bundle => bundle.PageLocation = "custom");
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/filters", null, bundle => bundle.PageLocation = "custom");
+            configurable.Add<StylesheetBundle>("content/less/site.less");
             configurable.AddUrlWithAlias<ScriptBundle>("http://maps.google.com/maps/api/js?sensor=false&libraries=places", "googleMaps");
 		}
 	}

@@ -2,6 +2,8 @@
 
 [references]
 ~/scripts/lib/bootstrap
+~/scripts/lib/angular
+~/scripts/lib/angular-bootstrap
 ~/scripts/lib/ckeditor
 ~/scripts/lib/jquery
 ~/scripts/lib/jquery-fileupload

@@ -1,0 +1,38 @@
+﻿@section AltNav
+{
+    <p>
+        <button type="button" class="btn btn-inverse" data-ng-click="open()">
+            Add Group <i class="icon-plus"></i>
+        </button>
+    </p>
+}
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Last Login</th>
+            <th>Approved</th>
+            <th>Is Locked Out</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="phone in phones">
+            <td>{{phone.name}}</td>
+            <td>{{phone.number}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+
+@using (Html.AngularScope("add"))
+{
+    @:{{message}}
+}
+
+

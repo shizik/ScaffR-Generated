@@ -24,12 +24,17 @@
       <mvcSiteMapNode title="Editor Templates" controller="Components" action="EditorTemplates"/>
       <mvcSiteMapNode title="Exceptions" controller="Components" action="Exceptions"/>
     </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Tasks" controller="Tasks" action="Index" >
+      </mvcSiteMapNode>
 
     <mvcSiteMapNode title="Admin" controller="Home" action="Manage" imageUrl="icon-lock" key="Manage" visibility="breadcrumb">
+      <mvcSiteMapNode title="Manage Groups" controller="Security" action="Index"/>
       <mvcSiteMapNode title="Manage Users" controller="Users" action="Manager" imageUrl="icon-group" key="ManageUsers">
         <mvcSiteMapNode title="Details" controller="Users" action="Details" key="UserDetails" preservedRouteParameters="id"/>
         <mvcSiteMapNode title="Security" controller="Users" action="Security" preservedRouteParameters="id"/>
         <mvcSiteMapNode title="History" controller="Users" action="History" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Tasks" controller="Users" action="Tasks" preservedRouteParameters="id"/>
       </mvcSiteMapNode>
       <mvcSiteMapNode title="View Logs" controller="Logging" action="Manage" key="ViewLogs">
         <mvcSiteMapNode title="Success" controller="Logging" action="Success"/>
