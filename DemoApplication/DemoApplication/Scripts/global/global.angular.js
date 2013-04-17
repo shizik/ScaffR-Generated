@@ -4,7 +4,7 @@
 var Application = Application || {};
 
 Application.Constants = angular.module('application.constants', []);
-Application.Services = angular.module('application.services', []);
+Application.Services = angular.module('application.services', ['ngResource']);
 Application.Controllers = angular.module('application.controllers', []);
 Application.Filters = angular.module('application.filters', []);
 Application.Directives = angular.module('application.directives', []);
@@ -16,5 +16,5 @@ angular.module('application', ['ui.bootstrap', 'application.filters', 'applicati
 
 // web.config 
 Application.Constants.constant('$config', {
-    SERVICE_ROOT: '/'
+    SERVICE_ROOT: '/Scripts/mock-data/'
 });

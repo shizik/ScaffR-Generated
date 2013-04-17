@@ -433,6 +433,8 @@
     <Content Include="Scripts\global\global.validation.js" />
     <Content Include="Scripts\global\global.widgets.js" />
     <Content Include="Scripts\lib\angular-bootstrap\bundle.txt" />
+    <Content Include="Scripts\lib\angular-resource\angular-resource.js" />
+    <Content Include="Scripts\lib\angular-resource\bundle.txt" />
     <Content Include="Scripts\lib\angular\angular.js" />
     <Content Include="Scripts\lib\angular\bundle.txt" />
     <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
@@ -645,10 +647,20 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\mock-data\employees\2.js" />
+    <Content Include="Scripts\mock-data\employees\1.js" />
+    <Content Include="Scripts\mock-data\tasks\list.js" />
+    <Content Include="Scripts\mock-data\tasks\task.js" />
+    <Content Include="Scripts\mock-data\teams\summary.js" />
+    <Content Include="Scripts\mock-data\templates\summary.js" />
+    <Content Include="Scripts\mock-data\employees\summary.js" />
+    <Content Include="Scripts\mock-data\templates\template.js" />
+    <Content Include="Scripts\services\categories.js" />
+    <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
     <Content Include="Scripts\services\templates.js" />
-    <Content Include="Scripts\services\users.js" />
+    <Content Include="Scripts\services\employees.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
