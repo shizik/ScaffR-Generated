@@ -2,22 +2,51 @@
 
 Application.Controllers.controller('index', ['$scope', 'groups', function ($scope, groups) {
 
-    groups.get('asdf asdf');
+    $scope.display = 'tiles';
+    $scope.sort = 'za';
 
-    $scope.phones = [
+    var items = [
         {
-            "name": "asdf",
-            "number": "asdf"
+            "name": "John Smith",
+            "open": 1,
+            "overdue": 0,
+            "closed": 2,
+            "tasks": 3
+        },{
+            "name": "John Hancock",
+            "open": 1,
+            "overdue": 0,
+            "closed": 2,
+            "tasks": 3
         }
     ];
-    
-    $scope.open = function() {
-        alert('open');
+
+    $scope.getItems = function () {       
+        return items;
     };
-    
+
+    $scope.changeDisplay = function (mode) {
+        $scope.display = mode;
+    };
+
+    $scope.changeSort = function(sort) {
+        $scope.sort = sort;
+    };
+
+    $scope.getSortLabel = function(sort) {
+        switch (sort) {
+            case 'az':
+                return 'Sort A-Z';
+            case 'za':
+                return 'Sort Z-A';
+            default:
+                return '';
+        }
+    };
+
 }]);
 
-Application.Controllers.controller('add', function($scope) {
+Application.Controllers.controller('add', function ($scope) {
 
     $scope.message = 'hello';
 

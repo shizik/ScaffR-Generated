@@ -8,31 +8,63 @@
 }
 
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Last Login</th>
-            <th>Approved</th>
-            <th>Is Locked Out</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr data-ng-repeat="phone in phones">
-            <td>{{phone.name}}</td>
-            <td>{{phone.number}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+
+<div class="btn-toolbar">
+
+    <div class="btn-group">        
+        <a class="btn" ng-class="{disabled:display=='tiles'}"  data-ng-click="changeDisplay('tiles')">
+            <i class="icon-th-large"></i>
+        </a>
+        <a class="btn" ng-class="{disabled:display=='list'}" data-ng-click="changeDisplay('list')">
+            <i class="icon-align-justify"></i>
+        </a>
+    </div>
+
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: &nbsp; <strong>{{getSortLabel(sort)}}</strong>
+    <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#" ng-click="changeSort('az')">Name A-Z</a>
+                <a href="#" ng-click="changeSort('za')">Name Z-A</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
 
 
-@using (Html.AngularScope("add"))
-{
-    @:{{message}}
-}
 
+<div data-ng-switch on="display">
+
+    <table class="table table-striped" ng-switch-when="list">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Open</th>
+                <th>Overdue</th>
+                <th>Closed</th>
+                <th>Tasks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="item in getItems()">
+                <td>{{item.name}}</td>
+                <td>{{item.open}}</td>
+                <td>{{item.overdue}}</td>
+                <td>{{item.closed}}</td>
+                <td>{{item.tasks}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row-fluid" ng-switch-when="tiles">
+
+        <div class="span2" data-ng-repeat="item in getItems()">
+            <h2>{{item.name}}</h2>
+        </div>
+
+    </div>
+
+</div>
 

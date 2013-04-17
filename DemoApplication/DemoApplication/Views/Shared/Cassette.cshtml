@@ -1,5 +1,4 @@
 @{
-
     Bundles.Reference("content/less/site.less");
     Bundles.Reference("scripts/lib/jquery");
     Bundles.Reference("scripts/lib/angular");
@@ -14,7 +13,6 @@
     Bundles.Reference("scripts/services");
     Bundles.Reference("scripts/directives");   
     Bundles.Reference("scripts/global");
-
 }
 
 <!doctype html>
@@ -28,7 +26,7 @@
         @Bundles.RenderScripts("head")
     </head>
  
-    <body class="@ViewBag.BodyClass">
+    <body class="@ViewBag.BodyClass ng-cloak">
         
         @using (Html.AngularScope())
         {

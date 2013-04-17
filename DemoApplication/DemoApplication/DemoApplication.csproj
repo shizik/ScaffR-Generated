@@ -646,6 +646,8 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
     <Content Include="Scripts\services\groups.js" />
+    <Content Include="Scripts\services\tasks.js" />
+    <Content Include="Scripts\services\templates.js" />
     <Content Include="Scripts\services\users.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
