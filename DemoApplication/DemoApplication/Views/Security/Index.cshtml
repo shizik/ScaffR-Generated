@@ -49,7 +49,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in getItems()">
+            <tr data-ng-repeat="item in items">
                 <td>{{item.name}}</td>
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
@@ -60,7 +60,7 @@
     </table>
     <div class="row-fluid" ng-switch-when="tiles">
 
-        <div class="span2" data-ng-repeat="item in getItems()">
+        <div class="span2" data-ng-repeat="item in items">
             <h2>{{item.name}}</h2>
         </div>
 
