@@ -1,12 +1,14 @@
  
 
 [references]
-~/scripts/lib/bootstrap
 ~/scripts/lib/angular
 ~/scripts/lib/angular-bootstrap
+~/scripts/lib/angular-resource
+~/scripts/lib/bootstrap
 ~/scripts/lib/ckeditor
 ~/scripts/lib/jquery
 ~/scripts/lib/jquery-fileupload
 ~/scripts/lib/jquery-plugins
 ~/scripts/lib/jquery-tmpl
 ~/scripts/lib/jquery-ui
+~/scripts/lib/underscore

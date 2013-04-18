@@ -28,6 +28,11 @@ namespace DemoApplication.Areas.Api.Controllers
     {
         protected IService<T> Service;
 
+        public virtual IEnumerable<T> Get()
+        {
+            return Service.GetAll();
+        }
+
         public virtual HttpResponseMessage Get(int id)
         {
             T item = Service.GetById(id);
@@ -38,11 +43,6 @@ namespace DemoApplication.Areas.Api.Controllers
             }
 
             return response;
-        }
-
-        public virtual IEnumerable<T> Get()
-        {
-            return Service.GetAll();
         }
 
         public virtual void Delete(int id)

@@ -1,16 +1,17 @@
 ﻿/// <reference path="../global/global.angular.js" />
 
-Application.Services.factory('teams', function ($resource) {
+Application.Services.factory('departments', function ($resource) {
 
     // TODO: Change with WebApi endpoint
-    var endPoint = $resource('/Scripts/mock-data/teams/:file.js', {}, {
+    var endPoint = $resource('/Scripts/mock-data/departments/:file.js', {}, {
         get: { method: 'GET', params: { file: '@file' } },
         getSummary: { method: 'GET', params: { file: '@file' }, isArray: true },
     });
 
     return {
-        getSummary: function () { 
+        getAll: function () {
             return endPoint.getSummary({ file: "summary" });
         }
     };
+
 });

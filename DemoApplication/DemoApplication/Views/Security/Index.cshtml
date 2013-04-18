@@ -4,6 +4,17 @@
         <button type="button" class="btn btn-inverse" data-ng-click="open()">
             Add Group <i class="icon-plus"></i>
         </button>
+        <div modal="shouldBeOpen" close="close()" options="opts">
+            <div class="modal-header">
+                <h4>I'm a modal!</h4>
+            </div>
+            <div class="modal-body">
+                This is where the middle goes
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+            </div>
+        </div>
     </p>
 }
 
@@ -11,8 +22,8 @@
 
 <div class="btn-toolbar">
 
-    <div class="btn-group">        
-        <a class="btn" ng-class="{disabled:display=='tiles'}"  data-ng-click="changeDisplay('tiles')">
+    <div class="btn-group">
+        <a class="btn" ng-class="{disabled:display=='tiles'}" data-ng-click="changeDisplay('tiles')">
             <i class="icon-th-large"></i>
         </a>
         <a class="btn" ng-class="{disabled:display=='list'}" data-ng-click="changeDisplay('list')">
@@ -21,13 +32,52 @@
     </div>
 
     <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: &nbsp; <strong>{{getSortLabel(sort)}}</strong>
-    <span class="caret"></span>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: <strong>{{getSortLabel(sort)}}</strong>
+            <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li>
                 <a href="#" ng-click="changeSort('az')">Name A-Z</a>
                 <a href="#" ng-click="changeSort('za')">Name Z-A</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Filter By:
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu filter">
+            <li>                
+                <div>
+                    <input name="query"/>
+                    <ul>
+                        <li>Status</li>
+                        <ul>
+                            <li>Open</li>
+                            <li>Open</li>
+                            <li>Open</li>
+                        </ul>
+                        <li>Assigned To</li>
+                        <ul>
+                            <li></li>
+                        </ul>
+                        <li>Team</li>
+                        <ul>
+                            <li data-ng-repeat="team in teams" >
+                                <a ng-click="changeFilter('team', $team.id)">{{team.name}}</a>    
+                            </li>
+                        </ul>
+                        <li>Department</li>
+                        <ul>
+                            <li data-ng-repeat="department in departments" >
+                                <a ng-click="">{{department.name}}</a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+
+
             </li>
         </ul>
     </div>
@@ -49,7 +99,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in items">
+            <tr data-ng-repeat="item in items | customSort:sort">
                 <td>{{item.name}}</td>
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
@@ -58,13 +108,18 @@
             </tr>
         </tbody>
     </table>
-    <div class="row-fluid" ng-switch-when="tiles">
 
-        <div class="span2" data-ng-repeat="item in items">
-            <h2>{{item.name}}</h2>
+    <div class="span12 tiles" ng-switch-when="tiles">
+
+        <div class="tile" data-ng-repeat="item in items | customSort:sort">
+            <h3>{{item.name}}</h3>
+            <p>{{item.open}} Open</p>
+            <p>{{item.overdue}} Overdue</p>
+            <p>{{item.closed}} Closed</p>
+            <p>{{item.tasks}} Tasks</p>
         </div>
 
-    </div>
 
+    </div>
 </div>
 

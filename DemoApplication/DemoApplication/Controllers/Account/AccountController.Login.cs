@@ -14,11 +14,10 @@ namespace DemoApplication.Controllers.Account
 
     using System.Web.Mvc;
     using Core.Common.Membership;
-    using DemoApplication.Security.Authorization;
+    using Security.Authorization;
     using Extensions.ModelStateHelpers;
     using Filters;
     using Models.Account;
-    using Security.Authorization;
 
     #endregion
 
