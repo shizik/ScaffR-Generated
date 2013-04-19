@@ -32,6 +32,7 @@ namespace DemoApplication.DependencyResolution
     using Core.Interfaces.Site;
     using Core.Model;
     using Core.Services;
+    using Infrastructure.Http;
     using Dropdowns;
     using Dropdowns.Dropdowns;
     using Infrastructure.Configuration;
@@ -85,9 +86,6 @@ namespace DemoApplication.DependencyResolution
             // This is needed due to changed dependency resolution for WebAPI
             DependencyResolver.SetResolver(new NinjectResolver(kernel));
 
-            // We don't need this, plus it messes up when controller is not found
-            //ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory(kernel));
-
             RegisterServices(kernel);
             return kernel;
         }
@@ -105,6 +103,7 @@ namespace DemoApplication.DependencyResolution
 
             kernel.Bind<IRepository<Log>>().To<LoggingRepository>().InRequestScope();
             kernel.Bind<IService<Log>>().To<LoggingService>().InRequestScope();
+            kernel.Bind<IWebApiDataContext>().To<BreezeDataContext>().InRequestScope();
 
             // security
             kernel.Bind<IAuthenticationService>().To<ClaimsAuthenticationService>().InRequestScope();
@@ -126,21 +125,6 @@ namespace DemoApplication.DependencyResolution
             kernel.Bind<ISiteSettings>().ToConstant(AppConfig.Instance.Site).InSingletonScope();
             kernel.Bind<IPhotoSettings>().ToConstant(AppConfig.Instance.Photos).InSingletonScope();
             kernel.Bind<IMembershipSettings>().ToConstant(AppConfig.Instance.Membership).InSingletonScope();
-        }
-
-        public class NinjectControllerFactory : DefaultControllerFactory
-        {
-            private readonly IKernel ninjectKernel;
-
-            public NinjectControllerFactory(IKernel kernel)
-            {
-                ninjectKernel = kernel;
-            }
-
-            protected override IController GetControllerInstance(System.Web.Routing.RequestContext requestContext, Type controllerType)
-            {
-                return controllerType == null ? null : (IController)ninjectKernel.Get(controllerType);
-            }
         }
     }
 }
