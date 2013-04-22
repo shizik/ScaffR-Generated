@@ -4,7 +4,7 @@
 Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
-    
+
     $scope.sort = 'za';
 
     $scope.filter = {
@@ -12,7 +12,15 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         assignedTo: [],
         team: [],
         department: [],
-        alpha:true
+        alpha: true
+    };
+
+    $scope.status;
+
+    $scope.statusFilter = function (item) {
+        if (!$scope.status) return true;
+
+        return item[$scope.status].length > 0;
     };
 
     employee.summary(function (data) {
@@ -20,7 +28,7 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         for (var i = 0; i < data.employees.length; i++) {
 
             var emp = data.employees[i];
-            
+
             emp.open = [];
             emp.closed = [];
             emp.overdue = [];
@@ -28,21 +36,21 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
             for (var j = 0; j < emp.tasks.length; j++) {
 
                 var task = emp.tasks[j];
-                
+
                 if (!emp[task.status]) {
                     emp[task.status] = [];
                 }
                 emp[task.status].push(task);
-            }            
+            }
         }
-        
+
         $scope.employees = data.employees;
         $scope.assignables = data.assignables;
         $scope.departments = data.departments;
         $scope.summary = data.summary;
         $scope.teams = getTeamSummary(data.assignables);
     });
-    
+
     function getTeamSummary(ass) {
         var summary = [];
         for (var i = 0; i < ass.length; i++) {
@@ -54,16 +62,20 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         return summary;
     }
 
+
     $scope.changeFilter = function (status) {
-       if (_.contains($scope.filter.status, status)) {
-           $scope.filter.status = _.without($scope.filter.status, status);
-       } else {
-           $scope.filter.status.push(status);
-       }
-        console.log($scope.filter.status);
+
+        $scope.status = status;
+
+        //if (_.contains($scope.filter.status, status)) {
+        //    $scope.filter.status = _.without($scope.filter.status, status);
+        //} else {
+        //    $scope.filter.status.push(status);
+        //}
+        //console.log($scope.filter.status);
     };
 
-    $scope.containsStatus = function(status) {
+    $scope.containsStatus = function (status) {
         return _.contains($scope.filter.status, status);
     };
 
@@ -73,7 +85,7 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
 
     $scope.changeSort = function (sort) {
         $scope.sort = sort;
-    };    
+    };
 
     $scope.getSortLabel = function (sort) {
         switch (sort) {

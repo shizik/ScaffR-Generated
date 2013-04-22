@@ -8,12 +8,14 @@
 // Last Modified On : 03-28-2013
 // ***********************************************************************
 #endregion
+
 namespace DemoApplication.Infrastructure.Membership
 {
     #region
 
     using System;
     using System.Data.Entity.Migrations;
+    using System.Linq;
     using System.Security.Claims;
     using Core.Model;
     using Data;
@@ -24,48 +26,47 @@ namespace DemoApplication.Infrastructure.Membership
     {
         public void Seed(DataContext context)
         {
-            User existing = context.Users.Find(1);
+            User existing = context.Users.SingleOrDefault(x => x.Id == 1);
 
-            if (existing == null)
+            if (existing != null) return;
+
+            var user = new User()
             {
-                var user = new User()
-                {
-                    Id = 1,
-                    Email = "webmaster@scaffr.com",
-                    Username = "admin",
-                    FirstName = "Rod",
-                    LastName = "Johnson",
-                    LastLogin = DateTime.UtcNow,
-                    Gender = Gender.Male,
-                    Address = "Admin address",
-                    PhoneNumber = "555-555-5555",
-                    IsLoginAllowed = true,
-                    IsAccountClosed = false,
-                    IsAccountVerified = true,
-                    Created = DateTime.UtcNow,
-                    Tenant = "default",
-                    // password is "admin"
-                    HashedPassword = "FA00.ACHEhktjwC+lLMLKq0PZXYsnr9HreWXtgMY55xMDY4ctWYeyzGPxt2vGLEtOEX2SKA==",
-                    PasswordChanged = DateTime.UtcNow,
-                    FailedLoginCount = 0,
-                    Updated = DateTime.UtcNow
-                };
+                Id = 1,
+                Email = "webmaster@scaffr.com",
+                Username = "admin",
+                FirstName = "Rod",
+                LastName = "Johnson",
+                LastLogin = DateTime.UtcNow,
+                Gender = Gender.Male,
+                Address = "Admin address",
+                PhoneNumber = "555-555-5555",
+                IsLoginAllowed = true,
+                IsAccountClosed = false,
+                IsAccountVerified = true,
+                Created = DateTime.UtcNow,
+                Tenant = "default",
+                // password is "admin"
+                HashedPassword = "FA00.ACHEhktjwC+lLMLKq0PZXYsnr9HreWXtgMY55xMDY4ctWYeyzGPxt2vGLEtOEX2SKA==",
+                PasswordChanged = DateTime.UtcNow,
+                FailedLoginCount = 0,
+                Updated = DateTime.UtcNow
+            };
 
-                user.Claims.Add(new UserClaim()
-                {
-                    Type = ClaimTypes.Role,
-                    Value = "Admin"
-                });
+            user.Claims.Add(new UserClaim()
+            {
+                Type = ClaimTypes.Role,
+                Value = "Admin"
+            });
 
-                user.Claims.Add(new UserClaim()
-                {
-                    Type = ClaimTypes.Role,
-                    Value = "Super Admin"
-                });
+            user.Claims.Add(new UserClaim()
+            {
+                Type = ClaimTypes.Role,
+                Value = "Super Admin"
+            });
 
-                context.Users.AddOrUpdate(user);
-                context.SaveChanges();
-            }           
+            context.Users.AddOrUpdate(user);
+            context.SaveChanges();
         }
     }
 }

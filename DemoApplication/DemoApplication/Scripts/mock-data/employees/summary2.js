@@ -18,7 +18,7 @@
          },
         {
             "id": 2,
-            "name": "John Smith",
+            "name": "Smith Jones",
             "department": "Sales",
             "tasks": [
                 {
@@ -27,6 +27,42 @@
                     "assignedTo": "1"
                 }, {
                     "id": 2,
+                    "status": "open",
+                    "assignedTo": "1"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "John Doe",
+            "department": "Marketing",
+            "tasks": [
+                {
+                    "id": 3,
+                    "status": "overdue",
+                    "assignedTo": "1"
+                }, {
+                    "id": 8,
+                    "status": "overdue",
+                    "assignedTo": "1"
+                }, {
+                    "id": 5,
+                    "status": "open",
+                    "assignedTo": "1"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "George Washington",
+            "department": "Marketing",
+            "tasks": [
+                {
+                    "id": 3,
+                    "status": "overdue",
+                    "assignedTo": "1"
+                }, {
+                    "id": 5,
                     "status": "open",
                     "assignedTo": "1"
                 }
@@ -58,15 +94,15 @@
     "summary":[
         {
             "status": "open",
-            "count": 2
+            "count": 5
         },
         {
             "status": "closed",
-            "count": 0
+            "count": 1
         },
         {
             "status": "overdue",
-            "count": 0
+            "count": 3
         }
     ]
 }
