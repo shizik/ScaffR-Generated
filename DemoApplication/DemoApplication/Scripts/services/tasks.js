@@ -5,7 +5,8 @@ Application.Services.factory('tasks', function ($resource) {
     // TODO: Change with WebApi endpoint
     var endPoint = $resource('/Scripts/mock-data/tasks/:file.js', {}, {
         get: { method: 'GET', params: { file: '@file' } },
-        query: { method: 'GET', params: { file: '@file' }, isArray: true }
+        query: { method: 'GET', params: { file: '@file' }, isArray: true },
+        summary: { method: 'GET', params: { file: '@file' }, isArray: true },
     });
 
     return {
@@ -28,6 +29,10 @@ Application.Services.factory('tasks', function ($resource) {
         delete: function (task) {
             // TODO: Add logic to delete the task
         },
+        
+        summary: function() {
+            return endPoint.summary({ file: "summary" });
+        }
 
     };
 });

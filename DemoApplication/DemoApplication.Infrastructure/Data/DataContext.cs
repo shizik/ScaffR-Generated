@@ -21,6 +21,16 @@ namespace DemoApplication.Infrastructure.Data
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Log> Log { get; set; }        
+        public DbSet<Log> Log { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Template> Templates { get; set; }
+
+        public DbSet<Task> Tasks { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
     }    
 }

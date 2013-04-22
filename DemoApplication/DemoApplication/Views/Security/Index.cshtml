@@ -18,8 +18,6 @@
     </p>
 }
 
-
-
 <div class="btn-toolbar">
 
     <div class="btn-group">
@@ -54,13 +52,15 @@
                     <ul>
                         <li>Status</li>
                         <ul>
-                            <li>Open</li>
-                            <li>Open</li>
-                            <li>Open</li>
+                            <li ng-repeat="item in summary">
+                                <a href="#">{{item.status}} ({{item.count}})</a>                                
+                            </li>
                         </ul>
                         <li>Assigned To</li>
                         <ul>
-                            <li></li>
+                            <li data-ng-repeat="assignable in assignables">
+                                <a href="#">{{assignable.name}}</a>                                
+                            </li>
                         </ul>
                         <li>Team</li>
                         <ul>
@@ -74,6 +74,9 @@
                                 <a ng-click="">{{department.name}}</a>
                             </li>
                         </ul>
+                    </ul>
+                    <ul>
+                        <li>Sort Items Alphabetically</li>
                     </ul>
                 </div>
 
@@ -99,7 +102,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in items | customSort:sort">
+            <tr data-ng-repeat="item in employees">
                 <td>{{item.name}}</td>
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
@@ -111,12 +114,12 @@
 
     <div class="span12 tiles" ng-switch-when="tiles">
 
-        <div class="tile" data-ng-repeat="item in items | customSort:sort">
+        <div class="tile" data-ng-repeat="item in employees">
             <h3>{{item.name}}</h3>
-            <p>{{item.open}} Open</p>
-            <p>{{item.overdue}} Overdue</p>
-            <p>{{item.closed}} Closed</p>
-            <p>{{item.tasks}} Tasks</p>
+            <p>{{item.open.length}} Open</p>
+            <p>{{item.overdue.length}} Overdue</p>
+            <p>{{item.closed.length}} Closed</p>
+            <p>{{item.tasks.length}} Tasks</p>
         </div>
 
 

@@ -675,6 +675,7 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\mock-data\assignables\summary.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />
     <Content Include="Scripts\mock-data\employees\1.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
@@ -686,6 +687,7 @@
     <Content Include="Scripts\q.js" />
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\services\categories.js" />
+    <Content Include="Scripts\services\assignables.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
@@ -704,8 +706,6 @@
     <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\log\" />
-    <Folder Include="App_Start\" />
     <Folder Include="Content\images\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>

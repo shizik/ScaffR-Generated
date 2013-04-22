@@ -2,13 +2,15 @@
 
 namespace DemoApplication.Core.Model
 {
-    public class Employee : User, IAssignable
+    public class Employee : DomainObject, IAssignable
     {
+            
+
         public string Title { get; set; }
 
         public string Name
         {
-            get { return FullName; }
+            get { return User.FullName; }
         }
 
         public virtual Department Department { get; set; }
@@ -17,5 +19,7 @@ namespace DemoApplication.Core.Model
         /// Assignments about this user
         /// </summary>
         public virtual ICollection<Assignment> AssignmentsAbout { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
