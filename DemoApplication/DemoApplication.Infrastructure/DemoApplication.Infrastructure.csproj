@@ -38,8 +38,14 @@
     <Reference Include="ActionMailer.Net.Standalone">
       <HintPath>..\packages\ActionMailer.Standalone.0.7.4\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
     </Reference>
+    <Reference Include="Breeze.WebApi">
+      <HintPath>..\packages\Breeze.WebApi.1.3.0\lib\Breeze.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony">
+      <HintPath>..\packages\Breeze.WebApi.1.3.0\lib\Irony.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -126,6 +132,7 @@
     <Compile Include="Configuration\Storage\StorageElement.cs" />
     <Compile Include="Data\DatabaseFactory.cs" />
     <Compile Include="Extensions\SessionExtensions.cs" />
+    <Compile Include="Http\BreezeDataContext.cs" />
     <Compile Include="Logging\CodeFirstLogProvider.cs" />
     <Compile Include="Logging\EmailLogProvider.cs" />
     <Compile Include="Logging\ExceptionCodes.cs" />
@@ -144,6 +151,18 @@
     <Compile Include="Migrations\201304011321411_Extended logging fields.cs" />
     <Compile Include="Migrations\201304011321411_Extended logging fields.Designer.cs">
       <DependentUpon>201304011321411_Extended logging fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201304190959250_TasksInitial.cs" />
+    <Compile Include="Migrations\201304190959250_TasksInitial.Designer.cs">
+      <DependentUpon>201304190959250_TasksInitial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201304210539520_Employees.cs" />
+    <Compile Include="Migrations\201304210539520_Employees.Designer.cs">
+      <DependentUpon>201304210539520_Employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201304211207570_Tasks.cs" />
+    <Compile Include="Migrations\201304211207570_Tasks.Designer.cs">
+      <DependentUpon>201304211207570_Tasks.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Membership\MembershipDataSeeder.cs" />
@@ -204,6 +223,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201304011321411_Extended logging fields.resx">
       <DependentUpon>201304011321411_Extended logging fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201304190959250_TasksInitial.resx">
+      <DependentUpon>201304190959250_TasksInitial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201304210539520_Employees.resx">
+      <DependentUpon>201304210539520_Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201304211207570_Tasks.resx">
+      <DependentUpon>201304211207570_Tasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

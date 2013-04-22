@@ -24,7 +24,11 @@ namespace DemoApplication.Infrastructure.Membership
     {
         public void Seed(DataContext context)
         {
-            var user = new User()
+            User existing = context.Users.Find(1);
+
+            if (existing == null)
+            {
+                var user = new User()
                 {
                     Id = 1,
                     Email = "webmaster@scaffr.com",
@@ -47,20 +51,21 @@ namespace DemoApplication.Infrastructure.Membership
                     Updated = DateTime.UtcNow
                 };
 
-            user.Claims.Add(new UserClaim()
+                user.Claims.Add(new UserClaim()
                 {
                     Type = ClaimTypes.Role,
                     Value = "Admin"
                 });
 
-            user.Claims.Add(new UserClaim()
-            {
-                Type = ClaimTypes.Role,
-                Value = "Super Admin"
-            });
+                user.Claims.Add(new UserClaim()
+                {
+                    Type = ClaimTypes.Role,
+                    Value = "Super Admin"
+                });
 
-            context.Users.AddOrUpdate(user);
-            context.SaveChanges();
+                context.Users.AddOrUpdate(user);
+                context.SaveChanges();
+            }           
         }
     }
 }

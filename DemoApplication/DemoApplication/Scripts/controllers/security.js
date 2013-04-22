@@ -1,18 +1,71 @@
 ﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
 'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employees', 'tasks', 'templates', 'departments', 'teams', function ($scope, employees, tasks, templates, departments, teams) {
+Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
+    
     $scope.sort = 'za';
+
     $scope.filter = {
-        field: '',
-        value: ''
+        status: [],
+        assignedTo: [],
+        team: [],
+        department: [],
+        alpha:true
     };
 
-    $scope.items = employees.getSummary();
-    $scope.departments = departments.getAll();
-    $scope.teams = teams.getSummary();
+    employee.summary(function (data) {
+
+        for (var i = 0; i < data.employees.length; i++) {
+
+            var emp = data.employees[i];
+            
+            emp.open = [];
+            emp.closed = [];
+            emp.overdue = [];
+
+            for (var j = 0; j < emp.tasks.length; j++) {
+
+                var task = emp.tasks[j];
+                
+                if (!emp[task.status]) {
+                    emp[task.status] = [];
+                }
+                emp[task.status].push(task);
+            }            
+        }
+        
+        $scope.employees = data.employees;
+        $scope.assignables = data.assignables;
+        $scope.departments = data.departments;
+        $scope.summary = data.summary;
+        $scope.teams = getTeamSummary(data.assignables);
+    });
+    
+    function getTeamSummary(ass) {
+        var summary = [];
+        for (var i = 0; i < ass.length; i++) {
+            var assignable = ass[i];
+            if (assignable.type == 'team') {
+                summary.push(assignable);
+            }
+        }
+        return summary;
+    }
+
+    $scope.changeFilter = function (status) {
+       if (_.contains($scope.filter.status, status)) {
+           $scope.filter.status = _.without($scope.filter.status, status);
+       } else {
+           $scope.filter.status.push(status);
+       }
+        console.log($scope.filter.status);
+    };
+
+    $scope.containsStatus = function(status) {
+        return _.contains($scope.filter.status, status);
+    };
 
     $scope.changeDisplay = function (mode) {
         $scope.display = mode;
@@ -21,13 +74,6 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'tasks', 'te
     $scope.changeSort = function (sort) {
         $scope.sort = sort;
     };    
-
-    $scope.changeFilter = function(field, value) {
-        $scope.filter = {
-            field: field,
-            value: value
-        };        
-    };
 
     $scope.getSortLabel = function (sort) {
         switch (sort) {

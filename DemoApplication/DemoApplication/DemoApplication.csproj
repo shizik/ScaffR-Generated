@@ -45,6 +45,9 @@
     <Reference Include="AjaxMin">
       <HintPath>..\packages\AjaxMin.4.60.4609.17023\lib\net20\AjaxMin.dll</HintPath>
     </Reference>
+    <Reference Include="Breeze.WebApi">
+      <HintPath>..\packages\Breeze.WebApi.1.3.0\lib\Breeze.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="Cassette">
       <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
     </Reference>
@@ -71,7 +74,18 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Irony">
+      <HintPath>..\packages\Breeze.WebApi.1.3.0\lib\Irony.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.SqlServer.Types.10.50.1600.1\lib\Net20\Microsoft.SqlServer.Types.dll</HintPath>
@@ -84,6 +98,10 @@
     </Reference>
     <Reference Include="MvcSiteMapProvider">
       <HintPath>..\packages\ScaffR.Sitemap.1.1.4\lib\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\ScaffR.Ninject.1.1.4\lib\Ninject.dll</HintPath>
@@ -111,12 +129,19 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Services" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.OData">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.1\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
@@ -133,9 +158,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -197,6 +219,7 @@
     <Compile Include="Application\Startup\AppStartup.Routes.cs" />
     <Compile Include="Application\Startup\AppStartup.Validators.cs" />
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
+    <Compile Include="Areas\Api\Controllers\NetchexApiController.cs" />
     <Compile Include="Controllers\Account\AccountController.ChangePassword.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\Account\AccountController.PasswordReset.cs" />
@@ -208,6 +231,7 @@
     <Compile Include="Controllers\Account\AccountController.Logout.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Components\ComponentsController.Exceptions.cs" />
+    <Compile Include="Controllers\Employees\EmployeesController.cs" />
     <Compile Include="Controllers\Home\HomeController.About.cs" />
     <Compile Include="Controllers\SecurityX\SecurityController.cs" />
     <Compile Include="Controllers\Tasks\TasksController.Templates.cs" />
@@ -414,7 +438,11 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\breeze.intellisense.js" />
+    <Content Include="Scripts\breeze.debug.js" />
+    <Content Include="Scripts\breeze.min.js" />
     <Content Include="Scripts\controllers\bundle.txt" />
+    <Content Include="Scripts\controllers\employee.js" />
     <Content Include="Scripts\controllers\home.js" />
     <Content Include="Scripts\custom\bundle.txt" />
     <Content Include="Scripts\custom\custom.js" />
@@ -647,15 +675,22 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\mock-data\assignables\summary.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />
     <Content Include="Scripts\mock-data\employees\1.js" />
+    <Content Include="Scripts\mock-data\employees\summary2.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
+    <Content Include="Scripts\mock-data\tasks\summary.js" />
     <Content Include="Scripts\mock-data\tasks\task.js" />
     <Content Include="Scripts\mock-data\teams\summary.js" />
     <Content Include="Scripts\mock-data\templates\summary.js" />
     <Content Include="Scripts\mock-data\employees\summary.js" />
     <Content Include="Scripts\mock-data\templates\template.js" />
+    <Content Include="Scripts\q.js" />
+    <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\services\categories.js" />
+    <Content Include="Scripts\services\assignables.js" />
+    <Content Include="Scripts\services\employee.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
@@ -671,9 +706,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\log\" />
     <Folder Include="Content\images\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>
