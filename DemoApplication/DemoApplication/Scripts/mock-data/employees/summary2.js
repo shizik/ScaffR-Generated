@@ -15,7 +15,23 @@
                      "assignedTo": "1"
                  }
              ]
-         }
+         },
+        {
+            "id": 2,
+            "name": "John Smith",
+            "department": "Sales",
+            "tasks": [
+                {
+                    "id": 1,
+                    "status": "closed",
+                    "assignedTo": "1"
+                }, {
+                    "id": 2,
+                    "status": "open",
+                    "assignedTo": "1"
+                }
+            ]
+        }
     ],
     "assignables": [
         {

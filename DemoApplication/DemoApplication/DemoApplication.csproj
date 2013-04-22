@@ -678,7 +678,9 @@
     <Content Include="Scripts\mock-data\assignables\summary.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />
     <Content Include="Scripts\mock-data\employees\1.js" />
+    <Content Include="Scripts\mock-data\employees\summary2.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
+    <Content Include="Scripts\mock-data\tasks\summary.js" />
     <Content Include="Scripts\mock-data\tasks\task.js" />
     <Content Include="Scripts\mock-data\teams\summary.js" />
     <Content Include="Scripts\mock-data\templates\summary.js" />
@@ -688,6 +690,7 @@
     <Content Include="Scripts\q.min.js" />
     <Content Include="Scripts\services\categories.js" />
     <Content Include="Scripts\services\assignables.js" />
+    <Content Include="Scripts\services\employee.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />

@@ -54,8 +54,17 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         return summary;
     }
 
-    $scope.changeFilter = function() {
+    $scope.changeFilter = function (status) {
+       if (_.contains($scope.filter.status, status)) {
+           $scope.filter.status = _.without($scope.filter.status, status);
+       } else {
+           $scope.filter.status.push(status);
+       }
+        console.log($scope.filter.status);
+    };
 
+    $scope.containsStatus = function(status) {
+        return _.contains($scope.filter.status, status);
     };
 
     $scope.changeDisplay = function (mode) {
@@ -65,13 +74,6 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
     $scope.changeSort = function (sort) {
         $scope.sort = sort;
     };    
-
-    $scope.changeFilter = function(field, value) {
-        $scope.filter = {
-            field: field,
-            value: value
-        };        
-    };
 
     $scope.getSortLabel = function (sort) {
         switch (sort) {

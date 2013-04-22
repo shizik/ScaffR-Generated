@@ -52,8 +52,8 @@
                     <ul>
                         <li>Status</li>
                         <ul>
-                            <li ng-repeat="item in summary">
-                                <a href="#">{{item.status}} ({{item.count}})</a>                                
+                            <li ng-class="{active:containsStatus(item.status)}" ng-repeat="item in summary">
+                                <a href="#" ng-click="changeFilter(item.status)">{{item.status}} ({{item.count}})</a>                                
                             </li>
                         </ul>
                         <li>Assigned To</li>
@@ -102,7 +102,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in employees">
+            <tr data-ng-repeat="item in employees | customFilter:filter | customSort:sort">
                 <td>{{item.name}}</td>
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
@@ -114,7 +114,7 @@
 
     <div class="span12 tiles" ng-switch-when="tiles">
 
-        <div class="tile" data-ng-repeat="item in employees">
+        <div class="tile" data-ng-repeat="item in employees| customFilter:filter | customSort:sort">
             <h3>{{item.name}}</h3>
             <p>{{item.open.length}} Open</p>
             <p>{{item.overdue.length}} Overdue</p>
