@@ -18,7 +18,7 @@
     </p>
 }
 
-<div class="btn-toolbar">
+<div class="btn-toolbar form-inline">
 
     <div class="btn-group">
         <a class="btn" ng-class="{disabled:display=='tiles'}" data-ng-click="changeDisplay('tiles')">
@@ -30,13 +30,16 @@
     </div>
 
     <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: <strong>{{getSortLabel(sort)}}</strong>
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: <strong>{{ sortLabel }}</strong>
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="#" ng-click="changeSort('az')">Name A-Z</a>
-                <a href="#" ng-click="changeSort('za')">Name Z-A</a>
+                <a href="#" ng-click="predicate = 'name'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
+                <a href="#" ng-click="predicate = 'name'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
+                <a href="#" ng-click="predicate = 'overdue.length'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
+                <a href="#" ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
+                <a href="#" ng-click="predicate = 'dateDue'; reverse=false; sortLabel='Date Due'">Date Due</a>
             </li>
         </ul>
     </div>
@@ -46,31 +49,31 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu filter">
-            <li>                
+            <li>
                 <div>
-                    <input name="query"/>
+                    <input name="query" />
                     <ul>
                         <li>Status</li>
                         <ul>
                             <li ng-class="{active:containsStatus(item.status)}" ng-repeat="item in summary">
-                                <a href="#" ng-click="changeFilter(item.status)">{{item.status}} ({{item.count}})</a>                                
+                                <a href="#" ng-click="changeFilter(item.status)">{{item.status}} ({{item.count}})</a>
                             </li>
                         </ul>
                         <li>Assigned To</li>
                         <ul>
                             <li data-ng-repeat="assignable in assignables">
-                                <a href="#">{{assignable.name}}</a>                                
+                                <a href="#">{{assignable.name}}</a>
                             </li>
                         </ul>
                         <li>Team</li>
                         <ul>
-                            <li data-ng-repeat="team in teams" >
-                                <a ng-click="changeFilter('team', $team.id)">{{team.name}}</a>    
+                            <li data-ng-repeat="team in teams">
+                                <a ng-click="changeFilter('team', $team.id)">{{team.name}}</a>
                             </li>
                         </ul>
                         <li>Department</li>
                         <ul>
-                            <li data-ng-repeat="department in departments" >
+                            <li data-ng-repeat="department in departments">
                                 <a ng-click="">{{department.name}}</a>
                             </li>
                         </ul>
@@ -79,12 +82,12 @@
                         <li>Sort Items Alphabetically</li>
                     </ul>
                 </div>
-
-
             </li>
         </ul>
     </div>
-
+    <div class="btn-group">
+        <input type="text" class="input-xxlarge" placeholder="Type to search..." ng-model="query" />
+    </div>
 </div>
 
 
@@ -102,19 +105,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in employees | customFilter:filter | customSort:sort">
+            <tr data-ng-repeat="item in employees | filter:statusFilter | filter:{'name':query} | orderBy:predicate:reverse">
                 <td>{{item.name}}</td>
-                <td>{{item.open}}</td>
-                <td>{{item.overdue}}</td>
-                <td>{{item.closed}}</td>
-                <td>{{item.tasks}}</td>
+                <td>{{item.open.length}}</td>
+                <td>{{item.overdue.length}}</td>
+                <td>{{item.closed.length}}</td>
+                <td>{{item.tasks.length}}</td>
             </tr>
         </tbody>
     </table>
 
     <div class="span12 tiles" ng-switch-when="tiles">
 
-        <div class="tile" data-ng-repeat="item in employees| customFilter:filter | customSort:sort">
+        <div class="tile" data-ng-repeat="item in employees| filter:statusFilter | filter:{'name':query} | orderBy:predicate:reverse">
             <h3>{{item.name}}</h3>
             <p>{{item.open.length}} Open</p>
             <p>{{item.overdue.length}} Overdue</p>
