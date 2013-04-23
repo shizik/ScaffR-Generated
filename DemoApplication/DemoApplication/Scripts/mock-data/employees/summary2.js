@@ -10,11 +10,13 @@
                      "category": "Forms",
                      "asignee":"Christine Alexander",
                      "due": "05/13/13",
+                     "assignedTo": "1",
                      "status": "overdue"
                  }, {
                      "name":"Fill out New Hire W-4",
                      "category": "Forms",
                      "asignee":"Christine Alexander",
+                     "assignedTo": "1",
                      "due": "05/13/13",
                      "status": "overdue"
                  }
@@ -48,11 +50,11 @@
                 }, {
                     "id": 8,
                     "status": "overdue",
-                    "assignedTo": "1"
+                    "assignedTo": "2"
                 }, {
                     "id": 5,
                     "status": "open",
-                    "assignedTo": "1"
+                    "assignedTo": "2"
                 }
             ]
         },
@@ -77,22 +79,26 @@
         {
             "id": 1,
             "name": "George Washington",
-            "type": "person"
+            "type": "person",
+            "count": 6
         },
         {
             "id": 2,
             "name": "Portland Trailblazers",
-            "type": "team"
+            "type": "team",
+            "count": 10
         }
     ],
     "departments":[
         {
             "id":1,
-            "name":"Sales"            
+            "name":"Sales",
+            "count": 8            
         },
         {
             "id":2,
-            "name":"Marketing"
+            "name":"Marketing",
+            "count": 24
         }
     ],
     "summary":[

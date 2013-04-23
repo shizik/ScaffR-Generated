@@ -3,42 +3,34 @@
 
 Application.Directives.directive('flexFilter', function factory($parse, list) {
 
-    var definition = {
+    return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/statusFilter.html',
         scope: {
-            list: '=list'
+            list: '=',
+            filter: '=',
+            value: '@',
+            display: '@',
+            count: '@'
         },
         replace: true,
-        link: function (scope, element, attrs) {
+        controller: function ($scope) {
+            $scope.selection = [];
 
-            console.log('list', scope, element);
-           
+            $scope.$watch('selection', function () {
+                $scope.filter = [];
+
+                _.each($scope.selection, function (value, index) {
+                    if (!value) return;
+
+                    $scope.filter.push($scope.list[index][$scope.value || 'id']);
+                });
+
+                console.log('flexFilter', $scope.filter);
+
+            }, true);
         }
     };
-
-    return definition;
-
-});
-
-Application.Directives.directive('flexFilterItem', function factory($parse, list) {
-
-    var definition = {
-        restrict: 'E',
-        template: '<label class="checkbox"><input type="checkbox" ng-model="{{item.selected}}"/>{{item.status}} {{item.count}}</label>',
-        replace: true,
-        scope: {
-            item: '=item'
-        },
-        link: function (scope, element, attrs) {
-            scope.$watch(attrs.item, function(name) {
-                console.log('name was changed');
-            });
-        }
-    };
-
-    return definition;
-
 });
 
 Application.Directives.directive('task', function factory($parse) {
@@ -50,9 +42,9 @@ Application.Directives.directive('task', function factory($parse) {
             task: '=task'
         },
         replace: true,
-        link: function(scope, element, attrs) {
-            scope.$watch('task', function(task) {
-                
+        link: function (scope, element, attrs) {
+            scope.$watch('task', function (task) {
+
             });
         }
     };
