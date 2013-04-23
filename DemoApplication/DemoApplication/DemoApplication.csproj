@@ -231,7 +231,7 @@
     <Compile Include="Controllers\Account\AccountController.Logout.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Components\ComponentsController.Exceptions.cs" />
-    <Compile Include="Controllers\Employees\EmployeesController.cs" />
+    <Compile Include="Controllers\Employee\EmployeesController.cs" />
     <Compile Include="Controllers\Home\HomeController.About.cs" />
     <Compile Include="Controllers\SecurityX\SecurityController.cs" />
     <Compile Include="Controllers\Tasks\TasksController.Templates.cs" />
@@ -427,6 +427,9 @@
     <Content Include="Content\templates\carousel\carousel.html" />
     <Content Include="Content\templates\carousel\slide.html" />
     <Content Include="Content\templates\dialog\message.html" />
+    <Content Include="Content\templates\employee\statusFilter.html" />
+    <Content Include="Content\templates\employee\task.html" />
+    <Content Include="Content\templates\employee\tile.html" />
     <Content Include="Content\templates\pagination\pagination.html" />
     <Content Include="Content\templates\popover\popover.html" />
     <Content Include="Content\templates\progressbar\bar.html" />
@@ -675,9 +678,12 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\lib\underscore\bundle.txt" />
+    <Content Include="Scripts\lib\underscore\underscore-1.4.2.js" />
     <Content Include="Scripts\mock-data\assignables\summary.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />
     <Content Include="Scripts\mock-data\employees\1.js" />
+    <Content Include="Scripts\mock-data\employees\x.js" />
     <Content Include="Scripts\mock-data\employees\summary2.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
     <Content Include="Scripts\mock-data\tasks\summary.js" />
@@ -691,6 +697,7 @@
     <Content Include="Scripts\services\categories.js" />
     <Content Include="Scripts\services\assignables.js" />
     <Content Include="Scripts\services\employee.js" />
+    <Content Include="Scripts\services\list.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
@@ -706,7 +713,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\Thumbnail\" />

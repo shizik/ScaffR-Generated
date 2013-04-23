@@ -18,6 +18,11 @@
     </p>
 }
 
+<style>
+    .selected {
+        color: red !important;
+    }
+</style>
 <div class="btn-toolbar form-inline">
 
     <div class="btn-group">
@@ -51,14 +56,12 @@
         <ul class="dropdown-menu filter">
             <li>
                 <div>
-                    <input name="query" />
+                    <input />
                     <ul>
                         <li>Status</li>
-                        <ul>
-                            <li ng-class="{active:containsStatus(item.status)}" ng-repeat="item in summary">
-                                <a href="#" ng-click="changeFilter(item.status)">{{item.status}} ({{item.count}})</a>
-                            </li>
-                        </ul>
+
+                        <flex-filter list="summary" />
+     
                         <li>Assigned To</li>
                         <ul>
                             <li data-ng-repeat="assignable in assignables">
@@ -106,7 +109,7 @@
         </thead>
         <tbody>
             <tr data-ng-repeat="item in employees | filter:statusFilter | filter:{'name':query} | orderBy:predicate:reverse">
-                <td>{{item.name}}</td>
+                <td><a href="#">{{item.name}}</a></td>
                 <td>{{item.open.length}}</td>
                 <td>{{item.overdue.length}}</td>
                 <td>{{item.closed.length}}</td>
@@ -117,14 +120,9 @@
 
     <div class="span12 tiles" ng-switch-when="tiles">
 
-        <div class="tile" data-ng-repeat="item in employees| filter:statusFilter | filter:{'name':query} | orderBy:predicate:reverse">
-            <h3>{{item.name}}</h3>
-            <p>{{item.open.length}} Open</p>
-            <p>{{item.overdue.length}} Overdue</p>
-            <p>{{item.closed.length}} Closed</p>
-            <p>{{item.tasks.length}} Tasks</p>
-        </div>
-
+        <tile person="item" data-ng-repeat="item in employees| filter:statusFilter | queryFilter:'name' | orderBy:predicate:reverse">
+           
+        </tile>
 
     </div>
 </div>

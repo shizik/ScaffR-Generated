@@ -1,0 +1,39 @@
+﻿<div class="row-fluid">
+    <div class="span8">
+        <h1>{{person.name}}</h1>
+        <p>{{person.title}}</p>
+        <p><a href="#">{{person.email}}</a></p>
+    </div>
+    <div class="span4">
+        <p>
+            <img src="#" alt="Some logo" width="100" />
+        </p>
+
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">IT Manager Template</strong>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#" ng-click="changeSort('az')">Edit Setting</a></li>
+                <li class="divider"></li>
+                <li><a href="#" ng-click="changeSort('az')">Action 2</a></li>
+                <li><a href="#" ng-click="changeSort('az')">Action 3</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row-fluid">
+    <div class="span8">
+        <p>Company <span class="text-info">(30)</span> - <a href="#">View All</a> </p>
+        <ul>
+            <task task="task" ng-repeat="task in person.tasks"></task>
+        </ul>
+        <p>
+            <button class="btn">Add New Task <i class="icon-plus"></i></button>
+        </p>
+    </div>
+    <span class="span4">
+        <tile person="person" />
+    </span>
+</div>

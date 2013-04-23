@@ -24,26 +24,6 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
     };
 
     employee.summary(function (data) {
-
-        for (var i = 0; i < data.employees.length; i++) {
-
-            var emp = data.employees[i];
-
-            emp.open = [];
-            emp.closed = [];
-            emp.overdue = [];
-
-            for (var j = 0; j < emp.tasks.length; j++) {
-
-                var task = emp.tasks[j];
-
-                if (!emp[task.status]) {
-                    emp[task.status] = [];
-                }
-                emp[task.status].push(task);
-            }
-        }
-
         $scope.employees = data.employees;
         $scope.assignables = data.assignables;
         $scope.departments = data.departments;
