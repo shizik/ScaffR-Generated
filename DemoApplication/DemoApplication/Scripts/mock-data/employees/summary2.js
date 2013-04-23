@@ -6,13 +6,17 @@
              "department": "Sales",
              "tasks": [
                  {
-                     "id": 1,
-                     "status": "open",
-                     "assignedTo": "1"
+                     "name":"Fill out New Hire W-4",
+                     "category": "Forms",
+                     "asignee":"Christine Alexander",
+                     "due": "05/13/13",
+                     "status": "overdue"
                  }, {
-                     "id": 2,
-                     "status": "open",
-                     "assignedTo": "1"
+                     "name":"Fill out New Hire W-4",
+                     "category": "Forms",
+                     "asignee":"Christine Alexander",
+                     "due": "05/13/13",
+                     "status": "overdue"
                  }
              ]
          },

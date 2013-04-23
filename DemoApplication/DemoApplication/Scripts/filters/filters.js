@@ -37,8 +37,10 @@ Application.Filters.filter('customFilter', function() {
 Application.Filters.filter('queryFilter', function () {
     return function (items, propName, filterValue) {
 
-        // implement correct filtering here
-
+        if (filterValue) {
+            
+        }
+        
         return items;
     };
 });
