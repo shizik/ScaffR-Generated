@@ -56,30 +56,20 @@
         <ul class="dropdown-menu filter">
             <li>
                 <div>
-                    <input />
+                    <input type="text" />
                     <ul>
-                        <li>Status</li>
-
-                        <flex-filter list="summary" />
-     
-                        <li>Assigned To</li>
-                        <ul>
-                            <li data-ng-repeat="assignable in assignables">
-                                <a href="#">{{assignable.name}}</a>
-                            </li>
-                        </ul>
-                        <li>Team</li>
-                        <ul>
-                            <li data-ng-repeat="team in teams">
-                                <a ng-click="changeFilter('team', $team.id)">{{team.name}}</a>
-                            </li>
-                        </ul>
-                        <li>Department</li>
-                        <ul>
-                            <li data-ng-repeat="department in departments">
-                                <a ng-click="">{{department.name}}</a>
-                            </li>
-                        </ul>
+                        <li>Status
+                            <flex-filter list="summary" filter="filter.status" display="status" value="status" />
+                        </li>
+                        <li>Assigned To
+                            <flex-filter list="assignables" filter="filter.assignedTo" />
+                        </li>
+                        <li>Team
+                            <flex-filter list="teams" filter="filter.team" />
+                        </li>
+                        <li>Department
+                            <flex-filter list="departments" filter="filter.department" />
+                        </li>
                     </ul>
                     <ul>
                         <li>Sort Items Alphabetically</li>
@@ -93,10 +83,7 @@
     </div>
 </div>
 
-
-
 <div data-ng-switch on="display">
-
     <table class="table table-striped" ng-switch-when="list">
         <thead>
             <tr>
@@ -108,7 +95,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="item in employees | filter:statusFilter | filter:{'name':query} | orderBy:predicate:reverse">
+            <tr data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
                 <td><a href="#">{{item.name}}</a></td>
                 <td>{{item.open.length}}</td>
                 <td>{{item.overdue.length}}</td>
@@ -119,11 +106,8 @@
     </table>
 
     <div class="span12 tiles" ng-switch-when="tiles">
-
-        <tile person="item" data-ng-repeat="item in employees| filter:statusFilter | queryFilter:'name' | orderBy:predicate:reverse">
-           
-        </tile>
-
+        <tile person="item"
+            data-ng-repeat="item in employees| employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />
     </div>
 </div>
 

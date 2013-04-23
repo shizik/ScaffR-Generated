@@ -1,11 +1,10 @@
 ﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
+/// <reference path="~/Scripts/lib/angular/angular.js" />
 'use strict';
 
 Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
-
-    $scope.sort = 'za';
 
     $scope.filter = {
         status: [],
@@ -13,14 +12,6 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         team: [],
         department: [],
         alpha: true
-    };
-
-    $scope.status;
-
-    $scope.statusFilter = function (item) {
-        if (!$scope.status) return true;
-
-        return item[$scope.status].length > 0;
     };
 
     employee.summary(function (data) {
@@ -42,40 +33,12 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         return summary;
     }
 
-
-    $scope.changeFilter = function (status) {
-
-        $scope.status = status;
-
-        //if (_.contains($scope.filter.status, status)) {
-        //    $scope.filter.status = _.without($scope.filter.status, status);
-        //} else {
-        //    $scope.filter.status.push(status);
-        //}
-        //console.log($scope.filter.status);
-    };
-
     $scope.containsStatus = function (status) {
         return _.contains($scope.filter.status, status);
     };
 
     $scope.changeDisplay = function (mode) {
         $scope.display = mode;
-    };
-
-    $scope.changeSort = function (sort) {
-        $scope.sort = sort;
-    };
-
-    $scope.getSortLabel = function (sort) {
-        switch (sort) {
-            case 'az':
-                return 'Sort A-Z';
-            case 'za':
-                return 'Sort Z-A';
-            default:
-                return '';
-        }
     };
 
     $scope.open = function () {

@@ -1,46 +1,69 @@
 ﻿/// <reference path="../global/global.angular.js" />
 /// <reference path="../lib/underscore/underscore-1.4.2.js" />
 
-Application.Filters.filter('customSort', function() {
-    return function(items, strategy) {
+Application.Filters.filter('customSort', function () {
+    return function (items, strategy) {
 
         // implement correct sorting here
 
         var arr = [];
 
         switch (strategy) {
-        case 'az':
-// sort alphabetically ascending
+            case 'az':
+                // sort alphabetically ascending
 
-            arr = _.sortBy(items, 'name');
+                arr = _.sortBy(items, 'name');
 
-            break;
-        case 'za':
-            arr = _.sortBy(items, 'name').reverse();
+                break;
+            case 'za':
+                arr = _.sortBy(items, 'name').reverse();
 
-            break;
+                break;
         }
         return arr;
 
     };
 });
 
-Application.Filters.filter('customFilter', function() {
-    return function(items, filter) {
+Application.Filters.filter('employeeFilter', function () {
+    return function (items, filter) {
+        return _.filter(items, function (item) {
 
-        // implement correct filtering here
+            // Status and Assigned To
+            if (!_.some(item.tasks, function (task) {
 
-        return items;
+                if (!checkValue(filter.status, task.status)) return false;
+                if (!checkValue(filter.assignedTo, task.assignedTo)) return false;
+
+                return true;
+
+            })) return false;
+
+            // Team
+            // TODO: We have to decide what should this filter do
+
+            // Department
+            if (!checkValue(filter.department, item.department)) return false;
+
+            // If all checks passed this should be rendered
+            return true;
+        });
     };
+
+    //
+    // Helpers
+
+    function checkValue(list, value) {
+        return !list || list.length == 0 || _.contains(list, value);
+    }
 });
 
-Application.Filters.filter('queryFilter', function () {
-    return function (items, propName, filterValue) {
+Application.Filters.filter('searchFilter', function () {
+    return function (items, propName, query) {
+        if (!query) return items;
 
-        if (filterValue) {
-            
-        }
-        
-        return items;
+        return _.filter(items, function (item) {
+            return item[propName].toUpperCase().indexOf(query.toUpperCase()) !== -1;
+        });
     };
 });
