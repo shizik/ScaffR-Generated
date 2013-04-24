@@ -23,12 +23,33 @@
             "status": "closed"
         },
         {
-            "name":"Sing a welcome song",
+            "name":"Sing a welcoming song",
             "category": "Wellcoming",
             "asignee":"Jogn Doe",
             "due": "05/20/13",
             "status": "open"
-        }      
+        },
+        {
+            "name":"Fix the car",
+            "category": "Wellcoming",
+            "asignee":"Jogn Doe",
+            "due": "05/27/13",
+            "status": "open"
+        },
+        {
+            "name":"Make 100 push ups",
+            "category": "Wellcoming",
+            "asignee":"Jogn Doe",
+            "due": "06/20/13",
+            "status": "open"
+        },
+        {
+            "name":"Fill out New WSDL",
+            "category": "Forms",
+            "asignee":"Christine Alexander",
+            "due": "04/05/13",
+            "status": "closed"
+        }
     ],
     "assignables":[
         {
