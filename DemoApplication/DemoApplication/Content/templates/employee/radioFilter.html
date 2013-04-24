@@ -1,0 +1,11 @@
+﻿<ul class="nav nav-list">
+    <li data-ng-repeat="item in list">
+        <label class="radio">
+            <input type="radio" data-ng-model="data.selectedOption" value="{{item[value || 'id']}}" />
+            {{item[display || 'name']}} ({{item[count || 'count']}})
+        </label>
+    </li>
+    <li>
+        <a data-ng-click="clear()">(clear filter)</a>
+    </li>
+</ul>

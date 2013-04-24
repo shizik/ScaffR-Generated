@@ -43,7 +43,7 @@ Application.Filters.filter('employeeFilter', function () {
             // TODO: We have to decide what should this filter do
 
             // Department
-            if (!checkValue(filter.department, item.department)) return false;
+            if (!checkValue(filter.department, item.departmentId)) return false;
 
             // If all checks passed this should be rendered
             return true;
