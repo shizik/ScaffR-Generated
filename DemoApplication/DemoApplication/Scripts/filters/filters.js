@@ -67,3 +67,12 @@ Application.Filters.filter('searchFilter', function () {
         });
     };
 });
+
+
+// Skip filter used for paging, there is already limitTo in angular
+Application.Filters.filter('skip', function () {
+    return function (input, start) {
+        start = parseInt(start);
+        return input.slice(start);
+    };
+});

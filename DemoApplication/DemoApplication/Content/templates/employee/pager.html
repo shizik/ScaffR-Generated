@@ -1,0 +1,23 @@
+﻿<div>
+    <hr />
+    <div class="row-fluid">
+        <div class="span2 text-center">
+            <a data-ng-disabled="!hasPrev()" class="btn btn-link" data-ng-click="prevPage()">Less <i class="icon-caret-up"></i></a>
+        </div>
+        <div class="span8 text-center">
+
+            <div class="btn-group">
+                <a class="btn btn-link dropdown-toggle" data-toggle="dropdown">Viewing {{ pageSize }} Tasks<i class="icon-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li data-ng-repeat="size in pageSizes">
+                        <a data-ng-click="changePageSize(size)">View {{ size }} Tasks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="span2 text-center">
+            <a data-ng-disabled="!hasNext()" class="btn btn-link" data-ng-click="nextPage()">More <i class="icon-caret-down"></i></a>
+        </div>
+    </div>
+    <hr />
+</div>

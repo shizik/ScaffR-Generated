@@ -71,7 +71,69 @@ Application.Directives.directive('radioFilter', function factory() {
     };
 });
 
-Application.Directives.directive('task', function factory($parse) {
+Application.Directives.directive('pager', function factory($parse) {
+    return {
+        restrict: 'E',
+        templateUrl: '/content/templates/employee/pager.html',
+        scope: {
+            sizes: '@',
+            pageSize: '=',
+            currentPage: '=',
+            list: '='
+        },
+        replace: true,
+        controller: function ($scope) {
+            $scope.listLength = 0;
+            $scope.$watch('list', function () {
+                if (!$scope.list) return;
+
+                $scope.listLength = $scope.list.length;
+            });
+
+            //
+            // Next / Previous Page
+
+            $scope.hasPrev = function () {
+                return $scope.currentPage > 0;
+            };
+
+            $scope.hasNext = function () {
+                return $scope.currentPage * $scope.pageSize + $scope.pageSize < $scope.listLength;
+            };
+
+            $scope.prevPage = function () {
+                if (!$scope.hasPrev()) return;
+
+                $scope.currentPage--;
+            };
+
+            $scope.nextPage = function () {
+                if (!$scope.hasNext()) return;
+
+                $scope.currentPage++;
+            };
+
+            //
+            // Page Sizes
+
+            // TODO: size is always undefined, have no idea why
+            $scope.sizes = $scope.sizes || '6,8,10'; //'15,50,100'
+            $scope.pageSizes = $scope.sizes.split(',');
+            $scope.pageSizes.push('All');
+
+            $scope.changePageSize = function (value) {
+                console.log('changePageSize', value);
+                if (value == 'All')
+                    $scope.pageSize = $scope.listLength;
+                else
+                    $scope.pageSize = parseInt(value);
+            };
+            $scope.changePageSize($scope.pageSizes[0]);
+        }
+    };
+});
+
+Application.Directives.directive('task', function factory() {
 
     var definition = {
         restrict: 'E',

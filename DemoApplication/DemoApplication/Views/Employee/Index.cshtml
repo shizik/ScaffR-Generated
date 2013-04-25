@@ -128,16 +128,34 @@
 </div>
 <hr />
 <div class="row-fluid">
-    <div class="span8">
-        <p>Company <span class="text-info">(30)</span> - <a href="#">View All</a> </p>
-        <ul class="nav">
-            <task task="task" ng-repeat="task in person.tasks" />
-        </ul>
+    <div class="span5">
+        <p>
+            Company <span class="text-info">(30)</span> - 
+            <a data-ng-click="changePagedMode()">
+                <span data-ng-show="pagedMode">Close </span>View All
+            </a>
+        </p>
+        <div data-ng-switch data-on="pagedMode">
+            <ul class="nav" data-ng-switch-when="false">
+                <task task="task" data-ng-repeat="task in person.tasks | limitTo:briefPageSize" />
+            </ul>
+            <div data-ng-switch-when="true">
+                <ul class="nav">
+                    <task task="task" data-ng-repeat="task in person.tasks | skip:currentPage*pageSize | limitTo:pageSize" />
+                </ul>
+                <pager sizes="6,8,10" current-page="currentPage" page-size="pageSize" list="person.tasks" />
+            </div>
+        </div>
         <p>
             <button class="btn">Add New Task <i class="icon-plus"></i></button>
+            <span class="pull-right" data-ng-show="pagedMode">
+                <a class="btn btn-link" data-ng-click="changePagedMode()">Close View All</a>
+            </span>
         </p>
     </div>
-    <span class="span4">
+    <div class="span3">
+    </div>
+    <div class="span4">
         <tile person="person" />
-    </span>
+    </div>
 </div>

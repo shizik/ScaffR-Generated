@@ -3,8 +3,16 @@
 
 Application.Controllers.controller('index', ['$scope', 'employee', function ($scope, employee) {
 
-    var personCopy = {};
+    $scope.person = { tasks: [] };
 
+    employee.individual(function (data) {
+        $scope.person = data;
+    });
+
+    //
+    // General Data Editing
+
+    var personCopy = {};
     $scope.editMode = false;
 
     $scope.changeMode = function () {
@@ -26,8 +34,16 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         $scope.editMode = false;
     };
 
-    employee.individual(function (data) {
-        $scope.person = data;
-    });
+    //
+    // Task Paging
+
+    $scope.pagedMode = false;
+    $scope.currentPage = 0;
+    $scope.pageSize = 0;
+    $scope.briefPageSize = 4;
+
+    $scope.changePagedMode = function () {
+        $scope.pagedMode = !$scope.pagedMode;
+    };
 
 }]);
