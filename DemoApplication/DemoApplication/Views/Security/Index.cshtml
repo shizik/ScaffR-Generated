@@ -53,28 +53,24 @@
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Filter By:
             <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu filter">
+        <ul class="dropdown-menu nav nav-list">
             <li>
-                <div>
-                    <input type="text" />
-                    <ul>
-                        <li>Status
-                            <flex-filter list="summary" filter="filter.status" display="status" value="status" />
-                        </li>
-                        <li>Assigned To
-                            <flex-filter list="assignables" filter="filter.assignedTo" />
-                        </li>
-                        <li>Team
-                            <flex-filter list="teams" filter="filter.team" />
-                        </li>
-                        <li>Department
-                            <flex-filter list="departments" filter="filter.department" />
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>Sort Items Alphabetically</li>
-                    </ul>
-                </div>
+                <input type="text" placeholder="Filter..." /></li>
+            <li>
+                <label class="nav-header">Status</label>
+                <checkbox-filter list="summary" filter="filter.status" display="status" value="status" />
+            </li>
+            <li>
+                <label class="nav-header">Assigned To</label>
+                <checkbox-filter list="assignables" filter="filter.assignedTo" />
+            </li>
+            <li>
+                <label class="nav-header">Team</label>
+                <radio-filter list="teams" filter="filter.team" />
+            </li>
+            <li>
+                <label class="nav-header">Department</label>
+                <radio-filter list="departments" filter="filter.department" />
             </li>
         </ul>
     </div>

@@ -43,7 +43,7 @@ Application.Filters.filter('employeeFilter', function () {
             // TODO: We have to decide what should this filter do
 
             // Department
-            if (!checkValue(filter.department, item.department)) return false;
+            if (!checkValue(filter.department, item.departmentId)) return false;
 
             // If all checks passed this should be rendered
             return true;
@@ -65,5 +65,14 @@ Application.Filters.filter('searchFilter', function () {
         return _.filter(items, function (item) {
             return item[propName].toUpperCase().indexOf(query.toUpperCase()) !== -1;
         });
+    };
+});
+
+
+// Skip filter used for paging, there is already limitTo in angular
+Application.Filters.filter('skip', function () {
+    return function (input, start) {
+        start = parseInt(start);
+        return input.slice(start);
     };
 });

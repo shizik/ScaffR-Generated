@@ -1,7 +1,15 @@
-﻿<div class="tile">
-    <h3><a href="/employee/index/{{person.id}}">{{person.name}}</a></h3>
-    <p>{{person.totalOpen}} Open</p>
-    <p>{{person.totalClosed}} Overdue</p>
-    <p>{{person.totalOverdue}} Closed</p>
-    <p>{{person.totalTasks}} Tasks</p>
-</div>
+﻿<ul class="tile well nav nav-list">
+    <li class="nav-header">
+        <h3><a href="/employee/index/{{person.id}}">{{person.name}}</a></h3>
+    </li>
+    <li>
+        <ul class="nav nav-list">
+            <li>{{counts().open}} Open</li>
+            <li>{{counts().overdue}} Overdue</li>
+            <li>{{counts().closed}} Closed</li>
+            <li class="divider"></li>
+            <li>{{counts().total()}} Tasks</li>
+            <li class="divider"></li>
+        </ul>
+    </li>
+</ul>
