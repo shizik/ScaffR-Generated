@@ -137,11 +137,11 @@
         </p>
         <div data-ng-switch data-on="pagedMode">
             <ul class="nav" data-ng-switch-when="false">
-                <task task="task" data-ng-repeat="task in person.tasks | limitTo:briefPageSize" />
+                <task task="task" data-ng-repeat="task in person.tasks | orderBy:'due' | limitTo:briefPageSize" />
             </ul>
             <div data-ng-switch-when="true">
                 <ul class="nav">
-                    <task task="task" data-ng-repeat="task in person.tasks | skip:currentPage*pageSize | limitTo:pageSize" />
+                    <task task="task" data-ng-repeat="task in person.tasks | orderBy:'due' | skip:currentPage*pageSize | limitTo:pageSize" />
                 </ul>
                 <pager sizes="6,8,10" current-page="currentPage" page-size="pageSize" list="person.tasks" />
             </div>

@@ -4,11 +4,11 @@
     </li>
     <li>
         <ul class="nav nav-list">
-            <li>{{person.totalOpen}} Open</li>
-            <li>{{person.totalClosed}} Overdue</li>
-            <li>{{person.totalOverdue}} Closed</li>
+            <li>{{counts().open}} Open</li>
+            <li>{{counts().overdue}} Overdue</li>
+            <li>{{counts().closed}} Closed</li>
             <li class="divider"></li>
-            <li>{{person.totalTasks}} Tasks</li>
+            <li>{{counts().total()}} Tasks</li>
             <li class="divider"></li>
         </ul>
     </li>

@@ -1,7 +1,4 @@
-﻿/// <reference path="../global/global.angular.js" />
-/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-
-Application.Directives.directive('checkboxFilter', function factory() {
+﻿Application.Directives.directive('checkboxFilter', function factory() {
 
     return {
         restrict: 'E',
@@ -71,7 +68,7 @@ Application.Directives.directive('radioFilter', function factory() {
     };
 });
 
-Application.Directives.directive('pager', function factory($parse) {
+Application.Directives.directive('pager', function factory() {
     return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/pager.html',
@@ -139,13 +136,21 @@ Application.Directives.directive('task', function factory() {
         restrict: 'E',
         templateUrl: '/content/templates/employee/task.html',
         scope: {
-            task: '=task'
+            task: '='
         },
         replace: true,
-        link: function (scope, element, attrs) {
-            scope.$watch('task', function (task) {
+        controller: function ($scope) {
+            // TODO: This should be centralized
+            $scope.days = moment($scope.task.due).diff(moment(), 'days');
+            $scope.isOverdue = $scope.days < 0;
 
-            });
+            $scope.dateClass = function () {
+                if ($scope.task.isDone) return 'success';
+                else if ($scope.days < 0) return 'warning';
+                else if ($scope.days == 0) return 'error';
+
+                return 'info';
+            };
         }
     };
     return definition;
@@ -153,43 +158,40 @@ Application.Directives.directive('task', function factory() {
 });
 
 Application.Directives.directive('tile', function factory($parse) {
-
-    var definition = {
+    return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
         scope: {
-            person: '=person'
+            person: '='
         },
         replace: true,
-        compile: function (cElement, cAttrs) {
-            return function linkFn(scope, lElement, lAttrs) {
-
-                console.log(scope);
-
-                scope.$watch('person', function (person) {
-
-                    console.log('person', person);
-
-                    if (person) {
-                        var p = {
-                            open: [],
-                            closed: [],
-                            overdue: []
-                        };
-
-                        for (var j = 0; j < person.tasks.length; j++) {
-                            var task = person.tasks[j];
-                            p[task.status].push(task);
-                        }
-
-                        person.totalOpen = p.open.length;
-                        person.totalClosed = p.closed.length;
-                        person.totalOverdue = p.overdue.length;
-                        person.totalTasks = person.tasks.length;
+        controller: function ($scope) {
+            $scope.counts = function () {
+                var result = {
+                    open: 0,
+                    closed: 0,
+                    overdue: 0,
+                    total: function () {
+                        return result.open + result.closed + result.overdue;
                     }
+                };
+
+                if (!$scope.person) return result;
+
+                _.forEach($scope.person.tasks, function (item) {
+                    if (item.isDone) {
+                        result.closed++;
+                        return;
+                    }
+
+                    // TODO: This should be centralized
+                    var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
+                    if (isOverdue) result.overdue++;
+                    else result.open++;
                 });
+
+                return result;
             };
         }
     };
-    return definition;
 });

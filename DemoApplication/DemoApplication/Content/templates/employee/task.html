@@ -1,9 +1,9 @@
-﻿<li class="task" ng-class="{completed:task.status=='closed'}">
+﻿<li class="task" ng-class="{completed:task.isDone}">
     <label class="checkbox">
-        <input type="checkbox" data-ng-model="task.status" data-ng-true-value="closed" />
+        <input type="checkbox" data-ng-model="task.isDone" />
         {{task.name}}
         | <i class="icon-user"></i><a href="#">{{task.asignee}}</a>
-        | <i class="icon-calendar"></i>{{task.due}}
-        | <span class="label label-success">20 Days</span>
+        | <i class="icon-calendar"></i>{{task.due | date:'MM/dd/yy'}}
+        | <span class="label label-{{ dateClass() }}">{{ days }} Days</span>
     </label>
 </li>

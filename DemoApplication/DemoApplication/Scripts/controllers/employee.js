@@ -1,5 +1,4 @@
-﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-'use strict';
+﻿'use strict';
 
 Application.Controllers.controller('index', ['$scope', 'employee', function ($scope, employee) {
 

@@ -443,9 +443,9 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\breeze.intellisense.js" />
-    <Content Include="Scripts\breeze.debug.js" />
-    <Content Include="Scripts\breeze.min.js" />
+    <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
+    <Content Include="Scripts\lib\breeze\breeze.debug.js" />
+    <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\controllers\employee.js" />
     <Content Include="Scripts\controllers\home.js" />
@@ -680,6 +680,7 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\lib\moment\bundle.txt" />
     <Content Include="Scripts\lib\underscore\bundle.txt" />
     <Content Include="Scripts\lib\underscore\underscore-1.4.2.js" />
     <Content Include="Scripts\mock-data\assignables\summary.js" />
@@ -694,8 +695,8 @@
     <Content Include="Scripts\mock-data\templates\summary.js" />
     <Content Include="Scripts\mock-data\employees\summary.js" />
     <Content Include="Scripts\mock-data\templates\template.js" />
-    <Content Include="Scripts\q.js" />
-    <Content Include="Scripts\q.min.js" />
+    <Content Include="Scripts\lib\moment\moment.js" />
+    <Content Include="Scripts\lib\q\q.js" />
     <Content Include="Scripts\services\categories.js" />
     <Content Include="Scripts\services\assignables.js" />
     <Content Include="Scripts\services\employee.js" />
@@ -705,6 +706,7 @@
     <Content Include="Scripts\services\tasks.js" />
     <Content Include="Scripts\services\templates.js" />
     <Content Include="Scripts\services\employees.js" />
+    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
