@@ -8,6 +8,10 @@ Application.Services.factory('tasks', function ($resource) {
         query: { method: 'GET', params: { file: '@file' }, isArray: true },
         summary: { method: 'GET', params: { file: '@file' }, isArray: true },
     });
+    
+    var endPoint = $resource('/Scripts/mock-data/categories/:file.js', {}, {
+        summary: { method: 'GET', params: { file: '@file' }, isArray: true },
+    });
 
     return {
         getById: function (id) {

@@ -1,6 +1,4 @@
-﻿@model int
-
-<div data-ng-switch data-on="editMode">
+﻿<div data-ng-switch data-on="editMode">
     <div class="row-fluid" data-ng-switch-when="false">
         <div class="span8">
             <h1>{{person.name}} <a class="btn btn-link" data-ng-click="changeMode()">edit</a></h1>
@@ -149,7 +147,7 @@
             </div>
         </div>
         <p>
-            <a class="btn" href="@Url.Action("OnDemand", "Tasks", new{ id=Model })" >Add New Task <i class="icon-plus"></i></a>
+            <button class="btn">Add New Task <i class="icon-plus"></i></button>
             <span class="pull-right" data-ng-show="pagedMode">
                 <a class="btn btn-link" data-ng-click="changePagedMode()">Close View All</a>
             </span>

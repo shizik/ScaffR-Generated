@@ -8,5 +8,10 @@ namespace DemoApplication.Controllers.Tasks
         {
             return View();
         }
+
+        public ActionResult OnDemand(int id)
+        {
+            return View();
+        }
     }
 }

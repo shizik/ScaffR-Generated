@@ -428,7 +428,6 @@
     <Content Include="Content\templates\carousel\slide.html" />
     <Content Include="Content\templates\dialog\message.html" />
     <Content Include="Content\templates\employee\checkboxFilter.html" />
-    <Content Include="Content\templates\employee\pager.html" />
     <Content Include="Content\templates\employee\radioFilter.html" />
     <Content Include="Content\templates\employee\task.html" />
     <Content Include="Content\templates\employee\tile.html" />
@@ -443,12 +442,14 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
-    <Content Include="Scripts\lib\breeze\breeze.debug.js" />
-    <Content Include="Scripts\lib\breeze\breeze.min.js" />
+    <None Include="Scripts\breeze.intellisense.js" />
+    <Content Include="Scripts\breeze.debug.js" />
+    <Content Include="Scripts\breeze.min.js" />
     <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\controllers\employee.js" />
     <Content Include="Scripts\controllers\home.js" />
+    <Content Include="Scripts\controllers\tasks.js" />
+    <Content Include="Scripts\controllers\template.js" />
     <Content Include="Scripts\custom\bundle.txt" />
     <Content Include="Scripts\custom\custom.js" />
     <Content Include="Scripts\controllers\security.js" />
@@ -684,10 +685,12 @@
     <Content Include="Scripts\lib\underscore\bundle.txt" />
     <Content Include="Scripts\lib\underscore\underscore-1.4.2.js" />
     <Content Include="Scripts\mock-data\assignables\summary.js" />
+    <Content Include="Scripts\mock-data\categories\list.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />
     <Content Include="Scripts\mock-data\employees\1.js" />
     <Content Include="Scripts\mock-data\employees\x.js" />
     <Content Include="Scripts\mock-data\employees\summary2.js" />
+    <Content Include="Scripts\mock-data\milestones\list.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
     <Content Include="Scripts\mock-data\tasks\summary.js" />
     <Content Include="Scripts\mock-data\tasks\task.js" />
@@ -699,8 +702,10 @@
     <Content Include="Scripts\lib\q\q.js" />
     <Content Include="Scripts\services\categories.js" />
     <Content Include="Scripts\services\assignables.js" />
+    <Content Include="Scripts\services\departments.js" />
     <Content Include="Scripts\services\employee.js" />
     <Content Include="Scripts\services\list.js" />
+    <Content Include="Scripts\services\milestones.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
@@ -718,6 +723,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Tasks\OnDemand.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\Thumbnail\" />
