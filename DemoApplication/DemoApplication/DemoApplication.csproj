@@ -443,7 +443,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
-    <Content Include="Scripts\breeze.debug.js" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bundle.txt" />
@@ -474,6 +473,9 @@
     <Content Include="Scripts\lib\angular\bundle.txt" />
     <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap\bundle.txt" />
+    <Content Include="Scripts\lib\breeze\breeze.debug.js" />
+    <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
+    <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\lib\bundle.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -693,6 +695,7 @@
     <Content Include="Scripts\mock-data\employees\summary2.js" />
     <Content Include="Scripts\mock-data\milestones\list.js" />
     <Content Include="Scripts\mock-data\tasks\list.js" />
+    <Content Include="Scripts\mock-data\tasks\ondemand.js" />
     <Content Include="Scripts\mock-data\tasks\summary.js" />
     <Content Include="Scripts\mock-data\tasks\task.js" />
     <Content Include="Scripts\mock-data\teams\summary.js" />
