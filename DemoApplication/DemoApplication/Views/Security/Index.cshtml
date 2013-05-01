@@ -53,24 +53,26 @@
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Filter By:
             <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu nav nav-list">
-            <li>
-                <input type="text" placeholder="Filter..." /></li>
-            <li>
-                <label class="nav-header">Status</label>
-                <checkbox-filter list="summary" filter="filter.status" display="status" value="status" />
-            </li>
-            <li>
-                <label class="nav-header">Assigned To</label>
-                <checkbox-filter list="assignables" filter="filter.assignedTo" />
-            </li>
-            <li>
-                <label class="nav-header">Team</label>
-                <radio-filter list="teams" filter="filter.team" />
-            </li>
-            <li>
-                <label class="nav-header">Department</label>
-                <radio-filter list="departments" filter="filter.department" />
+        <ul class="dropdown-menu">
+            <li complex-menu>
+                <div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-search"></i></span>
+                        <input type="text" placeholder="Filter..." />
+                    </div>
+                </div>
+                <ul class="collapsible" data-title="Status">
+                    <checkbox-filter list="summary" filter="filter.status" display="status" value="status" />
+                </ul>
+                <ul class="collapsible" data-title="Assigned To">
+                    <checkbox-filter list="assignables" filter="filter.assignedTo" />
+                </ul>
+                <ul class="collapsible" data-title="Team">
+                    <radio-filter list="teams" filter="filter.team" />
+                </ul>
+                <ul class="collapsible" data-title="Department">
+                    <radio-filter list="departments" filter="filter.department" />
+                </ul>
             </li>
         </ul>
     </div>

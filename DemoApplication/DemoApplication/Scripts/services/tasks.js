@@ -9,13 +9,9 @@ Application.Services.factory('tasks', function ($resource) {
         summary: { method: 'GET', params: { file: '@file' }, isArray: true },
     });
     
-    var endPoint = $resource('/Scripts/mock-data/categories/:file.js', {}, {
-        summary: { method: 'GET', params: { file: '@file' }, isArray: true },
-    });
-
     return {
         getById: function (id) {
-            return endPoint.get({ file: "task" });
+            return endPoint.get({ file: "ondemand" });
         },
 
         getInTemplate: function (templateId) {

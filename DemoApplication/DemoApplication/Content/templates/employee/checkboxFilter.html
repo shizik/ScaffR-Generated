@@ -1,8 +1,6 @@
-﻿<ul class="nav nav-list">
-    <li data-ng-repeat="item in list">
-        <label class="checkbox">
-            <input type="checkbox" data-ng-model="selection[$index]" />
-            {{item[display || 'name']}} ({{item[count || 'count']}})
-        </label>
-    </li>
-</ul>
+﻿<li data-ng-repeat="item in list">
+    <label class="checkbox">
+        <input type="checkbox" data-ng-model="selection[$index]" />
+        {{item[display || 'name']}} ({{item[count || 'count']}})
+    </label>
+</li>
