@@ -200,6 +200,7 @@ Application.Directives.directive('task', function factory() {
             $scope.saveTask = function () {
                 // TODO: Add logic for saving
                 $scope.newCreated = false;
+                toastr.success("Saved");
             };
 
             $scope.deleteTask = function () {

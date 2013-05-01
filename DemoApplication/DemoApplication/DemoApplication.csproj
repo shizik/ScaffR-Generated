@@ -476,6 +476,7 @@
     <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap\bundle.txt" />
     <Content Include="Scripts\lib\breeze\breeze.debug.js" />
+    <Content Include="Content\less\bootstrap\toastr.less" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
     <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\lib\bundle.txt">
@@ -687,6 +688,7 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
     <Content Include="Scripts\lib\moment\bundle.txt" />
+    <Content Include="Scripts\lib\toastr\bundle.txt" />
     <Content Include="Scripts\lib\underscore\bundle.txt" />
     <Content Include="Scripts\lib\underscore\underscore-1.4.2.js" />
     <Content Include="Scripts\mock-data\assignables\summary.js" />
@@ -717,6 +719,7 @@
     <Content Include="Scripts\services\tasks.js" />
     <Content Include="Scripts\services\templates.js" />
     <Content Include="Scripts\services\employees.js" />
+    <Content Include="Scripts\lib\toastr\toastr.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
