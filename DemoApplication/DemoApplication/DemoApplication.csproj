@@ -428,6 +428,8 @@
     <Content Include="Content\templates\carousel\slide.html" />
     <Content Include="Content\templates\dialog\message.html" />
     <Content Include="Content\templates\employee\checkboxFilter.html" />
+    <Content Include="Content\templates\employee\due.html" />
+    <Content Include="Content\templates\employee\pager.html" />
     <Content Include="Content\templates\employee\radioFilter.html" />
     <Content Include="Content\templates\employee\task.html" />
     <Content Include="Content\templates\employee\tile.html" />

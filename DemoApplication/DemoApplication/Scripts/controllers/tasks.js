@@ -4,11 +4,11 @@
 
 Application.Controllers.controller('tasks', ['$scope', 'tasks', function ($scope, tasks) {
 
-    $scope.task = function() {
+    $scope.task = function () {
 
     };
 
-    $scope.save = function() {
+    $scope.save = function () {
 
     };
 
@@ -17,8 +17,32 @@ Application.Controllers.controller('tasks', ['$scope', 'tasks', function ($scope
 Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories', function ($scope, tasks, categories) {
 
     $scope.categories = categories.list();
+    $scope.task = tasks.getById(0);
     $scope.attachments = [];
     $scope.actions = [];
+
+    $scope.dueDate = undefined;
+
+    $scope.selectedMilestone = undefined;
+    $scope.milestone = { selectedOption: undefined };
+    $scope.$watch('milestone', function (value) {
+        if (!value.selectedOption) return;
+
+        $scope.selectedMilestone = _.find($scope.task.milestones, function (item) {
+            return item.id == value.selectedOption;
+        });
+
+        console.log('selectedMilestone', $scope.selectedMilestone);
+    }, true);
+
+    $scope.dueDateHumanize = function () {
+        if (!$scope.dueDate || !$scope.selectedMilestone) return undefined;
+
+        var start = moment($scope.selectedMilestone.date);
+        var end = moment($scope.dueDate);
+
+        return end.from(start);
+    };
 
     function clearAttachment() {
         $scope.title = '';
@@ -27,13 +51,13 @@ Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories',
         $scope.downloadRequired = false;
         $scope.attachmentMode = false;
     }
-    
+
     function clearAction() {
         $scope.actionName = '';
         $scope.actionMode = false;
     }
 
-    $scope.createAttachment = function() {
+    $scope.createAttachment = function () {
 
         var attachment = {
             title: $scope.title,
@@ -42,14 +66,14 @@ Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories',
             signatureRequired: $scope.signatureRequired,
             actions: []
         };
-        
+
         if (attachment.signatureRequired) {
             var signAction = {
                 title: 'Sign Form ' + attachment.title
             };
             $scope.actions.push(signAction);
         }
-        
+
         if (attachment.downloadRequired) {
             var downloadAction = {
                 title: 'Download Form ' + attachment.title
@@ -62,7 +86,7 @@ Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories',
         clearAttachment();
     };
 
-    $scope.removeAttachment = function(index) {
+    $scope.removeAttachment = function (index) {
         $scope.attachments.splice(index, 1);
     };
 
@@ -70,18 +94,18 @@ Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories',
         $scope.actions.splice(index, 1);
     };
 
-    $scope.createAction = function(name) {
-        $scope.actions.push({ title: name });        
+    $scope.createAction = function (name) {
+        $scope.actions.push({ title: name });
         clearAction();
     };
 
-    $scope.save = function() {
+    $scope.save = function () {
 
         alert('saved, bitch');
 
     };
 
-    $scope.cancel = function() {
+    $scope.cancel = function () {
         window.history.back();
     };
 
