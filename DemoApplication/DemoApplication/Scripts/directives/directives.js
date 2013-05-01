@@ -124,6 +124,8 @@ Application.Directives.directive('pager', function factory() {
                     $scope.pageSize = $scope.listLength;
                 else
                     $scope.pageSize = parseInt(value);
+
+                $scope.currentPage = 0;
             };
             $scope.changePageSize($scope.pageSizes[0]);
         }
@@ -131,33 +133,87 @@ Application.Directives.directive('pager', function factory() {
 });
 
 Application.Directives.directive('task', function factory() {
-
-    var definition = {
+    return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/task.html',
         scope: {
-            task: '='
+            task: '=',
+            available: '=',
+            assignables: '=',
+            deleteFn: '&'
         },
         replace: true,
         controller: function ($scope) {
-            // TODO: This should be centralized
-            $scope.days = moment($scope.task.due).diff(moment(), 'days');
-            $scope.isOverdue = $scope.days < 0;
+            $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
+
+            $scope.editMode = function () {
+                $scope.taskMode = 'edit';
+            };
+
+            $scope.assignment = { selectedOption: undefined };
+            $scope.$watch('assignment', function (newValue) {
+                if (!newValue.selectedOption) return;
+
+                $scope.task.name = newValue.selectedOption;
+                $scope.taskMode = 'display';
+            }, true);
+
+            $scope.assignee = { selectedOption: undefined };
+            $scope.$watch('assignee', function (newValue) {
+                if (!newValue.selectedOption) return;
+
+                $scope.task.assignee = newValue.selectedOption;
+            }, true);
+
+            $scope.isNew = function () {
+                return $scope.task.name == null || $scope.task.assignee == null || $scope.task.due == null;
+            };
+
+            $scope.newCreated = $scope.isNew();
+
+
+            $scope.preventClosing = function ($event) {
+                $event.stopPropagation();
+            };
+
+            $scope.days = function () {
+                if ($scope.task.due == null) return 0;
+
+                return moment($scope.task.due).diff(moment(), 'days');
+            };
+
+            $scope.isOverdue = function () {
+                return $scope.days() < 0;
+            };
 
             $scope.dateClass = function () {
                 if ($scope.task.isDone) return 'success';
-                else if ($scope.days < 0) return 'warning';
-                else if ($scope.days == 0) return 'error';
+                else if ($scope.days() < 0) return 'warning';
+                else if ($scope.days() == 0) return 'error';
 
                 return 'info';
             };
+
+            //
+            // Button actions
+
+            $scope.saveTask = function () {
+                // TODO: Add logic for saving
+                $scope.newCreated = false;
+            };
+
+            $scope.deleteTask = function () {
+                $scope.deleteFn({ task: $scope.task });
+            };
+
+            $scope.editTask = function () {
+                // TODO: Open the details page
+            };
         }
     };
-    return definition;
-
 });
 
-Application.Directives.directive('tile', function factory($parse) {
+Application.Directives.directive('tile', function factory() {
     return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
@@ -192,6 +248,42 @@ Application.Directives.directive('tile', function factory($parse) {
 
                 return result;
             };
+        }
+    };
+});
+
+Application.Directives.directive('complexMenu', function factory() {
+    return function (scope, element) {
+        $(element)
+            .addClass('nav nav-list')
+            .click(function (e) {
+                e.stopPropagation();
+            });
+    };
+});
+
+Application.Directives.directive('collapsible', function factory() {
+    return {
+        restrict: 'C',
+        template: '<div><div><i class=""></i><a>{{title}}</a></div>' +
+                  '<ul class="unstyled nav nav-list" ng-transclude></ul></div>',
+        scope: {
+            title: '@'
+        },
+        replace: true,
+        transclude: true,
+        link: function ($scope, element) {
+            var opened = true;
+
+            $(element).children(':first-child').find('a').click(function () {
+                opened = !opened;
+
+                $(this).prev()
+                       .removeClass(opened ? 'icon-chevron-right' : 'icon-chevron-down')
+                       .addClass(opened ? 'icon-chevron-down' : 'icon-chevron-right');
+
+                $(this).parent().next().toggle(opened);
+            }).click();
         }
     };
 });

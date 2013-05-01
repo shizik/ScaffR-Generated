@@ -443,7 +443,11 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\less\bootstrap\datepicker.less" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
+    <Content Include="Scripts\directives\bootstrap-datepicker.js" />
+    <Content Include="Scripts\lib\bootstrap-datepicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\lib\bootstrap-datepicker\bundle.txt" />
     <Content Include="Scripts\lib\breeze\breeze.debug.js" />
     <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\controllers\bundle.txt" />
@@ -464,7 +468,6 @@
     <Content Include="Scripts\global\global.js" />
     <Content Include="Scripts\global\global.modal.js" />
     <Content Include="Scripts\global\global.validation.js" />
-    <Content Include="Scripts\global\global.widgets.js" />
     <Content Include="Scripts\lib\angular-bootstrap\bundle.txt" />
     <Content Include="Scripts\lib\angular-resource\angular-resource.js" />
     <Content Include="Scripts\lib\angular-resource\bundle.txt" />
