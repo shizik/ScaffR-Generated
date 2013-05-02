@@ -231,7 +231,7 @@
     <Compile Include="Controllers\Account\AccountController.Logout.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Components\ComponentsController.Exceptions.cs" />
-    <Compile Include="Controllers\Employee\EmployeesController.cs" />
+    <Compile Include="Controllers\Employee\EmployeeController.cs" />
     <Compile Include="Controllers\Home\HomeController.About.cs" />
     <Compile Include="Controllers\SecurityX\SecurityController.cs" />
     <Compile Include="Controllers\Tasks\TasksController.Templates.cs" />
