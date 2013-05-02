@@ -1,8 +1,8 @@
 ﻿<li class="form-inline" data-ng-class="{completed:task.isDone}">
     <label class="checkbox">
-        <input type="checkbox" data-ng-model="task.isDone" />
+        <input type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
     </label>
-    <span data-ng-switch data-on="taskMode">
+    <span data-ng-switch="" data-on="taskMode">
         <span class="dropdown" data-ng-switch-when="new">
             <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
             <ul class="dropdown-menu">
@@ -31,7 +31,12 @@
         <span data-ng-switch-when="edit">
             <input type="text" class="input-task input-large" data-ng-model="task.name" placeholder="Type the task name..." />
         </span>
-        <span data-ng-switch-default><a data-ng-click="details()">{{task.name}}</a></span>
+        <span data-ng-switch-default="">
+            <span data-ng-switch="" data-on="newCreated">
+                <span data-ng-switch-when="true">{{task.name}}</span>
+                <a data-ng-switch-default="" data-ng-click="details()">{{task.name}}</a>
+            </span>
+        </span>
     </span>
     | <i class="icon-user"></i>
     <span class="dropdown" data-ng-switch="" data-on="task.isDone">
@@ -80,6 +85,6 @@
     <span data-ng-show="newCreated && !isNew()">
         <button class="btn btn-mini btn-info" data-ng-click="editTask()">Edit Details</button>
         <button class="btn btn-mini btn-primary" data-ng-click="saveTask()">Save</button>
-        <button class="btn btn-mini" data-ng-click="deleteTask()">Delete</button>
     </span>
+    <button data-ng-show="newCreated" class="btn btn-mini" data-ng-click="deleteTask()">Delete</button>
 </li>

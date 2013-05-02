@@ -64,7 +64,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     $scope.pagedMode = false;
     $scope.currentPage = 0;
     $scope.pageSize = 0;
-    $scope.briefPageSize = 4;
+    $scope.briefPageSize = 20;
 
     $scope.changePagedMode = function (category) {
         $scope.activeCategory = category;

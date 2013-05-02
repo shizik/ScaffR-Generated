@@ -147,7 +147,7 @@
                             assignables="assignables"
                             details-fn="showTask(task)"
                             delete-fn="deleteTask(task)"
-                            data-ng-repeat="task in tasks.group[category] | orderBy:'due' | limitTo:briefPageSize" />
+                            data-ng-repeat="task in tasks.group[category] | @*orderBy:'due' |*@ limitTo:(briefPageSize - 15*$index)" />
                     </ul>
                     <p>
                         <button class="btn" data-ng-click="addNewTask(category)">Add New Task <i class="icon-plus"></i></button>
