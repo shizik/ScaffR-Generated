@@ -83,7 +83,7 @@
     <span data-ng-show="task.due != null">| <span class="badge badge-{{ dateClass() }}">{{ days() }} Days</span>
     </span>
     <span data-ng-show="newCreated && !isNew()">
-        <button class="btn btn-mini btn-info" data-ng-click="editTask()">Edit Details</button>
+        <button class="btn btn-mini btn-info" data-ng-click="editMode()">Edit Details</button>
         <button class="btn btn-mini btn-primary" data-ng-click="saveTask()">Save</button>
     </span>
     <button data-ng-show="newCreated" class="btn btn-mini" data-ng-click="deleteTask()">Delete</button>

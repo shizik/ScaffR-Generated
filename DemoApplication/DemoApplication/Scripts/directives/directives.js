@@ -114,7 +114,7 @@ Application.Directives.directive('pager', function factory() {
             // Page Sizes
 
             // TODO: size is always undefined, have no idea why
-            $scope.sizes = $scope.sizes || '6,8,10'; //'15,50,100'
+            $scope.sizes = $scope.sizes || '10,15,20'; //'15,50,100'
             $scope.pageSizes = $scope.sizes.split(',');
             $scope.pageSizes.push('All');
 
@@ -148,7 +148,9 @@ Application.Directives.directive('task', function factory() {
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
-                $scope.taskMode = 'edit';
+                //$scope.taskMode = 'edit';
+                // TODO: This is for demo purposes
+                window.location.href = '/tasks/ondemand/1';
             };
 
             $scope.assignment = { selectedOption: undefined };

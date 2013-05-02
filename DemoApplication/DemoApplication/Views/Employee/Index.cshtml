@@ -166,10 +166,10 @@
                         delete-fn="deleteTask(task)"
                         data-ng-repeat="task in tasks.group[activeCategory] | orderBy:'due' | skip:currentPage*pageSize | limitTo:pageSize" />
                 </ul>
-                <div>
-                    <pager sizes="6,8,10" current-page="currentPage" page-size="pageSize" list="tasks.group[activeCategory]" />
+                <div class="row-fluid">
+                    <pager sizes="10,15,20" current-page="currentPage" page-size="pageSize" list="tasks.group[activeCategory]" />
                 </div>
-                <p>
+                <p class="clearfix">
                     <button class="btn" data-ng-click="addNewTask(activeCategory)">Add New Task <i class="icon-plus"></i></button>
                     <span class="pull-right">
                         <a class="btn btn-link" data-ng-click="changePagedMode()">Close View All</a>
