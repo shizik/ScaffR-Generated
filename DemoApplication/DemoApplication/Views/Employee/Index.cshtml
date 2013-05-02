@@ -133,91 +133,127 @@
     </div>
 </div>
 <hr />
-<div class="row-fluid">
-    <div class="span8" data-ng-switch data-on="pagedMode">
-        <div data-ng-switch-when="false">
-            <div data-ng-repeat="category in tasks.categories">
-                <h4>{{ category }} <span class="text-info">({{ tasks.group[category].length }})</span> - 
-                <a data-ng-click="changePagedMode(category)">View All</a>
+<div data-ng-switch="" data-on="listView">
+    <div class="row-fluid" data-ng-switch-default="">
+        <div class="span8" data-ng-switch="" data-on="pagedMode">
+            <div data-ng-switch-when="false">
+                <div data-ng-repeat="category in tasks.categories">
+                    <h4>{{ category }} <span class="text-info">({{ tasks.group[category].length }})</span> - 
+                <small><a data-ng-click="changePagedMode(category)">View All</a></small>
+                    </h4>
+                    <ul class="unstyled">
+                        <task task="task"
+                            available="availableTasks"
+                            assignables="assignables"
+                            details-fn="showTask(task)"
+                            delete-fn="deleteTask(task)"
+                            data-ng-repeat="task in tasks.group[category] | orderBy:'due' | limitTo:briefPageSize" />
+                    </ul>
+                    <p>
+                        <button class="btn" data-ng-click="addNewTask(category)">Add New Task <i class="icon-plus"></i></button>
+                    </p>
+                </div>
+            </div>
+            <div data-ng-switch-when="true">
+                <h4>{{ activeCategory }} <span class="text-info">({{ tasks.group[activeCategory].length }})</span> - 
+                <small><a data-ng-click="changePagedMode()">Close View All</a></small>
                 </h4>
-                <ul class="nav">
+                <ul class="unstyled">
                     <task task="task"
                         available="availableTasks"
                         assignables="assignables"
+                        details-fn="showTask(task)"
                         delete-fn="deleteTask(task)"
-                        data-ng-repeat="task in tasks.group[category] | orderBy:'due' | limitTo:briefPageSize" />
+                        data-ng-repeat="task in tasks.group[activeCategory] | orderBy:'due' | skip:currentPage*pageSize | limitTo:pageSize" />
                 </ul>
+                <div>
+                    <pager sizes="6,8,10" current-page="currentPage" page-size="pageSize" list="tasks.group[activeCategory]" />
+                </div>
                 <p>
-                    <button class="btn" data-ng-click="addNewTask(category)">Add New Task <i class="icon-plus"></i></button>
+                    <button class="btn" data-ng-click="addNewTask(activeCategory)">Add New Task <i class="icon-plus"></i></button>
+                    <span class="pull-right">
+                        <a class="btn btn-link" data-ng-click="changePagedMode()">Close View All</a>
+                    </span>
                 </p>
             </div>
         </div>
-        <div data-ng-switch-when="true">
-            <h4>{{ activeCategory }} <span class="text-info">({{ tasks.group[activeCategory].length }})</span> - 
-                <a data-ng-click="changePagedMode()">Close View All</a>
-            </h4>
-            <ul class="nav">
-                <task task="task"
-                    available="availableTasks"
-                    assignables="assignables"
-                    delete-fn="deleteTask(task)"
-                    data-ng-repeat="task in tasks.group[activeCategory] | orderBy:'due' | skip:currentPage*pageSize | limitTo:pageSize" />
-            </ul>
-            <div>
-                <pager sizes="6,8,10" current-page="currentPage" page-size="pageSize" list="tasks.group[activeCategory]" />
+        <div class="span4">
+            <div class="control-group">
+                <tile data-person="person" />
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
+                    <ul class="dropdown-menu">
+                    </ul>
+                </div>
             </div>
             <p>
-                <button class="btn" data-ng-click="addNewTask(activeCategory)">Add New Task <i class="icon-plus"></i></button>
-                <span class="pull-right">
-                    <a class="btn btn-link" data-ng-click="changePagedMode()">Close View All</a>
-                </span>
+                Comments
             </p>
+            <div class="control-group">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown">Add Comment <i class="icon-plus"></i></a>
+                    <ul class="dropdown-menu">
+                        <li complex-menu>
+                            <div>
+                                <textarea rows="5"></textarea>
+                            </div>
+                            <div>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    Private
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                    Notify Employee
+                                </label>
+                            </div>
+                            <div>
+                                <button class="btn">Cancel</button>
+                                <button class="btn btn-primary">Save</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="span4">
-        <div>
-            <tile data-person="person" />
-        </div>
-        <div>
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
-                <ul class="dropdown-menu">
-                </ul>
-            </div>
-        </div>
-        <div>
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
-                <ul class="dropdown-menu">
-                </ul>
-            </div>
-        </div>
-        <p>
-            Comments
-        </p>
-        <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
-            <ul class="dropdown-menu">
-                <li complex-menu>
-                    <div>
-                        <textarea rows="5"></textarea>
-                    </div>
-                    <div>
-                        <label class="checkbox">
-                            <input type="checkbox" />
-                            Private
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" />
-                            Notify Employee
-                        </label>
-                    </div>
-                    <div>
-                        <button class="btn">Cancel</button>
-                        <button class="btn btn-primary">Save</button>
-                    </div>
-                </li>
+    <div class="row-fluid" data-ng-switch-when="false">
+        <div class="span8">
+            <h4><a data-ng-click="backToList()">Back to Task List</a></h4>
+            <ul class="unstyled">
+                <task task="activeTask"
+                    available="availableTasks"
+                    assignables="assignables"
+                    details-fn="showTask(task)"
+                    delete-fn="deleteTask(task)" />
+            </ul>
+            <p>
+                <strong>Instructions:</strong>
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu est nulla, fringilla adipiscing odio. In tellus nibh, tempor at fermentum sit amet, tempus at odio. Vestibulum lacinia lacus sit amet velit facilisis sed auctor est blandit. Sed ullamcorper pulvinar eleifend. Suspendisse vel ligula orci, eu porta ipsum. Duis in odio id diam tincidunt semper vitae vel sapien. Maecenas sit amet magna ut ante vulputate faucibus.
+            </p>
+            <p>
+                <button class="btn">Download Form</button>
+                <button class="btn btn-success">Upload Completed Form</button>
+            </p>
+            <hr />
+            <ul class="unstyled">
+                <li class="muted">04/12/13 Viewed by You</li>
+                <li class="muted">04/12/13 Viewed by George Washington</li>
+                <li class="muted">04/12/13 Viewed by Christine Washington</li>
+                <li class="muted">04/12/13 Downloaded by George Washington</li>
             </ul>
         </div>
     </div>
 </div>
+

@@ -1,6 +1,6 @@
 ﻿<li class="form-inline" data-ng-class="{completed:task.isDone}">
     <label class="checkbox">
-        <input type="checkbox" data-ng-model="task.isDone" disabled="disabled" />
+        <input type="checkbox" data-ng-model="task.isDone" />
     </label>
     <span data-ng-switch data-on="taskMode">
         <span class="dropdown" data-ng-switch-when="new">
@@ -31,43 +31,49 @@
         <span data-ng-switch-when="edit">
             <input type="text" class="input-task input-large" data-ng-model="task.name" placeholder="Type the task name..." />
         </span>
-        <span data-ng-switch-default>{{task.name}}</span>
+        <span data-ng-switch-default><a data-ng-click="details()">{{task.name}}</a></span>
     </span>
     | <i class="icon-user"></i>
-    <span class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.assignee">
-            <span data-ng-switch-when="null" class="muted">Assign This Task</span>
-            <span data-ng-switch-default>{{task.assignee}}</span>
-        </a>
-        <ul class="dropdown-menu">
-            <li complex-menu>
-                <div>
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-search"></i></span>
-                        <input type="text" placeholder="Filter..." data-ng-model="query" />
+    <span class="dropdown" data-ng-switch="" data-on="task.isDone">
+        <span data-ng-switch-when="true">{{task.assignee}}</span>
+        <span data-ng-switch-default="">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.assignee">
+                <span data-ng-switch-when="null" class="muted">Assign This Task</span>
+                <span data-ng-switch-default="">{{task.assignee}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li complex-menu>
+                    <div>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-search"></i></span>
+                            <input type="text" placeholder="Filter..." data-ng-model="query" />
+                        </div>
                     </div>
-                </div>
-                <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in assignables.categories">
-                    <li data-ng-repeat="assignable in assignables.group[category] | searchFilter:'name':query ">
-                        <label class="radio">
-                            <input type="radio" data-ng-model="assignee.selectedOption" value="{{ assignable.name }}" />
-                            {{ assignable.name }}
-                        </label>
-                    </li>
-                </ul>
-            </li>
-            <li class="divider"></li>
-            <li>
-                <a>Add New Assignee</a>
-            </li>
-        </ul>
+                    <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in assignables.categories">
+                        <li data-ng-repeat="assignable in assignables.group[category] | searchFilter:'name':query ">
+                            <label class="radio">
+                                <input type="radio" data-ng-model="assignee.selectedOption" value="{{ assignable.name }}" />
+                                {{ assignable.name }}
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a>Add New Assignee</a>
+                </li>
+            </ul>
+        </span>
     </span>
     | <i class="icon-calendar"></i>
-    <span>
-        <a data-ng-switch data-on="task.due" b-datepicker="" ng-model="task.due">
-            <span data-ng-switch-when="null" class="muted">Set Due Date</span>
-            <span data-ng-switch-default>{{task.due | date:'MM/dd/yy'}}</span>
-        </a>
+    <span data-ng-switch="" data-on="task.isDone">
+        <span data-ng-switch-when="true">{{task.due | date:'MM/dd/yy'}}</span>
+        <span data-ng-switch-default="">
+            <a data-ng-switch data-on="task.due" b-datepicker="" ng-model="task.due">
+                <span data-ng-switch-when="null" class="muted">Set Due Date</span>
+                <span data-ng-switch-default>{{task.due | date:'MM/dd/yy'}}</span>
+            </a>
+        </span>
     </span>
     <span data-ng-show="task.due != null">| <span class="badge badge-{{ dateClass() }}">{{ days() }} Days</span>
     </span>

@@ -93,4 +93,20 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         $scope.tasks.group[category].splice(index, 1);
     };
 
+    //
+    // Individual task view
+
+    $scope.listView = true;
+    $scope.activeTask = undefined;
+
+    $scope.showTask = function (task) {
+        $scope.activeTask = task;
+        $scope.listView = false;
+    };
+
+    $scope.backToList = function () {
+        $scope.activeTask = undefined;
+        $scope.listView = true;
+    };
+
 }]);

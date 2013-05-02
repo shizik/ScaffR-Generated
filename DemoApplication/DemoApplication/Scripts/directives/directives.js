@@ -140,6 +140,7 @@ Application.Directives.directive('task', function factory() {
             task: '=',
             available: '=',
             assignables: '=',
+            detailsFn: '&',
             deleteFn: '&'
         },
         replace: true,
@@ -201,6 +202,10 @@ Application.Directives.directive('task', function factory() {
                 // TODO: Add logic for saving
                 $scope.newCreated = false;
                 toastr.success("Saved");
+            };
+
+            $scope.details = function () {
+                $scope.detailsFn({ task: $scope.task });
             };
 
             $scope.deleteTask = function () {
