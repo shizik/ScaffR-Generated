@@ -1,6 +1,8 @@
-﻿<li data-ng-repeat="item in list">
-    <label class="radio">
-        <input type="radio" data-ng-model="data.selectedOption" value="{{item[value || 'id']}}" />
-        {{item[display || 'name']}} ({{item[count || 'count']}})
-    </label>
-</li>
+﻿<div>
+    <li data-ng-repeat="item in list">
+        <label class="checkbox">
+            <input type="checkbox" data-ng-click="setValue(item[value || 'id'])" />
+            {{item[display || 'name']}} ({{item[count || 'count']}})
+        </label>
+    </li>
+</div>

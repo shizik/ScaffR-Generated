@@ -43,7 +43,7 @@
                     "category": "Company",
                     "assignee":"Jogn Doe",
                     "due": "2013-04-13T00:00:00+0100",
-                    "status": "open",
+                    "status": "overdue",
                     "isDone":false
                 },
                 {
@@ -51,7 +51,7 @@
                     "category": "Company",
                     "assignee":"Jogn Doe",
                     "due": "2013-04-20T00:00:00+0100",
-                    "status": "open",
+                    "status": "overdue",
                     "isDone":false
                 }
             ]
@@ -83,7 +83,7 @@
                     "category": "Company",
                     "assignee":"Jogn Doe",
                     "due": "2013-04-25T00:00:00+0100",
-                    "status": "open",
+                    "status": "overdue",
                     "isDone":false
                 },
                 {
@@ -158,11 +158,11 @@
     "summary":[
         {
             "status": "open",
-            "count": 5
+            "count": 6
         },
         {
             "status": "closed",
-            "count": 1
+            "count": 3
         },
         {
             "status": "overdue",

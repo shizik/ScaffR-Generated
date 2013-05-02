@@ -43,15 +43,20 @@ Application.Directives.directive('radioFilter', function factory() {
             count: '@'
         },
         replace: true,
+        link: function ($scope, element) {
+            $(element).on('click', 'input:checkbox', function () {
+                var $checkbox = $(this);
+
+                if (!$checkbox.is(':checked')) return;
+
+                $('input:checkbox', element).not($checkbox).attr('checked', false);
+            });
+        },
         controller: function ($scope) {
-            $scope.data = { selectedOption: undefined };
+            var prevValue = undefined;
 
-            $scope.clear = function () {
-                $scope.data.selectedOption = undefined;
-            };
-
-            $scope.$watch('data', function (newValue) {
-                var value = newValue.selectedOption;
+            $scope.setValue = function (value) {
+                if (value && prevValue == value) value = undefined;
 
                 if (_.isArray($scope.filter)) {
                     if (value)
@@ -62,8 +67,10 @@ Application.Directives.directive('radioFilter', function factory() {
                     $scope.filter = value;
                 }
 
+                prevValue = value;
+
                 console.log('radioFilter', $scope.filter);
-            }, true);
+            };
         }
     };
 });
