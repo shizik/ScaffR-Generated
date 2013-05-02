@@ -11,6 +11,11 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         department: []
     };
 
+    $scope.goToDetails = function (person) {
+        // TODO: Should use the location service
+        window.location.href = '/employee/index/' + person.id;
+    };
+
     employee.summary(function (data) {
         $scope.employees = data.employees;
         $scope.assignables = data.assignables;
