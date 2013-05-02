@@ -1,6 +1,4 @@
-﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-/// <reference path="~/Scripts/lib/angular/angular.js" />
-'use strict';
+﻿'use strict';
 
 Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
 
@@ -10,8 +8,7 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         status: [],
         assignedTo: [],
         team: [],
-        department: [],
-        alpha: true
+        department: []
     };
 
     employee.summary(function (data) {
@@ -56,7 +53,3 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
     };
 
 }]);
-
-$('.filter').click(function (e) {
-    e.stopPropagation();
-});

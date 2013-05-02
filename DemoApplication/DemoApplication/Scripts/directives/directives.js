@@ -271,8 +271,8 @@ Application.Directives.directive('complexMenu', function factory() {
 Application.Directives.directive('collapsible', function factory() {
     return {
         restrict: 'C',
-        template: '<div><div><i class=""></i><a>{{title}}</a></div>' +
-                  '<ul class="unstyled nav nav-list" ng-transclude></ul></div>',
+        template: '<div><div class="accordion-toggle"><i class=""></i><a>{{title}}</a></div>' +
+                  '<ul class="nav nav-list" ng-transclude></ul></div>',
         scope: {
             title: '@'
         },
@@ -281,14 +281,14 @@ Application.Directives.directive('collapsible', function factory() {
         link: function ($scope, element) {
             var opened = true;
 
-            $(element).children(':first-child').find('a').click(function () {
+            $(element).children(':first-child').click(function () {
                 opened = !opened;
 
-                $(this).prev()
+                $(this).children(':first-child')
                        .removeClass(opened ? 'icon-chevron-right' : 'icon-chevron-down')
                        .addClass(opened ? 'icon-chevron-down' : 'icon-chevron-right');
 
-                $(this).parent().next().toggle(opened);
+                $(this).next().toggle(opened);
             }).click();
         }
     };

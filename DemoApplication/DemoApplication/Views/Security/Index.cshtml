@@ -1,9 +1,9 @@
 ﻿@section AltNav
 {
     <p>
-        <button type="button" class="btn btn-inverse" data-ng-click="open()">
+        @*<button type="button" class="btn btn-inverse" data-ng-click="open()">
             Add Group <i class="icon-plus"></i>
-        </button>
+        </button>*@
         <div modal="shouldBeOpen" close="close()" options="opts">
             <div class="modal-header">
                 <h4>I'm a modal!</h4>
@@ -17,12 +17,6 @@
         </div>
     </p>
 }
-
-<style>
-    .selected {
-        color: red !important;
-    }
-</style>
 <div class="btn-toolbar form-inline">
 
     <div class="btn-group">
@@ -55,12 +49,12 @@
         </a>
         <ul class="dropdown-menu">
             <li complex-menu>
-                <div>
+                @*<div>
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-search"></i></span>
                         <input type="text" placeholder="Filter..." />
                     </div>
-                </div>
+                </div>*@
                 <ul class="collapsible" data-title="Status">
                     <checkbox-filter list="summary" filter="filter.status" display="status" value="status" />
                 </ul>
@@ -76,9 +70,9 @@
             </li>
         </ul>
     </div>
-    <div class="btn-group">
-        <input type="text" class="input-xxlarge" placeholder="Type to search..." ng-model="query" />
-    </div>
+<div class="btn-group">
+    <input type="text" class="input-xxlarge" placeholder="Type to search..." ng-model="query" />
+</div>
 </div>
 
 <div data-ng-switch on="display">
