@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
+Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'employeeUtils', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, employeeUtils, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
 
@@ -17,6 +17,10 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         $scope.departments = data.departments;
         $scope.summary = data.summary;
         $scope.teams = getTeamSummary(data.assignables);
+
+        _.forEach($scope.employees, function (person) {
+            person.counts = employeeUtils.getCounts(person);
+        });
     });
 
     function getTeamSummary(ass) {

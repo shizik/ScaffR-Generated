@@ -89,10 +89,10 @@
         <tbody>
             <tr data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
                 <td><a href="#">{{item.name}}</a></td>
-                <td>{{item.open.length}}</td>
-                <td>{{item.overdue.length}}</td>
-                <td>{{item.closed.length}}</td>
-                <td>{{item.tasks.length}}</td>
+                <td>{{item.counts.open}}</td>
+                <td>{{item.counts.overdue}}</td>
+                <td>{{item.counts.closed}}</td>
+                <td>{{item.counts.total()}}</td>
             </tr>
         </tbody>
     </table>

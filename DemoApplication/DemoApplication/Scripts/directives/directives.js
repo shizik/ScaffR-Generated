@@ -219,7 +219,7 @@ Application.Directives.directive('task', function factory() {
     };
 });
 
-Application.Directives.directive('tile', function factory() {
+Application.Directives.directive('tile', function factory(employeeUtils) {
     return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
@@ -228,31 +228,23 @@ Application.Directives.directive('tile', function factory() {
         },
         replace: true,
         controller: function ($scope) {
+
+            $scope.goToDetails = function () {
+                // TODO: Should use the location service
+                window.location.href = '/employee/index/' + $scope.person.id;
+            };
+
             $scope.counts = function () {
-                var result = {
-                    open: 0,
-                    closed: 0,
-                    overdue: 0,
-                    total: function () {
-                        return result.open + result.closed + result.overdue;
-                    }
-                };
+                return employeeUtils.getCounts($scope.person);
+            };
 
-                if (!$scope.person) return result;
+            $scope.badgeClass = '';
+            $scope.badgeCount = function () {
+                var counts = $scope.counts();
 
-                _.forEach($scope.person.tasks, function (item) {
-                    if (item.isDone) {
-                        result.closed++;
-                        return;
-                    }
+                $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
 
-                    // TODO: This should be centralized
-                    var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
-                    if (isOverdue) result.overdue++;
-                    else result.open++;
-                });
-
-                return result;
+                return counts.overdue > 0 ? counts.overdue : counts.open;
             };
         }
     };
