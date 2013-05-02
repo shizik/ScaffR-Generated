@@ -43,15 +43,20 @@ Application.Directives.directive('radioFilter', function factory() {
             count: '@'
         },
         replace: true,
+        link: function ($scope, element) {
+            $(element).on('click', 'input:checkbox', function () {
+                var $checkbox = $(this);
+
+                if (!$checkbox.is(':checked')) return;
+
+                $('input:checkbox', element).not($checkbox).attr('checked', false);
+            });
+        },
         controller: function ($scope) {
-            $scope.data = { selectedOption: undefined };
+            var prevValue = undefined;
 
-            $scope.clear = function () {
-                $scope.data.selectedOption = undefined;
-            };
-
-            $scope.$watch('data', function (newValue) {
-                var value = newValue.selectedOption;
+            $scope.setValue = function (value) {
+                if (value && prevValue == value) value = undefined;
 
                 if (_.isArray($scope.filter)) {
                     if (value)
@@ -62,8 +67,10 @@ Application.Directives.directive('radioFilter', function factory() {
                     $scope.filter = value;
                 }
 
+                prevValue = value;
+
                 console.log('radioFilter', $scope.filter);
-            }, true);
+            };
         }
     };
 });
@@ -114,7 +121,7 @@ Application.Directives.directive('pager', function factory() {
             // Page Sizes
 
             // TODO: size is always undefined, have no idea why
-            $scope.sizes = $scope.sizes || '6,8,10'; //'15,50,100'
+            $scope.sizes = $scope.sizes || '10,15,20'; //'15,50,100'
             $scope.pageSizes = $scope.sizes.split(',');
             $scope.pageSizes.push('All');
 
@@ -140,6 +147,7 @@ Application.Directives.directive('task', function factory() {
             task: '=',
             available: '=',
             assignables: '=',
+            detailsFn: '&',
             deleteFn: '&'
         },
         replace: true,
@@ -147,7 +155,9 @@ Application.Directives.directive('task', function factory() {
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
-                $scope.taskMode = 'edit';
+                //$scope.taskMode = 'edit';
+                // TODO: This is for demo purposes
+                window.location.href = '/tasks/ondemand/1';
             };
 
             $scope.assignment = { selectedOption: undefined };
@@ -203,6 +213,10 @@ Application.Directives.directive('task', function factory() {
                 toastr.success("Saved");
             };
 
+            $scope.details = function () {
+                $scope.detailsFn({ task: $scope.task });
+            };
+
             $scope.deleteTask = function () {
                 $scope.deleteFn({ task: $scope.task });
             };
@@ -214,7 +228,7 @@ Application.Directives.directive('task', function factory() {
     };
 });
 
-Application.Directives.directive('tile', function factory() {
+Application.Directives.directive('tile', function factory(employeeUtils) {
     return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
@@ -223,31 +237,23 @@ Application.Directives.directive('tile', function factory() {
         },
         replace: true,
         controller: function ($scope) {
+
+            $scope.goToDetails = function () {
+                // TODO: Should use the location service
+                window.location.href = '/employee/index/' + $scope.person.id;
+            };
+
             $scope.counts = function () {
-                var result = {
-                    open: 0,
-                    closed: 0,
-                    overdue: 0,
-                    total: function () {
-                        return result.open + result.closed + result.overdue;
-                    }
-                };
+                return employeeUtils.getCounts($scope.person);
+            };
 
-                if (!$scope.person) return result;
+            $scope.badgeClass = '';
+            $scope.badgeCount = function () {
+                var counts = $scope.counts();
 
-                _.forEach($scope.person.tasks, function (item) {
-                    if (item.isDone) {
-                        result.closed++;
-                        return;
-                    }
+                $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
 
-                    // TODO: This should be centralized
-                    var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
-                    if (isOverdue) result.overdue++;
-                    else result.open++;
-                });
-
-                return result;
+                return counts.overdue > 0 ? counts.overdue : counts.open;
             };
         }
     };
@@ -266,8 +272,8 @@ Application.Directives.directive('complexMenu', function factory() {
 Application.Directives.directive('collapsible', function factory() {
     return {
         restrict: 'C',
-        template: '<div><div><i class=""></i><a>{{title}}</a></div>' +
-                  '<ul class="unstyled nav nav-list" ng-transclude></ul></div>',
+        template: '<div><div class="accordion-toggle"><i class=""></i><a>{{title}}</a></div>' +
+                  '<ul class="nav nav-list" ng-transclude></ul></div>',
         scope: {
             title: '@'
         },
@@ -276,14 +282,14 @@ Application.Directives.directive('collapsible', function factory() {
         link: function ($scope, element) {
             var opened = true;
 
-            $(element).children(':first-child').find('a').click(function () {
+            $(element).children(':first-child').click(function () {
                 opened = !opened;
 
-                $(this).prev()
+                $(this).children(':first-child')
                        .removeClass(opened ? 'icon-chevron-right' : 'icon-chevron-down')
                        .addClass(opened ? 'icon-chevron-down' : 'icon-chevron-right');
 
-                $(this).parent().next().toggle(opened);
+                $(this).next().toggle(opened);
             }).click();
         }
     };

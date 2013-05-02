@@ -231,7 +231,7 @@
     <Compile Include="Controllers\Account\AccountController.Logout.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Components\ComponentsController.Exceptions.cs" />
-    <Compile Include="Controllers\Employee\EmployeesController.cs" />
+    <Compile Include="Controllers\Employee\EmployeeController.cs" />
     <Compile Include="Controllers\Home\HomeController.About.cs" />
     <Compile Include="Controllers\SecurityX\SecurityController.cs" />
     <Compile Include="Controllers\Tasks\TasksController.Templates.cs" />
@@ -477,6 +477,7 @@
     <Content Include="Scripts\lib\bootstrap\bundle.txt" />
     <Content Include="Scripts\lib\breeze\breeze.debug.js" />
     <Content Include="Content\less\bootstrap\toastr.less" />
+    <Content Include="Content\less\global\components\tiles.less" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
     <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\lib\bundle.txt">
@@ -720,6 +721,7 @@
     <Content Include="Scripts\services\templates.js" />
     <Content Include="Scripts\services\employees.js" />
     <Content Include="Scripts\lib\toastr\toastr.js" />
+    <Content Include="Scripts\utils\employee.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

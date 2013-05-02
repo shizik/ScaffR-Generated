@@ -100,9 +100,7 @@ Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories',
     };
 
     $scope.save = function () {
-
-        alert('saved, bitch');
-
+        toastr.success('Saved.');
     };
 
     $scope.cancel = function () {

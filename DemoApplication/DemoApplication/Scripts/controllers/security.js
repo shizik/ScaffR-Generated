@@ -1,8 +1,6 @@
-﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-/// <reference path="~/Scripts/lib/angular/angular.js" />
-'use strict';
+﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, tasks, templates, departments, teams, assignables) {
+Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'employeeUtils', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, employeeUtils, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
 
@@ -10,8 +8,12 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         status: [],
         assignedTo: [],
         team: [],
-        department: [],
-        alpha: true
+        department: []
+    };
+
+    $scope.goToDetails = function (person) {
+        // TODO: Should use the location service
+        window.location.href = '/employee/index/' + person.id;
     };
 
     employee.summary(function (data) {
@@ -20,6 +22,10 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
         $scope.departments = data.departments;
         $scope.summary = data.summary;
         $scope.teams = getTeamSummary(data.assignables);
+
+        _.forEach($scope.employees, function (person) {
+            person.counts = employeeUtils.getCounts(person);
+        });
     });
 
     function getTeamSummary(ass) {
@@ -56,7 +62,3 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
     };
 
 }]);
-
-$('.filter').click(function (e) {
-    e.stopPropagation();
-});

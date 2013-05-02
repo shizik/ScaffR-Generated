@@ -103,6 +103,78 @@
             "due": "2013-05-22T00:00:00+0100",
             "status": "open",
             "isDone":false
+        },
+        {
+            "name":"Task 7 FM",
+            "category": "Company",
+            "assignee":"Joe Satriani",
+            "due": "2013-05-17T00:00:00+0100",
+            "status": "closed",
+            "isDone":true
+        },
+        {
+            "name":"Fix the Task 8",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-04-03T00:00:00+0100",
+            "status": "open",
+            "isDone":false
+        },
+        {
+            "name":"Make 100 push ups Task 9",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-06-09T00:00:00+0100",
+            "status": "open",
+            "isDone":false
+        },
+        {
+            "name":"Play the Task 7",
+            "category": "Company",
+            "assignee":"Joe Satriani",
+            "due": "2013-05-07T00:00:00+0100",
+            "status": "closed",
+            "isDone":true
+        },
+        {
+            "name":"Fix the car 8",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-04-25T00:00:00+0100",
+            "status": "open",
+            "isDone":false
+        },
+        {
+            "name":"Make 100 push ups 774",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-06-05T00:00:00+0100",
+            "status": "open",
+            "isDone":false
+        },
+        {
+            "name":"Play the guitar Task 7",
+            "category": "Company",
+            "assignee":"Joe Satriani",
+            "due": "2013-05-02T00:00:00+0100",
+            "status": "closed",
+            "isDone":true
+        },
+        {
+            "name":"Fix the car Task 8",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-04-10T00:00:00+0100",
+            "status": "open",
+            "isDone":false
+        },
+        {
+            "name":"Make push ups Task 429",
+            "category": "Company",
+            "assignee":"Jogn Doe",
+            "due": "2013-06-24T00:00:00+0100",
+            "status": "open",
+            "isDone":false
         }
     ],
     "assignables":[

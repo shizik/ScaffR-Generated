@@ -1,15 +1,22 @@
-﻿<ul class="tile well nav nav-list">
-    <li class="nav-header">
-        <h3><a href="/employee/index/{{person.id}}">{{person.name}}</a></h3>
-    </li>
-    <li>
-        <ul class="nav nav-list">
-            <li>{{counts().open}} Open</li>
-            <li>{{counts().overdue}} Overdue</li>
-            <li>{{counts().closed}} Closed</li>
-            <li class="divider"></li>
-            <li>{{counts().total()}} Tasks</li>
-            <li class="divider"></li>
-        </ul>
-    </li>
-</ul>
+﻿<div class="tile well" data-ng-click="goToDetails()">
+    <ul class="nav nav-list">
+        <li>
+            <h4>{{person.name}}
+                <span class="badge {{badgeClass}}">{{badgeCount()}}</span>
+            </h4>
+        </li>
+        <li>
+            <ul class="unstyled">
+                <li>{{counts().open}} Open</li>
+                <li>{{counts().overdue}} Overdue</li>
+                <li>{{counts().closed}} Closed</li>
+                <li class="divider"></li>
+                <li>{{counts().total()}} Tasks</li>
+                <li class="divider"></li>
+            </ul>
+        </li>
+    </ul>
+    <p>
+        <a class="btn btn-success">View Details</a>
+    </p>
+</div>

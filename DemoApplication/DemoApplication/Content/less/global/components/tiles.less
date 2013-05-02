@@ -1,19 +1,43 @@
 ﻿@import "../../variables.less";
 
-.tiles
-{
-	
+.tiles {
 }
 
-.tile{
+.tile {
+    width: 150px;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    position: relative;
 
-	h3{
-		font-size: 14px;
-	}
+    h4 {
+        position: relative;
+        padding-right: 30px;
 
-	width: 200px;
-	display: inline-block;
-	padding: 5px;
-	margin: 5px;
-	border: 1px solid black;	
+        .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    p {
+        display: none;
+        position: absolute;
+        top: 45%;
+        right: 0;
+        left: 0;
+    }
+
+    &:hover {
+        li {
+            opacity: 0.4;
+        }
+
+        p {
+            text-align: center;
+            display: block;
+        }
+    }
 }

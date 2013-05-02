@@ -64,7 +64,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     $scope.pagedMode = false;
     $scope.currentPage = 0;
     $scope.pageSize = 0;
-    $scope.briefPageSize = 4;
+    $scope.briefPageSize = 20;
 
     $scope.changePagedMode = function (category) {
         $scope.activeCategory = category;
@@ -91,6 +91,22 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         var index = $scope.tasks.group[category].indexOf(task);
 
         $scope.tasks.group[category].splice(index, 1);
+    };
+
+    //
+    // Individual task view
+
+    $scope.listView = true;
+    $scope.activeTask = undefined;
+
+    $scope.showTask = function (task) {
+        $scope.activeTask = task;
+        $scope.listView = false;
+    };
+
+    $scope.backToList = function () {
+        $scope.activeTask = undefined;
+        $scope.listView = true;
     };
 
 }]);
