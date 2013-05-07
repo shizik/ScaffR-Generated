@@ -9,6 +9,13 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         $scope.tasks = groupItems(data.tasks);
         $scope.availableTasks = groupItems(data.availableTasks);
         $scope.assignables = groupItems(data.assignables, 'department');
+
+        var newTasks = {};
+        _.forEach($scope.tasks.categories, function (item) {
+            newTasks[item] = [];
+        });
+
+        $scope.newTasks = newTasks;
     });
 
     function groupItems(taskList, group) {
@@ -64,7 +71,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     $scope.pagedMode = false;
     $scope.currentPage = 0;
     $scope.pageSize = 0;
-    $scope.briefPageSize = 20;
+    $scope.briefPageSize = 5;
 
     $scope.changePagedMode = function (category) {
         $scope.activeCategory = category;
@@ -75,7 +82,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     // Add new task
 
     $scope.addNewTask = function (category) {
-        $scope.tasks.group[category].push(
+        $scope.newTasks[category].push(
             {
                 "name": null,
                 "category": category,
@@ -86,11 +93,16 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
             });
     };
 
+    $scope.saveTask = function (task) {
+        $scope.tasks.group[task.category].push(task);
+        $scope.deleteTask(task);
+    };
+
     $scope.deleteTask = function (task) {
         var category = task.category;
-        var index = $scope.tasks.group[category].indexOf(task);
+        var index = $scope.newTasks[category].indexOf(task);
 
-        $scope.tasks.group[category].splice(index, 1);
+        $scope.newTasks[category].splice(index, 1);
     };
 
     //

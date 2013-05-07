@@ -139,15 +139,22 @@
             <div data-ng-switch-when="false">
                 <div data-ng-repeat="category in tasks.categories">
                     <h4>{{ category }} <span class="text-info">({{ tasks.group[category].length }})</span> - 
-                <small><a data-ng-click="changePagedMode(category)">View All</a></small>
+                        <small><a data-ng-click="changePagedMode(category)">View All</a></small>
                     </h4>
                     <ul class="unstyled">
                         <task task="task"
                             available="availableTasks"
                             assignables="assignables"
                             details-fn="showTask(task)"
+                            data-ng-repeat="task in tasks.group[category] | orderBy:'due' | limitTo:briefPageSize" />
+                    </ul>
+                    <ul class="unstyled">
+                        <task task="task"
+                            available="availableTasks"
+                            assignables="assignables"
+                            save-fn="saveTask(task)"
                             delete-fn="deleteTask(task)"
-                            data-ng-repeat="task in tasks.group[category] | @*orderBy:'due' |*@ limitTo:(briefPageSize - 15*$index)" />
+                            data-ng-repeat="task in newTasks[category]" />
                     </ul>
                     <p>
                         <button class="btn" data-ng-click="addNewTask(category)">Add New Task <i class="icon-plus"></i></button>
@@ -165,6 +172,14 @@
                         details-fn="showTask(task)"
                         delete-fn="deleteTask(task)"
                         data-ng-repeat="task in tasks.group[activeCategory] | orderBy:'due' | skip:currentPage*pageSize | limitTo:pageSize" />
+                </ul>
+                <ul class="unstyled">
+                    <task task="task"
+                        available="availableTasks"
+                        assignables="assignables"
+                        save-fn="saveTask(task)"
+                        delete-fn="deleteTask(task)"
+                        data-ng-repeat="task in newTasks[activeCategory]" />
                 </ul>
                 <div class="row-fluid">
                     <pager sizes="10,15,20" current-page="currentPage" page-size="pageSize" list="tasks.group[activeCategory]" />
