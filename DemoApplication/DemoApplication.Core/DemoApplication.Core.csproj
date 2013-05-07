@@ -129,6 +129,7 @@
     <Compile Include="Interfaces\Assignments\IAssignmentService.cs" />
     <Compile Include="Interfaces\Membership\IPasswordPolicy.cs" />
     <Compile Include="Interfaces\Notifications\INotificationService.cs" />
+    <Compile Include="Model\Attachment.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\MilestoneType.cs" />
     <Compile Include="Model\IAssignable.cs" />
