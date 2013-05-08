@@ -6,7 +6,11 @@
     "credentials":
     {
         "username":"john.s"
-    },    
+    },
+    "activity": [
+        { "name": "Created Assignment: Fill out Hire W-4 Task 1", "date":"2013-04-20T00:00:00+0100" },
+        { "name": "Applied Template: Hiring", "date":"2013-04-15T00:00:00+0100" }
+    ],
     "tasks":[
         {
             "name":"Fill out Hire W-4 Task 1",
