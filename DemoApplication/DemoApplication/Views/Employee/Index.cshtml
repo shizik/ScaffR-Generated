@@ -68,7 +68,9 @@
                         data-ng-repeat="task in newTasks[category]" />
                 </ul>
                 <p>
-                    <button class="btn" data-ng-click="addNewTask(category)">Add New Task <i class="icon-plus"></i></button>
+                    <button class="btn" data-ng-click="addNewTask(category)" data-ng-disabled="isAddingTask">
+                        Add New Task <i class="icon-plus"></i>
+                    </button>
                 </p>
             </div>
         </div>

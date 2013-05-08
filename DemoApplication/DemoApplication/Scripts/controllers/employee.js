@@ -43,7 +43,11 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     //
     // Add new task
 
+    $scope.isAddingTask = false;
+
     $scope.addNewTask = function (category) {
+        $scope.isAddingTask = true;
+
         $scope.newTasks[category].push(
             {
                 "name": null,
@@ -65,6 +69,8 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         var index = $scope.newTasks[category].indexOf(task);
 
         $scope.newTasks[category].splice(index, 1);
+
+        $scope.isAddingTask = false;
     };
 
     //
