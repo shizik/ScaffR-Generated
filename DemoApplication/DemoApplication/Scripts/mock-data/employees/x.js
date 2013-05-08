@@ -286,5 +286,19 @@
             "status": "open",
             "isDone":false
         }
+    ],
+    "templates" : [
+        {
+            "name": "Hiring New Employee",
+            "isApplied":true
+        },
+        {
+            "name": "Upgrade the Salary",
+            "isApplied":false
+        },
+        {
+            "name": "Unpaid Leave",
+            "isApplied":false
+        }
     ]
 }

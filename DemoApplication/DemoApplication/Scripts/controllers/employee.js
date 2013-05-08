@@ -9,6 +9,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         $scope.tasks = groupItems(data.tasks);
         $scope.availableTasks = groupItems(data.availableTasks);
         $scope.assignables = groupItems(data.assignables, 'department');
+        $scope.templates = data.templates;
 
         var newTasks = {};
         _.forEach($scope.tasks.categories, function (item) {
@@ -38,45 +39,6 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
 
         return result;
     }
-
-    //
-    // General Data Editing
-
-    var personCopy = {};
-    $scope.editMode = false;
-
-    $scope.changeMode = function () {
-        if (!$scope.editMode) {
-            angular.copy($scope.person, personCopy);
-        } else {
-            $scope.person.name = personCopy.name;
-            $scope.person.title = personCopy.title;
-            $scope.person.email = personCopy.email;
-            $scope.person.credentials = personCopy.credentials;
-        }
-
-        $scope.editMode = !$scope.editMode;
-    };
-
-    $scope.saveGeneralData = function () {
-        // TODO: Add logic for saving data to server
-
-        $scope.editMode = false;
-    };
-
-    //
-    // Paging
-
-    $scope.activeCategory = undefined;
-    $scope.pagedMode = false;
-    $scope.currentPage = 0;
-    $scope.pageSize = 0;
-    $scope.briefPageSize = 5;
-
-    $scope.changePagedMode = function (category) {
-        $scope.activeCategory = category;
-        $scope.pagedMode = !$scope.pagedMode;
-    };
 
     //
     // Add new task
