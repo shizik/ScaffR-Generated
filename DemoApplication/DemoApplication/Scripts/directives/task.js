@@ -79,7 +79,7 @@
             };
 
             $scope.deleteTask = function () {
-                $scope.deleteFn({ task: $scope.task });
+                $scope.deleteFn({ task: $scope.task, isNew: $scope.newCreated });
             };
 
             $scope.editTask = function () {

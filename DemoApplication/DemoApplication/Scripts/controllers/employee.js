@@ -61,14 +61,15 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
 
     $scope.saveTask = function (task) {
         $scope.tasks.group[task.category].push(task);
-        $scope.deleteTask(task);
+        $scope.deleteTask(task, true);
     };
 
-    $scope.deleteTask = function (task) {
+    $scope.deleteTask = function (task, isNew) {
         var category = task.category;
-        var index = $scope.newTasks[category].indexOf(task);
+        var list = isNew ? $scope.newTasks : $scope.tasks.group;
+        var index = list[category].indexOf(task);
 
-        $scope.newTasks[category].splice(index, 1);
+        list[category].splice(index, 1);
 
         $scope.isAddingTask = false;
     };

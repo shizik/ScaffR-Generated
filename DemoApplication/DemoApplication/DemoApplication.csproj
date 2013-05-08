@@ -479,6 +479,7 @@
     <Content Include="Scripts\lib\breeze\breeze.debug.js" />
     <Content Include="Content\less\bootstrap\toastr.less" />
     <Content Include="Content\less\global\components\tiles.less" />
+    <Content Include="Content\less\global\components\task.less" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
     <Content Include="Scripts\lib\breeze\breeze.min.js" />
     <Content Include="Scripts\lib\bundle.txt">
