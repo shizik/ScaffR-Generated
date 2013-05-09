@@ -18,7 +18,8 @@
             "assignee":"Christine Alexander",
             "due": "2013-04-27T00:00:00+0100",
             "status": "overdue",
-            "isDone":false
+            "isDone":false,
+            "templateId": 1
         },
                 {
                     "name":"Fill out Hire L-10 Task 2",
@@ -26,15 +27,17 @@
                     "assignee":"Christine Alexander",
                     "due": "2013-05-11T00:00:00+0100",
                     "status": "closed",
-                    "isDone":true
+                    "isDone":true,
+                    "templateId": 1
                 },
                 {
                     "name":"Sing a welcoming song Task 3",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
+                    "assignee":"John Doe",
                     "due": "2013-05-23T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 1
                 },
         {
             "name":"Fill out New WSDL Task 6",
@@ -55,7 +58,7 @@
         {
             "name":"Drive the car Task 11",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-05-05T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -63,7 +66,7 @@
         {
             "name":"Make 50 sit ups Task 12",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-05-22T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -79,7 +82,7 @@
         {
             "name":"Fix the Task 8",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-04-03T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -95,7 +98,7 @@
         {
             "name":"Fix the car 8",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-04-25T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -103,7 +106,7 @@
         {
             "name":"Make 100 push ups 774",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-06-05T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -119,7 +122,7 @@
         {
             "name":"Fix the car Task 8",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-04-10T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -127,7 +130,7 @@
         {
             "name":"Make push ups Task 429",
             "category": "Company",
-            "assignee":"Jogn Doe",
+            "assignee":"John Doe",
             "due": "2013-06-24T00:00:00+0100",
             "status": "open",
             "isDone":false
@@ -253,6 +256,7 @@
     ],
     "templates" : [
         {
+            "id": 1,
             "name": "Hiring New Employee",
             "isApplied":true,
             "assignments": [
@@ -260,29 +264,33 @@
                     "name":"Fill out Hire W-4 Task 1",
                     "category": "Job",
                     "assignee":"Christine Alexander",
-                    "due": "2013-04-27T00:00:00+0100",
-                    "status": "overdue",
-                    "isDone":false
+                    "due": "2013-06-21T00:00:00+0100",
+                    "status": "open",
+                    "isDone":false,
+                    "templateId": 1
                 },
                 {
                     "name":"Fill out Hire L-10 Task 2",
                     "category": "Job",
                     "assignee":"Christine Alexander",
-                    "due": "2013-05-11T00:00:00+0100",
-                    "status": "closed",
-                    "isDone":true
+                    "due": "2013-05-19T00:00:00+0100",
+                    "status": "open",
+                    "isDone":false,
+                    "templateId": 1
                 },
                 {
                     "name":"Sing a welcoming song Task 3",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
+                    "assignee":"John Doe",
                     "due": "2013-05-23T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 1
                 }
             ]
         },
         {
+            "id": 2,
             "name": "Upgrade the Salary",
             "isApplied":false,
             "assignments": [
@@ -291,46 +299,52 @@
                     "category": "Company",
                     "assignee":"Joe Satriani",
                     "due": "2013-05-17T00:00:00+0100",
-                    "status": "closed",
-                    "isDone":true
+                    "status": "open",
+                    "isDone":false,
+                    "templateId": 2
                 },
                 {
                     "name":"Fix the car Task 8",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
-                    "due": "2013-04-25T00:00:00+0100",
+                    "assignee":"John Doe",
+                    "due": "2013-07-25T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 2
                 },
                 {
                     "name":"Make 100 push ups Task 9",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
+                    "assignee":"John Doe",
                     "due": "2013-06-06T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 2
                 }
             ]
         },
         {
+            "id": 3,
             "name": "Unpaid Leave",
             "isApplied":false,
             "assignments": [
                 {
                     "name":"Fix the car  Task 4",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
-                    "due": "2013-04-13T00:00:00+0100",
+                    "assignee":"John Doe",
+                    "due": "2013-06-13T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 3
                 },
                 {
                     "name":"Make 100 push ups Task 5",
                     "category": "Company",
-                    "assignee":"Jogn Doe",
-                    "due": "2013-04-20T00:00:00+0100",
+                    "assignee":"John Doe",
+                    "due": "2013-05-20T00:00:00+0100",
                     "status": "open",
-                    "isDone":false
+                    "isDone":false,
+                    "templateId": 3
                 }
             ]
         }

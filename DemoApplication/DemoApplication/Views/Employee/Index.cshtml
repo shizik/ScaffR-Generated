@@ -22,9 +22,9 @@
                         </div>
                     </div>
                     <ul class="unstyled">
-                        <li data-ng-repeat="item in templates | searchFilter:'name':templateQuery">
+                        <li data-ng-repeat="item in templates | orderBy:'isApplied':true | searchFilter:'name':templateQuery">
                             <label class="checkbox">
-                                <input type="checkbox" data-ng-model="item.isApplied" />
+                                <input type="checkbox" data-ng-model="item.isApplied" data-ng-click="applyTemplate(item)" />
                                 {{item.name}}
                             </label>
                         </li>
