@@ -84,7 +84,7 @@ Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils'
         });
 
         $scope.assignees = result;
-    });
+    }, true);
 
     //
     // Add new task
