@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employee', function ($scope, employee) {
+Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils', function ($scope, employee, commonUtils) {
 
     $scope.person = { tasks: [] };
 
@@ -9,6 +9,14 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
         $scope.tasks = groupItems(data.tasks);
         $scope.availableTasks = groupItems(data.availableTasks);
         $scope.assignables = groupItems(data.assignables, 'department');
+        $scope.templates = data.templates;
+
+        var newTasks = {};
+        _.forEach($scope.tasks.categories, function (item) {
+            newTasks[item] = [];
+        });
+
+        $scope.newTasks = newTasks;
     });
 
     function groupItems(taskList, group) {
@@ -33,49 +41,14 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
     }
 
     //
-    // General Data Editing
-
-    var personCopy = {};
-    $scope.editMode = false;
-
-    $scope.changeMode = function () {
-        if (!$scope.editMode) {
-            angular.copy($scope.person, personCopy);
-        } else {
-            $scope.person.name = personCopy.name;
-            $scope.person.title = personCopy.title;
-            $scope.person.email = personCopy.email;
-            $scope.person.credentials = personCopy.credentials;
-        }
-
-        $scope.editMode = !$scope.editMode;
-    };
-
-    $scope.saveGeneralData = function () {
-        // TODO: Add logic for saving data to server
-
-        $scope.editMode = false;
-    };
-
-    //
-    // Paging
-
-    $scope.activeCategory = undefined;
-    $scope.pagedMode = false;
-    $scope.currentPage = 0;
-    $scope.pageSize = 0;
-    $scope.briefPageSize = 20;
-
-    $scope.changePagedMode = function (category) {
-        $scope.activeCategory = category;
-        $scope.pagedMode = !$scope.pagedMode;
-    };
-
-    //
     // Add new task
 
+    $scope.isAddingTask = false;
+
     $scope.addNewTask = function (category) {
-        $scope.tasks.group[category].push(
+        $scope.isAddingTask = true;
+
+        $scope.newTasks[category].push(
             {
                 "name": null,
                 "category": category,
@@ -86,11 +59,21 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
             });
     };
 
-    $scope.deleteTask = function (task) {
-        var category = task.category;
-        var index = $scope.tasks.group[category].indexOf(task);
+    $scope.saveTask = function (task) {
+        $scope.tasks.group[task.category].push(task);
+        $scope.person.tasks.push(task);
+        $scope.deleteTask(task, true);
+    };
 
-        $scope.tasks.group[category].splice(index, 1);
+    $scope.deleteTask = function (task, isNew) {
+        var category = task.category;
+        var list = isNew ? $scope.newTasks : $scope.tasks.group;
+
+        commonUtils.removeFromList(task, list[category]);
+        if (!isNew)
+            commonUtils.removeFromList(task, $scope.person.tasks);
+
+        $scope.isAddingTask = false;
     };
 
     //

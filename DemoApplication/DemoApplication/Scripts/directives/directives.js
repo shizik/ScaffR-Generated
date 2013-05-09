@@ -139,126 +139,6 @@ Application.Directives.directive('pager', function factory() {
     };
 });
 
-Application.Directives.directive('task', function factory() {
-    return {
-        restrict: 'E',
-        templateUrl: '/content/templates/employee/task.html',
-        scope: {
-            task: '=',
-            available: '=',
-            assignables: '=',
-            detailsFn: '&',
-            deleteFn: '&'
-        },
-        replace: true,
-        controller: function ($scope) {
-            $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
-
-            $scope.editMode = function () {
-                //$scope.taskMode = 'edit';
-                // TODO: This is for demo purposes
-                window.location.href = '/tasks/ondemand/1';
-            };
-
-            $scope.assignment = { selectedOption: undefined };
-            $scope.$watch('assignment', function (newValue) {
-                if (!newValue.selectedOption) return;
-
-                $scope.task.name = newValue.selectedOption;
-                $scope.taskMode = 'display';
-            }, true);
-
-            $scope.assignee = { selectedOption: undefined };
-            $scope.$watch('assignee', function (newValue) {
-                if (!newValue.selectedOption) return;
-
-                $scope.task.assignee = newValue.selectedOption;
-            }, true);
-
-            $scope.isNew = function () {
-                return $scope.task.name == null || $scope.task.assignee == null || $scope.task.due == null;
-            };
-
-            $scope.newCreated = $scope.isNew();
-
-
-            $scope.preventClosing = function ($event) {
-                $event.stopPropagation();
-            };
-
-            $scope.days = function () {
-                if ($scope.task.due == null) return 0;
-
-                return moment($scope.task.due).diff(moment(), 'days');
-            };
-
-            $scope.isOverdue = function () {
-                return $scope.days() < 0;
-            };
-
-            $scope.dateClass = function () {
-                if ($scope.task.isDone) return 'success';
-                else if ($scope.days() < 0) return 'warning';
-                else if ($scope.days() == 0) return 'error';
-
-                return 'info';
-            };
-
-            //
-            // Button actions
-
-            $scope.saveTask = function () {
-                // TODO: Add logic for saving
-                $scope.newCreated = false;
-                toastr.success("Saved");
-            };
-
-            $scope.details = function () {
-                $scope.detailsFn({ task: $scope.task });
-            };
-
-            $scope.deleteTask = function () {
-                $scope.deleteFn({ task: $scope.task });
-            };
-
-            $scope.editTask = function () {
-                // TODO: Open the details page
-            };
-        }
-    };
-});
-
-Application.Directives.directive('tile', function factory(employeeUtils) {
-    return {
-        restrict: 'E',
-        templateUrl: '/content/templates/employee/tile.html',
-        scope: {
-            person: '='
-        },
-        replace: true,
-        controller: function ($scope) {
-
-            $scope.goToDetails = function () {
-                // TODO: Should use the location service
-                window.location.href = '/employee/index/' + $scope.person.id;
-            };
-
-            $scope.counts = function () {
-                return employeeUtils.getCounts($scope.person);
-            };
-
-            $scope.badgeClass = '';
-            $scope.badgeCount = function () {
-                var counts = $scope.counts();
-
-                $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
-
-                return counts.overdue > 0 ? counts.overdue : counts.open;
-            };
-        }
-    };
-});
-
 Application.Directives.directive('complexMenu', function factory() {
     return function (scope, element) {
         $(element)
@@ -272,7 +152,7 @@ Application.Directives.directive('complexMenu', function factory() {
 Application.Directives.directive('collapsible', function factory() {
     return {
         restrict: 'C',
-        template: '<div><div class="accordion-toggle"><i class=""></i><a>{{title}}</a></div>' +
+        template: '<div><div data-complex-menu class="accordion-toggle"><i class=""></i><a>{{title}}</a></div>' +
                   '<ul class="nav nav-list" ng-transclude></ul></div>',
         scope: {
             title: '@'

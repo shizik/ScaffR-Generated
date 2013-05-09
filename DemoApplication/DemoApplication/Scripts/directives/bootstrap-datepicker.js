@@ -7,7 +7,7 @@
             updateModel = function (ev) {
                 $(element).datepicker('hide').blur();
                 return $scope.$apply(function () {
-                    return controller.$setViewValue(ev.date);
+                    return controller.$setViewValue(moment(ev.date).toJSON());
                 });
             };
             if (controller != null) {

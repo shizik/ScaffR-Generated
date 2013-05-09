@@ -1,20 +1,18 @@
-﻿<div class="tile well" data-ng-click="goToDetails()">
+﻿<div class="tile well tile-{{mode}}" data-ng-click="goToDetails()">
     <ul class="nav nav-list">
         <li>
             <h4>{{person.name}}
                 <span class="badge {{badgeClass}}">{{badgeCount()}}</span>
             </h4>
         </li>
-        <li>
-            <ul class="unstyled">
-                <li>{{counts().open}} Open</li>
-                <li>{{counts().overdue}} Overdue</li>
-                <li>{{counts().closed}} Closed</li>
-                <li class="divider"></li>
-                <li>{{counts().total()}} Tasks</li>
-                <li class="divider"></li>
-            </ul>
-        </li>
+    </ul>
+    <ul class="nav nav-list">
+        <li data-ng-click="filter='open'" data-ng-class="{active:filter=='open'}"><a>{{counts().open}} Open</a></li>
+        <li data-ng-click="filter='overdue'" data-ng-class="{active:filter=='overdue'}"><a>{{counts().overdue}} Overdue</a></li>
+        <li data-ng-click="filter='closed'" data-ng-class="{active:filter=='closed'}"><a>{{counts().closed}} Closed</a></li>
+        <li class="divider"></li>
+        <li data-ng-click="filter='all'" data-ng-class="{active:filter=='all'}"><a>{{counts().total()}} Tasks</a></li>
+        <li class="divider"></li>
     </ul>
     <p>
         <a class="btn btn-success">View Details</a>
