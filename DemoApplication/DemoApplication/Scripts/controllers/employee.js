@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employee', function ($scope, employee) {
+Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils', function ($scope, employee, commonUtils) {
 
     $scope.person = { tasks: [] };
 
@@ -61,15 +61,17 @@ Application.Controllers.controller('index', ['$scope', 'employee', function ($sc
 
     $scope.saveTask = function (task) {
         $scope.tasks.group[task.category].push(task);
+        $scope.person.tasks.push(task);
         $scope.deleteTask(task, true);
     };
 
     $scope.deleteTask = function (task, isNew) {
         var category = task.category;
         var list = isNew ? $scope.newTasks : $scope.tasks.group;
-        var index = list[category].indexOf(task);
 
-        list[category].splice(index, 1);
+        commonUtils.removeFromList(task, list[category]);
+        if (!isNew)
+            commonUtils.removeFromList(task, $scope.person.tasks);
 
         $scope.isAddingTask = false;
     };

@@ -139,37 +139,6 @@ Application.Directives.directive('pager', function factory() {
     };
 });
 
-Application.Directives.directive('tile', function factory(employeeUtils) {
-    return {
-        restrict: 'E',
-        templateUrl: '/content/templates/employee/tile.html',
-        scope: {
-            person: '='
-        },
-        replace: true,
-        controller: function ($scope) {
-
-            $scope.goToDetails = function () {
-                // TODO: Should use the location service
-                window.location.href = '/employee/index/' + $scope.person.id;
-            };
-
-            $scope.counts = function () {
-                return employeeUtils.getCounts($scope.person);
-            };
-
-            $scope.badgeClass = '';
-            $scope.badgeCount = function () {
-                var counts = $scope.counts();
-
-                $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
-
-                return counts.overdue > 0 ? counts.overdue : counts.open;
-            };
-        }
-    };
-});
-
 Application.Directives.directive('complexMenu', function factory() {
     return function (scope, element) {
         $(element)

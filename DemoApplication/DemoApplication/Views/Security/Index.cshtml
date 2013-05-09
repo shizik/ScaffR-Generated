@@ -98,7 +98,8 @@
     </table>
 
     <div class="span12 tiles" ng-switch-when="tiles">
-        <tile person="item"
+        <tile data-mode="list"
+            data-person="item"
             data-ng-repeat="item in employees| employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />
     </div>
 </div>

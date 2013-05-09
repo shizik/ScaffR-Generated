@@ -1,7 +1,4 @@
-﻿/// <reference path="../global/global.angular.js" />
-/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-
-Application.Filters.filter('customSort', function () {
+﻿Application.Filters.filter('customSort', function () {
     return function (items, strategy) {
 
         // implement correct sorting here
@@ -56,6 +53,25 @@ Application.Filters.filter('employeeFilter', function () {
     function checkValue(list, value) {
         return !list || list.length == 0 || _.contains(list, value);
     }
+});
+
+Application.Filters.filter('taskFilter', function () {
+    return function (items, filter) {
+        return _.filter(items, function (item) {
+            var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
+
+            switch (filter) {
+                case 'closed':
+                    return item.isDone;
+                case 'overdue':
+                    return !item.isDone && isOverdue;
+                case 'open':
+                    return !item.isDone && !isOverdue;
+                default:
+                    return true;
+            }
+        });
+    };
 });
 
 Application.Filters.filter('searchFilter', function () {
