@@ -1,8 +1,6 @@
-﻿<li class="task form-inline" data-ng-class="{completed:task.isDone}">
+﻿<li class="task" data-ng-class="{completed:task.isDone}">
     <div>
-        <label class="checkbox">
-            <input type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
-        </label>
+        <input class="task-checkbox" type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
         <span data-ng-switch="" data-on="taskMode">
             <span class="dropdown" data-ng-switch-when="new">
                 <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
@@ -37,9 +35,9 @@
             </span>
         </span>
         | <i class="icon-user"></i>
-        <span class="dropdown" data-ng-switch="" data-on="task.isDone">
+        <span data-ng-switch="" data-on="task.isDone">
             <span data-ng-switch-when="true">{{task.assignee}}</span>
-            <span data-ng-switch-default="">
+            <span class="dropdown" data-ng-switch-default="">
                 <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.assignee">
                     <span data-ng-switch-when="null" class="muted">Assign This Task</span>
                     <span data-ng-switch-default="">{{task.assignee}}</span>
@@ -53,11 +51,22 @@
                             </div>
                         </div>
                     </li>
-                    <li complex-menu>
+                    <li>
                         <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in assignables.categories">
+                            <li>
+                                <label class="checkbox">
+                                    <input type="checkbox"
+                                        data-ng-checked="isTeam && task.assignee==category"
+                                        data-ng-click="assign(category,true)" />
+                                    (Assign to Team)
+                                </label>
+                            </li>
                             <li data-ng-repeat="assignable in assignables.group[category] | searchFilter:'name':query ">
-                                <label class="radio">
-                                    <input type="radio" data-ng-model="assignee.selectedOption" value="{{ assignable.name }}" />
+                                <label class="checkbox">
+                                    <input type="checkbox"
+                                        data-ng-click="assign(assignable.name,false)"
+                                        data-ng-checked="(isTeam && task.assignee==category) || task.assignee==assignable.name"
+                                        data-ng-disabled="isTeam && task.assignee==category" />
                                     {{ assignable.name }}
                                 </label>
                             </li>
@@ -65,7 +74,24 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a>Add New Assignee</a>
+                        <a data-ng-click="assign(undefined,false)">Assign to this Employee</a>
+                    </li>
+                </ul>
+            </span>
+        </span>
+        <span data-ng-show="isTeam">|
+            <strong>resolution: </strong>
+            <span class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="resolveByAll">
+                    <span data-ng-switch-when="null" class="muted">Choose</span>
+                    <span data-ng-switch-default="">{{resolveByAll && 'by All' || 'by One'}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-ng-click="resolveByAll=false">One Team Member</a>
+                    </li>
+                    <li>
+                        <a data-ng-click="resolveByAll=true">All Team Members</a>
                     </li>
                 </ul>
             </span>

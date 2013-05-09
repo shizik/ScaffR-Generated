@@ -28,12 +28,20 @@
                 $scope.taskMode = 'display';
             }, true);
 
-            $scope.assignee = { selectedOption: undefined };
-            $scope.$watch('assignee', function (newValue) {
-                if (!newValue.selectedOption) return;
+            $scope.isTeam = false;
+            $scope.resolveByAll = null;
+            $scope.assign = function (assignee, isTeam) {
+                $scope.resolveByAll = null;
 
-                $scope.task.assignee = newValue.selectedOption;
-            }, true);
+                if ($scope.task.assignee == assignee) {
+                    $scope.task.assignee = null;
+                    $scope.isTeam = false;
+                    return;
+                }
+
+                $scope.isTeam = isTeam;
+                $scope.task.assignee = assignee || $scope.$parent.person.name;
+            };
 
             $scope.isNew = function () {
                 return $scope.task.name == null || $scope.task.assignee == null || $scope.task.due == null;
