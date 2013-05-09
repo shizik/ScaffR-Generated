@@ -2444,6 +2444,34 @@ Type type, IDataReader reader, int startBound = 0, int length = -1, bool returnN
             }
 #endif
 
+            #region map multiple objects with records set
+            public IEnumerable<TFirst> Map<TFirst, TSecond, TKey>
+           (
+                // GridReader reader,
+           Func<TFirst, TKey> firstKey,
+           Func<TSecond, TKey> secondKey,
+           Action<TFirst, IEnumerable<TSecond>> addChildren
+           )
+            {
+                var first = this.Read<TFirst>().ToList();
+                var childMap = this
+                    .Read<TSecond>()
+                    .GroupBy(s => secondKey(s))
+                    .ToDictionary(g => g.Key, g => g.AsEnumerable());
+
+                foreach (var item in first)
+                {
+                    IEnumerable<TSecond> children;
+                    if (childMap.TryGetValue(firstKey(item), out children))
+                    {
+                        addChildren(item, children);
+                    }
+                }
+
+                return first;
+            }
+            #endregion
+
             private IEnumerable<T> ReadDeferred<T>(int index, Func<IDataReader, object> deserializer, Identity typedIdentity)
             {
                 try

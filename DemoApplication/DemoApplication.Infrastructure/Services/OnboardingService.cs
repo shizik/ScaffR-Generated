@@ -1,5 +1,6 @@
 ﻿namespace DemoApplication.Infrastructure.Services
 {
+    using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using Core.Model;
@@ -9,7 +10,7 @@
     {
         void ApplyTemplate(string employeeCd, int templateId);
 
-        Assignment ApplyTask(string employeeCd, int taskId ,string description, string name, int Order);
+        Assignment ApplyTask(string employeeCd, int taskId, string description, string name, int Order);
 
         Assignment GetAssignment(int assignmentId);
     }
@@ -34,21 +35,21 @@
             }
         }
 
-        public void ApplyTemplate(string employeeCd, int templateId)
+        public void ApplyTemplate(string employeeCode, int templateId)
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.Execute("[dbo].[Employee_ApplyTemplate]", new { employeeCd, templateId },
+                var result = db.Connection.Execute("[dbo].[Employee_ApplyTemplate]", new { employeeCode, templateId },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public Template CreateTemplate(string employeeCd, string templateName, string templateCategory, string companyCd)
+        public Template CreateTemplate(string EmployeeCode, string templateName, string templateCategory, string companyCd)
         {
             using (var db = new DapperDatabase())
             {
                 var args = new DynamicParameters();
-                args.Add("@Employee_Cd", dbType: DbType.StringFixedLength, size: 30, value: employeeCd);
+                args.Add("@EmployeeCode", dbType: DbType.StringFixedLength, size: 30, value: EmployeeCode);
                 args.Add("@TemplateName", dbType: DbType.String, value: templateName);
                 args.Add("@TemplateCategory", dbType: DbType.String, value: templateCategory);
                 args.Add("@Company_Cd", dbType: DbType.StringFixedLength, size: 3, value: companyCd);
@@ -64,13 +65,13 @@
             }
         }
 
-        public Assignment ApplyTask(string employeeCd, int taskId, string description, string name, int Order)
+        public Assignment ApplyTask(string EmployeeCode, int taskId, string description, string name, int Order)
         {
             using (var db = new DapperDatabase())
             {
 
                 var args = new DynamicParameters();
-                args.Add("@EmployeeCd", dbType: DbType.StringFixedLength, size: 30, value: employeeCd);
+                args.Add("@EmployeeCode", dbType: DbType.StringFixedLength, size: 30, value: EmployeeCode);
                 args.Add("@TaskId", dbType: DbType.Int32, value: taskId);
                 args.Add("@description", dbType: DbType.String, value: description);
                 args.Add("@Name", dbType: DbType.String, value: name);
@@ -119,5 +120,47 @@
                 return assignment;
             }
         }
+
+        public IEnumerable<Employee> GetEmployeesWithAssignment(string companyCode)
+        {
+            using (var db = new DapperDatabase())
+            {
+                var Employees = db.Connection.QueryMultiple("[dbo].[Employee_Tasks]", new { Company_Cd = companyCode }, commandType: CommandType.StoredProcedure).
+                    Map<Employee, Assignment, string>(
+                                                    employee => employee.EmployeeCode,
+                                                    assignment => assignment.EmployeeCode,
+                                                    (employee, assignments) =>
+                                                    { employee.AssignmentsAbout = assignments; }
+                                                 ).ToList();
+                return Employees;
+            }
+        }
+
+
+        public void AddExectDueDateForAssignment(int AssignmentID, System.DateTime duedate)
+        {
+            using (var db = new DapperDatabase())
+            {
+
+                var args = new DynamicParameters();
+                args.Add("@DueDate", dbType: DbType.DateTime, value: duedate);
+                args.Add("@AssignmentId", dbType: DbType.Int32, value: AssignmentID);
+
+                db.Connection.Execute("[dbo].[Assignment_AddDueDate_Exact]",
+                    args,
+                    commandType: CommandType.StoredProcedure);
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
     }
 }

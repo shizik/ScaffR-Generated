@@ -10,6 +10,7 @@
 #endregion
 namespace DemoApplication.InfrastructureTests
 {
+    using System;
     using Infrastructure.Services;
     using NUnit.Framework;
 
@@ -50,7 +51,22 @@ namespace DemoApplication.InfrastructureTests
         [Test]
         public void ApplyTask_Succceeds()
         {
-            var applyTask = Service.ApplyTask("1", 1, "Test description", "NewName", 0);
+            var applyTask = Service.ApplyTask("1", 4, "Test's description", "NewName", 0);
+            Assert.IsTrue(true);
+        }
+
+        [Test]
+        public void Employee_GetTasks()
+        {
+            var task = Service.GetEmployeesWithAssignment("1");
+            Assert.IsTrue(true);
+        }
+
+
+        [Test]
+        public void AddExectDueDateForAssignment_Succeeds()
+        {
+            Service.AddExectDueDateForAssignment(9, DateTime.Now);
             Assert.IsTrue(true);
         }
     }
