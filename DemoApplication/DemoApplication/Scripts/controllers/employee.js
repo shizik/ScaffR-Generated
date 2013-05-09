@@ -41,6 +41,52 @@ Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils'
     }
 
     //
+    // Filtering
+
+    $scope.filter = {
+        status: 'all',
+        assignees: [],
+        period: undefined
+    };
+
+    $scope.assignees = [];
+    $scope.periods = [
+        { name: 'Today', func: 'dayOfYear' },
+        { name: 'This Week', func: 'week' },
+        { name: 'This Month', func: 'month' }
+    ];
+
+    $scope.$watch('person.tasks', function (newValue) {
+        if (newValue.length == 0) return;
+
+        var result = [];
+        _.forEach($scope.periods, function (item) {
+            item.count = 0;
+        });
+
+        _.forEach(newValue, function (item) {
+
+            // Handle period counts
+            _.forEach($scope.periods, function (period) {
+                if (moment()[period.func]() != moment(item.due)[period.func]()) return;
+
+                period.count += 1;
+            });
+
+            // Handle assignees counts
+            var assignee = _.findWhere(result, { name: item.assignee });
+            if (assignee) {
+                assignee.count += 1;
+                return;
+            }
+
+            result.push({ name: item.assignee, count: 1 });
+        });
+
+        $scope.assignees = result;
+    });
+
+    //
     // Add new task
 
     $scope.isAddingTask = false;

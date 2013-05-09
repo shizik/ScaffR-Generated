@@ -15,7 +15,7 @@
         {
             "name":"Fill out Hire W-4 Task 1",
             "category": "Job",
-            "assignee":"Christine Alexander",
+            "assignee":"The Hulk",
             "due": "2013-04-27T00:00:00+0100",
             "status": "overdue",
             "isDone":false,

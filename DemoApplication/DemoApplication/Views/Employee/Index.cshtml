@@ -12,7 +12,7 @@
         </p>
 
         <div class="btn-group dropdown">
-            <a class="btn dropdown-toggle" data-toggle="dropdown">Apply Template<span class="caret"></span></a>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">Apply Template <span class="caret"></span></a>
             <ul class="dropdown-menu nav">
                 <li complex-menu>
                     <div>
@@ -71,12 +71,15 @@
             </div>
             <div class="span4">
                 <div class="control-group">
-                    <tile data-person="person" data-filter="filter" data-mode="detail" />
+                    <tile data-person="person" data-filter="filter.status" data-mode="detail" />
                 </div>
                 <div class="control-group">
                     <div class="btn-group">
                         <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
                         <ul class="dropdown-menu">
+                            <li data-complex-menu>
+                                <checkbox-filter list="assignees" filter="filter.assignees" value="name" />
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -84,6 +87,9 @@
                     <div class="btn-group">
                         <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
                         <ul class="dropdown-menu">
+                            <li data-complex-menu>
+                                <radio-filter list="periods" filter="filter.period" value="func" />
+                            </li>
                         </ul>
                     </div>
                 </div>

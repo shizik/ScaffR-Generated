@@ -58,20 +58,35 @@ Application.Filters.filter('employeeFilter', function () {
 Application.Filters.filter('taskFilter', function () {
     return function (items, filter) {
         return _.filter(items, function (item) {
-            var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
+            if (!checkStatus(item, filter.status)) return false;
 
-            switch (filter) {
-                case 'closed':
-                    return item.isDone;
-                case 'overdue':
-                    return !item.isDone && isOverdue;
-                case 'open':
-                    return !item.isDone && !isOverdue;
-                default:
-                    return true;
-            }
+            if (filter.assignees.length > 0 &&
+                !_.contains(filter.assignees, item.assignee)) return false;
+
+            if (filter.period &&
+                moment()[filter.period]() != moment(item.due)[filter.period]()) return false;
+
+            return true;
         });
     };
+
+    //
+    // Helpers
+
+    function checkStatus(task, status) {
+        var isOverdue = moment(task.due).diff(moment(), 'days') < 0;
+
+        switch (status) {
+            case 'closed':
+                return task.isDone;
+            case 'overdue':
+                return !task.isDone && isOverdue;
+            case 'open':
+                return !task.isDone && !isOverdue;
+            default:
+                return true;
+        }
+    }
 });
 
 Application.Filters.filter('searchFilter', function () {

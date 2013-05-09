@@ -694,7 +694,7 @@
     <Content Include="Scripts\lib\moment\bundle.txt" />
     <Content Include="Scripts\lib\toastr\bundle.txt" />
     <Content Include="Scripts\lib\underscore\bundle.txt" />
-    <Content Include="Scripts\lib\underscore\underscore-1.4.2.js" />
+    <Content Include="Scripts\lib\underscore\underscore-1.4.4.js" />
     <Content Include="Scripts\mock-data\assignables\summary.js" />
     <Content Include="Scripts\mock-data\categories\list.js" />
     <Content Include="Scripts\mock-data\employees\2.js" />

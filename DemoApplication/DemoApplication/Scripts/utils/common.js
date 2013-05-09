@@ -1,7 +1,7 @@
 ﻿Application.Utils.factory('commonUtils', function () {
     return {
         removeFromList: function (item, list) {
-            var index = list.indexOf(item);
+            var index = _.indexOf(list, item);
 
             if (index < 0) return;
 

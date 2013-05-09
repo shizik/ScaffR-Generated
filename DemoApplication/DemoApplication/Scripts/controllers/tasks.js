@@ -1,6 +1,4 @@
-﻿/// <reference path="../lib/underscore/underscore-1.4.2.js" />
-/// <reference path="~/Scripts/lib/angular/angular.js" />
-'use strict';
+﻿'use strict';
 
 Application.Controllers.controller('tasks', ['$scope', 'tasks', function ($scope, tasks) {
 

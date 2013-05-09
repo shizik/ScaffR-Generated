@@ -48,7 +48,7 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li complex-menu>
+            <li>
                 @*<div>
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-search"></i></span>
@@ -56,16 +56,24 @@
                     </div>
                 </div>*@
                 <ul class="collapsible" data-title="Status">
-                    <radio-filter list="summary" filter="filter.status" display="status" value="status" />
+                    <li>
+                        <radio-filter list="summary" filter="filter.status" display="status" value="status" />
+                    </li>
                 </ul>
                 <ul class="collapsible" data-title="Assigned To">
-                    <radio-filter list="assignables" filter="filter.assignedTo" />
+                    <li>
+                        <radio-filter list="assignables" filter="filter.assignedTo" />
+                    </li>
                 </ul>
                 <ul class="collapsible" data-title="Team">
-                    <radio-filter list="teams" filter="filter.team" />
+                    <li>
+                        <radio-filter list="teams" filter="filter.team" />
+                    </li>
                 </ul>
                 <ul class="collapsible" data-title="Department">
-                    <radio-filter list="departments" filter="filter.department" />
+                    <li>
+                        <radio-filter list="departments" filter="filter.department" />
+                    </li>
                 </ul>
             </li>
         </ul>
