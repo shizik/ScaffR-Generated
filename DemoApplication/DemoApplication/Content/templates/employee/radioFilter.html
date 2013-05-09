@@ -1,8 +1,8 @@
-﻿<div>
+﻿<ul class="unstyled">
     <li data-ng-repeat="item in list">
         <label class="checkbox">
             <input type="checkbox" data-ng-click="setValue(item[value || 'id'])" />
             {{item[display || 'name']}} ({{item[count || 'count']}})
         </label>
     </li>
-</div>
+</ul>
