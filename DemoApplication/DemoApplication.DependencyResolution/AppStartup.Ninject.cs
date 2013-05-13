@@ -48,6 +48,7 @@ namespace DemoApplication.DependencyResolution
     using Ninject.Web.Common;
     using Security.Authentication;
     using Security.Authorization;
+    using System.Web.Http;
 
     #endregion
 
@@ -84,7 +85,7 @@ namespace DemoApplication.DependencyResolution
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
             // This is needed due to changed dependency resolution for WebAPI
-            DependencyResolver.SetResolver(new NinjectResolver(kernel));
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
 
             RegisterServices(kernel);
             return kernel;

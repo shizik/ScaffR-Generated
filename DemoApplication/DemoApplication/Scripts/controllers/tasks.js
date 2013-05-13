@@ -12,7 +12,7 @@ Application.Controllers.controller('tasks', ['$scope', 'tasks', function ($scope
 
 }]);
 
-Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories', function ($scope, tasks, categories) {
+Application.Controllers.controller('ondemand', ['$scope', 'tasks', 'categories', 'toastr', function ($scope, tasks, categories, toastr) {
 
     $scope.categories = categories.list();
     $scope.task = tasks.getById(0);

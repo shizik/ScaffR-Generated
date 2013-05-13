@@ -8,6 +8,9 @@
 // Last Modified On : 03-28-2013
 // ***********************************************************************
 #endregion
+
+using System.Text.RegularExpressions;
+
 namespace DemoApplication.Application.Startup
 {
     #region
@@ -31,10 +34,11 @@ namespace DemoApplication.Application.Startup
         public void Configure(BundleCollection configurable)
         {
             configurable.AddPerSubDirectory<ScriptBundle>("scripts/global");
-            configurable.AddPerSubDirectory<ScriptBundle>("scripts/lib");
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/lib", new FileSearch { Exclude = new Regex(".intellisense\\.js$") });
             configurable.AddPerIndividualFile<ScriptBundle>("scripts/custom", null, bundle => bundle.PageLocation = "custom");
             configurable.AddPerIndividualFile<ScriptBundle>("scripts/controllers", null, bundle => bundle.PageLocation = "bottom");
             configurable.AddPerSubDirectory<ScriptBundle>("scripts/services", null, bundle => bundle.PageLocation = "custom");
+            configurable.AddPerSubDirectory<ScriptBundle>("scripts/models", null, bundle => bundle.PageLocation = "custom");
             configurable.AddPerSubDirectory<ScriptBundle>("scripts/directives", null, bundle => bundle.PageLocation = "custom");
             configurable.AddPerSubDirectory<ScriptBundle>("scripts/filters", null, bundle => bundle.PageLocation = "custom");
             configurable.AddPerSubDirectory<ScriptBundle>("scripts/utils", null, bundle => bundle.PageLocation = "custom");

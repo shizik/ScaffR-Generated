@@ -7,7 +7,6 @@
     using Infrastructure.Http;
     using Newtonsoft.Json.Linq;
 
-    [BreezeController]
     public partial class NetchexApiController : ApiController
     {
         private readonly IWebApiDataContext _context;

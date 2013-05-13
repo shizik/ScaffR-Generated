@@ -1,8 +1,6 @@
 ﻿ckeditor.js
 config.js
 styles.js
-lang/pt-br.js
-lang/en.js
 
 [references]
 ~/Scripts/lib/jquery

@@ -1,0 +1,5 @@
+﻿q.js
+*
+
+[references]
+~/scripts/lib/jquery

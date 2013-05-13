@@ -1,9 +1,18 @@
-﻿/// <reference path="../global/global.angular.js" />
-
-Application.Services.factory('employee', function ($resource) {
+﻿Application.Services.factory('employee', function ($resource, datacontext) {
     // TODO: Change with WebApi endpoint
-    return $resource('/Scripts/mock-data/employees/:file.js', {}, {
+    var resource = $resource('/Scripts/mock-data/employees/:file.js', {}, {
         summary: { method: 'GET', params: { file: 'summary2' }, isArray: false },
         individual: { method: 'GET', params: { file: 'x' }, isArray: false },
     });
+
+    return {
+        summary: resource.summary,
+        individual: resource.individual,
+        test: function () {
+            return datacontext.query('Assignments').execute();
+        },
+        save: function () {
+            return datacontext.saveChanges();
+        }
+    };
 });

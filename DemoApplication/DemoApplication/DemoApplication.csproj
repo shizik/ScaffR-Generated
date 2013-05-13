@@ -243,6 +243,8 @@
     <Compile Include="Extensions\ErrorHandlingHelpers\ErrorResult.cs" />
     <Compile Include="Extensions\HtmlHelpers\DisposableHelper.cs" />
     <Compile Include="Extensions\HtmlHelpers\HtmlExtensions.AngularJS.cs" />
+    <Compile Include="Extensions\JsonNet\CustomContractResolver.cs" />
+    <Compile Include="Extensions\JsonNet\EntityNameValueProvider.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
     <Compile Include="Models\Account\ChangePasswordFromResetKeyModel.cs" />
@@ -477,12 +479,13 @@
     <Content Include="Scripts\lib\angular\bundle.txt" />
     <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap\bundle.txt" />
-    <Content Include="Scripts\lib\breeze\breeze.debug.js" />
+    <Content Include="Scripts\lib\breeze\breeze.js" />
     <Content Include="Content\less\bootstrap\toastr.less" />
     <Content Include="Content\less\global\components\tiles.less" />
     <Content Include="Content\less\global\components\task.less" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
-    <Content Include="Scripts\lib\breeze\breeze.min.js" />
+    <Content Include="Scripts\lib\breeze\bundle.txt" />
+    <Content Include="Scripts\lib\breeze\q.js" />
     <Content Include="Scripts\lib\bundle.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -687,6 +690,7 @@
     <Content Include="Scripts\lib\jquery-ui\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\lib\jquery-ui\jquery.ui.timepicker.js" />
     <Content Include="Scripts\lib\jquery\bundle.txt" />
+    <None Include="Scripts\lib\jquery\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\lib\jquery\jquery-1.9.1.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
@@ -711,9 +715,12 @@
     <Content Include="Scripts\mock-data\employees\summary.js" />
     <Content Include="Scripts\mock-data\templates\template.js" />
     <Content Include="Scripts\lib\moment\moment.js" />
-    <Content Include="Scripts\lib\q\q.js" />
+    <Content Include="Scripts\models\assignment.js" />
+    <Content Include="Scripts\models\employee.js" />
+    <Content Include="Scripts\models\task.js" />
     <Content Include="Scripts\services\categories.js" />
     <Content Include="Scripts\services\assignables.js" />
+    <Content Include="Scripts\services\datacontext.js" />
     <Content Include="Scripts\services\departments.js" />
     <Content Include="Scripts\services\employee.js" />
     <Content Include="Scripts\services\list.js" />

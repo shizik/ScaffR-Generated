@@ -11,6 +11,7 @@
 #region
 
 using DemoApplication.Application.Startup;
+using DemoApplication.Extensions.JsonNet;
 
 #endregion
 
@@ -23,13 +24,26 @@ namespace DemoApplication.Application.Startup
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Routing;
+    using Newtonsoft.Json.Serialization;
 
     #endregion
 
-    public partial  class AppStartup
-	{
+    public partial class AppStartup
+    {
         public static void WebApi()
         {
+            // 
+            // Json.Net settings
+
+            GlobalConfiguration.Configuration.Formatters.Remove(
+                                GlobalConfiguration.Configuration.Formatters.XmlFormatter);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.
+                                SerializerSettings.ContractResolver = new CustomContractResolver();
+
+            //
+            // Routes
+
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
@@ -43,28 +57,28 @@ namespace DemoApplication.Application.Startup
             );
 
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
-                "DefaultApiGet", "api/{controller}", 
-                new { action = "Get" }, 
+                "DefaultApiGet", "api/{controller}",
+                new { action = "Get" },
                 new { httpMethod = new HttpMethodConstraint(HttpMethod.Get) }
             );
-            
+
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
-                "DefaultApiPost", "api/{controller}", 
-                new { action = "Post" }, 
+                "DefaultApiPost", "api/{controller}",
+                new { action = "Post" },
                 new { httpMethod = new HttpMethodConstraint(HttpMethod.Post) }
             );
-            
+
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
-                "DefaultApiPut", "api/{controller}", 
-                new { action = "Put" }, 
+                "DefaultApiPut", "api/{controller}",
+                new { action = "Put" },
                 new { httpMethod = new HttpMethodConstraint(HttpMethod.Put) }
             );
-            
+
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
-                "DefaultApiDelete", "api/{controller}", 
-                new { action = "Delete" }, 
+                "DefaultApiDelete", "api/{controller}",
+                new { action = "Delete" },
                 new { httpMethod = new HttpMethodConstraint(HttpMethod.Delete) }
             );
         }
-	}
+    }
 }

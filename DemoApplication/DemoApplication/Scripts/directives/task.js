@@ -11,7 +11,7 @@
             detailsFn: '&'
         },
         replace: true,
-        controller: function ($scope) {
+        controller: function ($scope, toastr) {
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
