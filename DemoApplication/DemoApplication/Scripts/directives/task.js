@@ -33,14 +33,15 @@
             $scope.assign = function (assignee, isTeam) {
                 $scope.resolveByAll = null;
 
-                if ($scope.task.assignee == assignee) {
+                if (assignee && $scope.task.assignee == assignee) {
                     $scope.task.assignee = null;
                     $scope.isTeam = false;
                     return;
                 }
 
                 $scope.isTeam = isTeam;
-                $scope.task.assignee = assignee || $scope.$parent.person.name;
+                $scope.task.assignee = assignee ||
+                    ($scope.$parent.person.firstName + ' ' + $scope.$parent.person.lastName);
             };
 
             $scope.isNew = function () {

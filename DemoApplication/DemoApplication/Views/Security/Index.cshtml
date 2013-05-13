@@ -36,9 +36,9 @@
             <li>
                 <a href="#" ng-click="predicate = 'lastName'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
                 <a href="#" ng-click="predicate = 'lastName'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
-                <a href="#" ng-click="predicate = 'overdue.length'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
+                <a href="#" ng-click="predicate = 'counts.overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
                 <a href="#" ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
-                <a href="#" ng-click="predicate = 'dateDue'; reverse=false; sortLabel='Date Due'">Date Due</a>
+                <a href="#" ng-click="predicate = 'latestDueDate()'; reverse=false; sortLabel='Date Due'">Date Due</a>
             </li>
         </ul>
     </div>

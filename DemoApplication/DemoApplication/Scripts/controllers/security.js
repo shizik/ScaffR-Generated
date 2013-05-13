@@ -25,6 +25,16 @@ Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 
 
         _.forEach($scope.employees, function (person) {
             person.counts = employeeUtils.getCounts(person);
+
+            person.latestDueDate = function () {
+                var due = undefined;
+
+                _.forEach(person.tasks, function (task) {
+                    if (!due || task.due < due) due = task.due;
+                });
+
+                return due;
+            };
         });
     });
 
