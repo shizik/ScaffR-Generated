@@ -5,11 +5,28 @@ namespace DemoApplication.Core.Model
 {
     public class Assignment : TaskInfo
     {
-        public DateTime? CompletionDate { get; set; }
+        public string EmployeeCode
+        {
+            get;
+            set;
+        }
+
 
         public string CompletedBy { get; set; }
 
         public DateTime? DueDate { get; set; }
+
+        public int Status { get; set; }
+
+        public DateTime? CompletionDate
+        {
+            get
+            {
+                if (Status != 0 && DueDate != null && DueDate.Value != null) return DueDate.Value;
+
+                return null;
+            }
+        }
 
         [NotMapped]
         public bool IsOverdue
