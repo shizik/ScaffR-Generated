@@ -21,6 +21,26 @@ angular.module('application', ['ui.bootstrap',
                                'application.controllers'])
     .value('breeze', window.breeze)
     .value('toastr', window.toastr)
+    .config(
+        ['$routeProvider',
+            function ($routeProvider) {
+                $routeProvider
+                    .when('/', {
+                        templateUrl: '/employee/index',
+                        controller: 'listController'
+                    })
+                    .when('/employee/:id', {
+                        templateUrl: '/employee/detail',
+                        controller: 'employeeController'
+                    })
+                    .when('/task/:id', {
+                        templateUrl: '/tasks/ondemand',
+                        controller: 'tasksController'
+                    })
+                    .otherwise({
+                        redirectTo: '/'
+                    });
+            }])
     .run(function ($rootScope, $http, $location) {
 
     });

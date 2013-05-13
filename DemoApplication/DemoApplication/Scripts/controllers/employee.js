@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils', function ($scope, employee, commonUtils) {
+Application.Controllers.controller('employeeController', ['$scope', 'employee', 'commonUtils', function ($scope, employee, commonUtils) {
 
     $scope.person = { tasks: [] };
 

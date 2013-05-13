@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-Application.Controllers.controller('index', ['$scope', 'employees', 'employee', 'employeeUtils', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, employeeUtils, tasks, templates, departments, teams, assignables) {
+Application.Controllers.controller('listController', ['$scope', 'employees', 'employee', 'employeeUtils', 'tasks', 'templates', 'departments', 'teams', 'assignables', function ($scope, employees, employee, employeeUtils, tasks, templates, departments, teams, assignables) {
 
     $scope.display = 'tiles';
 

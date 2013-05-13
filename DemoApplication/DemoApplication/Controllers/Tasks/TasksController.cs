@@ -9,9 +9,9 @@ namespace DemoApplication.Controllers.Tasks
             return View();
         }
 
-        public ActionResult OnDemand(int id)
+        public ActionResult OnDemand()
         {
-            return View();
+            return PartialView();
         }
     }
 }

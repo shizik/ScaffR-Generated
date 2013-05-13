@@ -8,7 +8,7 @@
             mode: '@'
         },
         replace: true,
-        controller: function ($scope) {
+        controller: function ($scope, $location) {
 
             $scope.$watch('mode', function (value) {
                 if (!value || value == 'list') return;
@@ -26,7 +26,9 @@
                 if ($scope.mode == 'detail') return;
 
                 // TODO: Should use the location service
-                window.location.href = '/employee/index/' + $scope.person.id;
+                $location.path('/employee/' + $scope.person.id);
+
+                //window.location.href = '/employee/index/' + $scope.person.id;
             };
 
             $scope.counts = function () {

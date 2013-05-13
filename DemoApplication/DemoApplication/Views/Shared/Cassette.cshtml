@@ -21,6 +21,7 @@
     Bundles.Reference("scripts/services");
     Bundles.Reference("scripts/models");
     Bundles.Reference("scripts/directives");
+    Bundles.Reference("scripts/controllers");
 }
 
 <!doctype html>
@@ -33,9 +34,7 @@
     @Bundles.RenderStylesheets()
     @Bundles.RenderScripts("head")
 </head>
-
-@using (Html.AngularScope(tagName: "body", htmlAttributes: new { @class = "ng-cloak" }))
-{
+<body>
     @RenderBody()
 
     @Html.Partial("_Modal")
@@ -43,6 +42,5 @@
     @Bundles.RenderScripts()
     @Bundles.RenderScripts("custom")
     @Bundles.RenderScripts("bottom")
-}
-
+</body>
 </html>

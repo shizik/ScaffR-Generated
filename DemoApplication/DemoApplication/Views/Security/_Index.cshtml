@@ -1,4 +1,24 @@
-﻿<div class="btn-toolbar form-inline">
+﻿@section AltNav
+{
+    <p>
+        @*<button type="button" class="btn btn-inverse" data-ng-click="open()">
+            Add Group <i class="icon-plus"></i>
+        </button>*@
+        <div modal="shouldBeOpen" close="close()" options="opts">
+            <div class="modal-header">
+                <h4>I'm a modal!</h4>
+            </div>
+            <div class="modal-body">
+                This is where the middle goes
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+            </div>
+        </div>
+    </p>
+}
+<div class="btn-toolbar form-inline">
+
     <div class="btn-group">
         <a class="btn" ng-class="{disabled:display=='tiles'}" data-ng-click="changeDisplay('tiles')">
             <i class="icon-th-large"></i>
@@ -14,11 +34,11 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a data-ng-click="predicate = 'lastName'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
-                <a data-ng-click="predicate = 'lastName'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
-                <a data-ng-click="predicate = 'counts.overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
-                <a data-ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
-                <a data-ng-click="predicate = 'latestDueDate()'; reverse=false; sortLabel='Date Due'">Date Due</a>
+                <a href="#" ng-click="predicate = 'lastName'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
+                <a href="#" ng-click="predicate = 'lastName'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
+                <a href="#" ng-click="predicate = 'counts.overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
+                <a href="#" ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
+                <a href="#" ng-click="predicate = 'latestDueDate()'; reverse=false; sortLabel='Date Due'">Date Due</a>
             </li>
         </ul>
     </div>

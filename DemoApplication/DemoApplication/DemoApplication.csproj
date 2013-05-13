@@ -447,12 +447,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
+    <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
     <Content Include="Scripts\directives\task.js" />
     <Content Include="Scripts\directives\tile.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bundle.txt" />
-    <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\controllers\employee.js" />
     <Content Include="Scripts\controllers\home.js" />
     <Content Include="Scripts\controllers\tasks.js" />
@@ -744,8 +744,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Detail.cshtml" />
     <Content Include="Views\Tasks\OnDemand.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Security\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\Thumbnail\" />

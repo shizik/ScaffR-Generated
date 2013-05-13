@@ -5,9 +5,15 @@
     public class EmployeeController : Controller
     {
         [HttpGet]
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            return View(id);
+            return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult Detail()
+        {
+            return PartialView();
         }
     }
 }

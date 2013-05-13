@@ -11,13 +11,15 @@
             detailsFn: '&'
         },
         replace: true,
-        controller: function ($scope, toastr) {
+        controller: function ($scope, $location, toastr) {
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
                 //$scope.taskMode = 'edit';
                 // TODO: This is for demo purposes
-                window.location.href = '/tasks/ondemand/1';
+                $location.path('/task/' + $scope.task.id);
+
+                //window.location.href = '/tasks/ondemand/1';
             };
 
             $scope.assignment = { selectedOption: undefined };
