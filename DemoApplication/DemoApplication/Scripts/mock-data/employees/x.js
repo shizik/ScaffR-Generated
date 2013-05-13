@@ -1,6 +1,7 @@
 ﻿{
     "id":1,
-    "name": "John Smith",
+    "firstName": "John",
+    "lastName": "Smith",
     "title": "IT Department Director",
     "email": "john@company.com",    
     "credentials":

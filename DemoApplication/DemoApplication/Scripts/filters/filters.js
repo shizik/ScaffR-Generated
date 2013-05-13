@@ -84,7 +84,7 @@ Application.Filters.filter('taskFilter', function () {
             case 'open':
                 return !task.isDone && !isOverdue;
             default:
-                return true;
+                return !task.isDone;
         }
     }
 });

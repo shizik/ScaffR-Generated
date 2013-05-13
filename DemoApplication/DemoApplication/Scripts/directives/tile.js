@@ -10,7 +10,17 @@
         replace: true,
         controller: function ($scope) {
 
-            $scope.filter = 'all';
+            $scope.$watch('mode', function (value) {
+                if (!value || value == 'list') return;
+
+                $scope.filter = 'all';
+            });
+
+            $scope.changeFilter = function (filter) {
+                if ($scope.mode == 'list') return;
+
+                $scope.filter = filter;
+            };
 
             $scope.goToDetails = function () {
                 if ($scope.mode == 'detail') return;
@@ -29,7 +39,7 @@
 
                 $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
 
-                return counts.overdue > 0 ? counts.overdue : counts.open;
+                return counts.overdue + counts.open;
             };
         }
     };

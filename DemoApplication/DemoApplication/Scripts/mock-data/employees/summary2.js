@@ -2,7 +2,8 @@
     "employees": [
          {
              "id": 1,
-             "name": "John Smith",
+             "firstName": "John",
+             "lastName": "Smith",
              "department": "Sales",
              "departmentId":"1",
              "tasks": [
@@ -34,7 +35,8 @@
          },
         {
             "id": 2,
-            "name": "Smith Jones",
+            "firstName": "Smith",
+            "lastName": "Jones",
             "department": "Sales",
             "departmentId":"1",
             "tasks": [
@@ -58,7 +60,8 @@
         },
                 {
                     "id": 3,
-                    "name": "Chuck Norris",
+                    "firstName": "Chuck",
+                    "lastName": "Norris",
                     "department": "Marketing",
                     "departmentId":"2",
                     "tasks": [
@@ -94,11 +97,12 @@
                     "status": "open",
                     "isDone":false
                 }
-            ]
-        },
+                    ]
+                },
         {
-            "id": 3,
-            "name": "George Washington",
+            "id": 4,
+            "firstName": "George",
+            "lastName": "Washington",
             "department": "Marketing",
             "departmentId":"2",
             "tasks": [
