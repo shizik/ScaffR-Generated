@@ -5,7 +5,7 @@
              "firstName": "John",
              "lastName": "Smith",
              "department": "Sales",
-             "departmentId":"1",
+             "departmentId":1,
              "tasks": [
                          {
                              "name":"Fill out Hire W-4 Task 1",
@@ -38,7 +38,7 @@
             "firstName": "Smith",
             "lastName": "Jones",
             "department": "Sales",
-            "departmentId":"1",
+            "departmentId":1,
             "tasks": [
                 {
                     "name":"Fix the car  Task 4",
@@ -63,7 +63,7 @@
                     "firstName": "Chuck",
                     "lastName": "Norris",
                     "department": "Marketing",
-                    "departmentId":"2",
+                    "departmentId":2,
                     "tasks": [
                 {
                     "name":"Fill out New WSDL Task 6",
@@ -104,7 +104,7 @@
             "firstName": "George",
             "lastName": "Washington",
             "department": "Marketing",
-            "departmentId":"2",
+            "departmentId":2,
             "tasks": [
                 {
                     "name":"Change light bulb Task 10",

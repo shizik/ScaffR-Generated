@@ -142,16 +142,12 @@ Application.Controllers.controller('index', ['$scope', 'employee', 'commonUtils'
     // Templates
 
     $scope.applyTemplate = function (template) {
-        if (template.isApplied) {
-            _.forEach(template.assignments, function (item) {
-                $scope.saveTask(item);
-            });
-        } else {
-            _.forEach($scope.person.tasks, function (item) {
-                if (item.templateId != template.id) return;
+        if (template.isApplied) return;
 
-                $scope.deleteTask(item, false);
-            });
-        }
+        _.forEach(template.assignments, function (item) {
+            $scope.saveTask(item);
+        });
+
+        template.isApplied = true;
     };
 }]);

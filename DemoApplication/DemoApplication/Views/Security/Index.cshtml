@@ -95,8 +95,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
-                <td>{{item.name}}</td>
+            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse">
+                <td>{{item.firstName}} {{item.lastName}}</td>
                 <td>{{item.counts.open}}</td>
                 <td>{{item.counts.overdue}}</td>
                 <td>{{item.counts.closed}}</td>
@@ -109,7 +109,7 @@
         <tile data-mode="list"
             data-person="item"
             data-filter="nofilter"
-            data-ng-repeat="item in employees| employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />
+            data-ng-repeat="item in employees| employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse" />
     </div>
 </div>
 
