@@ -58,7 +58,7 @@ Application.Filters.filter('employeeFilter', function () {
 Application.Filters.filter('taskFilter', function () {
     return function (items, filter) {
         return _.filter(items, function (item) {
-            if (!checkStatus(item, filter.status)) return false;
+            if (filter.status && !checkStatus(item, filter.status)) return false;
 
             if (filter.assignees.length > 0 &&
                 !_.contains(filter.assignees, item.assignee)) return false;
@@ -87,6 +87,14 @@ Application.Filters.filter('taskFilter', function () {
                 return !task.isDone;
         }
     }
+});
+
+Application.Filters.filter('taskInCategoryFilter', function () {
+    return function (items, categoryId) {
+        return _.filter(items, function (item) {
+            return item.categoryId == categoryId;
+        });
+    };
 });
 
 Application.Filters.filter('searchFilter', function () {

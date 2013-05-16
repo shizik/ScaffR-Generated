@@ -174,3 +174,16 @@ Application.Directives.directive('collapsible', function factory() {
         }
     };
 });
+
+Application.Directives.directive('layoutChange', function factory() {
+    return {
+        templateUrl: '/content/templates/directives/layoutChange.html',
+        scope: {
+            display: '='
+        },
+        replace: true,
+        controller: function ($scope) {
+            $scope.display = 'tiles';
+        }
+    };
+});

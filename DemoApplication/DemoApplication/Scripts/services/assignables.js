@@ -3,15 +3,8 @@
 Application.Services.factory('assignables', function ($resource) {
 
     // TODO: Change with WebApi endpoint
-    var endPoint = $resource('/Scripts/mock-data/assignables/:file.js', {}, {
+    return $resource('/Scripts/mock-data/assignables/:file.js', {}, {
         get: { method: 'GET', params: { file: '@file' } },
-        getSummary: { method: 'GET', params: { file: '@file' }, isArray: true },
+        getAll: { method: 'GET', params: { file: 'summary' }, isArray: true },
     });
-
-    return {
-        getSummary: function () {
-            return endPoint.getSummary({ file: "summary" });
-        }
-    };
-
 });

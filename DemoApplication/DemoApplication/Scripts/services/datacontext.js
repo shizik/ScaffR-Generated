@@ -12,7 +12,7 @@
 
     var dataService = new breeze.DataService({
         serviceName: '/api/netchexapi',
-        hasServerMetadata: false, // don't ask the server for metadata
+        hasServerMetadata: true,
         jsonResultsAdapter: adapter
     });
 

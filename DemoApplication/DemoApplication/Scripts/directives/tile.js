@@ -3,8 +3,9 @@
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
         scope: {
-            person: '=',
+            entity: '=',
             filter: '=',
+            detailsUrl: '@',
             mode: '@'
         },
         replace: true,
@@ -25,23 +26,14 @@
             $scope.goToDetails = function () {
                 if ($scope.mode == 'detail') return;
 
-                // TODO: Should use the location service
-                $location.path('/employee/' + $scope.person.id);
-
-                //window.location.href = '/employee/index/' + $scope.person.id;
-            };
-
-            $scope.counts = function () {
-                return employeeUtils.getCounts($scope.person);
+                $location.path($scope.detailsUrl + $scope.entity.id);
             };
 
             $scope.badgeClass = '';
             $scope.badgeCount = function () {
-                var counts = $scope.counts();
+                $scope.badgeClass = $scope.entity.overdue > 0 ? 'badge-warning' : 'badge-info';
 
-                $scope.badgeClass = counts.overdue > 0 ? 'badge-warning' : 'badge-info';
-
-                return counts.overdue + counts.open;
+                return $scope.entity.overdue + $scope.entity.open;
             };
         }
     };

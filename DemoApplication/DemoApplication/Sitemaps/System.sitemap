@@ -29,10 +29,7 @@
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="Admin" controller="Home" action="Manage" imageUrl="icon-lock" key="Manage" visibility="breadcrumb">
-      <mvcSiteMapNode title="Employees" controller="Security" action="Index">
-        <mvcSiteMapNode title="Employee Tasks" controller="Employee" action="Index" preservedRouteParameters="id"/>
-        <mvcSiteMapNode title="Task Details" controller="Tasks" action="OnDemand" preservedRouteParameters="id"/>
-      </mvcSiteMapNode>
+      <mvcSiteMapNode title="On-Boarding" controller="Security" action="Index" />
       <mvcSiteMapNode title="Manage Users" controller="Users" action="Manager" imageUrl="icon-group" key="ManageUsers">
         <mvcSiteMapNode title="Details" controller="Users" action="Details" key="UserDetails" preservedRouteParameters="id"/>
         <mvcSiteMapNode title="Security" controller="Users" action="Security" preservedRouteParameters="id"/>

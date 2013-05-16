@@ -1,4 +1,5 @@
 ﻿using System;
+using DemoApplication.Areas.Api.MockData;
 using DemoApplication.Core.Model;
 using Newtonsoft.Json.Serialization;
 
@@ -10,8 +11,9 @@ namespace DemoApplication.Extensions.JsonNet
         {
             var contract = base.CreateObjectContract(objectType);
 
-            if (typeof(DomainObject).IsAssignableFrom(objectType))
-            {
+            if (objectType != typeof(ModelRegistry.Metadata) &&
+                objectType != typeof(ModelRegistry.StructuralType) &&
+                objectType != typeof(ModelRegistry.DataProperty))
                 contract.Properties.Add(new JsonProperty
                 {
                     Readable = true,
@@ -21,7 +23,6 @@ namespace DemoApplication.Extensions.JsonNet
                     Converter = ResolveContractConverter(typeof(string)),
                     ValueProvider = new EntityNameValueProvider(objectType.Name)
                 });
-            }
 
             return contract;
         }

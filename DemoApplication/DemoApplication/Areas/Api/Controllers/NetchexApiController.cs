@@ -1,13 +1,14 @@
-﻿namespace DemoApplication.Areas.Api.Controllers
+﻿using System.Collections.Generic;
+
+namespace DemoApplication.Areas.Api.Controllers
 {
-    using System.Linq;
     using System.Web.Http;
     using Breeze.WebApi;
-    using Core.Model;
+    using MockData;
     using Infrastructure.Http;
     using Newtonsoft.Json.Linq;
 
-    public partial class NetchexApiController : ApiController
+    public class NetchexApiController : ApiController
     {
         private readonly IWebApiDataContext _context;
 
@@ -16,22 +17,41 @@
             _context = context;
         }
 
+
         //
-        // GET ~/api/Users
+        // GET ~/api/Metadata
 
         [HttpGet]
-        public IQueryable<User> Users()
+        public object Metadata()
         {
-            return _context.Users;
+            return ModelRegistry.Generate();
         }
 
         //
-        // GET ~/api/Metadata 
+        // GET ~/api/EmployeeBrief
 
         [HttpGet]
-        public string Metadata()
+        public List<EmployeeBrief> EmployeeBrief()
         {
-            return _context.Metadata();
+            return EmployeeBriefData.Get();
+        }
+
+        //
+        // GET ~/api/TeamBrief
+
+        [HttpGet]
+        public List<TeamBrief> TeamBrief()
+        {
+            return TeamBriefData.Get();
+        }
+
+        //
+        // GET ~/api/TemplateBrief
+
+        [HttpGet]
+        public List<TemplateBrief> TemplateBrief()
+        {
+            return TemplateBriefData.Get();
         }
 
         //

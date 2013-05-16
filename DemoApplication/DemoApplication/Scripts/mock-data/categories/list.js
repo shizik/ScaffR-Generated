@@ -1,7 +1,7 @@
 ﻿[
     {
         "id": 1,
-        "name": "Policies"
+        "name": "Company"
     },
     {
         "id": 2,
@@ -9,6 +9,10 @@
     },
     {
         "id": 3,
-        "name": "Something else"
+        "name": "Policies"
+    },
+    {
+        "id": 4,
+        "name": "Benefits"
     }
 ]

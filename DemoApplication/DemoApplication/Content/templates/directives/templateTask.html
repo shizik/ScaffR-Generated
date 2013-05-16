@@ -1,0 +1,122 @@
+﻿<li class="task">
+    <div>
+        <input class="task-checkbox" type="checkbox" disabled="disabled" />
+        <span data-ng-switch="" data-on="taskMode">
+            <span class="dropdown" data-ng-switch-when="new">
+                <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
+                <ul class="dropdown-menu">
+                    <li data-complex-menu>
+                        <div>
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-search"></i></span>
+                                <input type="text" placeholder="Filter..." data-ng-model="query" />
+                            </div>
+                        </div>
+                    </li>
+                    <li data-ng-repeat="task in available | orderBy:'name' | searchFilter:'name':query">
+                        <a data-ng-click="assignment.selectedOption=task.name">{{ task.name }}
+                            <i class="icon-tag" data-ng-show="task.prebuilt"></i>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a data-ng-click="editMode()">Create a Custom Task</a>
+                    </li>
+                </ul>
+            </span>
+            <span data-ng-switch-default="">{{task.name}}</span>
+        </span>
+        | <i class="icon-user"></i>
+        <span class="dropdown" data-ng-switch="">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.assignee">
+                <span data-ng-switch-when="null" class="muted">Assign This Task</span>
+                <span data-ng-switch-default="">{{task.assignee}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li complex-menu>
+                    <div>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-search"></i></span>
+                            <input type="text" placeholder="Filter..." data-ng-model="query" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in assignables.categories">
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox"
+                                    data-ng-checked="isTeam && task.assignee==category"
+                                    data-ng-click="assign(category,true)" />
+                                (Assign to Team)
+                            </label>
+                        </li>
+                        <li data-ng-repeat="assignable in assignables.group[category] | searchFilter:'name':query ">
+                            <label class="checkbox">
+                                <input type="checkbox"
+                                    data-ng-click="assign(assignable.name,false)"
+                                    data-ng-checked="(isTeam && task.assignee==category) || task.assignee==assignable.name"
+                                    data-ng-disabled="isTeam && task.assignee==category" />
+                                {{ assignable.name }}
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a data-ng-click="assign(undefined,false)">Assign to On-boarding Employee</a>
+                </li>
+            </ul>
+        </span>
+        <span data-ng-show="isTeam">|
+            <strong>resolution: </strong>
+            <span class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="resolveByAll">
+                    <span data-ng-switch-when="null" class="muted">Choose</span>
+                    <span data-ng-switch-default="">{{resolveByAll && 'by All' || 'by One'}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a data-ng-click="resolveByAll=false">One Team Member</a>
+                    </li>
+                    <li>
+                        <a data-ng-click="resolveByAll=true">All Team Members</a>
+                    </li>
+                </ul>
+            </span>
+        </span>
+        | <i class="icon-calendar"></i>
+        <span class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.due">
+                <span data-ng-switch-when="null" class="muted">Choose Due Date Logic</span>
+                <span data-ng-switch-default>{{task.due}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="form-inline" data-complex-menu="">
+                    <label class="radio">
+                        <input type="radio" value="true" />
+                        Before
+                    </label>
+                    <label class="radio">
+                        <input type="radio" value="false" />
+                        After
+                    </label>
+                    <select data-ng-model="test" data-ng-options="m.name for m in milestones">
+                        <option value="">-- Choose Milestone --</option>
+                    </select>
+                    <input type="text" placeholder="Enter a value..." />
+                    <select data-ng-model="test">
+                        <option value="1">Days</option>
+                        <option value="2">Weeks</option>
+                        <option value="3">Months</option>
+                        <option value="4">Quarter</option>
+                    </select>
+                </li>
+            </ul>
+        </span>
+    </div>
+    <div data-ng-show="newCreated">
+        <button class="btn btn-small btn-success" data-ng-disabled="isNew()" data-ng-click="saveTask()">Save this task</button>
+        <button class="btn btn-small btn-link" data-ng-click="deleteTask()">Cancel</button>
+    </div>
+</li>
