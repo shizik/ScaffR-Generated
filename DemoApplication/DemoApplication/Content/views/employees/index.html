@@ -10,9 +10,9 @@
             <li>
                 <a data-ng-click="predicate = 'lastName'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
                 <a data-ng-click="predicate = 'lastName'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
-                <a data-ng-click="predicate = 'counts.overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
+                <a data-ng-click="predicate = 'overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
                 <a data-ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
-                <a data-ng-click="predicate = 'latestDueDate()'; reverse=false; sortLabel='Date Due'">Date Due</a>
+                <a data-ng-click="predicate = 'latestDueDate'; reverse=false; sortLabel='Date Due'">Date Due</a>
             </li>
         </ul>
     </div>
@@ -28,13 +28,13 @@
                         <span class="add-on"><i class="icon-search"></i></span>
                         <input type="text" placeholder="Filter..." />
                     </div>
-                </div>
+                </div>-->
                 <ul class="collapsible" data-title="Status">
                     <li>
-                        <radio-filter list="summary" filter="filter.status" display="status" value="status" />
+                        <radio-filter list="statuses" filter="filter.status" display="status" value="status" />
                     </li>
                 </ul>
-                <ul class="collapsible" data-title="Assigned To">
+                <!--<ul class="collapsible" data-title="Assigned To">
                     <li>
                         <radio-filter list="assignables" filter="filter.assignedTo" />
                     </li>
@@ -43,12 +43,12 @@
                     <li>
                         <radio-filter list="teams" filter="filter.team" />
                     </li>
-                </ul>
+                </ul>-->
                 <ul class="collapsible" data-title="Department">
                     <li>
                         <radio-filter list="departments" filter="filter.department" />
                     </li>
-                </ul>-->
+                </ul>
             </li>
         </ul>
     </div>
@@ -62,20 +62,25 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Manager</th>
                 <th>Open</th>
                 <th>Overdue</th>
                 <th>Closed</th>
                 <th>Tasks</th>
+                <th>Date Initiated</th>
+                <th>Last Action</th>
             </tr>
         </thead>
         <tbody>
-            <!--<tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse">-->
-            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees">
+            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
                 <td>{{item.firstName}} {{item.lastName}}</td>
+                <td>{{item.manager}}</td>
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
                 <td>{{item.closed}}</td>
                 <td>{{item.total}}</td>
+                <td>{{item.dateInitiated | date:'MM/dd/yyyy'}}</td>
+                <td>{{item.dateLastAction | date:'MM/dd/yyyy'}}</td>
             </tr>
         </tbody>
     </table>
@@ -85,7 +90,7 @@
             data-entity="item"
             data-details-url="/employees/"
             data-filter="nofilter"
-            data-ng-repeat="item in employees" />
+            data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />
     </div>
 </div>
 

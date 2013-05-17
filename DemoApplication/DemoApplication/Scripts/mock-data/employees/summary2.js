@@ -155,26 +155,22 @@
         {
             "id":1,
             "name":"Sales",
-            "count": 8            
+            "count": 8          
+        },
+        {
+            "id":3,
+            "name":"Marketing",
+            "count": 24
+        },
+        {
+            "id":4,
+            "name":"Human Resources",
+            "count": 24
         },
         {
             "id":2,
-            "name":"Marketing",
+            "name":"IT Department",
             "count": 24
-        }
-    ],
-    "summary":[
-        {
-            "status": "open",
-            "count": 6
-        },
-        {
-            "status": "closed",
-            "count": 3
-        },
-        {
-            "status": "overdue",
-            "count": 3
         }
     ]
 }

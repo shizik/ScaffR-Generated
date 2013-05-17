@@ -6,11 +6,26 @@ Application.Controllers.controller('ctrlEmployeesIndex',
             $scope.$parent.backLinkText = undefined;
 
             $scope.filter = {
-                status: [],
-                assignedTo: [],
-                team: [],
-                department: []
+                status: undefined,
+                assignedTo: undefined,
+                team: undefined,
+                department: undefined
             };
+
+            $scope.statuses = [
+                {
+                    "status": "open",
+                    "count": 0
+                },
+                {
+                    "status": "closed",
+                    "count": 0
+                },
+                {
+                    "status": "overdue",
+                    "count": 0
+                }
+            ];
 
             $scope.goToDetails = function (employee) {
                 $location.path('/employees/' + employee.id);
@@ -18,33 +33,39 @@ Application.Controllers.controller('ctrlEmployeesIndex',
 
             employees.summary().then(function (data) {
                 $scope.employees = data.results;
+
+                _.forEach($scope.employees, function (item) {
+                    $scope.statuses[0].count += item.open;
+                    $scope.statuses[1].count += item.closed;
+                    $scope.statuses[2].count += item.overdue;
+                });
+
                 $scope.$apply();
             }).fail(function (error) {
                 console.log('error', error);
                 toastr.error('An error occured while pulling the data.');
             });
 
-            /*employee.summary(function (data) {
-                $scope.employees = data.employees;
-                $scope.assignables = [];// data.assignables;
-                $scope.departments = [];//data.departments;
-                $scope.summary = [];//data.summary;
+            employees.summaryOld(function (data) {
+                $scope.assignables = data.assignables;
+                $scope.departments = data.departments;
+                $scope.summary = data.summary;
                 $scope.teams = getTeamSummary(data.assignables);
-        
+
                 _.forEach($scope.employees, function (person) {
                     person.counts = employeeUtils.getCounts(person);
-        
+
                     person.latestDueDate = function () {
                         var due = undefined;
-        
+
                         _.forEach(person.tasks, function (task) {
                             if (!due || task.due < due) due = task.due;
                         });
-        
+
                         return due;
                     };
                 });
-            });*/
+            });
 
             function getTeamSummary(ass) {
                 var summary = [];

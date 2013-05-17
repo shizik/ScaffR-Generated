@@ -6,7 +6,7 @@
     });
 
     return {
-        //summary: resource.summary,
+        summaryOld: resource.summary,
         summary: function() {
             return datacontext.query('EmployeeBrief').execute();
         },

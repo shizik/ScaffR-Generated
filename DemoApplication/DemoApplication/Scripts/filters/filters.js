@@ -26,21 +26,23 @@ Application.Filters.filter('employeeFilter', function () {
     return function (items, filter) {
         return _.filter(items, function (item) {
 
+            // Status
+            if (filter.status && item[filter.status] == 0) return false;
+
             // Status and Assigned To
-            if (!_.some(item.tasks, function (task) {
+            //if (!_.some(item.tasks, function (task) {
 
-                if (!checkValue(filter.status, task.status)) return false;
-                if (!checkValue(filter.assignedTo, task.assignedTo)) return false;
+            //    if (!checkValue(filter.assignedTo, task.assignedTo)) return false;
 
-                return true;
+            //    return true;
 
-            })) return false;
+            //})) return false;
 
             // Team
             // TODO: We have to decide what should this filter do
 
             // Department
-            if (!checkValue(filter.department, item.departmentId)) return false;
+            if (filter.department && filter.department != item.departmentId) return false;
 
             // If all checks passed this should be rendered
             return true;
