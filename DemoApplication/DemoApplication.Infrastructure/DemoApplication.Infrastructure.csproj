@@ -172,6 +172,10 @@
     <Compile Include="Migrations\201304211207570_Tasks.Designer.cs">
       <DependentUpon>201304211207570_Tasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201305141556146_MigrationMay14.cs" />
+    <Compile Include="Migrations\201305141556146_MigrationMay14.Designer.cs">
+      <DependentUpon>201305141556146_MigrationMay14.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Membership\MembershipDataSeeder.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
@@ -239,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201304211207570_Tasks.resx">
       <DependentUpon>201304211207570_Tasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201305141556146_MigrationMay14.resx">
+      <DependentUpon>201305141556146_MigrationMay14.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
