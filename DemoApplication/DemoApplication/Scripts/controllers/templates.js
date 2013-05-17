@@ -31,14 +31,10 @@ Application.Controllers.controller('ctrlTemplatesIndex',
         }]);
 
 Application.Controllers.controller('ctrlTemplatesDetail',
-            ['$scope', 'templates', 'categories', 'commonUtils',
-    function ($scope, templates, categories, commonUtils) {
+            ['$scope', '$routeParams', 'templates', 'categories', 'commonUtils', 'toastr',
+    function ($scope, $routeParams, templates, categories, commonUtils, toastr) {
 
-        $scope.isEdit = false;
-
-        $scope.switchMode = function () {
-            $scope.isEdit = !$scope.isEdit;
-        }
+        $scope.isEdit = $routeParams.id == 0;
 
         $scope.$parent.backLinkText = 'Dashboard';
 
@@ -55,7 +51,17 @@ Application.Controllers.controller('ctrlTemplatesDetail',
         });
 
         templates.individual(function (data) {
-            $scope.template = data;
+            if ($routeParams.id == 0) {
+                $scope.template = {
+                    name: '',
+                    description: '',
+                    activity: [],
+                    tasks: []
+                }
+            }
+            else
+                $scope.template = data;
+
             $scope.availableTasks = groupItems(data.availableTasks, 'categoryId');
             $scope.assignables = groupItems(data.assignables, 'department');
             $scope.milestones = data.milestones;
@@ -143,7 +149,10 @@ Application.Controllers.controller('ctrlTemplatesDetail',
                     "name": null,
                     "categoryId": categoryId,
                     "assignee": null,
-                    "due": null,
+                    "interval": null,
+                    "value": null,
+                    "isBefore": null,
+                    "milestone": null,
                     "templateId": $scope.template.id
                 });
         };
@@ -160,22 +169,6 @@ Application.Controllers.controller('ctrlTemplatesDetail',
         };
 
         //
-        // Individual task view
-
-        $scope.listView = true;
-        $scope.activeTask = undefined;
-
-        $scope.showTask = function (task) {
-            $scope.activeTask = task;
-            $scope.listView = false;
-        };
-
-        $scope.backToList = function () {
-            $scope.activeTask = undefined;
-            $scope.listView = true;
-        };
-
-        //
         // Template Assignables
 
         $scope.templateAppliesTo = [];
@@ -186,4 +179,21 @@ Application.Controllers.controller('ctrlTemplatesDetail',
         $scope.removeTemplateAssignable = function (index) {
             $scope.templateAppliesTo.splice(index, 1);
         };
+
+        //
+        // Global Actions
+
+        $scope.switchMode = function () {
+            $scope.isEdit = !$scope.isEdit;
+        }
+
+        $scope.saveChanges = function () {
+            toastr.success('Saved.');
+            $scope.isEdit = false;
+        }
+
+        $scope.goBack = function () {
+            window.history.back();
+        }
+
     }]);

@@ -433,6 +433,7 @@
     <Content Include="Content\templates\carousel\carousel.html" />
     <Content Include="Content\templates\carousel\slide.html" />
     <Content Include="Content\templates\dialog\message.html" />
+    <Content Include="Content\templates\directives\dueDateLogic.html" />
     <Content Include="Content\templates\directives\layoutChange.html" />
     <Content Include="Content\templates\directives\templateTask.html" />
     <Content Include="Content\templates\employee\checkboxFilter.html" />
@@ -463,6 +464,7 @@
     <Content Include="Scripts\controllers\teams.js" />
     <Content Include="Scripts\controllers\main.js" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
+    <Content Include="Scripts\directives\dueDateLogic.js" />
     <Content Include="Scripts\directives\templateTask.js" />
     <Content Include="Scripts\directives\task.js" />
     <Content Include="Scripts\directives\tile.js" />

@@ -6,17 +6,16 @@
             <p>{{team.description}}</p>
         </div>
         <div data-ng-switch-when="true">
-            <p>
-                <input class="input-xxlarge" type="text" data-ng-model="team.name" />
-            </p>
-            <p>
-                <textarea class="input-xxlarge" data-ng-model="team.description" rows="4"></textarea>
-            </p>
+            <label>Team Name:</label>
+            <input class="input-xxlarge" type="text" data-ng-model="team.name" />
+            <button class="btn-link" data-ng-click="switchMode()">close</button>
+            <label>Team Description:</label>
+            <textarea class="input-xxlarge" data-ng-model="team.description" rows="4"></textarea>
         </div>
     </div>
-    <div class="span4" data-ng-show="isEdit">
-        <button class="btn btn-success" data-ng-click="switchMode()">Save</button>
-        <button class="btn">Cancel</button>
+    <div class="span4">
+        <button class="btn btn-success" data-ng-click="saveChanges()">Save Team Changes</button>
+        <button class="btn" data-ng-click="goBack()">Cancel</button>
     </div>
 </div>
 <ul class="nav nav-tabs">

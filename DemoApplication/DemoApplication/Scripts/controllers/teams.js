@@ -30,10 +30,10 @@ Application.Controllers.controller('ctrlTeamsIndex',
         }]);
 
 Application.Controllers.controller('ctrlTeamsDetail',
-            ['$scope', 'teams', 'commonUtils',
-    function ($scope, teams, commonUtils) {
+            ['$scope', '$routeParams', 'teams', 'commonUtils', 'toastr',
+    function ($scope, $routeParams, teams, commonUtils, toastr) {
 
-        $scope.isEdit = false;
+        $scope.isEdit = $routeParams.id == 0;
 
         $scope.switchMode = function () {
             $scope.isEdit = !$scope.isEdit;
@@ -44,7 +44,19 @@ Application.Controllers.controller('ctrlTeamsDetail',
         $scope.team = { tasks: [] };
 
         teams.individual(function (data) {
-            $scope.team = data;
+            if ($routeParams.id == 0) {
+                $scope.team = {
+                    name: '',
+                    description: '',
+                    activity: [],
+                    members: [],
+                    tasks: []
+                }
+            }
+            else
+                $scope.team = data;
+
+
             //$scope.tasks = groupItems(data.tasks);
             //$scope.availableTasks = groupItems(data.availableTasks);
             //$scope.assignables = groupItems(data.assignables, 'department');
@@ -126,4 +138,20 @@ Application.Controllers.controller('ctrlTeamsDetail',
             commonUtils.removeFromList(member, list);
             $scope.isAddingMember = false;
         };
+
+        //
+        // Global Actions
+
+        $scope.switchMode = function () {
+            $scope.isEdit = !$scope.isEdit;
+        }
+
+        $scope.saveChanges = function () {
+            toastr.success('Saved.');
+            $scope.isEdit = false;
+        }
+
+        $scope.goBack = function () {
+            window.history.back();
+        }
     }]);

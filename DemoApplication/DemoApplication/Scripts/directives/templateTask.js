@@ -48,7 +48,17 @@
             $scope.isNew = function () {
                 return $scope.task.name == null ||
                        $scope.task.assignee == null ||
-                       $scope.task.due == null;
+                       $scope.task.interval == null ||
+                       $scope.task.value == null ||
+                       $scope.task.isBefore == null ||
+                       $scope.task.milestone == null;
+            };
+
+            $scope.isDueDateChosen = function () {
+                return $scope.task.interval != null ||
+                       $scope.task.value != null ||
+                       $scope.task.isBefore != null ||
+                       $scope.task.milestone != null;
             };
 
             $scope.newCreated = $scope.isNew();

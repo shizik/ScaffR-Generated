@@ -1,21 +1,21 @@
 ﻿<div class="row-fluid">
     <div class="span8" data-ng-switch="" data-on="isEdit">
         <div data-ng-switch-default="false">
-            <h1>{{template.name}} <button class="btn-link btn-small" data-ng-click="switchMode()">edit</button></h1>
+            <h1>{{template.name}}
+                <button class="btn-link btn-small" data-ng-click="switchMode()">edit</button></h1>
             <p>{{template.description}}</p>
         </div>
         <div data-ng-switch-when="true">
-            <p>
-                <input class="input-xxlarge" type="text" data-ng-model="template.name" />
-            </p>
-            <p>
-                <textarea class="input-xxlarge" data-ng-model="template.description" rows="4"></textarea>
-            </p>
+            <label>Template Name:</label>
+            <input class="input-xxlarge" type="text" data-ng-model="template.name" />
+            <button class="btn-link" data-ng-click="switchMode()">close</button>
+            <label>Template Description:</label>
+            <textarea class="input-xxlarge" data-ng-model="template.description" rows="4"></textarea>
         </div>
     </div>
     <div class="span4">
-        <button class="btn btn-success" data-ng-click="switchMode()">Save Template</button>
-        <button class="btn">Cancel</button>
+        <button class="btn btn-success" data-ng-click="saveChanges()">Save Template Changes</button>
+        <button class="btn" data-ng-click="goBack()">Cancel</button>
     </div>
 </div>
 <div class="row-fluid">
@@ -92,7 +92,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="control-group">
+                <!--<div class="control-group">
                     <div class="btn-group">
                         <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
                         <ul class="dropdown-menu">
@@ -101,7 +101,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

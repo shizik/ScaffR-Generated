@@ -11,70 +11,100 @@
             "name":"Fill out Hire W-4 Task 1",
             "categoryId": 2,
             "assignee":"The Hulk",
-            "due": "2013-04-27T00:00:00+0100",
+            "interval": "Weeks",
+            "value": "3",
+            "isBefore": false,
+            "milestone": "Hire Date",
             "templateId": 1
         },
         {
             "name":"Fill out New WSDL Task 6",
             "categoryId": 2,
             "assignee":"Christine Alexander",
-            "due": "2013-04-27T00:00:00+0100",
+            "interval": "Days",
+            "value": "10",
+            "isBefore": true,
+            "milestone": "Hire Date",
             "templateId":1
         },
         {
             "name":"Change light bulb Task 10",
             "categoryId": 2,
             "assignee":"Christine Alexander",
-            "due": "2013-06-01T00:00:00+0100",
+            "interval": "Months",
+            "value": "3",
+            "isBefore": false,
+            "milestone": "Hire Date",
             "templateId":1
         },
         {
             "name":"Drive the car Task 11",
             "categoryId": 1,
             "assignee":"John Doe",
-            "due": "2013-05-05T00:00:00+0100",
+            "interval": "Days",
+            "value": "3",
+            "isBefore": false,
+            "milestone": "Hire Date",
             "templateId":1
         },
         {
             "name":"Make 50 sit ups Task 12",
             "categoryId": 2,
             "assignee":"John Doe",
-            "due": "2013-05-22T00:00:00+0100",
+            "interval": "Days",
+            "value": "45",
+            "isBefore": false,
+            "milestone": "Hire Date",
             "templateId":1
         },
         {
             "name":"Task 7 FM",
             "categoryId": 4,
             "assignee":"Joe Satriani",
-            "due": "2013-05-17T00:00:00+0100",
+            "interval": "Weeks",
+            "value": "3",
+            "isBefore": true,
+            "milestone": "Anniversary",
             "templateId":1
         },
         {
             "name":"Fix the Task 8",
             "categoryId": 1,
             "assignee":"John Doe",
-            "due": "2013-04-03T00:00:00+0100",
+            "interval": "Days",
+            "value": "30",
+            "isBefore": true,
+            "milestone": "Anniversary",
             "templateId":1
         },
         {
             "name":"Play the Task 7",
             "categoryId": 1,
             "assignee":"Joe Satriani",
-            "due": "2013-05-07T00:00:00+0100",
+            "interval": "Days",
+            "value": "30",
+            "isBefore": false,
+            "milestone": "Hire Date",
             "templateId":1
         },
         {
             "name":"Fix the car Task 8",
             "categoryId": 2,
             "assignee":"John Doe",
-            "due": "2013-04-10T00:00:00+0100",
+            "interval": "Weeks",
+            "value": "2",
+            "isBefore": true,
+            "milestone": "Anniversary",
             "templateId":1
         },
         {
             "name":"Make push ups Task 429",
             "categoryId": 2,
             "assignee":"John Doe",
-            "due": "2013-06-24T00:00:00+0100",
+            "interval": "Weeks",
+            "value": "7",
+            "isBefore": true,
+            "milestone": "Anniversary",
             "templateId":1
         }
     ],
@@ -229,8 +259,8 @@
         }
     ],
     "milestones":[
-        { "id": 1, "name":"Hire Date"},
-        { "id": 2, "name":"Anniversary"},
-        { "id": 3, "name":"Fired Date"}
+        "Hire Date",
+        "Anniversary",
+        "Fired Date"
     ]
 }

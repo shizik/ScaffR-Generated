@@ -87,32 +87,11 @@
         </span>
         | <i class="icon-calendar"></i>
         <span class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="task.due">
-                <span data-ng-switch-when="null" class="muted">Choose Due Date Logic</span>
-                <span data-ng-switch-default>{{task.due}}</span>
+            <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch data-on="isDueDateChosen()">
+                <span data-ng-switch-when="false" class="muted">Choose Due Date Logic</span>
+                <span data-ng-switch-default>{{task.value}} {{task.interval}} {{task.isBefore && 'Before' || 'After'}} {{task.milestone}}</span>
             </a>
-            <ul class="dropdown-menu">
-                <li class="form-inline" data-complex-menu="">
-                    <label class="radio">
-                        <input type="radio" value="true" />
-                        Before
-                    </label>
-                    <label class="radio">
-                        <input type="radio" value="false" />
-                        After
-                    </label>
-                    <select data-ng-model="test" data-ng-options="m.name for m in milestones">
-                        <option value="">-- Choose Milestone --</option>
-                    </select>
-                    <input type="text" placeholder="Enter a value..." />
-                    <select data-ng-model="test">
-                        <option value="1">Days</option>
-                        <option value="2">Weeks</option>
-                        <option value="3">Months</option>
-                        <option value="4">Quarter</option>
-                    </select>
-                </li>
-            </ul>
+            <ul class="dropdown-menu" data-due-date-logic="" data-task="task" data-milestones="milestones"></ul>
         </span>
     </div>
     <div data-ng-show="newCreated">
