@@ -5,6 +5,13 @@ Application.Controllers.controller('ctrlTemplatesIndex',
         function ($scope, $location, templates, toastr) {
             $scope.$parent.backLinkText = undefined;
 
+            $scope.filter = {
+                status: undefined,
+                assignedTo: undefined,
+                team: undefined,
+                department: undefined
+            };
+
             templates.summary().then(function (data) {
                 $scope.templates = data.results;
                 $scope.$apply();
@@ -13,12 +20,9 @@ Application.Controllers.controller('ctrlTemplatesIndex',
                 toastr.error('An error occured while pulling the data.');
             });
 
-            $scope.filter = {
-                status: [],
-                assignedTo: [],
-                team: [],
-                department: []
-            };
+            templates.getSummary(function (data) {
+                $scope.departments = data.departments;
+            });
 
             $scope.goToDetails = function (template) {
                 $location.path('/templates/' + template.id);

@@ -5,7 +5,7 @@ Application.Services.factory('templates', ['$resource', 'datacontext', function 
     // TODO: Change with WebApi endpoint
     var endPoint = $resource('/Scripts/mock-data/templates/:file.js', {}, {
         get: { method: 'GET', params: { file: '@file' } },
-        getSummary: { method: 'GET', params: { file: '@file' }, isArray: true },
+        getSummary: { method: 'GET', params: { file: 'summary2' }, isArray: false },
         individual: { method: 'GET', params: { file: 'x' }, isArray: false },
     });
 
@@ -14,9 +14,7 @@ Application.Services.factory('templates', ['$resource', 'datacontext', function 
             return endPoint.get({ file: "template" });
         },
 
-        getSummary: function () {
-            return endPoint.getSummary({ file: "summary" });
-        },
+        getSummary: endPoint.getSummary,
         individual: endPoint.individual,
 
         summary: function () {

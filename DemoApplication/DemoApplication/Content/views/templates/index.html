@@ -21,16 +21,16 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <!-- <li>
-                <div>
+            <li>
+                <!--<div>
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-search"></i></span>
                         <input type="text" placeholder="Filter..." />
                     </div>
-                </div>
-                <ul class="collapsible" data-title="Status">
+                </div>-->
+                <!--<ul class="collapsible" data-title="Status">
                     <li>
-                        <radio-filter list="summary" filter="filter.status" display="status" value="status" />
+                        <radio-filter list="statuses" filter="filter.status" display="status" value="status" />
                     </li>
                 </ul>
                 <ul class="collapsible" data-title="Assigned To">
@@ -42,13 +42,13 @@
                     <li>
                         <radio-filter list="teams" filter="filter.team" />
                     </li>
-                </ul>
+                </ul>-->
                 <ul class="collapsible" data-title="Department">
                     <li>
                         <radio-filter list="departments" filter="filter.department" />
                     </li>
                 </ul>
-            </li>-->
+            </li>
         </ul>
     </div>
     <div class="btn-group">
@@ -67,8 +67,7 @@
             </tr>
         </thead>
         <tbody>
-            <!--<tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse">-->
-            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in templates | searchFilter:'name':query | orderBy:predicate:reverse">
+            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in templates | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
                 <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.createdBy}}</td>
@@ -79,7 +78,7 @@
     </table>
 
     <div class="span12 tiles" ng-switch-when="tiles">
-        <div class="tile well tile-list" data-ng-click="goToDetails(item)" data-ng-repeat="item in templates | searchFilter:'name':query | orderBy:predicate:reverse">
+        <div class="tile well tile-list" data-ng-click="goToDetails(item)" data-ng-repeat="item in templates | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
             <ul class="nav nav-list">
                 <li>
                     <h4>{{item.name}}</h4>

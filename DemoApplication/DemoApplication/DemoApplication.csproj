@@ -727,9 +727,11 @@
     <Content Include="Scripts\mock-data\tasks\summary.js" />
     <Content Include="Scripts\mock-data\tasks\task.js" />
     <Content Include="Scripts\mock-data\teams\summary.js" />
+    <Content Include="Scripts\mock-data\teams\summary2.js" />
     <Content Include="Scripts\mock-data\teams\x.js" />
     <Content Include="Scripts\mock-data\templates\summary.js" />
     <Content Include="Scripts\mock-data\employees\summary.js" />
+    <Content Include="Scripts\mock-data\templates\summary2.js" />
     <Content Include="Scripts\mock-data\templates\template.js" />
     <Content Include="Scripts\lib\moment\moment.js" />
     <Content Include="Scripts\mock-data\templates\x.js" />

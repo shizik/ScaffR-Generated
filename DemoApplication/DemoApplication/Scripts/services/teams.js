@@ -5,14 +5,12 @@ Application.Services.factory('teams', ['$resource', 'datacontext', function ($re
     // TODO: Change with WebApi endpoint
     var endPoint = $resource('/Scripts/mock-data/teams/:file.js', {}, {
         get: { method: 'GET', params: { file: '@file' } },
-        getSummary: { method: 'GET', params: { file: '@file' }, isArray: true },
+        getSummary: { method: 'GET', params: { file: 'summary2' }, isArray: false },
         individual: { method: 'GET', params: { file: 'x' }, isArray: false },
     });
 
     return {
-        getSummary: function () {
-            return endPoint.getSummary({ file: "summary" });
-        },
+        getSummary: endPoint.getSummary,
         individual: endPoint.individual,
         summary: function () {
             return datacontext.query('TeamBrief').execute();

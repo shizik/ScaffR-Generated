@@ -7,6 +7,7 @@ namespace DemoApplication.Areas.Api.MockData
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int DepartmentId { get; set; }
         public string Department { get; set; }
         public string Description { get; set; }
         public int TasksCount { get; set; }
@@ -26,6 +27,7 @@ namespace DemoApplication.Areas.Api.MockData
                     {
                         Id = 1,
                         Name = "Sales Associate",
+                        DepartmentId=1,
                         Department ="Sales",
                         Description = "Assigned to every sales associate in Westpark",
                         TasksCount  = 8,
@@ -37,6 +39,7 @@ namespace DemoApplication.Areas.Api.MockData
                     {
                         Id = 2,
                         Name = "IT Director",
+                        DepartmentId=2,
                         Department ="IT",
                         Description = "Assigned to every IT Director in Minneapolis",
                         TasksCount  = 3,
@@ -48,6 +51,7 @@ namespace DemoApplication.Areas.Api.MockData
                     {
                         Id = 3,
                         Name = "VP of Marketing",
+                        DepartmentId=3,
                         Department ="Marketing",
                         Description = "Assigned to every marketing employee",
                         TasksCount  = 4,
@@ -59,6 +63,7 @@ namespace DemoApplication.Areas.Api.MockData
                     {
                         Id = 4,
                         Name = "CFO Phoenix",
+                        DepartmentId=4,
                         Department ="Finance",
                         Description = "Assigned to Chief Director level financial employee",
                         TasksCount  = 7,
@@ -70,6 +75,7 @@ namespace DemoApplication.Areas.Api.MockData
                     {
                         Id = 5,
                         Name = "Sales Representative",
+                        DepartmentId=1,
                         Department ="Sales",
                         Description = "Assigned to every Sales Representative",
                         TasksCount  = 11,
