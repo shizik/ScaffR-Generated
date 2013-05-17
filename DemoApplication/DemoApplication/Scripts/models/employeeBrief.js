@@ -6,7 +6,7 @@
 
     function initializer(model) {
         model.name = model.firstName + " " + model.lastName;
-        model.total = model.open + model.overdue + model.closed;
+        model.total = model.open + model.overdue/* + model.closed*/;
     }
 });
 

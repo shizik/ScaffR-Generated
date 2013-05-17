@@ -56,11 +56,9 @@ Application.Controllers.controller('ctrlTeamsDetail',
             else
                 $scope.team = data;
 
+            commonUtils.setCounts($scope.team);
 
-            //$scope.tasks = groupItems(data.tasks);
-            //$scope.availableTasks = groupItems(data.availableTasks);
-            //$scope.assignables = groupItems(data.assignables, 'department');
-            //$scope.templates = data.templates;
+            $scope.departments = data.departments;
         });
 
         //
@@ -112,31 +110,21 @@ Application.Controllers.controller('ctrlTeamsDetail',
         //
         // Add new member
 
-        $scope.newMembers = [];
-        $scope.isAddingMember = false;
-        $scope.addNewMember = function () {
-            $scope.isAddingMember = true;
-
-            $scope.newMembers.push(
-                {
-                    "name": null,
-                    "category": category,
-                    "assignee": null,
-                    "due": null,
-                    "status": "open",
-                    "isDone": false
+        $scope.addMember = function (item, isTeam) {
+            if (isTeam) {
+                _.forEach(item.people, function (p) {
+                    p.isActive = true;
+                    $scope.team.members.push(p);
                 });
+            }
+            else {
+                item.isActive = true;
+                $scope.team.members.push(item);
+            }
         };
 
-        $scope.saveTask = function (task) {
-            $scope.team.members.push(task);
-            $scope.deleteTask(task, true);
-        };
-
-        $scope.deleteTask = function (member, isNew) {
-            var list = isNew ? $scope.newMembers : $scope.team.members;
-            commonUtils.removeFromList(member, list);
-            $scope.isAddingMember = false;
+        $scope.deleteMember = function (index) {
+            $scope.team.members.splice(index, 1);
         };
 
         //

@@ -187,3 +187,32 @@ Application.Directives.directive('layoutChange', function factory() {
         }
     };
 });
+
+Application.Directives.directive('taskBadge', function factory() {
+    return {
+        template: '<span class="badge badge-{{ dateClass() }}">{{ days() }} Days</span>',
+        scope: {
+            task: '='
+        },
+        replace: true,
+        controller: function ($scope) {
+            $scope.days = function () {
+                if ($scope.task.due == null) return 0;
+
+                return moment($scope.task.due).diff(moment(), 'days');
+            };
+
+            $scope.isOverdue = function () {
+                return $scope.days() < 0;
+            };
+
+            $scope.dateClass = function () {
+                if ($scope.task.isDone) return 'success';
+                else if ($scope.days() < 0) return 'warning';
+                else if ($scope.days() == 0) return 'error';
+
+                return 'info';
+            };
+        }
+    };
+});

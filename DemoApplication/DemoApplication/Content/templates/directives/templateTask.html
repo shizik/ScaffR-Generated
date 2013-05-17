@@ -93,6 +93,10 @@
             </a>
             <ul class="dropdown-menu" data-due-date-logic="" data-task="task" data-milestones="milestones"></ul>
         </span>
+        <span class="edit-controls" data-ng-hide="newCreated">
+            <button class="btn btn-mini" data-ng-click="deleteTask()"><i class="icon-trash"></i></button>
+            <button class="btn btn-mini" data-ng-click="editMode()">Edit</button>
+        </span>
     </div>
     <div data-ng-show="newCreated">
         <button class="btn btn-small btn-success" data-ng-disabled="isNew()" data-ng-click="saveTask()">Save this task</button>

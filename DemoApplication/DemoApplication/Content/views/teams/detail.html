@@ -28,8 +28,11 @@
             <div class="span8">
                 <h4>Members <span class="text-info">({{ team.members.length }})</span></h4>
                 <ul class="unstyled">
-                    <li data-ng-repeat="member in team.members | orderBy:'name'">{{ member.name }} 
+                    <li class="task" data-ng-repeat="member in team.members | orderBy:'name'">{{ member.name }} 
                         <span class="badge{{member.isActive && ' badge-success' || ''}}">{{ member.isActive && 'Active' || 'Inactive' }}</span>
+                        <span class="edit-controls single-btn">
+                            <button class="btn btn-mini" data-ng-click="deleteMember($index)"><i class="icon-trash"></i></button>
+                        </span>
                     </li>
                 </ul>
                 <!--<ul class="unstyled">
@@ -40,21 +43,44 @@
                         delete-fn="deleteTask(task,isNew)"
                         data-ng-repeat="task in newTasks[category]" />
                 </ul>-->
-                <p>
-                    <button class="btn"
-                        data-ng-click="addNewMember()"
-                        data-ng-show="newMembers.length == 0"
-                        data-ng-disabled="isAddingMember">
-                        Add Member <i class="icon-plus"></i>
-                    </button>
-                </p>
+                <div class="dropdown">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown">Add Member <i class="icon-plus"></i></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <ul class="collapsible" data-title="{{d.name}}" data-ng-repeat="d in departments">
+                                <li>
+                                    <div>
+                                        <ul class="collapsible" data-title="Teams">
+                                            <li data-ng-repeat="t in d.teams | searchFilter:'name':query ">
+                                                <a data-ng-click="addMember(t, true)">{{ t.name }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul class="collapsible" data-title="Individuals">
+                                            <li data-ng-repeat="p in d.people | searchFilter:'name':query ">
+                                                <a data-ng-click="addMember(p, false)">{{ p.name }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                 <h4>Assigned Tasks <span class="text-info">({{ (team.tasks | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
-                    <task task="task"
-                        assignables="assignables"
-                        details-fn="showTask(task)"
-                        delete-fn="deleteTask(task,isNew)"
-                        data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'due'" />
+                    <li class="task" data-ng-class="{completed:task.isDone}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'due'">
+                        <input class="task-checkbox" type="checkbox" data-ng-checked="task.isDone" disabled="disabled" />
+                        <a href="#/tasks/1">{{ task.name }}
+                            <i class="icon-tag" data-ng-show="task.prebuilt"></i>
+                        </a>
+                        | <i class="icon-user"></i>
+                        {{task.assignee}}
+                        | <i class="icon-calendar"></i>
+                        {{task.due | date:'MM/dd/yy'}}
+                        | <span data-task-badge="" data-task="task"></span>
+                    </li>
                 </ul>
             </div>
             <div class="span4">
@@ -65,7 +91,7 @@
                     <div class="btn-group">
                         <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li data-complex-menu>
+                            <li data-complex-menu="">
                                 <checkbox-filter list="assignees" filter="filter.assignees" value="name" />
                             </li>
                         </ul>
@@ -75,7 +101,7 @@
                     <div class="btn-group">
                         <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
                         <ul class="dropdown-menu">
-                            <li data-complex-menu>
+                            <li data-complex-menu="">
                                 <radio-filter list="periods" filter="filter.period" value="func" />
                             </li>
                         </ul>

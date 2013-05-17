@@ -130,30 +130,127 @@
             "isDone":false
         }
     ],
-    "assignables":[
-        {
-            "id":4,
-            "name":"Yakuza",
-            "department": "IT",
-            "type":"team"
+    "departments":[{
+            "name": "IT Department",
+            "teams":[
+                {
+                    "id":1,
+                    "name":"Yakuza",
+                    "people":[
+                        {
+                            "id":11,
+                            "name":"Chiristine Alexander"
+                        },
+                        {
+                            "id":12,
+                            "name":"Gene Hackman"
+                        },
+                        {
+                            "id":13,
+                            "name":"Andrea Andrews"
+                        }
+                    ]
+                },
+                {
+                    "id":2,
+                    "name":"IT Admins",
+                    "people":[
+                        {
+                            "id":21,
+                            "name":"John Doe"
+                        },
+                        {
+                            "id":22,
+                            "name":"Sally Doe"
+                        },
+                        {
+                            "id":23,
+                            "name":"Andrew Andreas"
+                        }
+                    ]
+                }
+            ],
+            "people": [
+                {
+                    "id":11,
+                    "name":"Chiristine Alexander"
+                },
+                {
+                    "id":12,
+                    "name":"Gene Hackman"
+                },
+                {
+                    "id":13,
+                    "name":"Andrea Andrews"
+                },
+                {
+                    "id":21,
+                    "name":"John Doe"
+                },
+                {
+                    "id":22,
+                    "name":"Sally Doe"
+                },
+                {
+                    "id":23,
+                    "name":"Andrew Andreas"
+                }
+            ]
         },
         {
-            "id":5,
-            "name":"The Hulk",
-            "department": "IT",
-            "type":"person"
-        },
-        {
-            "id":6,
-            "name":"Chuck Norris",
-            "department": "Security",
-            "type":"person"
-        },
-        {
-            "id":7,
-            "name":"Bruce Lee",
-            "department": "Security",
-            "type":"person"
+            "name": "Sales Department",
+            "teams":[
+                {
+                    "id":3,
+                    "name":"Sales Rangers",
+                    "people":[
+                        {
+                            "id":31,
+                            "name":"Chuck Norris"
+                        },
+                        {
+                            "id":32,
+                            "name":"Larry Page"
+                        }
+                    ]
+                },
+                {
+                    "id":4,
+                    "name":"Sales Managers",
+                    "people":[
+                        {
+                            "id":41,
+                            "name":"Doey John"
+                        },
+                        {
+                            "id":42,
+                            "name":"San Andreas"
+                        },
+                        {
+                            "id":43,
+                            "name":"Thomas Jefferson"
+                        }
+                    ]
+                }
+            ],
+            "people": [
+                {
+                    "id":1,
+                    "name":"Thomas Jefferson"
+                },
+                {
+                    "id":2,
+                    "name":"Andrew Jackson"
+                },
+                {
+                    "id":3,
+                    "name":"Olivia Cleaver"
+                },
+                {
+                    "id":4,
+                    "name":"George Washington"
+                }
+            ]
         }
     ]
 }

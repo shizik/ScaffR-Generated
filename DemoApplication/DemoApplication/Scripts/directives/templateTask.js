@@ -17,9 +17,7 @@
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
-                //$scope.taskMode = 'edit';
-                // TODO: This is for demo purposes
-                $location.path('/task/' + $scope.task.id);
+                $location.path('/tasks/1'/* + $scope.task.id*/);
             };
 
             $scope.assignment = { selectedOption: undefined };

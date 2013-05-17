@@ -1,8 +1,8 @@
 ﻿'use strict';
 
 Application.Controllers.controller('ctrlEmployeesIndex',
-                ['$scope', '$location', 'employees', 'employeeUtils', 'toastr',
-        function ($scope, $location, employees, employeeUtils, toastr) {
+                ['$scope', '$location', 'employees', 'commonUtils', 'toastr',
+        function ($scope, $location, employees, commonUtils, toastr) {
             $scope.$parent.backLinkText = undefined;
 
             $scope.filter = {
@@ -72,6 +72,8 @@ Application.Controllers.controller('ctrlEmployeesDetail',
 
         employees.individual(function (data) {
             $scope.person = data;
+            $scope.person.name = $scope.person.firstName + ' ' + $scope.person.lastName;
+
             $scope.tasks = groupItems(data.tasks);
             $scope.availableTasks = groupItems(data.availableTasks);
             $scope.assignables = groupItems(data.assignables, 'department');
@@ -124,6 +126,8 @@ Application.Controllers.controller('ctrlEmployeesDetail',
 
         $scope.$watch('person.tasks', function (newValue) {
             if (newValue.length == 0) return;
+
+            commonUtils.setCounts($scope.person);
 
             var result = [];
             _.forEach($scope.periods, function (item) {

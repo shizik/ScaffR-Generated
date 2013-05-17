@@ -5,7 +5,7 @@
     store.registerEntityTypeCtor("TeamBrief", null, initializer);
 
     function initializer(model) {
-        model.total = model.open + model.overdue + model.closed;
+        model.total = model.open + model.overdue/* + model.closed*/;
     }
 });
 
