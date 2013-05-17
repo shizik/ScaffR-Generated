@@ -15,11 +15,7 @@
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
-                //$scope.taskMode = 'edit';
-                // TODO: This is for demo purposes
-                $location.path('/task/' + $scope.task.id);
-
-                //window.location.href = '/tasks/ondemand/1';
+                $location.path('/tasks/1'/* + $scope.task.id*/);
             };
 
             $scope.assignment = { selectedOption: undefined };
@@ -55,24 +51,6 @@
 
             $scope.preventClosing = function ($event) {
                 $event.stopPropagation();
-            };
-
-            $scope.days = function () {
-                if ($scope.task.due == null) return 0;
-
-                return moment($scope.task.due).diff(moment(), 'days');
-            };
-
-            $scope.isOverdue = function () {
-                return $scope.days() < 0;
-            };
-
-            $scope.dateClass = function () {
-                if ($scope.task.isDone) return 'success';
-                else if ($scope.days() < 0) return 'warning';
-                else if ($scope.days() == 0) return 'error';
-
-                return 'info';
             };
 
             //

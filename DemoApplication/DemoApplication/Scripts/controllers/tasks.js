@@ -1,18 +1,7 @@
 ﻿'use strict';
 
-Application.Controllers.controller('tasks', ['$scope', 'tasks', function ($scope, tasks) {
-
-    $scope.task = function () {
-
-    };
-
-    $scope.save = function () {
-
-    };
-
-}]);
-
-Application.Controllers.controller('tasksController', ['$scope', 'tasks', 'categories', 'toastr', function ($scope, tasks, categories, toastr) {
+Application.Controllers.controller('ctrlTasksEdit', ['$scope', 'tasks', 'categories', 'toastr', function ($scope, tasks, categories, toastr) {
+    $scope.$parent.backLinkText = 'Task List';
 
     $scope.categories = categories.list();
     $scope.task = tasks.getById(0);

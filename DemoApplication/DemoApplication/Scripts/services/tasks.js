@@ -4,12 +4,14 @@ Application.Services.factory('tasks', function ($resource) {
 
     // TODO: Change with WebApi endpoint
     var endPoint = $resource('/Scripts/mock-data/tasks/:file.js', {}, {
-        get: { method: 'GET', params: { file: '@file' } },
+        get: { method: 'GET', params: { file: 'x' } },
         query: { method: 'GET', params: { file: '@file' }, isArray: true },
         summary: { method: 'GET', params: { file: '@file' }, isArray: true },
     });
-    
+
     return {
+        getAvailable: endPoint.get,
+
         getById: function (id) {
             return endPoint.get({ file: "ondemand" });
         },
@@ -29,8 +31,8 @@ Application.Services.factory('tasks', function ($resource) {
         delete: function (task) {
             // TODO: Add logic to delete the task
         },
-        
-        summary: function() {
+
+        summary: function () {
             return endPoint.summary({ file: "summary" });
         }
 

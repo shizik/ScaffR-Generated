@@ -24,21 +24,39 @@ angular.module('application', ['ui.bootstrap',
     .config(
         ['$routeProvider',
             function ($routeProvider) {
+                var rootFolder = '/content/views';
+
                 $routeProvider
-                    .when('/', {
-                        templateUrl: '/employee/index',
-                        controller: 'listController'
+                    .when('/employees', {
+                        templateUrl: rootFolder + '/employees/index.html',
+                        controller: 'ctrlEmployeesIndex'
                     })
-                    .when('/employee/:id', {
-                        templateUrl: '/employee/detail',
-                        controller: 'employeeController'
+                    .when('/employees/:id', {
+                        templateUrl: rootFolder + '/employees/detail.html',
+                        controller: 'ctrlEmployeesDetail'
                     })
-                    .when('/task/:id', {
-                        templateUrl: '/tasks/ondemand',
-                        controller: 'tasksController'
+                    .when('/templates', {
+                        templateUrl: rootFolder + '/templates/index.html',
+                        controller: 'ctrlTemplatesIndex'
+                    })
+                    .when('/templates/:id', {
+                        templateUrl: rootFolder + '/templates/detail.html',
+                        controller: 'ctrlTemplatesDetail'
+                    })
+                    .when('/teams', {
+                        templateUrl: rootFolder + '/teams/index.html',
+                        controller: 'ctrlTeamsIndex'
+                    })
+                    .when('/teams/:id', {
+                        templateUrl: rootFolder + '/teams/detail.html',
+                        controller: 'ctrlTeamsDetail'
+                    })
+                    .when('/tasks/:id', {
+                        templateUrl: rootFolder + '/tasks/edit.html',
+                        controller: 'ctrlTasksEdit'
                     })
                     .otherwise({
-                        redirectTo: '/'
+                        redirectTo: '/employees'
                     });
             }])
     .run(function ($rootScope, $http, $location) {

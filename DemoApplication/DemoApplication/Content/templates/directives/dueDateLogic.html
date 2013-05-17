@@ -1,0 +1,39 @@
+﻿<ul>
+    <li data-complex-menu="">
+        <label>Time Interval</label>
+        <select data-ng-model="task.interval">
+            <option value="">-- Choose a period --</option>
+            <option>Days</option>
+            <option>Weeks</option>
+            <option>Months</option>
+            <option>Quarters</option>
+        </select>
+        <label>Type or Choose a Value</label>
+        <select data-ng-model="chosenValue" data-ng-disabled="!task.interval">
+            <option value="">-- Choose --</option>
+            <option value="0">On Date</option>
+            <option value="10">10 {{task.interval}}</option>
+            <option value="15">15 {{task.interval}}</option>
+            <option value="30">30 {{task.interval}}</option>
+            <option value="45">45 {{task.interval}}</option>
+            <option value="60">60 {{task.interval}}</option>
+            <option value="custom">Add Custom Value</option>
+        </select>
+        <span data-ng-show="chosenValue == 'custom'">
+            <label>Custom value</label>
+            <input class="input-medium" type="text" placeholder="Value..." data-ng-model="task.value" />
+        </span>
+        <label class="radio">
+            <input type="radio" data-ng-model="isBefore" value="true" />
+            Before
+        </label>
+        <label class="radio">
+            <input type="radio" data-ng-model="isBefore" value="false" />
+            After
+        </label>
+        <label>Milestone</label>
+        <select data-ng-model="task.milestone" data-ng-options="m for m in milestones" data-ng-disabled="!task.interval">
+            <option value="">-- Choose Milestone --</option>
+        </select>
+    </li>
+</ul>
