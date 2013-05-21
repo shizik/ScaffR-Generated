@@ -110,6 +110,9 @@
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\ScaffR.Ninject.1.1.4\lib\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="NLipsum.Core">
+      <HintPath>..\packages\NLipsum.0.1.3\lib\net40\NLipsum.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Omu.ValueInjecter">
       <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
     </Reference>
@@ -217,13 +220,62 @@
     <Compile Include="Application\Startup\AppStartup.Routes.cs" />
     <Compile Include="Application\Startup\AppStartup.Validators.cs" />
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
+    <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\TemplateController.cs" />
+    <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Api\Controllers\NetchexApiController.cs" />
-    <Compile Include="Areas\Api\MockData\Assignment.cs" />
-    <Compile Include="Areas\Api\MockData\Employee.cs" />
-    <Compile Include="Areas\Api\MockData\EmployeeBrief.cs" />
-    <Compile Include="Areas\Api\MockData\ModelRegistry.cs" />
-    <Compile Include="Areas\Api\MockData\TeamBrief.cs" />
-    <Compile Include="Areas\Api\MockData\TemplateBrief.cs" />
+    <Compile Include="Areas\Api\Metadata\DataProperty.cs" />
+    <Compile Include="Areas\Api\Metadata\MetadataDefinition.cs" />
+    <Compile Include="Areas\Api\Metadata\MetadataRegistry.cs" />
+    <Compile Include="Areas\Api\Metadata\StructuralType.cs" />
+    <Compile Include="Areas\Api\Models\Assignment.cs" />
+    <Compile Include="Areas\Api\Models\Task.cs" />
+    <Compile Include="Areas\Api\Models\Template.cs" />
+    <Compile Include="Areas\Api\Models\Principal.cs" />
+    <Compile Include="Areas\Api\Models\Employee.cs" />
+    <Compile Include="Areas\Api\Models\EmployeeBrief.cs" />
+    <Compile Include="Areas\Api\Models\TeamBrief.cs" />
+    <Compile Include="Areas\Api\Models\TemplateBrief.cs" />
+    <Compile Include="Areas\Onboarding\Models\Assignment.cs" />
+    <Compile Include="Areas\Onboarding\Models\Assignment_Attachment.cs" />
+    <Compile Include="Areas\Onboarding\Models\Assignment_History.cs" />
+    <Compile Include="Areas\Onboarding\Models\Attachment.cs" />
+    <Compile Include="Areas\Onboarding\Models\Department.cs" />
+    <Compile Include="Areas\Onboarding\Models\Department_Template.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\AssignmentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Assignment_AttachmentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Assignment_HistoryMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\AttachmentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\DepartmentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Department_TemplateMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\MilestoneMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Person_CommentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Person_HireMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Person_ListMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Person_MainMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\PrincipalMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\TagMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\TaskMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Task_AttachmentMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Task_CategoryMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\Task_TemplateMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\TeamMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Mapping\TemplateMap.cs" />
+    <Compile Include="Areas\Onboarding\Models\Milestone.cs" />
+    <Compile Include="Areas\Onboarding\Models\OnboardingContext.cs" />
+    <Compile Include="Areas\Onboarding\Models\Person_Comment.cs" />
+    <Compile Include="Areas\Onboarding\Models\Person_Hire.cs" />
+    <Compile Include="Areas\Onboarding\Models\Person_List.cs" />
+    <Compile Include="Areas\Onboarding\Models\Person_Main.cs" />
+    <Compile Include="Areas\Onboarding\Models\Principal.cs" />
+    <Compile Include="Areas\Onboarding\Models\Tag.cs" />
+    <Compile Include="Areas\Onboarding\Models\Task.cs" />
+    <Compile Include="Areas\Onboarding\Models\Task_Attachment.cs" />
+    <Compile Include="Areas\Onboarding\Models\Task_Category.cs" />
+    <Compile Include="Areas\Onboarding\Models\Task_Template.cs" />
+    <Compile Include="Areas\Onboarding\Models\Team.cs" />
+    <Compile Include="Areas\Onboarding\Models\Template.cs" />
+    <Compile Include="Areas\Onboarding\OnboardingAreaRegistration.cs" />
     <Compile Include="Controllers\Account\AccountController.ChangePassword.cs" />
     <Compile Include="Controllers\Account\AccountController.cs" />
     <Compile Include="Controllers\Account\AccountController.PasswordReset.cs" />
@@ -465,6 +517,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
     <Content Include="Scripts\controllers\bundle.txt" />
+    <Content Include="Scripts\controllers\employees.index.js" />
     <Content Include="Scripts\controllers\teams.js" />
     <Content Include="Scripts\controllers\main.js" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
@@ -474,7 +527,7 @@
     <Content Include="Scripts\directives\tile.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker\bundle.txt" />
-    <Content Include="Scripts\controllers\employees.js" />
+    <Content Include="Scripts\controllers\employees.detail.js" />
     <Content Include="Scripts\controllers\tasks.js" />
     <Content Include="Scripts\controllers\templates.js" />
     <Content Include="Scripts\custom\bundle.txt" />
@@ -502,6 +555,7 @@
     <Content Include="Content\less\bootstrap\toastr.less" />
     <Content Include="Content\less\global\components\tiles.less" />
     <Content Include="Content\less\global\components\task.less" />
+    <Content Include="Areas\Onboarding\Views\Web.config" />
     <None Include="Scripts\lib\breeze\breeze.intellisense.js" />
     <Content Include="Scripts\lib\breeze\bundle.txt" />
     <Content Include="Scripts\lib\breeze\q.js" />
@@ -742,20 +796,19 @@
     <Content Include="Scripts\models\assignment.js" />
     <Content Include="Scripts\models\teamBrief.js" />
     <Content Include="Scripts\models\templateBrief.js" />
-    <Content Include="Scripts\models\employeeBrief.js" />
     <Content Include="Scripts\models\employee.js" />
     <Content Include="Scripts\models\task.js" />
-    <Content Include="Scripts\services\categories.js" />
+    <Content Include="Scripts\services\service.category.js" />
     <Content Include="Scripts\services\assignables.js" />
     <Content Include="Scripts\services\datacontext.js" />
     <Content Include="Scripts\services\departments.js" />
-    <Content Include="Scripts\services\employees.js" />
+    <Content Include="Scripts\services\service.employee.js" />
     <Content Include="Scripts\services\list.js" />
     <Content Include="Scripts\services\milestones.js" />
     <Content Include="Scripts\services\teams.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\tasks.js" />
-    <Content Include="Scripts\services\templates.js" />
+    <Content Include="Scripts\services\service.template.js" />
     <Content Include="Scripts\lib\toastr\toastr.js" />
     <Content Include="Scripts\utils\common.js" />
     <Content Include="Scripts\utils\employee.js" />
@@ -793,6 +846,8 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Onboarding\Controllers\" />
+    <Folder Include="Areas\Onboarding\Views\Shared\" />
     <Folder Include="Content\images\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>

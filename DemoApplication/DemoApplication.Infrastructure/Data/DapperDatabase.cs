@@ -7,17 +7,17 @@
 
     public class DapperDatabase : IDisposable
     {
-        private readonly DbConnection connection;
+        private readonly DbConnection _connection;
 
         public DapperDatabase()
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Local"].ConnectionString);
+            _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Local"].ConnectionString);
             Connection.Open();
         }
 
         public DbConnection Connection
         {
-            get { return connection; }
+            get { return _connection; }
         }
 
         public void Dispose()

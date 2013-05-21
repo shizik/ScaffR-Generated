@@ -31,6 +31,8 @@
 
             $scope.badgeClass = '';
             $scope.badgeCount = function () {
+                if (!$scope.entity) return 0;
+
                 $scope.badgeClass = $scope.entity.overdue > 0 ? 'badge-warning' : 'badge-info';
 
                 return $scope.entity.overdue + $scope.entity.open;

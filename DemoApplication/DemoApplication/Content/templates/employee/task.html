@@ -98,13 +98,13 @@
         </span>
         | <i class="icon-calendar"></i>
         <span data-ng-switch="" data-on="task.isDone">
-            <span data-ng-switch-when="true">{{task.due | date:'MM/dd/yy'}}</span>
+            <span data-ng-switch-when="true">{{task.dueDate | date:'MM/dd/yy'}}</span>
             <span data-ng-switch-default="">
-                <a data-ng-switch="" data-on="task.due" data-b-datepicker="" data-ng-model="task.due">
+                <a data-ng-switch="" data-on="task.dueDate" data-b-datepicker="" data-ng-model="task.dueDate">
                     <span data-ng-switch-when="null" class="muted">Set Due Date</span>
-                    <span data-ng-switch-default="">{{task.due | date:'MM/dd/yy'}}</span>
+                    <span data-ng-switch-default="">{{task.dueDate | date:'MM/dd/yy'}}</span>
                 </a>
-                <span data-ng-show="task.due != null">| <span data-task-badge="" data-task="task"></span>
+                <span data-ng-show="task.dueDate != null">| <span data-task-badge="" data-task="task"></span>
                 </span>
                 <span class="edit-controls" data-ng-hide="newCreated">
                     <button class="btn btn-mini" data-ng-click="deleteTask()"><i class="icon-trash"></i></button>

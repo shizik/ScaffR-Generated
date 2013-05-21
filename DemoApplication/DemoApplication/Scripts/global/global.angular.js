@@ -29,11 +29,11 @@ angular.module('application', ['ui.bootstrap',
                 $routeProvider
                     .when('/employees', {
                         templateUrl: rootFolder + '/employees/index.html',
-                        controller: 'ctrlEmployeesIndex'
+                        controller: 'employees.index'
                     })
                     .when('/employees/:id', {
                         templateUrl: rootFolder + '/employees/detail.html',
-                        controller: 'ctrlEmployeesDetail'
+                        controller: 'employees.detail'
                     })
                     .when('/templates', {
                         templateUrl: rootFolder + '/templates/index.html',

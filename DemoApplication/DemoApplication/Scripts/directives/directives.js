@@ -197,9 +197,9 @@ Application.Directives.directive('taskBadge', function factory() {
         replace: true,
         controller: function ($scope) {
             $scope.days = function () {
-                if ($scope.task.due == null) return 0;
+                if ($scope.task.dueDate == null) return 0;
 
-                return moment($scope.task.due).diff(moment(), 'days');
+                return moment($scope.task.dueDate).diff(moment(), 'days');
             };
 
             $scope.isOverdue = function () {

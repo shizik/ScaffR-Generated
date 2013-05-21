@@ -38,8 +38,11 @@ namespace DemoApplication.Application.Startup
             GlobalConfiguration.Configuration.Formatters.Remove(
                                 GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
+            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.TypeNameHandling =
+            //                    Newtonsoft.Json.TypeNameHandling.All;
+
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.
-                                SerializerSettings.ContractResolver = new CustomContractResolver();
+                                SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             //
             // Routes
@@ -53,7 +56,8 @@ namespace DemoApplication.Application.Startup
 
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 name: "DefaultApiWithActions",
-                routeTemplate: "api/{controller}/{action}"
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
             );
 
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(

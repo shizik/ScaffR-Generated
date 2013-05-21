@@ -28,7 +28,7 @@
             "templateId":1
         },
         {
-            "name":"Change light bulb Task 10",
+            "name":"Change the light bulb Task 10",
             "categoryId": 2,
             "assignee":"Christine Alexander",
             "interval": "Months",
