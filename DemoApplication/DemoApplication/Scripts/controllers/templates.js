@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 Application.Controllers.controller('ctrlTemplatesIndex',
-                ['$scope', '$location', 'templates', 'toastr',
+                ['$scope', '$location', 'service.template', 'toastr',
         function ($scope, $location, templates, toastr) {
             $scope.$parent.backLinkText = undefined;
 
@@ -35,8 +35,8 @@ Application.Controllers.controller('ctrlTemplatesIndex',
         }]);
 
 Application.Controllers.controller('ctrlTemplatesDetail',
-            ['$scope', '$routeParams', 'templates', 'categories', 'commonUtils', 'toastr',
-    function ($scope, $routeParams, templates, categories, commonUtils, toastr) {
+            ['$scope', '$routeParams', 'service.template', 'service.category', 'commonUtils', 'toastr',
+    function ($scope, $routeParams, serviceTemplate, serviceCategory, commonUtils, toastr) {
 
         $scope.isEdit = $routeParams.id == 0;
 
@@ -44,7 +44,7 @@ Application.Controllers.controller('ctrlTemplatesDetail',
 
         $scope.template = { tasks: [] };
 
-        categories.list(function (data) {
+        serviceCategory.getAll(function (data) {
             $scope.categories = data;
 
             var newTasks = {};

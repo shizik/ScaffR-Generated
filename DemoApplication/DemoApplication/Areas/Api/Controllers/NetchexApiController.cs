@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using DemoApplication.Areas.Api.Models;
 
 namespace DemoApplication.Areas.Api.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Http;
     using Breeze.WebApi;
-    using MockData;
     using Infrastructure.Http;
+    using Metadata;
+    using MockData;
     using Newtonsoft.Json.Linq;
 
-    public class NetchexApiController : ApiController
+    public partial class NetchexApiController : ApiController
     {
         private readonly IWebApiDataContext _context;
 
@@ -17,23 +19,13 @@ namespace DemoApplication.Areas.Api.Controllers
             _context = context;
         }
 
-
         //
         // GET ~/api/Metadata
 
         [HttpGet]
-        public object Metadata()
+        public MetadataDefinition Metadata()
         {
-            return ModelRegistry.Generate();
-        }
-
-        //
-        // GET ~/api/EmployeeBrief
-
-        [HttpGet]
-        public List<EmployeeBrief> EmployeeBrief()
-        {
-            return EmployeeBriefData.Get();
+            return MetadataRegistry.Generate();
         }
 
         //
@@ -53,6 +45,15 @@ namespace DemoApplication.Areas.Api.Controllers
         {
             return TemplateBriefData.Get();
         }
+
+        //[HttpGet]
+        //public Employee Get(string id)
+        //{
+        //    var employee = EmployeeData.GetById(id);
+        //    //employee.Tasks = AssignmentData.GetForEmployee(id);
+
+        //    return employee;
+        //}
 
         //
         // POST ~/api/SaveChanges

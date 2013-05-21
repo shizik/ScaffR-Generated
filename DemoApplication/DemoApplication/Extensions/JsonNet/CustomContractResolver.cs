@@ -1,4 +1,5 @@
 ﻿using System;
+using DemoApplication.Areas.Api.Metadata;
 using DemoApplication.Areas.Api.MockData;
 using DemoApplication.Core.Model;
 using Newtonsoft.Json.Serialization;
@@ -11,9 +12,9 @@ namespace DemoApplication.Extensions.JsonNet
         {
             var contract = base.CreateObjectContract(objectType);
 
-            if (objectType != typeof(ModelRegistry.Metadata) &&
-                objectType != typeof(ModelRegistry.StructuralType) &&
-                objectType != typeof(ModelRegistry.DataProperty))
+            if (objectType != typeof(MetadataDefinition) &&
+                objectType != typeof(StructuralType) &&
+                objectType != typeof(DataProperty))
                 contract.Properties.Add(new JsonProperty
                 {
                     Readable = true,

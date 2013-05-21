@@ -43,7 +43,7 @@
             };
 
             $scope.isNew = function () {
-                return $scope.task.name == null || $scope.task.assignee == null || $scope.task.due == null;
+                return $scope.task.name == null || $scope.task.assigneeId == null || $scope.task.dueDate == null;
             };
 
             $scope.newCreated = $scope.isNew();
