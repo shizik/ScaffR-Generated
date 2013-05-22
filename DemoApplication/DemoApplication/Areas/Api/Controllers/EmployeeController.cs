@@ -35,7 +35,7 @@
                 employee.Title = "This is a title";
                 employee.Email = "email@example.com";
 
-                employee.Assignments = result.Read<Assignment>().ToList();
+                employee.Tasks = result.Read<Assignment>().ToList();
 
                 return employee;
             }

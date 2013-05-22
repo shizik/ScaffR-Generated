@@ -36,6 +36,8 @@
                     $scope.statuses[0].count += item.open;
                     $scope.statuses[1].count += item.closed;
                     $scope.statuses[2].count += item.overdue;
+
+                    item.total = item.open + item.closed + item.overdue;
                 });
 
             });

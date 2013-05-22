@@ -11,6 +11,15 @@
         replace: true,
         controller: function ($scope, $location) {
 
+            $scope.$watch('entity', function (value) {
+                if (!value) return;
+
+                if (value.name)
+                    $scope.name = value.name;
+                else
+                    $scope.name = value.firstName + ' ' + value.lastName;
+            });
+
             $scope.$watch('mode', function (value) {
                 if (!value || value == 'list') return;
 

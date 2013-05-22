@@ -11,7 +11,7 @@
             detailsFn: '&'
         },
         replace: true,
-        controller: function ($scope, $location, toastr) {
+        controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
@@ -53,6 +53,13 @@
                 $event.stopPropagation();
             };
 
+            $scope.$watch('task', function (value) {
+                debugger;
+                serviceTask.update(value, function () {
+                    toastr.success("Saved");
+                });
+            });
+
             //
             // Button actions
 
@@ -74,6 +81,6 @@
             $scope.editTask = function () {
                 // TODO: Open the details page
             };
-        }
+        }]
     };
 });

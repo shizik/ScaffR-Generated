@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace DemoApplication.Areas.Api.Models
+﻿namespace DemoApplication.Areas.Api.Models
 {
     public class Task
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
 
         public int Interval { get; set; }
         public bool IsBefore { get; set; }

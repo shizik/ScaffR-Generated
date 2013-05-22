@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('teams.detail',
-            ['$scope', '$routeParams', 'teams', 'commonUtils', 'toastr',
-    function ($scope, $routeParams, teams, commonUtils, toastr) {
+            ['$scope', '$routeParams', 'service.team', 'commonUtils', 'toastr',
+    function ($scope, $routeParams, serviceTeam, commonUtils, toastr) {
 
         $scope.isEdit = $routeParams.id == 0;
 
@@ -12,7 +12,7 @@
 
         $scope.team = { tasks: [] };
 
-        teams.individual(function (data) {
+        serviceTeam.individual(function (data) {
             if ($routeParams.id == 0) {
                 $scope.team = {
                     name: '',

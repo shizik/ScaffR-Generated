@@ -221,6 +221,8 @@
     <Compile Include="Application\Startup\AppStartup.Validators.cs" />
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\TaskController.cs" />
     <Compile Include="Areas\Api\Controllers\TeamController.cs" />
     <Compile Include="Areas\Api\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
@@ -230,6 +232,7 @@
     <Compile Include="Areas\Api\Metadata\MetadataRegistry.cs" />
     <Compile Include="Areas\Api\Metadata\StructuralType.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
+    <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
     <Compile Include="Areas\Api\Models\Task.cs" />
     <Compile Include="Areas\Api\Models\Template.cs" />
