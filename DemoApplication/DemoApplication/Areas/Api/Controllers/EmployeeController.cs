@@ -17,7 +17,8 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
+                var result= db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
+                return result;
             }
         }
 
