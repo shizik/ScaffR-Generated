@@ -45,7 +45,7 @@
                             assignables="assignables"
                             details-fn="showTask(task)"
                             delete-fn="deleteTask(task,isNew)"
-                            data-ng-repeat="task in tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
+                            data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
                     </ul>
                     <ul class="unstyled">
                         <task task="task"
@@ -71,7 +71,9 @@
                 </div>
                 <div class="control-group">
                     <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown" data-ng-disabled="assignees.length==0">
+                            Show Tasks by Assigned <i class="caret"></i>
+                        </button>
                         <ul class="dropdown-menu">
                             <li data-complex-menu>
                                 <checkbox-filter list="assignees" filter="filter.assignees" value="name" />
@@ -81,7 +83,7 @@
                 </div>
                 <div class="control-group">
                     <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></button>
                         <ul class="dropdown-menu">
                             <li data-complex-menu>
                                 <radio-filter list="periods" filter="filter.period" value="func" />

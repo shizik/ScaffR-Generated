@@ -1,6 +1,4 @@
-﻿'use strict';
-
-Application.Controllers.controller('mainController', ['$scope', '$location', function ($scope, $location) {
+﻿Application.Controllers.controller('mainController', ['$scope', function ($scope) {
     $scope.backLinkText = undefined;
 
     $scope.showBackLink = function () {

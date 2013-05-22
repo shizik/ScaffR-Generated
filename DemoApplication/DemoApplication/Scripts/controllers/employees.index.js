@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('employees.index',
                 ['$scope', '$location', 'service.employee', 'commonUtils', 'toastr',
-        function ($scope,   $location,   serviceEmployee,    commonUtils,   toastr) {
+        function ($scope, $location, serviceEmployee, commonUtils, toastr) {
             $scope.$parent.backLinkText = undefined;
 
             $scope.filter = {
@@ -36,6 +36,8 @@
                     $scope.statuses[0].count += item.open;
                     $scope.statuses[1].count += item.closed;
                     $scope.statuses[2].count += item.overdue;
+
+                    item.total = item.open + item.closed + item.overdue;
                 });
 
             });

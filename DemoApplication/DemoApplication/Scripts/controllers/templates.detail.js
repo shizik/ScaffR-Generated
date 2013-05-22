@@ -1,40 +1,4 @@
-﻿'use strict';
-
-Application.Controllers.controller('ctrlTemplatesIndex',
-                ['$scope', '$location', 'service.template', 'toastr',
-        function ($scope, $location, templates, toastr) {
-            $scope.$parent.backLinkText = undefined;
-
-            $scope.filter = {
-                status: undefined,
-                assignedTo: undefined,
-                team: undefined,
-                department: undefined
-            };
-
-            templates.summary().then(function (data) {
-                $scope.templates = data.results;
-                $scope.$apply();
-            }).fail(function (error) {
-                console.log('error', error);
-                toastr.error('An error occured while pulling the data.');
-            });
-
-            templates.getSummary(function (data) {
-                $scope.departments = data.departments;
-            });
-
-            $scope.goToDetails = function (template) {
-                $location.path('/templates/' + template.id);
-            };
-
-            $scope.containsStatus = function (status) {
-                return _.contains($scope.filter.status, status);
-            };
-
-        }]);
-
-Application.Controllers.controller('ctrlTemplatesDetail',
+﻿Application.Controllers.controller('templates.detail',
             ['$scope', '$routeParams', 'service.template', 'service.category', 'commonUtils', 'toastr',
     function ($scope, $routeParams, serviceTemplate, serviceCategory, commonUtils, toastr) {
 
@@ -61,7 +25,7 @@ Application.Controllers.controller('ctrlTemplatesDetail',
                     description: '',
                     activity: [],
                     tasks: []
-                }
+                };
             }
             else
                 $scope.template = data;
@@ -189,15 +153,15 @@ Application.Controllers.controller('ctrlTemplatesDetail',
 
         $scope.switchMode = function () {
             $scope.isEdit = !$scope.isEdit;
-        }
+        };
 
         $scope.saveChanges = function () {
             toastr.success('Saved.');
             $scope.isEdit = false;
-        }
+        };
 
         $scope.goBack = function () {
             window.history.back();
-        }
+        };
 
     }]);

@@ -1,8 +1,9 @@
-﻿namespace DemoApplication.Areas.Api.MockData
+﻿namespace DemoApplication.Areas.Api.Models
 {
     public class Principal
     {
-        public string Principal_Cd { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
+        public bool IsTeam { get; set; }
     }
 }
