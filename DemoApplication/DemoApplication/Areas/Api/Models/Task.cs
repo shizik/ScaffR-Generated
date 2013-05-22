@@ -6,12 +6,12 @@ namespace DemoApplication.Areas.Api.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime? CompletedDate { get; set; }
-        public bool IsDone { get; set; }
 
-        public string EmployeeId { get; set; }
-        public int AssigneeId { get; set; }
+        public int Interval { get; set; }
+        public bool IsBefore { get; set; }
+        public int MilestoneId { get; set; }
+        public int MilestoneValue { get; set; }
+
         public int CategoryId { get; set; }
     }
 }

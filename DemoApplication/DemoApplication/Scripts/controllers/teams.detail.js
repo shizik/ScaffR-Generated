@@ -1,70 +1,12 @@
-﻿'use strict';
-
-Application.Controllers.controller('ctrlTeamsIndex',
-                ['$scope', '$location', 'teams', 'toastr',
-        function ($scope, $location, teams, toastr) {
-
-            $scope.$parent.backLinkText = undefined;
-
-            $scope.filter = {
-                status: undefined,
-                assignedTo: undefined,
-                team: undefined,
-                department: undefined
-            };
-
-            $scope.statuses = [
-                {
-                    "status": "open",
-                    "count": 0
-                },
-                {
-                    "status": "closed",
-                    "count": 0
-                },
-                {
-                    "status": "overdue",
-                    "count": 0
-                }
-            ];
-
-            teams.summary().then(function (data) {
-                $scope.teams = data.results;
-
-                _.forEach($scope.teams, function (item) {
-                    $scope.statuses[0].count += item.open;
-                    $scope.statuses[1].count += item.closed;
-                    $scope.statuses[2].count += item.overdue;
-                });
-
-                $scope.$apply();
-            }).fail(function (error) {
-                console.log('error', error);
-                toastr.error('An error occured while pulling the data.');
-            });
-
-            teams.getSummary(function (data) {
-                $scope.departments = data.departments;
-            });
-
-            $scope.goToDetails = function (team) {
-                $location.path('/teams/' + team.id);
-            };
-
-            $scope.containsStatus = function (status) {
-                return _.contains($scope.filter.status, status);
-            };
-        }]);
-
-Application.Controllers.controller('ctrlTeamsDetail',
+﻿Application.Controllers.controller('teams.detail',
             ['$scope', '$routeParams', 'teams', 'commonUtils', 'toastr',
     function ($scope, $routeParams, teams, commonUtils, toastr) {
 
         $scope.isEdit = $routeParams.id == 0;
 
-        $scope.switchMode = function () {
+        $scope.switchMode = function() {
             $scope.isEdit = !$scope.isEdit;
-        }
+        };
 
         $scope.$parent.backLinkText = 'Dashboard';
 
@@ -78,7 +20,7 @@ Application.Controllers.controller('ctrlTeamsDetail',
                     activity: [],
                     members: [],
                     tasks: []
-                }
+                };
             }
             else
                 $scope.team = data;
@@ -157,16 +99,16 @@ Application.Controllers.controller('ctrlTeamsDetail',
         //
         // Global Actions
 
-        $scope.switchMode = function () {
+        $scope.switchMode = function() {
             $scope.isEdit = !$scope.isEdit;
-        }
+        };
 
-        $scope.saveChanges = function () {
+        $scope.saveChanges = function() {
             toastr.success('Saved.');
             $scope.isEdit = false;
-        }
+        };
 
-        $scope.goBack = function () {
+        $scope.goBack = function() {
             window.history.back();
-        }
+        };
     }]);

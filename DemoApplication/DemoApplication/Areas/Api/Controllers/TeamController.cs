@@ -5,13 +5,12 @@
     using System.Linq;
     using System.Web.Http;
     using Infrastructure.Data;
-    using MockData;
     using Models;
 
-    public class TemplateController : ApiController
+    public class TeamController : ApiController
     {
         //
-        // GET ~/api/Template
+        // GET ~/api/Team
 
         public IEnumerable<dynamic> Get()
         {
@@ -22,30 +21,30 @@
         }
 
         //
-        // GET ~/api/Template/Brief
+        // GET ~/api/Team/Brief
 
         [HttpGet]
-        public IEnumerable<TemplateBrief> Brief()
+        public IEnumerable<TeamBrief> Brief()
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<TemplateBrief>("Template_GetBrief", commandType: CommandType.StoredProcedure);
+                return db.Connection.Query<TeamBrief>("Team_GetBrief", commandType: CommandType.StoredProcedure);
             }
         }
         
         //
-        // GET ~/api/Template/Get/1
+        // GET ~/api/Team/Get/1
 
-        public Template Get(string id)
+        public Team Get(string id)
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Template_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Team_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
 
-                var template = result.Read<Template>().Single();
-                template.Tasks = result.Read<Task>().ToList();
+                var team = result.Read<Team>().Single();
+                team.Assignments = result.Read<Assignment>().ToList();
 
-                return template;
+                return team;
             }
         }
     }
