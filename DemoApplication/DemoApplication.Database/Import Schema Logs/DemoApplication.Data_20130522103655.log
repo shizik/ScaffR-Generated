@@ -1,0 +1,10 @@
+5/22/2013 4:36:55 PM	This log contains information about the import schema operation into project 'DemoApplication.Database' on computer 'ROD-LAPTOP' by user 'Rod'.
+5/22/2013 4:36:55 PM	Deserializing model
+5/22/2013 4:36:55 PM	Resolving model
+5/22/2013 4:36:55 PM	Visiting imported model for types
+5/22/2013 4:36:56 PM	Scanning project for duplicate elements
+5/22/2013 4:36:56 PM	Finished duplicate element processing
+5/22/2013 4:36:56 PM	Processing extra files
+5/22/2013 4:36:56 PM	Finished importing Data-tier Application file.
+5/22/2013 4:36:56 PM	A summary of the import was saved to the following location: D:\Repositories\ScaffR-Generated\DemoApplication\DemoApplication.Database\Import Schema Logs\DemoApplication.Data_20130522103655.log
+5/22/2013 4:36:56 PM	Click Finish to continue...

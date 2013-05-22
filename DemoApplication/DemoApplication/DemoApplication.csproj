@@ -387,10 +387,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Onboarding.mdf" />
-    <Content Include="App_Data\Onboarding_log.ldf">
-      <DependentUpon>Onboarding.mdf</DependentUpon>
-    </Content>
     <Content Include="CodeTemplates\Scaffolders\ScaffR.Core\license.txt" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\images\generalFile.png" />
@@ -812,6 +808,7 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\images\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>

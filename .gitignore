@@ -25,3 +25,4 @@ DemoApplication/DemoApplication/Files/*.*
 DemoApplication/DemoApplication/Content/images/*_2013_*.png
 DemoApplication/DemoApplication/App_Data/Onboarding_log.ldf
 DemoApplication/DemoApplication/App_Data/Onboarding_log.ldf
+DemoApplication/DemoApplication.Database/DemoApplication.Database.publish.xml

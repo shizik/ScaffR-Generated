@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DemoApplication.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a085100e-618d-41ba-b8ca-b144abe817ef}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DemoApplication.Database</RootNamespace>
+    <AssemblyName>DemoApplication.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <SqlTargetName>Onboarding</SqlTargetName>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Ignored On Import\" />
+    <Folder Include="Ignored On Import\Onboarding_20130522_04-36-56\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="Onboarding">
+      <DefaultValue>Onboarding</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Assignment.sql" />
+    <Build Include="dbo\Tables\Assignment_Attachment.sql" />
+    <Build Include="dbo\Tables\Assignment_History.sql" />
+    <Build Include="dbo\Tables\Attachment.sql" />
+    <Build Include="dbo\Tables\Department.sql" />
+    <Build Include="dbo\Tables\Department_Template.sql" />
+    <Build Include="dbo\Tables\Milestone.sql" />
+    <Build Include="dbo\Tables\Person_Comment.sql" />
+    <Build Include="dbo\Tables\Person_Hire.sql" />
+    <Build Include="dbo\Tables\Person_List.sql" />
+    <Build Include="dbo\Tables\Person_Main.sql" />
+    <Build Include="dbo\Tables\Person_Team.sql" />
+    <Build Include="dbo\Tables\Person_Template.sql" />
+    <Build Include="dbo\Tables\Principal.sql" />
+    <Build Include="dbo\Tables\Tags.sql" />
+    <Build Include="dbo\Tables\Task.sql" />
+    <Build Include="dbo\Tables\Task_Attachment.sql" />
+    <Build Include="dbo\Tables\Task_Category.sql" />
+    <Build Include="dbo\Tables\Task_Template.sql" />
+    <Build Include="dbo\Tables\Team.sql" />
+    <Build Include="dbo\Tables\Team_Employee.sql" />
+    <Build Include="dbo\Tables\Template.sql" />
+    <Build Include="dbo\Views\Assignments.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_AddDueDate_Exact.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_AddPrincipal.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_CreateFromTask.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_GetByEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Attachment_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_AddComment.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_AddTask.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_ApplyTemplate.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetBrief.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetByCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetMilestoneDate.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetPrincipals.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_Tasks.sql" />
+    <Build Include="dbo\Stored Procedures\List_GetByEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Principal_GetAvailable.sql" />
+    <Build Include="dbo\Stored Procedures\Task_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Task_Category_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Team_AddEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Team_GetBrief.sql" />
+    <Build Include="dbo\Stored Procedures\Team_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Brief.sql" />
+    <Build Include="dbo\Stored Procedures\Template_GetById.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DemoApplication.Database.publish.xml" />
+  </ItemGroup>
+</Project>
