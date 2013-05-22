@@ -19,24 +19,11 @@
             $scope.templates = data;
         });
 
-        //employees.getById2($routeParams.id, function (data) {
-        //    //employees.save(data);
-        //});
-
         serviceEmployee.getById($routeParams.id, function (data) {
             $scope.person = data;
 
+            commonUtils.setCounts($scope.person);
         });
-
-        $scope.tasks = [];
-        //employees.getAssignments($routeParams.id).then(function (data) {
-        //    $scope.tasks = data.results;
-        //    $scope.$apply();
-
-        //}).fail(function (error) {
-        //    console.log('error', error);
-        //    toastr.error('An error occured while pulling the data.');
-        //});
 
         //serviceEmployee.individual(function (data) {
         //    $scope.availableTasks = groupItems(data.availableTasks);
@@ -76,12 +63,12 @@
 
         $scope.assignees = [];
         $scope.periods = [
-            { name: 'Today', func: 'dayOfYear' },
-            { name: 'This Week', func: 'week' },
-            { name: 'This Month', func: 'month' }
+            { name: 'Today', func: 'dayOfYear', count: 0 },
+            { name: 'This Week', func: 'week', count: 0 },
+            { name: 'This Month', func: 'month', count: 0 }
         ];
 
-        $scope.$watch('tasks', function (newValue) {
+        $scope.$watch('person.tasks', function (newValue) {
             if (!newValue || newValue.length == 0) return;
 
             commonUtils.setCounts($scope.person);
@@ -124,10 +111,9 @@
             $scope.newTasks[category].push(
                 {
                     "name": null,
-                    "category": category,
+                    "categoryId": category,
                     "assignee": null,
-                    "due": null,
-                    "status": "open",
+                    "dueDate": null,
                     "isDone": false
                 });
         };

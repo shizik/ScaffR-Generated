@@ -22,8 +22,8 @@ angular.module('application', ['ui.bootstrap',
     .value('breeze', window.breeze)
     .value('toastr', window.toastr)
     .config(
-        ['$routeProvider',
-            function ($routeProvider) {
+        ['$routeProvider', '$httpProvider',
+            function ($routeProvider, $httpProvider) {
                 var rootFolder = '/content/views';
 
                 $routeProvider
@@ -37,31 +37,50 @@ angular.module('application', ['ui.bootstrap',
                     })
                     .when('/templates', {
                         templateUrl: rootFolder + '/templates/index.html',
-                        controller: 'ctrlTemplatesIndex'
+                        controller: 'templates.index'
                     })
                     .when('/templates/:id', {
                         templateUrl: rootFolder + '/templates/detail.html',
-                        controller: 'ctrlTemplatesDetail'
+                        controller: 'templates.detail'
                     })
                     .when('/teams', {
                         templateUrl: rootFolder + '/teams/index.html',
-                        controller: 'ctrlTeamsIndex'
+                        controller: 'teams.index'
                     })
                     .when('/teams/:id', {
                         templateUrl: rootFolder + '/teams/detail.html',
-                        controller: 'ctrlTeamsDetail'
+                        controller: 'teams.detail'
                     })
                     .when('/tasks/:id', {
                         templateUrl: rootFolder + '/tasks/edit.html',
-                        controller: 'ctrlTasksEdit'
+                        controller: 'tasks.edit'
                     })
                     .otherwise({
                         redirectTo: '/employees'
                     });
-            }])
-    .run(function ($rootScope, $http, $location) {
 
-    });
+                $httpProvider.responseInterceptors.push(['$q', 'toastr', function ($q, toastr) {
+                    return function (promise) {
+                        return promise.then(function (response) {
+                            return response;
+                        }, function (response) {
+
+                            switch (response.status) {
+                                case 401:
+                                    window.location = "/";
+                                    break;
+                                case 404:
+                                    toastr.error("Resource was not found.");
+                                    break;
+                                default:
+                                    toastr.error("There was a server error while issuing the request.");
+                            }
+
+                            return $q.reject(response);
+                        });
+                    };
+                }]);
+            }]);
 
 // web.config 
 Application.Constants.constant('$config', {
