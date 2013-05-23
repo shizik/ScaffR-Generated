@@ -222,15 +222,11 @@
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\PrincipalController.cs" />
     <Compile Include="Areas\Api\Controllers\TaskController.cs" />
     <Compile Include="Areas\Api\Controllers\TeamController.cs" />
     <Compile Include="Areas\Api\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
-    <Compile Include="Areas\Api\Controllers\NetchexApiController.cs" />
-    <Compile Include="Areas\Api\Metadata\DataProperty.cs" />
-    <Compile Include="Areas\Api\Metadata\MetadataDefinition.cs" />
-    <Compile Include="Areas\Api\Metadata\MetadataRegistry.cs" />
-    <Compile Include="Areas\Api\Metadata\StructuralType.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
@@ -264,8 +260,6 @@
     <Compile Include="Extensions\ErrorHandlingHelpers\ErrorResult.cs" />
     <Compile Include="Extensions\HtmlHelpers\DisposableHelper.cs" />
     <Compile Include="Extensions\HtmlHelpers\HtmlExtensions.AngularJS.cs" />
-    <Compile Include="Extensions\JsonNet\CustomContractResolver.cs" />
-    <Compile Include="Extensions\JsonNet\EntityNameValueProvider.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
     <Compile Include="Models\Account\ChangePasswordFromResetKeyModel.cs" />
@@ -761,7 +755,7 @@
     <Content Include="Scripts\models\employee.js" />
     <Content Include="Scripts\models\task.js" />
     <Content Include="Scripts\services\service.category.js" />
-    <Content Include="Scripts\services\assignables.js" />
+    <Content Include="Scripts\services\service.principal.js" />
     <Content Include="Scripts\services\datacontext.js" />
     <Content Include="Scripts\services\departments.js" />
     <Content Include="Scripts\services\service.employee.js" />

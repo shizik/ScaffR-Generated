@@ -15,7 +15,7 @@
                 }
 
                 // TODO: This should be centralized
-                var isOverdue = moment(item.due).diff(moment(), 'days') < 0;
+                var isOverdue = moment(item.dueDate).diff(moment(), 'days') < 0;
                 if (isOverdue) entity.overdue++;
                 else entity.open++;
             });

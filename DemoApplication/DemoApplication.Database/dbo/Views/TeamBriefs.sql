@@ -1,9 +1,16 @@
 ﻿CREATE VIEW [dbo].[TeamBriefs]
 	AS SELECT 	
-		t.*,
-		12 as 'EmployeesCount',
-		1 as 'Open',
-		2 as 'Overdue',
-		3 as 'Closed',
-		4 as 'Performance'
-	 FROM [Teams] t
+		Team_Cd as Id,
+		[Name],
+		[Company_Cd] as 'CompanyId',
+		[Description],
+		CreatedDate as 'DateInitiated',
+		LastActionDate as 'DateLastAction',
+		(SELECT COUNT(1) FROM dbo.Team_Employee WHERE Team.Team_Cd = Team_Employee.Team_Cd) as 'EmployeesCount',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 0 AND DueDate <= GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Open',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 0 AND DueDate > GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Overdue',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 1 AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Closed',
+		(SELECT TOP 1 DueDate FROM dbo.Assignment WHERE Team.Team_Cd = Assignment.Principal_Cd ORDER BY DueDate DESC) AS 'LatestDueDate',
+		90 as 'Performance'
+	 FROM dbo.Team
+	 GROUP BY Team_Cd, [Name], [Company_Cd], [Description], CreatedDate, LastActionDate

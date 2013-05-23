@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('teams.index',
-                ['$scope', '$location', 'teams', 'toastr',
-        function ($scope, $location, teams, toastr) {
+                ['$scope', '$location', 'service.team', 'toastr',
+        function ($scope, $location, serviceTeam, toastr) {
 
             $scope.$parent.backLinkText = undefined;
 
@@ -25,25 +25,22 @@
                     "count": 0
                 }
             ];
-
-            teams.summary().then(function (data) {
-                $scope.teams = data.results;
+            serviceTeam.getBrief(function (data) {
+                $scope.teams = data;
 
                 _.forEach($scope.teams, function (item) {
                     $scope.statuses[0].count += item.open;
                     $scope.statuses[1].count += item.closed;
                     $scope.statuses[2].count += item.overdue;
+
+                    item.total = item.open + item.overdue;
                 });
 
-                $scope.$apply();
-            }).fail(function (error) {
-                console.log('error', error);
-                toastr.error('An error occured while pulling the data.');
             });
 
-            teams.getSummary(function (data) {
-                $scope.departments = data.departments;
-            });
+            //teams.getSummary(function (data) {
+            //    $scope.departments = data.departments;
+            //});
 
             $scope.goToDetails = function (team) {
                 $location.path('/teams/' + team.id);

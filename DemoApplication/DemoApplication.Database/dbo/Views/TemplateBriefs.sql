@@ -2,5 +2,5 @@
 	AS SELECT 
 		t.*,
 		d.Name as 'DepartmentName',
-		(SELECT COUNT(1) FROM dbo.Task_Template WHERE TemplateId = TemplateId) AS 'TasksCount'
+		(SELECT COUNT(1) FROM dbo.Task_Template WHERE Task_Template.TemplateId = t.Id) AS 'TasksCount'
 		FROM [Templates] t LEFT OUTER JOIN [Departments] d on t.DepartmentId = d.DepartmentId

@@ -43,7 +43,7 @@
             };
 
             $scope.isNew = function () {
-                return $scope.task.name == null || $scope.task.assigneeId == null || $scope.task.dueDate == null;
+                return $scope.task.name == null || $scope.task.principalId == null || $scope.task.dueDate == null;
             };
 
             $scope.newCreated = $scope.isNew();
@@ -54,10 +54,9 @@
             };
 
             $scope.$watch('task', function (value) {
-                debugger;
-                serviceTask.update(value, function () {
-                    toastr.success("Saved");
-                });
+                //serviceTask.update(value, function () {
+                //    toastr.success("Saved");
+                //});
             });
 
             //

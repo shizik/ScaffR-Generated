@@ -49,7 +49,7 @@
                     </ul>
                     <ul class="unstyled">
                         <task task="task"
-                            available="availableTasks.group[category]"
+                            available="availableTasks | taskInCategoryFilter:category.id"
                             assignables="assignables"
                             save-fn="saveTask(task)"
                             delete-fn="deleteTask(task,isNew)"

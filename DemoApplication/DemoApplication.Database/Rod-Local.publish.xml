@@ -8,6 +8,12 @@
     <BlockWhenDriftDetected>False</BlockWhenDriftDetected>
     <RegisterDataTierApplication>False</RegisterDataTierApplication>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <ScriptDatabaseOptions>True</ScriptDatabaseOptions>
+    <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
+    <AllowDropBlockingAssemblies>True</AllowDropBlockingAssemblies>
+    <DropObjectsNotInSource>False</DropObjectsNotInSource>
+    <CreateNewDatabase>True</CreateNewDatabase>
+    <BackupDatabaseBeforeChanges>False</BackupDatabaseBeforeChanges>
   </PropertyGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Onboarding">

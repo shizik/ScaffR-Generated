@@ -7,7 +7,6 @@ SELECT
 	[DueDate],
 	[CompletedDate],
 	[Employee_Cd] as 'EmployeeId',
-	[Principal_Type] as 'PrincipalType',
 	[Principal_Cd] as 'PrincipalId',
 	[CategoryId],
 	Case [Status] 

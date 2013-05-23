@@ -17,19 +17,18 @@
         {
             using (var db = new DapperDatabase())
             {
-                var result= db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
-                return result;
+                return db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
             }
         }
 
         //
-        // GET ~/api/Employee/Get/1
+        // GET ~/api/Employee/1
 
         public Employee Get(string id)
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Employee_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Employee_GetById", new { EmployeeId = id }, commandType: CommandType.StoredProcedure);
 
                 var employee = result.Read<Employee>().Single();
                 //TODO: These fields are not in the database

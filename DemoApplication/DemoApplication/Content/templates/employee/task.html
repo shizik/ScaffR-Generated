@@ -38,9 +38,9 @@
         <span data-ng-switch="" data-on="task.isDone">
             <span data-ng-switch-when="true">{{task.assignee}}</span>
             <span class="dropdown" data-ng-switch-default="">
-                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.assignee">
+                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.principalId">
                     <span data-ng-switch-when="null" class="muted">Assign This Task</span>
-                    <span data-ng-switch-default="">{{task.assignee}}</span>
+                    <span data-ng-switch-default="">{{task.principalId}}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li data-complex-menu="">

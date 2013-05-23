@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('employees.detail',
-            ['$scope', '$routeParams', 'service.employee', 'service.template', 'service.category', 'commonUtils',
-    function ($scope, $routeParams, serviceEmployee, serviceTemplate, serviceCategory, commonUtils) {
+            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.template', 'service.principal', 'service.category', 'commonUtils',
+    function ($scope, $routeParams, serviceEmployee, serviceTask, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
 
         $scope.$parent.backLinkText = 'Dashboard';
 
@@ -17,6 +17,14 @@
 
         serviceTemplate.getAll(function (data) {
             $scope.templates = data;
+        });
+
+        serviceTask.getAvailable(function (data) {
+            $scope.availableTasks = data; //groupItems(data.availableTasks);
+        });
+
+        servicePrincipal.getAll(function (data) {
+            $scope.assignables = data; //groupItems(data.assignables, 'department');
         });
 
         serviceEmployee.getById($routeParams.id, function (data) {
