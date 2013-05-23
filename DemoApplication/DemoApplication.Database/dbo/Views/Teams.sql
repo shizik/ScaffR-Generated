@@ -6,8 +6,7 @@
 	[Company_Cd] as 'CompanyId',
 	[Description],
 	CreatedDate as 'DateInitiated',
-	LastActionDate as 'DateLastAction',
-	[LatestDueDate]
+	LastActionDate as 'DateLastAction'
 
 	 FROM [Team]
 	 

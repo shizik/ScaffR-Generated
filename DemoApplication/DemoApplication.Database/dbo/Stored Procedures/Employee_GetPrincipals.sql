@@ -12,6 +12,6 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    select p.* from Principals p inner join Assignments a on p.PrincipalId = a.PrincipalId
+    select p.* from Principals p inner join Assignments a on p.Id = a.PrincipalId
 
 END

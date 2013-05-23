@@ -6,6 +6,10 @@
             return moment(date)[func](milestone.interval.toLowerCase(), milestone.value);
         },
 
+        getAvailable: function (callback) {
+            $http.get('/api/task/available').success(callback);
+        },
+
         save: function (entity, callback) {
             $http.put('/api/assignment', entity).success(callback);
         },

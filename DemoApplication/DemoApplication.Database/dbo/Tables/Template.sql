@@ -4,10 +4,11 @@
     [Name]       VARCHAR (50) NOT NULL,
     [Category]   VARCHAR (30) NOT NULL,
     [Description] VARCHAR(500) NULL, 
-    [DepartmentId] INT NULL, 
-    [CreatedBy] CHAR(3) NULL, 
+    [DepartmentId] CHAR(3) NULL, 
+    [CreatedBy] CHAR(30) NULL, 
     [CreatedDate] DATETIME NULL, 
     [ModifiedDate] DATETIME NULL, 
-    CONSTRAINT [PK_Template] PRIMARY KEY CLUSTERED ([TemplateId] ASC)
+    CONSTRAINT [PK_Template] PRIMARY KEY CLUSTERED ([TemplateId] ASC), 
+    CONSTRAINT [FK_Template_Principal] FOREIGN KEY ([CreatedBy]) REFERENCES dbo.Principal([Principal_Cd])
 );
 

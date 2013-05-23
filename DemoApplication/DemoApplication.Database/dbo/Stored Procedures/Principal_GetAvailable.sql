@@ -4,8 +4,6 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE [dbo].[Principal_GetAvailable] 
-	-- Add the parameters for the stored procedure here
-	@AssignmentId int
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from

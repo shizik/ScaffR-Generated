@@ -11,7 +11,6 @@
 #region
 
 using DemoApplication.Application.Startup;
-using DemoApplication.Extensions.JsonNet;
 
 #endregion
 
@@ -37,9 +36,6 @@ namespace DemoApplication.Application.Startup
 
             GlobalConfiguration.Configuration.Formatters.Remove(
                                 GlobalConfiguration.Configuration.Formatters.XmlFormatter);
-
-            //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.TypeNameHandling =
-            //                    Newtonsoft.Json.TypeNameHandling.All;
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.
                                 SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

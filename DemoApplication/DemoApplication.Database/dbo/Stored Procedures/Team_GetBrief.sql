@@ -5,7 +5,7 @@
 -- =============================================
 CREATE PROCEDURE Team_GetBrief 
 	-- Add the parameters for the stored procedure here
-	@CompanyCode char(3)
+	--@CompanyCode char(3)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -16,6 +16,6 @@ BEGIN
 	SELECT 
 		*
 	FROM [dbo].[TeamBriefs] 
-	where CompanyId = @CompanyCode	
+	--where CompanyId = @CompanyCode	
 
 END

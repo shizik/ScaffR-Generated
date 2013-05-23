@@ -130,10 +130,14 @@
     <Build Include="dbo\Views\Milestones.sql" />
     <Build Include="dbo\Views\Teams.sql" />
     <Build Include="dbo\Views\TeamBriefs.sql" />
+    <Build Include="dbo\Stored Procedures\Template_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Task_GetAvailable.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DemoApplication.Database.publish.xml" />
     <None Include="Rod-Local.publish.xml" />
     <None Include="Snapshots\DemoApplication.Database_20130522_04-56-40.dacpac" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DemoApplication.Database.refactorlog" />
   </ItemGroup>
 </Project>

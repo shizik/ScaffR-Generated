@@ -5,7 +5,7 @@
 -- =============================================
 CREATE PROCEDURE Template_GetBrief 
 	
-	@Company_Cd char(3)
+	--@Company_Cd char(3)
 
 AS
 BEGIN
@@ -17,6 +17,6 @@ BEGIN
 	SELECT 
 		*
 	FROM TemplateBriefs 
-	Where CompanyId = @Company_Cd
+	--Where CompanyId = @Company_Cd
 
 END

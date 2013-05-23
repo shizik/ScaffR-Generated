@@ -5,7 +5,7 @@
         },
 
         getById: function (id, callback) {
-            $http.get('/api/employee/' + id).success(callback);
+            $http.get('/api/employee/?id=' + id).success(callback);
         }
     };
 }]);

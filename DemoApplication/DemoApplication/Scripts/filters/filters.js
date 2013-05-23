@@ -76,7 +76,7 @@ Application.Filters.filter('taskFilter', function () {
     // Helpers
 
     function checkStatus(task, status) {
-        var isOverdue = moment(task.due).diff(moment(), 'days') < 0;
+        var isOverdue = moment(task.dueDate).diff(moment(), 'days') < 0;
 
         switch (status) {
             case 'closed':

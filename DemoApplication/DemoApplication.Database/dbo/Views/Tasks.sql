@@ -9,4 +9,4 @@
 		[MilestoneValue],
 		[CategoryId],
 		[TemplateId]
-	 FROM [Task]
+	 FROM [Task] 

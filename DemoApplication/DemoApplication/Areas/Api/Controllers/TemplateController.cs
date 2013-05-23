@@ -33,7 +33,7 @@
         }
         
         //
-        // GET ~/api/Template/Get/1
+        // GET ~/api/Template/1
 
         public Template Get(string id)
         {

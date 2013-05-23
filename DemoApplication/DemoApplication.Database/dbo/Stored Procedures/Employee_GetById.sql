@@ -1,6 +1,4 @@
-﻿
-
--- =============================================
+﻿-- =============================================
 -- Author:		Marko Ilievski
 -- Create date: 5/21/2013
 -- Description:	Returns single employee with associated assignments

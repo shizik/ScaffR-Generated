@@ -4,8 +4,8 @@
     [Company_Cd] NCHAR (10)   NULL,
     [Description] VARCHAR(500) NULL, 
     [CreatedDate] DATETIME NULL, 
-    [LatestDueDate] DATETIME NULL, 
     [LastActionDate] DATETIME NULL, 
-    CONSTRAINT [PK_Team] PRIMARY KEY CLUSTERED ([Team_Cd] ASC)
+    CONSTRAINT [PK_Team] PRIMARY KEY CLUSTERED ([Team_Cd] ASC), 
+    CONSTRAINT [FK_Team_Principal] FOREIGN KEY ([Team_Cd]) REFERENCES dbo.Principal([Principal_Cd])
 );
 

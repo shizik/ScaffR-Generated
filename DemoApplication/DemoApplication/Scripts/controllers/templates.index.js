@@ -10,17 +10,13 @@
                 department: undefined
             };
 
-            templates.summary().then(function (data) {
-                $scope.templates = data.results;
-                $scope.$apply();
-            }).fail(function (error) {
-                console.log('error', error);
-                toastr.error('An error occured while pulling the data.');
+            templates.getBrief(function (data) {
+                $scope.templates = data;
             });
 
-            templates.getSummary(function (data) {
-                $scope.departments = data.departments;
-            });
+            //templates.getSummary(function (data) {
+            //    $scope.departments = data.departments;
+            //});
 
             $scope.goToDetails = function (template) {
                 $location.path('/templates/' + template.id);

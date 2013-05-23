@@ -15,6 +15,7 @@
     CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED ([TaskId] ASC),
     CONSTRAINT [FK_Task_Milestone] FOREIGN KEY ([MilestoneId]) REFERENCES [dbo].[Milestone] ([MilestoneId]),
     CONSTRAINT [FK_Task_Task] FOREIGN KEY ([ParentTaskId]) REFERENCES [dbo].[Task] ([TaskId]),
-    CONSTRAINT [FK_Task_Task_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Task_Category] ([CategoryId])
+    CONSTRAINT [FK_Task_Task_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Task_Category] ([CategoryId]), 
+    CONSTRAINT [FK_Task_Template] FOREIGN KEY ([TemplateId]) REFERENCES dbo.Template([TemplateId])
 );
 
