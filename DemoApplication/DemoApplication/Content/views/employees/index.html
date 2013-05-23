@@ -44,11 +44,11 @@
                         <radio-filter list="teams" filter="filter.team" />
                     </li>
                 </ul>-->
-                <ul class="collapsible" data-title="Department">
+                <!--<ul class="collapsible" data-title="Department">
                     <li>
                         <radio-filter list="departments" filter="filter.department" />
                     </li>
-                </ul>
+                </ul>-->
             </li>
         </ul>
     </div>
@@ -62,25 +62,25 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Manager</th>
+                <!--<th>Manager</th>-->
                 <th>Open</th>
                 <th>Overdue</th>
                 <th>Closed</th>
                 <th>Tasks</th>
-                <th>Date Initiated</th>
-                <th>Last Action</th>
+                <!--<th>Date Initiated</th>
+                <th>Last Action</th>-->
             </tr>
         </thead>
         <tbody>
             <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
                 <td>{{item.firstName}} {{item.lastName}}</td>
-                <td>{{item.manager}}</td>
+                <!--<td>{{item.manager}}</td>-->
                 <td>{{item.open}}</td>
                 <td>{{item.overdue}}</td>
                 <td>{{item.closed}}</td>
                 <td>{{item.total}}</td>
-                <td>{{item.dateInitiated | date:'MM/dd/yyyy'}}</td>
-                <td>{{item.dateLastAction | date:'MM/dd/yyyy'}}</td>
+                <!--<td>{{item.dateInitiated | date:'MM/dd/yyyy'}}</td>
+                <td>{{item.dateLastAction | date:'MM/dd/yyyy'}}</td>-->
             </tr>
         </tbody>
     </table>

@@ -12,7 +12,7 @@
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <AllowDropBlockingAssemblies>True</AllowDropBlockingAssemblies>
     <DropObjectsNotInSource>False</DropObjectsNotInSource>
-    <CreateNewDatabase>True</CreateNewDatabase>
+    <CreateNewDatabase>False</CreateNewDatabase>
     <BackupDatabaseBeforeChanges>False</BackupDatabaseBeforeChanges>
   </PropertyGroup>
   <ItemGroup>

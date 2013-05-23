@@ -136,6 +136,7 @@
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />
     <None Include="Snapshots\DemoApplication.Database_20130522_04-56-40.dacpac" />
+    <None Include="PrincipalCleanup.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DemoApplication.Database.refactorlog" />
