@@ -13,6 +13,7 @@
     [Order]          INT           CONSTRAINT [DF_Assignment_Order] DEFAULT ((0)) NOT NULL,
     [Reocurring]     BIT           NOT NULL,
     [AssignmentMode] TINYINT       NULL,
+    [CategoryId] INT NOT NULL, 
     CONSTRAINT [PK_Assignment] PRIMARY KEY CLUSTERED ([AssignmentId] ASC),
     CONSTRAINT [FK_Assignment_Person_Main] FOREIGN KEY ([Employee_Cd]) REFERENCES [dbo].[Person_Main] ([Employee_Cd]),
     CONSTRAINT [FK_Assignment_Principal] FOREIGN KEY ([Principal_Cd]) REFERENCES [dbo].[Principal] ([Principal_Cd]),

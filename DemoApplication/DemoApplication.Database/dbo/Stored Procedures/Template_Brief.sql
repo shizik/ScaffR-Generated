@@ -20,7 +20,7 @@ BEGIN
 		Name, 
 		Category,
 		(SELECT COUNT(1) FROM dbo.Task_Template WHERE TemplateId = TemplateId) AS 'Tasks'
-	FROM Template 
+	FROM Templates 
 	Where Company_Cd = @Company_Cd
 
 END

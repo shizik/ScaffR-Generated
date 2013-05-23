@@ -64,6 +64,7 @@
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="Ignored On Import\" />
     <Folder Include="Ignored On Import\Onboarding_20130522_04-36-56\" />
+    <Folder Include="Snapshots" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Onboarding">
@@ -120,8 +121,11 @@
     <Build Include="dbo\Stored Procedures\Team_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Template_Brief.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetById.sql" />
+    <Build Include="dbo\Views\Principals.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DemoApplication.Database.publish.xml" />
+    <None Include="Rod-Local.publish.xml" />
+    <None Include="Snapshots\DemoApplication.Database_20130522_04-56-40.dacpac" />
   </ItemGroup>
 </Project>

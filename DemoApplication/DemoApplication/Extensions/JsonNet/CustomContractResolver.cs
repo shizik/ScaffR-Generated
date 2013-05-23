@@ -1,11 +1,9 @@
-﻿using System;
-using DemoApplication.Areas.Api.Metadata;
-using DemoApplication.Areas.Api.MockData;
-using DemoApplication.Core.Model;
-using Newtonsoft.Json.Serialization;
-
-namespace DemoApplication.Extensions.JsonNet
+﻿namespace DemoApplication.Extensions.JsonNet
 {
+    using System;
+    using Areas.Api.Metadata;
+    using Newtonsoft.Json.Serialization;
+
     public class CustomContractResolver : CamelCasePropertyNamesContractResolver
     {
         protected override JsonObjectContract CreateObjectContract(Type objectType)

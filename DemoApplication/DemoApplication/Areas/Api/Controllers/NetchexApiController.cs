@@ -7,7 +7,6 @@ namespace DemoApplication.Areas.Api.Controllers
     using Breeze.WebApi;
     using Infrastructure.Http;
     using Metadata;
-    using MockData;
     using Newtonsoft.Json.Linq;
 
     public partial class NetchexApiController : ApiController

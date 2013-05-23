@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DemoApplication.Areas.Api.MockData
+namespace DemoApplication.Areas.Api.Models
 {
     public class TemplateBrief
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DemoApplication.Areas.Api.MockData;
 using DemoApplication.Areas.Api.Models;
 
 namespace DemoApplication.Areas.Api.Metadata

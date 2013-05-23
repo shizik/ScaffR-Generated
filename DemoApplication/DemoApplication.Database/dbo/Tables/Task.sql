@@ -10,6 +10,8 @@
     [ReminderInfo]   VARCHAR (50)  NULL,
     [AssignmentMode] TINYINT       NULL,
     [CategoryId]     INT           NOT NULL,
+    [Interval] INT NULL, 
+    [IsBefore] BIT NULL, 
     CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED ([TaskId] ASC),
     CONSTRAINT [FK_Task_Milestone] FOREIGN KEY ([MilestoneId]) REFERENCES [dbo].[Milestone] ([MilestoneId]),
     CONSTRAINT [FK_Task_Task] FOREIGN KEY ([ParentTaskId]) REFERENCES [dbo].[Task] ([TaskId]),
