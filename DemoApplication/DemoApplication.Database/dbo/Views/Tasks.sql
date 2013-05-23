@@ -7,5 +7,6 @@
 		[IsBefore],
 		[MilestoneId],
 		[MilestoneValue],
-		[CategoryId]
+		[CategoryId],
+		[TemplateId]
 	 FROM [Task]

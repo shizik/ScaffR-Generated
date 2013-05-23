@@ -5,12 +5,14 @@
 -- =============================================
 CREATE PROCEDURE [dbo].[Template_GetById] 
 	-- Add the parameters for the stored procedure here
-	@templateId int
+	@TemplateId int
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    SELECT * FROM Template where TemplateId = @templateId
+    SELECT * FROM Templates where Id = @TemplateId
+
+	Select * from Tasks where TemplateId = @TemplateId
 END
