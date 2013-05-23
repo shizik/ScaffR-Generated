@@ -15,7 +15,7 @@
             $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
 
             $scope.editMode = function () {
-                $location.path('/tasks/1'/* + $scope.task.id*/);
+                $location.path('/tasks/' + $scope.task.id);
             };
 
             $scope.assignment = { selectedOption: undefined };
@@ -28,18 +28,24 @@
 
             $scope.isTeam = false;
             $scope.resolveByAll = null;
-            $scope.assign = function (assignee, isTeam) {
+            $scope.assign = function (principal, isTeam) {
                 $scope.resolveByAll = null;
 
-                if (assignee && $scope.task.assignee == assignee) {
-                    $scope.task.assignee = null;
+                if (principal && $scope.task.principalId == principal.id) {
+                    $scope.task.principalId = null;
                     $scope.isTeam = false;
+                    $scope.principal = null;
                     return;
                 }
 
                 $scope.isTeam = isTeam;
-                $scope.task.assignee = assignee ||
-                    ($scope.$parent.person.firstName + ' ' + $scope.$parent.person.lastName);
+                $scope.principal = principal ||
+                    {
+                        id: $scope.$parent.person.id,
+                        name: $scope.$parent.person.firstName + ' ' + $scope.$parent.person.lastName
+                    };
+
+                $scope.task.principalId = $scope.principal.id;
             };
 
             $scope.isNew = function () {
@@ -48,16 +54,8 @@
 
             $scope.newCreated = $scope.isNew();
 
-
-            $scope.preventClosing = function ($event) {
-                $event.stopPropagation();
-            };
-
-            $scope.$watch('task', function (value) {
-                //serviceTask.update(value, function () {
-                //    toastr.success("Saved");
-                //});
-            });
+            if ($scope.task && $scope.task.principalId != null)
+                $scope.principal = _.find($scope.assignables, function (item) { return item.id == $scope.task.principalId; });
 
             //
             // Button actions

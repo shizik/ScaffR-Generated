@@ -6,10 +6,10 @@
 		[Description],
 		CreatedDate as 'DateInitiated',
 		LastActionDate as 'DateLastAction',
-		(SELECT COUNT(1) FROM dbo.Team_Employee WHERE Team.Team_Cd = Team_Employee.Team_Cd) as 'EmployeesCount',
-	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 0 AND DueDate <= GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Open',
-	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 0 AND DueDate > GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Overdue',
-	    (SELECT COUNT(1) FROM dbo.Assignment WHERE IsDone = 1 AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Closed',
+		(SELECT COUNT(1) FROM dbo.Person_Team WHERE Team.Team_Cd = Person_Team.Team_Cd) as 'EmployeesCount',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] = 0 AND DueDate <= GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Open',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] = 0 AND DueDate > GETDATE() AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Overdue',
+	    (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] = 1 AND Team.Team_Cd = Assignment.Principal_Cd) AS 'Closed',
 		(SELECT TOP 1 DueDate FROM dbo.Assignment WHERE Team.Team_Cd = Assignment.Principal_Cd ORDER BY DueDate DESC) AS 'LatestDueDate',
 		90 as 'Performance'
 	 FROM dbo.Team

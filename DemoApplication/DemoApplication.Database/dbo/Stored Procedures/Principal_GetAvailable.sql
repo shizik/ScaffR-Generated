@@ -14,6 +14,6 @@ BEGIN
 
 	select @Company_Cd = Company_Cd from Person_Main p inner join Assignment a on p.Employee_Cd = a.Employee_Cd
 
-    select * from Principals where CompanyId = @Company_Cd
-
+    select * from Principals --where CompanyId = @Company_Cd
+	ORDER BY Name
 END
