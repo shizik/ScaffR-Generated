@@ -15,4 +15,8 @@ BEGIN
     SELECT * FROM Templates where Id = @TemplateId
 
 	Select * from Tasks where TemplateId = @TemplateId
+
+	Select e.* from Employees e inner join Person_Template pt on e.Id = pt.Employee_Cd
+	where pt.TemplateId = @TemplateId
+
 END
