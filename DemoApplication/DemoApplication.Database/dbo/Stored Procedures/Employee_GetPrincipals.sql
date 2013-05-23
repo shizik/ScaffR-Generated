@@ -12,9 +12,6 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    select Employee_Cd as 'Principal_Cd', Last_Name_Txt + ',' + First_Name_Txt as 'Name', 0 as 'IsTeam' from Person_Main where Company_Cd = @Company_Cd
+    select p.* from Principals p inner join Assignments a on p.PrincipalId = a.PrincipalId
 
-	union
-
-	Select Team_Cd as 'Principal_Cd', Name, 1 as 'IsTeam' from Team where Company_Cd = @Company_Cd
 END
