@@ -119,9 +119,14 @@
     <Build Include="dbo\Stored Procedures\Team_AddEmployee.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetBrief.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetById.sql" />
-    <Build Include="dbo\Stored Procedures\Template_Brief.sql" />
+    <Build Include="dbo\Stored Procedures\Template_GetBrief.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetById.sql" />
     <Build Include="dbo\Views\Principals.sql" />
+    <Build Include="dbo\Views\Templates.sql" />
+    <Build Include="dbo\Views\Tasks.sql" />
+    <Build Include="dbo\Views\TemplateBriefs.sql" />
+    <Build Include="dbo\Views\Departments.sql" />
+    <Build Include="dbo\Views\Employees.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DemoApplication.Database.publish.xml" />

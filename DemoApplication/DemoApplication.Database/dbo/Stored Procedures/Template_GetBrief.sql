@@ -3,7 +3,7 @@
 -- Create date: 5/20/2013
 -- Description:	
 -- =============================================
-CREATE PROCEDURE Template_Brief 
+CREATE PROCEDURE Template_GetBrief 
 	
 	@Company_Cd char(3)
 
@@ -15,12 +15,8 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT 
-		TemplateId, 
-		Company_Cd, 
-		Name, 
-		Category,
-		(SELECT COUNT(1) FROM dbo.Task_Template WHERE TemplateId = TemplateId) AS 'Tasks'
-	FROM Templates 
-	Where Company_Cd = @Company_Cd
+		*
+	FROM TemplateBriefs 
+	Where CompanyId = @Company_Cd
 
 END

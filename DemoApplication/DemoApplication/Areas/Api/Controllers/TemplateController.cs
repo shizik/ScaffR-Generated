@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Web.Http;
     using Infrastructure.Data;
-    using MockData;
     using Models;
 
     public class TemplateController : ApiController
