@@ -40,7 +40,7 @@
             <span class="dropdown" data-ng-switch-default="">
                 <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.principalId">
                     <span data-ng-switch-when="null" class="muted">Assign This Task</span>
-                    <span data-ng-switch-default="">{{task.principalId}}</span>
+                    <span data-ng-switch-default="">{{principal.name}}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li data-complex-menu="">
@@ -52,22 +52,22 @@
                         </div>
                     </li>
                     <li>
-                        <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in assignables.categories">
+                        <ul class="collapsible" data-title="{{team.name}}" data-ng-repeat="team in assignables | conditional:'isTeam':true">
                             <li>
                                 <label class="checkbox">
                                     <input type="checkbox"
-                                        data-ng-checked="isTeam && task.assignee==category"
-                                        data-ng-click="assign(category,true)" />
+                                        data-ng-checked="principal.isTeam && principal.id==team.id"
+                                        data-ng-click="assign(team,true)" />
                                     (Assign to Team)
                                 </label>
                             </li>
-                            <li data-ng-repeat="assignable in assignables.group[category] | searchFilter:'name':query ">
+                            <li data-ng-repeat="member in assignables | conditional:'teamId':team.id | searchFilter:'name':query ">
                                 <label class="checkbox">
                                     <input type="checkbox"
-                                        data-ng-click="assign(assignable.name,false)"
-                                        data-ng-checked="(isTeam && task.assignee==category) || task.assignee==assignable.name"
-                                        data-ng-disabled="isTeam && task.assignee==category" />
-                                    {{ assignable.name }}
+                                        data-ng-click="assign(member,false)"
+                                        data-ng-checked="(principal.isTeam && principal.id==team.id) || principal.id==member.id"
+                                        data-ng-disabled="principal.isTeam && principal.id==team.id" />
+                                    {{ member.name }}
                                 </label>
                             </li>
                         </ul>

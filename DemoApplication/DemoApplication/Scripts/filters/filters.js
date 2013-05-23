@@ -109,6 +109,15 @@ Application.Filters.filter('searchFilter', function () {
     };
 });
 
+Application.Filters.filter('conditional', function () {
+    return function (items, propName, value) {
+        if (!value) return items;
+
+        return _.filter(items, function (item) {
+            return item[propName] == value;
+        });
+    };
+});
 
 // Skip filter used for paging, there is already limitTo in angular
 Application.Filters.filter('skip', function () {

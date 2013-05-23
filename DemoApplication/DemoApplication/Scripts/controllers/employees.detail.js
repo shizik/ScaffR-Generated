@@ -20,11 +20,11 @@
         });
 
         serviceTask.getAvailable(function (data) {
-            $scope.availableTasks = data; //groupItems(data.availableTasks);
+            $scope.availableTasks = data;
         });
 
         servicePrincipal.getAll(function (data) {
-            $scope.assignables = data; //groupItems(data.assignables, 'department');
+            $scope.assignables = data;
         });
 
         serviceEmployee.getById($routeParams.id, function (data) {
