@@ -127,6 +127,9 @@
     <Build Include="dbo\Views\TemplateBriefs.sql" />
     <Build Include="dbo\Views\Departments.sql" />
     <Build Include="dbo\Views\Employees.sql" />
+    <Build Include="dbo\Views\Milestones.sql" />
+    <Build Include="dbo\Views\Teams.sql" />
+    <Build Include="dbo\Views\TeamBriefs.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DemoApplication.Database.publish.xml" />
