@@ -42,7 +42,8 @@
                 var result = db.Connection.QueryMultiple("Team_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
 
                 var team = result.Read<Team>().Single();
-                team.Assignments = result.Read<Assignment>().ToList();
+                team.Members = result.Read<Team.Member>().ToList();
+                team.Tasks = result.Read<Team.Assignment>().ToList();
 
                 return team;
             }

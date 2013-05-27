@@ -222,6 +222,7 @@
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\MilestoneController.cs" />
     <Compile Include="Areas\Api\Controllers\PrincipalController.cs" />
     <Compile Include="Areas\Api\Controllers\TaskController.cs" />
     <Compile Include="Areas\Api\Controllers\TeamController.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Content\templates\dialog\message.html" />
     <Content Include="Content\templates\directives\dueDateLogic.html" />
     <Content Include="Content\templates\directives\layoutChange.html" />
+    <Content Include="Content\templates\directives\assignPrincipal.html" />
     <Content Include="Content\templates\directives\templateTask.html" />
     <Content Include="Content\templates\employee\checkboxFilter.html" />
     <Content Include="Content\templates\employee\due.html" />
@@ -478,6 +480,7 @@
     <Content Include="Scripts\controllers\teams.detail.js" />
     <Content Include="Scripts\controllers\main.js" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
+    <Content Include="Scripts\directives\assignPrincipal.js" />
     <Content Include="Scripts\directives\dueDateLogic.js" />
     <Content Include="Scripts\directives\templateTask.js" />
     <Content Include="Scripts\directives\task.js" />
@@ -760,7 +763,7 @@
     <Content Include="Scripts\services\departments.js" />
     <Content Include="Scripts\services\service.employee.js" />
     <Content Include="Scripts\services\list.js" />
-    <Content Include="Scripts\services\milestones.js" />
+    <Content Include="Scripts\services\service.milestone.js" />
     <Content Include="Scripts\services\service.team.js" />
     <Content Include="Scripts\services\groups.js" />
     <Content Include="Scripts\services\service.task.js" />

@@ -35,7 +35,7 @@
         //
         // GET ~/api/Template/1
 
-        public Template Get(string id)
+        public Template Get(int id)
         {
             using (var db = new DapperDatabase())
             {
