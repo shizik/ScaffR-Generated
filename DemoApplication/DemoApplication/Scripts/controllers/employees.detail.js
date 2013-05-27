@@ -33,33 +33,6 @@
             commonUtils.setCounts($scope.person);
         });
 
-        //serviceEmployee.individual(function (data) {
-        //    $scope.availableTasks = groupItems(data.availableTasks);
-        //    $scope.assignables = groupItems(data.assignables, 'department');
-        //    $scope.templates = data.templates;
-        //});
-
-        function groupItems(taskList, group) {
-            group = group || 'category';
-
-            var result = {
-                categories: [],
-                group: {}
-            };
-
-            _.forEach(taskList, function (item) {
-
-                if (!result.group[item[group]]) {
-                    result.group[item[group]] = [];
-                    result.categories.push(item[group]);
-                }
-
-                result.group[item[group]].push(item);
-            });
-
-            return result;
-        }
-
         //
         // Filtering
 
@@ -90,19 +63,20 @@
 
                 // Handle period counts
                 _.forEach($scope.periods, function (period) {
-                    if (moment()[period.func]() != moment(item.due)[period.func]()) return;
+                    if (moment()[period.func]() != moment(item.dueDate)[period.func]()) return;
 
                     period.count += 1;
                 });
 
                 // Handle assignees counts
-                var assignee = _.findWhere(result, { name: item.assignee });
+                var assignee = _.findWhere(result, { id: item.principalId });
                 if (assignee) {
                     assignee.count += 1;
                     return;
                 }
 
-                result.push({ name: item.assignee, count: 1 });
+                var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
+                result.push({ id: principal.id, name: principal.name, count: 1 });
             });
 
             $scope.assignees = result;

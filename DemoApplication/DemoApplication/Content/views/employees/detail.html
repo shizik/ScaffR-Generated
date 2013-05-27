@@ -39,7 +39,7 @@
         <div class="row-fluid" data-ng-switch-default="">
             <div class="span8">
                 <div data-ng-repeat="category in categories">
-                    <h4>{{ category.name }} <span class="text-info">({{ (tasks | taskInCategoryFilter:category.id).length }})</span></h4>
+                    <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
                     <ul class="unstyled">
                         <task task="task"
                             assignables="assignables"
@@ -76,7 +76,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li data-complex-menu>
-                                <checkbox-filter list="assignees" filter="filter.assignees" value="name" />
+                                <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
                             </li>
                         </ul>
                     </div>

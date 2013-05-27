@@ -1,28 +1,4 @@
-﻿Application.Filters.filter('customSort', function () {
-    return function (items, strategy) {
-
-        // implement correct sorting here
-
-        var arr = [];
-
-        switch (strategy) {
-            case 'az':
-                // sort alphabetically ascending
-
-                arr = _.sortBy(items, 'name');
-
-                break;
-            case 'za':
-                arr = _.sortBy(items, 'name').reverse();
-
-                break;
-        }
-        return arr;
-
-    };
-});
-
-Application.Filters.filter('employeeFilter', function () {
+﻿Application.Filters.filter('employeeFilter', function () {
     return function (items, filter) {
         return _.filter(items, function (item) {
 
@@ -63,10 +39,10 @@ Application.Filters.filter('taskFilter', function () {
             if (filter.status && !checkStatus(item, filter.status)) return false;
 
             if (filter.assignees.length > 0 &&
-                !_.contains(filter.assignees, item.assignee)) return false;
+                !_.contains(filter.assignees, item.principalId)) return false;
 
             if (filter.period &&
-                moment()[filter.period]() != moment(item.due)[filter.period]()) return false;
+                moment()[filter.period]() != moment(item.dueDate)[filter.period]()) return false;
 
             return true;
         });
