@@ -12,8 +12,6 @@
         },
         replace: true,
         controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
-            $scope.taskMode = $scope.task.name == null ? 'new' : 'display';
-
             $scope.editMode = function () {
                 $location.path('/tasks/' + $scope.task.id);
             };
@@ -23,39 +21,36 @@
                 if (!newValue.selectedOption) return;
 
                 $scope.task.name = newValue.selectedOption;
-                $scope.taskMode = 'display';
             }, true);
 
             $scope.isTeam = false;
             $scope.resolveByAll = null;
-            $scope.assign = function (principal, isTeam) {
+            $scope.assign = function (principalId, isTeam) {
                 $scope.resolveByAll = null;
 
-                if (principal && $scope.task.principalId == principal.id) {
+                // Handle deselecting an item
+                if (principalId && $scope.task.principalId == principalId) {
                     $scope.task.principalId = null;
                     $scope.isTeam = false;
-                    $scope.principal = null;
                     return;
                 }
 
                 $scope.isTeam = isTeam;
-                $scope.principal = principal ||
-                    {
-                        id: $scope.$parent.person.id,
-                        name: $scope.$parent.person.firstName + ' ' + $scope.$parent.person.lastName
-                    };
-
-                $scope.task.principalId = $scope.principal.id;
+                $scope.task.principalId = principalId || $scope.$parent.person.id;
             };
+
+            $scope.$watch('task.principalId', function (value) {
+                if (value == null)
+                    $scope.principal = null;
+                else
+                    $scope.principal = _.find($scope.assignables, function (item) { return item.id == value; });
+            });
 
             $scope.isNew = function () {
                 return $scope.task.name == null || $scope.task.principalId == null || $scope.task.dueDate == null;
             };
 
             $scope.newCreated = $scope.isNew();
-
-            if ($scope.task && $scope.task.principalId != null)
-                $scope.principal = _.find($scope.assignables, function (item) { return item.id == $scope.task.principalId; });
 
             //
             // Button actions

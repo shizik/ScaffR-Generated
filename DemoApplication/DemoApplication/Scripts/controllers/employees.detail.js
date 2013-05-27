@@ -120,19 +120,19 @@
                 {
                     "name": null,
                     "categoryId": category,
-                    "assignee": null,
+                    "principalId": null,
                     "dueDate": null,
                     "isDone": false
                 });
         };
 
         $scope.saveTask = function (task) {
-            $scope.template.tasks.push(task);
+            $scope.person.tasks.push(task);
             $scope.deleteTask(task, true);
         };
 
         $scope.deleteTask = function (task, isNew) {
-            var list = isNew ? $scope.newTasks[task.categoryId] : $scope.template.tasks;
+            var list = isNew ? $scope.newTasks[task.categoryId] : $scope.person.tasks;
             commonUtils.removeFromList(task, list);
             $scope.isAddingTask = false;
         };
