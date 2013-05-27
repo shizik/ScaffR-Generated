@@ -13,7 +13,7 @@
         replace: true,
         controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
             $scope.editMode = function () {
-                $location.path('/tasks/' + $scope.task.id);
+                $location.path('/tasks/edit/' + $scope.task.id);
             };
 
             $scope.assignment = { selectedOption: undefined };

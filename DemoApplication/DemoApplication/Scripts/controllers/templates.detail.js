@@ -146,9 +146,17 @@
         };
 
         $scope.deleteTask = function (task, isNew) {
-            var list = isNew ? $scope.newTasks[task.categoryId] : $scope.template.tasks;
-            commonUtils.removeFromList(task, list);
-            $scope.isAddingTask = false;
+            if (isNew) {
+                commonUtils.removeFromList(task, $scope.newTasks[task.categoryId]);
+                $scope.isAddingTask = false;
+            } else {
+                serviceTask.delete(task.id, function () {
+                    commonUtils.removeFromList(task, $scope.template.tasks);
+                    $scope.isAddingTask = false;
+
+                    toastr.success('Deleted.');
+                });
+            }
         };
 
         //
