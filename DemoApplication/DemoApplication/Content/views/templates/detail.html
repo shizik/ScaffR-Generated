@@ -34,10 +34,29 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a class="btn dropdown-toggle" data-toggle="dropdown">Add Value <i class="icon-plus"></i></a>
+                <a class="btn dropdown-toggle" data-toggle="dropdown">Add Department <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
                     <li data-ng-repeat="department in departments">
                         <a href="" data-ng-click="setTemplateAssignable(department)">{{ department.name }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="inline">
+            <li data-ng-repeat="assignable in template.positions">
+                <div class="btn-group">
+                    <button class="btn btn-success" title="Click to apply the template">
+                        <i class="icon-ok" data-ng-show="assignable.isApplied"></i>
+                        {{assignable}}
+                    </button>
+                    <button class="btn" data-ng-click="removePosition(assignable, $index)"><i class="icon-remove"></i></button>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a class="btn dropdown-toggle" data-toggle="dropdown">Add Position <i class="icon-plus"></i></a>
+                <ul class="dropdown-menu">
+                    <li data-ng-repeat="position in positions">
+                        <a href="" data-ng-click="setPosition(position)">{{ position }}</a>
                     </li>
                 </ul>
             </li>

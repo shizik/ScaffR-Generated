@@ -9,7 +9,7 @@
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
 
-            if (!$routeParams.id) {
+            if ($routeParams.id == 0) {
                 $scope.template = {
                     name: '',
                     description: '',
@@ -19,9 +19,12 @@
             } else {
                 serviceTemplate.getById($routeParams.id, function (data) {
                     $scope.template = data;
+                    $scope.template.positions = [];
                 });
             }
         });
+
+        $scope.positions = ['IT Manager', 'Sales Representative', 'Sales Manager', 'Web Developer'];
 
         serviceDepartment.getAll(function (data) {
             $scope.departments = data;
@@ -170,7 +173,6 @@
         //
         // Template Assignables
 
-        $scope.templateAppliesTo = [];
         $scope.setTemplateAssignable = function (assignable) {
             serviceTemplate.addDepartment($scope.template.id, assignable.id, function () {
                 $scope.template.departments.push(assignable);
@@ -183,9 +185,17 @@
             });
         };
 
+        $scope.setPosition = function (position) {
+            $scope.template.positions.push(position);
+        };
+
+        $scope.removePosition = function (position, index) {
+            $scope.template.positions.splice(index, 1);
+        };
+
         $scope.applyTemplate = function (department) {
             serviceTemplate.applyToDepartment($scope.template.id, department.id, function () {
-                toastr.success('Applied Successfully')
+                toastr.success('Applied Successfully');
                 department.isApplied = true;
             });
         };
