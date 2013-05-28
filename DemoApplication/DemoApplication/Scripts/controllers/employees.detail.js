@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('employees.detail',
-            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.template', 'service.principal', 'service.category', 'commonUtils',
-    function ($scope, $routeParams, serviceEmployee, serviceTask, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
+            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.assignment', 'service.template', 'service.principal', 'service.category', 'commonUtils',
+    function ($scope, $routeParams, serviceEmployee, serviceTask, serviceAssignment, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
 
         $scope.$parent.backLinkText = 'Dashboard';
 
@@ -108,9 +108,17 @@
         };
 
         $scope.deleteTask = function (task, isNew) {
-            var list = isNew ? $scope.newTasks[task.categoryId] : $scope.person.tasks;
-            commonUtils.removeFromList(task, list);
-            $scope.isAddingTask = false;
+            if (isNew) {
+                commonUtils.removeFromList(task, $scope.newTasks[task.categoryId]);
+                $scope.isAddingTask = false;
+            } else {
+                serviceAssignment.delete(task.id, function () {
+                    commonUtils.removeFromList(task, $scope.person.tasks);
+                    $scope.isAddingTask = false;
+
+                    toastr.success('Deleted.');
+                });
+            }
         };
 
         //

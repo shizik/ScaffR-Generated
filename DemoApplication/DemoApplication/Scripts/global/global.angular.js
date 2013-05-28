@@ -51,7 +51,7 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/teams/detail.html',
                         controller: 'teams.detail'
                     })
-                    .when('/tasks/edit/:id', {
+                    .when('/tasks/edit/', {
                         templateUrl: rootFolder + '/tasks/edit.html',
                         controller: 'tasks.edit'
                     })

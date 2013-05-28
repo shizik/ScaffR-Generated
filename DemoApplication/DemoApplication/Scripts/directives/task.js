@@ -12,9 +12,7 @@
         },
         replace: true,
         controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
-            $scope.editMode = function () {
-                $location.path('/tasks/edit/' + $scope.task.id);
-            };
+            $scope.employeeId = $scope.$parent.person.id;
 
             $scope.assignment = { selectedOption: undefined };
             $scope.$watch('assignment', function (newValue) {

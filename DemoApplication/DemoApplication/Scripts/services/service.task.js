@@ -1,5 +1,21 @@
 ﻿Application.Services.factory('service.task', ['$http', function ($http) {
     return {
+        getEmpty: function () {
+            return {
+                id: 0,
+                name: null,
+                description: null,
+                parentTaskId: null,
+                milestoneId: null,
+                milestoneValue: null,
+                interval: null,
+                isBefore: null,
+                templateId: null,
+                categoryId: null,
+                principalId: null
+            };
+        },
+
         getDueDateFromMilestone: function (date, milestone) {
             var func = milestone.isBefore ? 'subtract' : 'add';
 

@@ -1,7 +1,10 @@
 ﻿Application.Controllers.controller('tasks.edit',
-                ['$scope', '$routeParams', 'service.task', 'service.category', 'service.milestone', 'toastr',
-        function ($scope, $routeParams, serviceTask, serviceCategory, serviceMilestone, toastr) {
+                ['$scope', '$routeParams', 'service.task', 'service.assignment', 'service.category', 'service.milestone', 'toastr',
+        function ($scope, $routeParams, serviceTask, serviceAssignment, serviceCategory, serviceMilestone, toastr) {
             $scope.$parent.backLinkText = 'Task List';
+
+            $scope.isNew = $routeParams.templateId != undefined || $routeParams.employeeId != undefined;
+            $scope.isFromEmployee = $routeParams.assignmentId != undefined || $routeParams.employeeId != undefined;
 
             serviceCategory.getAll(function (data) {
                 $scope.categories = data;
@@ -11,29 +14,60 @@
                 $scope.milestones = data;
             });
 
-            serviceTask.getById($routeParams.id, function (data) {
-                $scope.task = data;
-            });
-
-            //$scope.task = {
-            //    name: null,
-            //    description: null,
-            //    categoryId: null,
-            //    assignee: null,
-            //    interval: null,
-            //    milestoneValue: null,
-            //    isBefore: null,
-            //    milestoneId: null
-            //};
+            if ($scope.isNew) {
+                $scope.task = serviceTask.getEmpty();
+            } else {
+                if ($scope.isFromEmployee)
+                    serviceAssignment.getById($routeParams.assignmentId, function (data) {
+                        $scope.task = data;
+                    });
+                else
+                    serviceTask.getById($routeParams.taskId, function (data) {
+                        $scope.task = data;
+                    });
+            }
 
             $scope.isDueDateChosen = function () {
                 if (!$scope.task) return false;
 
                 return $scope.task.interval != null &&
-                       $scope.task.isBefore != null &&
-                       $scope.task.milestoneValue != null &&
-                       $scope.task.milestoneId != null;
+                    $scope.task.isBefore != null &&
+                    $scope.task.milestoneValue != null &&
+                    $scope.task.milestoneId != null;
             };
+
+            $scope.save = function () {
+                if ($scope.isNew) {
+                    if ($scope.isFromEmployee)
+                        serviceAssignment.addFromTask($scope.task, function () {
+                            window.history.back();
+                            toastr.success('Saved.');
+                        });
+                    else
+                        serviceTask.add($scope.task, function () {
+                            window.history.back();
+                            toastr.success('Saved.');
+                        });
+                } else {
+                    if ($scope.isFromEmployee)
+                        serviceAssignment.update($scope.task, function () {
+                            window.history.back();
+                            toastr.success('Saved.');
+                        });
+                    else
+                        serviceTask.update($scope.task, function () {
+                            window.history.back();
+                            toastr.success('Saved.');
+                        });
+                }
+            };
+
+            $scope.cancel = function () {
+                window.history.back();
+            };
+
+            //
+            // Attachments / Actions
 
             $scope.attachments = [];
             $scope.actions = [];
@@ -91,16 +125,6 @@
             $scope.createAction = function (name) {
                 $scope.actions.push({ title: name });
                 clearAction();
-            };
-
-            $scope.save = function () {
-                serviceTask.update($scope.task, function (id) {
-                    toastr.success('Saved.');
-                });
-            };
-
-            $scope.cancel = function () {
-                window.history.back();
             };
 
         }]);

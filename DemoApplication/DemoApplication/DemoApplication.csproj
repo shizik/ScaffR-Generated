@@ -755,6 +755,7 @@
     <Content Include="Scripts\models\templateBrief.js" />
     <Content Include="Scripts\models\employee.js" />
     <Content Include="Scripts\models\task.js" />
+    <Content Include="Scripts\services\service.assignment.js" />
     <Content Include="Scripts\services\service.category.js" />
     <Content Include="Scripts\services\service.principal.js" />
     <Content Include="Scripts\services\datacontext.js" />

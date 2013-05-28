@@ -20,7 +20,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a data-ng-click="editMode()">Create a Custom Task</a>
+                        <a href="#/tasks/edit/?templateId={{templateId}}">Create a Custom Task</a>
                     </li>
                 </ul>
             </span>
@@ -95,7 +95,7 @@
         </span>
         <span class="edit-controls" data-ng-hide="newCreated">
             <button class="btn btn-mini" data-ng-click="deleteTask()"><i class="icon-trash"></i></button>
-            <button class="btn btn-mini" data-ng-click="editMode()">Edit</button>
+            <a href="#/tasks/edit/?taskId={{task.id}}" class="btn btn-mini">Edit</a>
         </span>
     </div>
     <div data-ng-show="newCreated">

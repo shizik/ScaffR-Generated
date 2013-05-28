@@ -5,17 +5,17 @@
 -- =============================================
 CREATE PROCEDURE Task_Add 
 	-- Add the parameters for the stored procedure here
+	@Id int OUTPUT,
 	@Name varchar(50),
 	@Description varchar(500),
 	@ParentTaskId int,
 	@MilestoneId int,
 	@MilestoneValue int,
+	@Interval int,
+	@IsBefore bit,
 	@TemplateId int,
-	@Recurring bit,
-	@ReminderInfo varchar(50),
-	@AssignmentMode tinyint,
 	@CategoryId int,
-	@TaskID int output 
+	@PrincipalId CHAR(30)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -24,10 +24,9 @@ BEGIN
 
     -- Insert statements for procedure here
 	insert into Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, TemplateId, Recurring, ReminderInfo, AssignmentMode, CategoryId)
-	values (@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @TemplateId, @Recurring, @ReminderInfo, @AssignmentMode, @CategoryId)
+		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, TemplateId, CategoryId)
+	values 
+		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @TemplateId, @CategoryId)
 
-	select @TaskId = SCOPE_IDENTITY()
-
-
+	SELECT @Id = SCOPE_IDENTITY()
 END

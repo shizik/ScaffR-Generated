@@ -12,6 +12,8 @@
         public int MilestoneValue { get; set; }
         public string PrincipalId { get; set; }
 
+        public int? ParentTaskId { get; set; }
+        public int? TemplateId { get; set; }
         public int CategoryId { get; set; }
     }
 }

@@ -136,6 +136,8 @@
     <Build Include="dbo\Stored Procedures\Task_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Task_Update.sql" />
     <Build Include="dbo\Stored Procedures\Task_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

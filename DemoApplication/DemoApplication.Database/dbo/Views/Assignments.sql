@@ -1,16 +1,16 @@
-﻿
-CREATE VIEW dbo.Assignments AS
+﻿CREATE VIEW dbo.Assignments AS
 SELECT
 	[AssignmentId] as 'Id',
 	[Name],
 	[Description], 
 	[DueDate],
 	[CompletedDate],
-	[Employee_Cd] as 'EmployeeId',
+	Case [Status] when 1 then 1 else 0 END AS 'IsDone',
+	
 	[Principal_Cd] as 'PrincipalId',
-	[CategoryId],
-	Case [Status] 
-		when 1 then 1 
-		else 0
-	END AS 'IsDone' 
+	0 AS 'PrincipalIsTeam',
+	1 AS 'ResolvedByOne',
+
+	[Employee_Cd] as 'EmployeeId',
+	[CategoryId]
 FROM [dbo].[Assignment]
