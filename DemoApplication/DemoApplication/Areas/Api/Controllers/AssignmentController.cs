@@ -5,6 +5,7 @@
     using Infrastructure.Data;
     using Models;
     using System.Linq;
+    using Newtonsoft.Json.Linq;
 
     public class AssignmentController : ApiController
     {
@@ -25,6 +26,15 @@
             using (var db = new DapperDatabase())
             {
                 return (int)db.Connection.Query<decimal>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
+        [HttpPut]
+        public int AddFromTask(AssignmentSave entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return (int)db.Connection.Query<decimal>("Assignment_AddFromTask", entity, commandType: CommandType.StoredProcedure).First();
             }
         }
 

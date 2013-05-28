@@ -13,6 +13,8 @@ CREATE PROCEDURE Template_AddTask
 	@Interval int,
 	@IsBefore bit,
 	@TemplateId int,
+	@PrincipalIsTeam bit,
+	@ResolvedByOne bit,
 	@CategoryId int,
 	@PrincipalId CHAR(30)
 AS

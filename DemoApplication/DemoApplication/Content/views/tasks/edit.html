@@ -28,8 +28,7 @@
                     </button>
                     <ul class="dropdown-menu" data-due-date-logic="" data-task="task" data-milestones="milestones"></ul>
                 </div>
-                <span class="badge badge-success" data-ng-show="isDueDateChosen()">
-                    {{task.milestoneValue}} 
+                <span class="badge badge-success" data-ng-show="isDueDateChosen()">{{task.milestoneValue}} 
                     {{intervals[task.interval]}} 
                     {{task.isBefore && 'Before' || 'After'}} 
                     {{milestone}}
@@ -47,6 +46,46 @@
                 Set Due Date
             </a>
             <span class="badge badge-success">{{task.dueDate | date:'dd MMMM yyyy'}}</span>
+        </span>
+    </div>
+    <div class="span3">
+        <label>Principal:</label>
+        <span class="dropdown">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.principalId">
+                <span data-ng-switch-when="null">Assign This Task</span>
+                <span data-ng-switch-default="">{{principal.name}}</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li data-complex-menu="">
+                    <div>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-search"></i></span>
+                            <input type="text" placeholder="Filter..." data-ng-model="query" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <ul class="collapsible" data-title="{{team.name}}" data-ng-repeat="team in assignables | conditional:'isTeam':true">
+                        <li>
+                            <label class="checkbox">
+                                <input type="checkbox"
+                                    data-ng-checked="principal.isTeam && principal.id==team.id"
+                                    data-ng-click="assign(team.id,true)" />
+                                (Assign to Team)
+                            </label>
+                        </li>
+                        <li data-ng-repeat="member in assignables | conditional:'teamId':team.id | searchFilter:'name':query ">
+                            <label class="checkbox">
+                                <input type="checkbox"
+                                    data-ng-click="assign(member.id,false)"
+                                    data-ng-checked="(principal.isTeam && principal.id==team.id) || principal.id==member.id"
+                                    data-ng-disabled="principal.isTeam && principal.id==team.id" />
+                                {{ member.name }}
+                            </label>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </span>
     </div>
 </div>

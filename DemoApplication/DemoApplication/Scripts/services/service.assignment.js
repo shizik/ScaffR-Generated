@@ -25,6 +25,10 @@
             $http.put('/api/assignment', entity).success(callback);
         },
 
+        addFromTask: function (entity, callback) {
+            $http.put('/api/assignment/addFromTask', entity).success(callback);
+        },
+
         update: function (entity, callback) {
             $http.post('/api/assignment', entity).success(callback);
         },

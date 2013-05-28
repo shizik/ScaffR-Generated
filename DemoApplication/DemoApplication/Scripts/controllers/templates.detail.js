@@ -8,6 +8,19 @@
 
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
+            
+            if (!$routeParams.id) {
+                $scope.template = {
+                    name: '',
+                    description: '',
+                    activity: [],
+                    tasks: []
+                };
+            } else {
+                serviceTemplate.getById($routeParams.id, function (data) {
+                    $scope.template = data;
+                });
+            }
         });
 
         serviceCategory.getAll(function (data) {
@@ -28,19 +41,6 @@
         serviceTask.getAvailable(function (data) {
             $scope.availableTasks = data;
         });
-
-        if (!$routeParams.id) {
-            $scope.template = {
-                name: '',
-                description: '',
-                activity: [],
-                tasks: []
-            };
-        } else {
-            serviceTemplate.getById($routeParams.id, function (data) {
-                $scope.template = data;
-            });
-        }
 
         //templates.individual(function (data) {
 
@@ -115,6 +115,8 @@
                 if (!$scope.assignables) return;
 
                 var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
+                if (!principal) return;
+
                 result.push({ id: principal.id, name: principal.name, count: 1 });
             });
 

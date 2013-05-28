@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[Employee_AddTask]
 	@IsBefore bit,
 	@TemplateId int,
 	@CategoryId int,
+	@DueDate datetime,
 	@PrincipalId CHAR(30),
 	@EmployeeId CHAR(30)
 AS
@@ -23,12 +24,10 @@ BEGIN
 	values 
 		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @CategoryId)
 
-	DECLARE @DueDate datetime = GETDATE()
-
 	insert into Assignment 
-		([Name], [Description], TaskId, DueDate, [Status], Principal_Cd, Employee_Cd, CategoryId)
+		([Name], [Description], TaskId, DueDate, [Status], Principal_Cd, Employee_Cd, CategoryId, ResolvedByOne, Reocurring)
 	values 
-		(@Name, @Description, SCOPE_IDENTITY(), @DueDate, 0, @PrincipalId, @EmployeeId, @CategoryId)
+		(@Name, @Description, SCOPE_IDENTITY(), @DueDate, 0, @PrincipalId, @EmployeeId, @CategoryId, 0, 0)
 
-	SELECT @Id = SCOPE_IDENTITY()
+	SELECT SCOPE_IDENTITY()
 END

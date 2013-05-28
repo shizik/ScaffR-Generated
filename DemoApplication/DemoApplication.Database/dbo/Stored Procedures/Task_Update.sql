@@ -12,6 +12,8 @@ CREATE PROCEDURE Task_Update
 	@Interval int,
 	@IsBefore bit,
 	@PrincipalId CHAR(30),
+	@PrincipalIsTeam bit,
+	@ResolvedByOne bit,
 	@ParentTaskId int,
 	@TemplateId int,
 	@CategoryId int
