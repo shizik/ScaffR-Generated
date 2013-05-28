@@ -222,6 +222,7 @@
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Api\Controllers\MilestoneController.cs" />
     <Compile Include="Areas\Api\Controllers\PrincipalController.cs" />
     <Compile Include="Areas\Api\Controllers\TaskController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
+    <Compile Include="Areas\Api\Models\Department.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
     <Compile Include="Areas\Api\Models\Task.cs" />
     <Compile Include="Areas\Api\Models\Template.cs" />
@@ -756,6 +758,7 @@
     <Content Include="Scripts\models\templateBrief.js" />
     <Content Include="Scripts\models\employee.js" />
     <Content Include="Scripts\models\task.js" />
+    <Content Include="Scripts\services\service.department.js" />
     <Content Include="Scripts\services\service.assignment.js" />
     <Content Include="Scripts\services\service.category.js" />
     <Content Include="Scripts\services\service.principal.js" />

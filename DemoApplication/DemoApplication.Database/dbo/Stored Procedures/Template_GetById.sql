@@ -14,6 +14,10 @@ BEGIN
 
     SELECT * FROM Templates WHERE Id = @Id
 
+	SELECT Departments.*
+	FROM Departments INNER JOIN Department_Template ON Departments.Id = Department_Template.Department_Cd
+	WHERE Department_Template.TemplateId = @Id
+
 	SELECT Tasks.*
 	FROM Tasks
 	WHERE Tasks.TemplateId = @Id

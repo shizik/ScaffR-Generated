@@ -8,6 +8,7 @@ namespace DemoApplication.Areas.Api.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public List<Department> Departments { get; set; }
         public List<Task> Tasks { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('templates.detail',
-            ['$scope', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
-    function ($scope, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceCategory, serviceMilestone, commonUtils, toastr) {
+            ['$scope', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+    function ($scope, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, serviceCategory, serviceMilestone, commonUtils, toastr) {
 
         $scope.isEdit = $routeParams.id == 0;
 
@@ -8,7 +8,7 @@
 
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
-            
+
             if (!$routeParams.id) {
                 $scope.template = {
                     name: '',
@@ -21,6 +21,10 @@
                     $scope.template = data;
                 });
             }
+        });
+
+        serviceDepartment.getAll(function (data) {
+            $scope.departments = data;
         });
 
         serviceCategory.getAll(function (data) {
@@ -168,11 +172,15 @@
 
         $scope.templateAppliesTo = [];
         $scope.setTemplateAssignable = function (assignable) {
-            $scope.templateAppliesTo.push(assignable);
+            serviceTemplate.addDepartment($scope.template.id, assignable.id, function () {
+                $scope.template.departments.push(assignable);
+            });
         };
 
-        $scope.removeTemplateAssignable = function (index) {
-            $scope.templateAppliesTo.splice(index, 1);
+        $scope.removeTemplateAssignable = function (assignable, index) {
+            serviceTemplate.deleteDepartment($scope.template.id, assignable.id, function () {
+                $scope.template.departments.splice(index, 1);
+            });
         };
 
         //

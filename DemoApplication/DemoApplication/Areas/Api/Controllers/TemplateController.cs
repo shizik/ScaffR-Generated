@@ -33,6 +33,7 @@
                 var result = db.Connection.QueryMultiple("Template_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
 
                 var template = result.Read<Template>().Single();
+                template.Departments = result.Read<Department>().ToList();
                 template.Tasks = result.Read<Task>().ToList();
 
                 return template;
@@ -57,6 +58,28 @@
                                                          new { Id = id, EmployeeId = employeeId },
                                                          commandType: CommandType.StoredProcedure)
                                          .First();
+            }
+        }
+
+        [HttpGet]
+        public void AddDepartment(int id, string departmentId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_AddDepartment",
+                                      new { Id = id, DepartmentId = departmentId },
+                                      commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpGet]
+        public void DeleteDepartment(int id, string departmentId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_DeleteDepartment",
+                                      new { Id = id, DepartmentId = departmentId },
+                                      commandType: CommandType.StoredProcedure);
             }
         }
     }

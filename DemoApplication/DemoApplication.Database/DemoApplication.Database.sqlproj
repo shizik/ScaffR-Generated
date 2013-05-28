@@ -143,6 +143,9 @@
     <Build Include="dbo\Stored Procedures\Employee_GetMilestoneValue.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Add.sql" />
     <Build Include="dbo\Stored Procedures\Template_Apply.sql" />
+    <Build Include="dbo\Stored Procedures\Department_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Template_DeleteDepartment.sql" />
+    <Build Include="dbo\Stored Procedures\Template_AddDepartment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />
