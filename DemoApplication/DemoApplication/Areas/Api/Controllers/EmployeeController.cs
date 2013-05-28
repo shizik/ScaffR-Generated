@@ -1,5 +1,6 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -9,9 +10,6 @@
 
     public class EmployeeController : ApiController
     {
-        //
-        // GET ~/api/Employee/Brief
-
         [HttpGet]
         public IEnumerable<EmployeeBrief> Brief()
         {
@@ -20,9 +18,6 @@
                 return db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
             }
         }
-
-        //
-        // GET ~/api/Employee/1
 
         public Employee Get(string id)
         {
@@ -38,6 +33,18 @@
                 employee.Tasks = result.Read<Assignment>().ToList();
 
                 return employee;
+            }
+        }
+
+        [HttpGet]
+        public string GetMilestoneValue(string id, int milestoneId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<DateTime>("Employee_GetMilestoneValue",
+                                                     new { Id = id, MilestoneId = milestoneId },
+                                                     commandType: CommandType.StoredProcedure)
+                                    .First().ToShortDateString();
             }
         }
     }

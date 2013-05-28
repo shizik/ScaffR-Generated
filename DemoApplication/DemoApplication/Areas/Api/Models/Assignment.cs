@@ -16,6 +16,7 @@ namespace DemoApplication.Areas.Api.Models
         public bool ResolvedByOne { get; set; }
 
         public string EmployeeId { get; set; }
+        public int TaskId { get; set; }
         public int CategoryId { get; set; }
     }
 }

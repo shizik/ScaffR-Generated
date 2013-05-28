@@ -11,15 +11,21 @@
             detailsFn: '&'
         },
         replace: true,
-        controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
+        controller: ['$scope', '$location', 'service.task', 'service.assignment', 'toastr', function ($scope, $location, serviceTask, serviceAssignment, toastr) {
             $scope.employeeId = $scope.$parent.person.id;
 
-            $scope.assignment = { selectedOption: undefined };
-            $scope.$watch('assignment', function (newValue) {
-                if (!newValue.selectedOption) return;
-
-                $scope.task.name = newValue.selectedOption;
-            }, true);
+            $scope.setTask = function (task) {
+                $scope.task.name = task.name;
+                $scope.task.description = task.description;
+                $scope.task.taskId = task.id;
+                $scope.task.principalId = task.principalId;
+                $scope.task.resolveByOne = task.resolveByOne;
+                $scope.task.employeeId = $scope.employeeId;
+                $scope.isTeam = task.principalIsTeam;
+                serviceTask.getDueDateFromMilestone($scope.employeeId, task, function (data) {
+                    $scope.task.dueDate = data;
+                });
+            };
 
             $scope.isTeam = false;
             $scope.resolveByAll = null;
@@ -53,11 +59,16 @@
             //
             // Button actions
 
+            //$scope.$watch('task.dueDate', function (value) {
+            //    serviceAssignment.update($scope.task, function () {
+            //        toastr.success("Changes Saved");
+            //    });
+            //});
+
             $scope.saveTask = function () {
                 // TODO: Add logic for saving
                 $scope.newCreated = false;
                 $scope.saveFn({ task: $scope.task });
-                toastr.success("Saved");
             };
 
             $scope.details = function () {

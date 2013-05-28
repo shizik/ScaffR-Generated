@@ -138,6 +138,10 @@
     <Build Include="dbo\Stored Procedures\Task_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Update.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_AddTask.sql" />
+    <Build Include="dbo\Tables\Person_Milestone.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetMilestoneValue.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_Add.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

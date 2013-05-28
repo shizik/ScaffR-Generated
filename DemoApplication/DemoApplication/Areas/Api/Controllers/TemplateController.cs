@@ -9,9 +9,6 @@
 
     public class TemplateController : ApiController
     {
-        //
-        // GET ~/api/Template
-
         public IEnumerable<dynamic> Get()
         {
             using (var db = new DapperDatabase())
@@ -19,9 +16,6 @@
                 return db.Connection.Query("Template_GetAll", commandType: CommandType.StoredProcedure);
             }
         }
-
-        //
-        // GET ~/api/Template/Brief
 
         [HttpGet]
         public IEnumerable<TemplateBrief> Brief()
@@ -31,9 +25,6 @@
                 return db.Connection.Query<TemplateBrief>("Template_GetBrief", commandType: CommandType.StoredProcedure);
             }
         }
-        
-        //
-        // GET ~/api/Template/1
 
         public Template Get(int id)
         {
@@ -45,6 +36,15 @@
                 template.Tasks = result.Read<Task>().ToList();
 
                 return template;
+            }
+        }
+
+        [HttpPost]
+        public void AddTask(Task entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_AddTask", entity, commandType: CommandType.StoredProcedure);
             }
         }
     }

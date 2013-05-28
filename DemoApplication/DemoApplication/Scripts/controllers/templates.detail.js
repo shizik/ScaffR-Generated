@@ -6,6 +6,10 @@
 
         $scope.$parent.backLinkText = 'Dashboard';
 
+        servicePrincipal.getAll(function (data) {
+            $scope.assignables = data;
+        });
+
         serviceCategory.getAll(function (data) {
             $scope.categories = data;
 
@@ -21,15 +25,11 @@
             $scope.milestones = data;
         });
 
-        servicePrincipal.getAll(function (data) {
-            $scope.assignables = data;
-        });
-
         serviceTask.getAvailable(function (data) {
             $scope.availableTasks = data;
         });
 
-        if ($routeParams.id == 0) {
+        if (!$routeParams.id) {
             $scope.template = {
                 name: '',
                 description: '',
@@ -111,6 +111,8 @@
                     assignee.count += 1;
                     return;
                 }
+
+                if (!$scope.assignables) return;
 
                 var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
                 result.push({ id: principal.id, name: principal.name, count: 1 });

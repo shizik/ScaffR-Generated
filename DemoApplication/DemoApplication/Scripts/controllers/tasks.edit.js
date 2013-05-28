@@ -13,9 +13,18 @@
             serviceMilestone.getAll(function (data) {
                 $scope.milestones = data;
             });
+            
+            $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
+            $scope.$watch('task.milestoneId', function (value) {
+                if (!value) return;
+
+                $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
+            }, true);
 
             if ($scope.isNew) {
                 $scope.task = serviceTask.getEmpty();
+                if ($routeParams.templateId)
+                    $scope.task.templateId = $routeParams.templateId;
             } else {
                 if ($scope.isFromEmployee)
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
@@ -44,7 +53,7 @@
                             toastr.success('Saved.');
                         });
                     else
-                        serviceTask.add($scope.task, function () {
+                        serviceTask.addInTemplate($scope.task, function () {
                             window.history.back();
                             toastr.success('Saved.');
                         });

@@ -17,7 +17,7 @@
             <option value="">-- Choose Category --</option>
         </select>
     </div>
-    <div class="span3" data-ng-switch="" data-on="!isNew && isFromEmployee">
+    <div class="span4" data-ng-switch="" data-on="!isNew && isFromEmployee">
         <div data-ng-switch-when="false">
             <label>Due Date Logic:</label>
             <div>
@@ -28,10 +28,11 @@
                     </button>
                     <ul class="dropdown-menu" data-due-date-logic="" data-task="task" data-milestones="milestones"></ul>
                 </div>
-                <span class="badge badge-success" data-ng-show="isDueDateChosen()">{{task.value}} 
-                {{task.interval}} 
-                {{task.isBefore && 'Before' || 'After'}} 
-                {{task.milestone}}
+                <span class="badge badge-success" data-ng-show="isDueDateChosen()">
+                    {{task.milestoneValue}} 
+                    {{intervals[task.interval]}} 
+                    {{task.isBefore && 'Before' || 'After'}} 
+                    {{milestone}}
                 </span>
             </div>
             <label class="checkbox">

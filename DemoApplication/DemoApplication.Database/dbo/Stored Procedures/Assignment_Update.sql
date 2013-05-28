@@ -14,6 +14,7 @@ CREATE PROCEDURE Assignment_Update
 	@PrincipalIsTeam bit,
 	@ResolvedByOne bit,
 	@EmployeeId CHAR(30),
+	@TaskId int,
 	@CategoryId int
 AS
 BEGIN
@@ -23,8 +24,10 @@ BEGIN
 		  ,DueDate = @DueDate
 		  ,CompletedDate = @CompletedDate
 		  ,[Status] = @IsDone
+		  ,ResolvedByOne = 0
 		  ,Principal_Cd = @PrincipalId
 		  ,Employee_Cd = @EmployeeId
+		  ,TaskId = @TaskId
 		  ,CategoryId = @CategoryId
 	 WHERE AssignmentId = @Id
 END

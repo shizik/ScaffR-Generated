@@ -24,7 +24,7 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Assignment_Add", entity, commandType: CommandType.StoredProcedure);
+                return (int)db.Connection.Query<decimal>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).First();
             }
         }
 

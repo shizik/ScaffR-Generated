@@ -1,6 +1,6 @@
 ﻿Application.Services.factory('service.assignment', ['$http', function ($http) {
     return {
-        getEmpty: function () {
+        getEmpty: function (categoryId) {
             return {
                 id: 0,
                 name: null,
@@ -12,7 +12,8 @@
                 principalIsTeam: null,
                 resolvedByOne: null,
                 employeeId: null,
-                categoryId: null
+                taskId: null,
+                categoryId: categoryId
             };
         },
 

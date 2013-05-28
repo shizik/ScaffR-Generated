@@ -16,10 +16,13 @@
             };
         },
 
-        getDueDateFromMilestone: function (date, milestone) {
-            var func = milestone.isBefore ? 'subtract' : 'add';
-
-            return moment(date)[func](milestone.interval.toLowerCase(), milestone.value);
+        getDueDateFromMilestone: function (employeeId, task, callback) {
+            $http.get('/api/employee/getMilestoneValue?id=' + employeeId + '&milestoneId=' + task.milestoneId).success(function (data) {
+                var intervals = [undefined, "days", "weeks", "months", "quarters"];
+                var func = task.isBefore ? 'subtract' : 'add';
+                var date = moment(data)[func](intervals[task.interval], task.milestoneValue);
+                callback(date._d);
+            });
         },
 
         getById: function (id, callback) {
@@ -32,6 +35,10 @@
 
         add: function (entity, callback) {
             $http.put('/api/task', entity).success(callback);
+        },
+
+        addInTemplate: function (entity, callback) {
+            $http.post('/api/template/addtask', entity).success(callback);
         },
 
         update: function (entity, callback) {

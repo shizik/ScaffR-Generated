@@ -6,11 +6,13 @@ SELECT
 	[DueDate],
 	[CompletedDate],
 	Case [Status] when 1 then 1 else 0 END AS 'IsDone',
-	
 	[Principal_Cd] as 'PrincipalId',
-	0 AS 'PrincipalIsTeam',
-	1 AS 'ResolvedByOne',
-
+	
+	CASE (SELECT 1 FROM Team WHERE Team.Team_Cd = [Assignment].Principal_Cd) 
+	WHEN 1 THEN 1 ELSE 0 END AS 'PrincipalIsTeam',
+	
+	[ResolvedByOne],
 	[Employee_Cd] as 'EmployeeId',
+	TaskId,
 	[CategoryId]
 FROM [dbo].[Assignment]

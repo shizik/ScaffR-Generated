@@ -25,12 +25,12 @@
 
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
-        });
 
-        serviceEmployee.getById($routeParams.id, function (data) {
-            $scope.person = data;
+            serviceEmployee.getById($routeParams.id, function (data) {
+                $scope.person = data;
 
-            commonUtils.setCounts($scope.person);
+                commonUtils.setCounts($scope.person);
+            });
         });
 
         //
@@ -92,19 +92,18 @@
         $scope.addNewTask = function (category) {
             $scope.isAddingTask = true;
 
-            $scope.newTasks[category].push(
-                {
-                    "name": null,
-                    "categoryId": category,
-                    "principalId": null,
-                    "dueDate": null,
-                    "isDone": false
-                });
+            $scope.newTasks[category].push(serviceAssignment.getEmpty(category));
         };
 
         $scope.saveTask = function (task) {
-            $scope.person.tasks.push(task);
-            $scope.deleteTask(task, true);
+            serviceAssignment.add(task, function (id) {
+                $scope.deleteTask(task, true);
+
+                task.id = id;
+                $scope.person.tasks.push(task);
+
+                toastr.success("New Task Added");
+            });
         };
 
         $scope.deleteTask = function (task, isNew) {
