@@ -11,8 +11,12 @@ CREATE PROCEDURE Task_Update
 	@MilestoneValue int,
 	@Interval int,
 	@IsBefore bit,
-	@CategoryId int,
-	@PrincipalId CHAR(30)
+	@PrincipalId CHAR(30),
+	@PrincipalIsTeam bit,
+	@ResolvedByOne bit,
+	@ParentTaskId int,
+	@TemplateId int,
+	@CategoryId int
 AS
 BEGIN
 	UPDATE [dbo].[Task]
@@ -22,6 +26,8 @@ BEGIN
 		  ,[MilestoneValue] = @MilestoneValue
 		  ,[Interval] = @Interval
 		  ,[IsBefore] = @IsBefore
+		  ,[ParentTaskId] = @ParentTaskId
+		  ,[TemplateId] = @TemplateId
 		  ,[CategoryId] = @CategoryId
 	 WHERE TaskId = @Id
 END

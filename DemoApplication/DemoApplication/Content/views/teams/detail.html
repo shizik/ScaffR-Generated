@@ -63,7 +63,7 @@
                 <h4>Assigned Tasks <span class="text-info">({{ (team.tasks | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
                     <li class="task" data-ng-class="{completed:task.isDone}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'dueDate'">
-                        <a href="#/tasks/edit/1">{{ task.name }}</a>
+                        <a href="#/tasks/edit?assignmentId={{task.id}}">{{ task.name }}</a>
                         | <i class="icon-user"></i>
                         {{task.principalName}}
                         | <i class="icon-calendar"></i>

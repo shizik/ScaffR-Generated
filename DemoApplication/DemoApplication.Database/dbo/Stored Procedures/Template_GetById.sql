@@ -14,8 +14,8 @@ BEGIN
 
     SELECT * FROM Templates WHERE Id = @Id
 
-	SELECT Tasks.*,  Task_Template.Principal_Cd AS PrincipalId
-	FROM Tasks INNER JOIN Task_Template ON Tasks.Id = Task_Template.TaskId
+	SELECT Tasks.*
+	FROM Tasks
 	WHERE Tasks.TemplateId = @Id
 
 END

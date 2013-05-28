@@ -21,7 +21,8 @@ BEGIN
 	WHERE p.Team_Cd = @Id
 
 	-- Getting all tasks for the team
-	SELECT Assignment.IsDone,
+	SELECT Assignment.TaskId AS Id,
+		   Assignment.IsDone,
 		   Assignment.Name AS Name,  
 		   Person_Main.Employee_Cd AS PrincipalId, 		   
 		   Last_Name_Txt + ' ' + First_Name_Txt AS PrincipalName, 

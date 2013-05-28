@@ -7,4 +7,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[FK_Department_Template_Department]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a75111f1-f6f0-4ddc-a2be-100217d71a7d" ChangeDateTime="05/28/2013 14:56:10">
+    <Property Name="ElementName" Value="[dbo].[Person_Hire].[OriginalHire_Dt]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person_Hire]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MilestoneId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="076bb5f6-0327-471b-9dcd-6254b9944e93" ChangeDateTime="05/28/2013 14:56:43">
+    <Property Name="ElementName" Value="[dbo].[Person_Hire].[Removed_Ind]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person_Hire]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Value" />
+  </Operation>
 </Operations>

@@ -6,5 +6,5 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * FROM Tasks
+	SELECT * FROM Tasks WHERE TemplateId IS NULL
 END

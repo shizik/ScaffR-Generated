@@ -11,9 +11,12 @@ namespace DemoApplication.Areas.Api.Models
         public DateTime? CompletedDate { get; set; }
         public bool IsDone { get; set; }
 
-        public string EmployeeId { get; set; }
-        public string PrincipalType { get; set; }
         public string PrincipalId { get; set; }
+        public bool PrincipalIsTeam { get; set; }
+        public bool ResolvedByOne { get; set; }
+
+        public string EmployeeId { get; set; }
+        public int TaskId { get; set; }
         public int CategoryId { get; set; }
     }
 }

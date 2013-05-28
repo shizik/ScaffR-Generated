@@ -12,9 +12,7 @@
         },
         replace: true,
         controller: function ($scope, $location, toastr) {
-            $scope.editMode = function () {
-                $location.path('/tasks/edit/' + $scope.task.id);
-            };
+            $scope.templateId = $scope.$parent.template.id;
 
             $scope.assignment = { selectedOption: undefined };
             $scope.$watch('assignment', function (newValue) {

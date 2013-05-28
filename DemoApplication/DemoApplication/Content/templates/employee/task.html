@@ -14,13 +14,13 @@
                         </div>
                     </li>
                     <li data-ng-repeat="task in available | taskInCategoryFilter:task.categoryId | orderBy:'name' | searchFilter:'name':query">
-                        <a data-ng-click="assignment.selectedOption=task.name">{{ task.name }}
+                        <a data-ng-click="setTask(task)">{{ task.name }}
                             <i class="icon-tag" data-ng-show="task.prebuilt"></i>
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a data-ng-click="editMode()">Create a Custom Task</a>
+                        <a href="#/tasks/edit/?employeeId={{employeeId}}">Create a Custom Task</a>
                     </li>
                 </ul>
             </span>
@@ -105,7 +105,7 @@
                 </span>
                 <span class="edit-controls" data-ng-hide="newCreated">
                     <button class="btn btn-mini" data-ng-click="deleteTask()"><i class="icon-trash"></i></button>
-                    <button class="btn btn-mini" data-ng-click="editMode()">Edit</button>
+                    <a href="#/tasks/edit/?assignmentId={{task.id}}" class="btn btn-mini">Edit</a>
                 </span>
             </span>
         </span>

@@ -4,11 +4,10 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE Assignment_GetById 
-	-- Add the parameters for the stored procedure here
-	@assignmentId int
+	@Id int
 AS
 BEGIN
 	
-	SELECT * FROM Assignment WHERE AssignmentId = @assignmentId
+	SELECT * FROM Assignments WHERE Id = @Id
 
 END

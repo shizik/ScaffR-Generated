@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('employees.detail',
-            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.template', 'service.principal', 'service.category', 'commonUtils',
-    function ($scope, $routeParams, serviceEmployee, serviceTask, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
+            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.assignment', 'service.template', 'service.principal', 'service.category', 'commonUtils',
+    function ($scope, $routeParams, serviceEmployee, serviceTask, serviceAssignment, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
 
         $scope.$parent.backLinkText = 'Dashboard';
 
@@ -25,12 +25,12 @@
 
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
-        });
 
-        serviceEmployee.getById($routeParams.id, function (data) {
-            $scope.person = data;
+            serviceEmployee.getById($routeParams.id, function (data) {
+                $scope.person = data;
 
-            commonUtils.setCounts($scope.person);
+                commonUtils.setCounts($scope.person);
+            });
         });
 
         //
@@ -68,6 +68,8 @@
                     period.count += 1;
                 });
 
+                if (!$scope.assignables || $scope.assignables.length == 0) return;
+
                 // Handle assignees counts
                 var assignee = _.findWhere(result, { id: item.principalId });
                 if (assignee) {
@@ -90,25 +92,32 @@
         $scope.addNewTask = function (category) {
             $scope.isAddingTask = true;
 
-            $scope.newTasks[category].push(
-                {
-                    "name": null,
-                    "categoryId": category,
-                    "principalId": null,
-                    "dueDate": null,
-                    "isDone": false
-                });
+            $scope.newTasks[category].push(serviceAssignment.getEmpty(category));
         };
 
         $scope.saveTask = function (task) {
-            $scope.person.tasks.push(task);
-            $scope.deleteTask(task, true);
+            serviceAssignment.add(task, function (id) {
+                $scope.deleteTask(task, true);
+
+                task.id = id;
+                $scope.person.tasks.push(task);
+
+                toastr.success("New Task Added");
+            });
         };
 
         $scope.deleteTask = function (task, isNew) {
-            var list = isNew ? $scope.newTasks[task.categoryId] : $scope.person.tasks;
-            commonUtils.removeFromList(task, list);
-            $scope.isAddingTask = false;
+            if (isNew) {
+                commonUtils.removeFromList(task, $scope.newTasks[task.categoryId]);
+                $scope.isAddingTask = false;
+            } else {
+                serviceAssignment.delete(task.id, function () {
+                    commonUtils.removeFromList(task, $scope.person.tasks);
+                    $scope.isAddingTask = false;
+
+                    toastr.success('Deleted.');
+                });
+            }
         };
 
         //
@@ -133,10 +142,15 @@
         $scope.applyTemplate = function (template) {
             if (template.isApplied) return;
 
-            _.forEach(template.assignments, function (item) {
-                $scope.saveTask(item);
-            });
+            serviceTemplate.apply(template.id, $scope.person.id, function (data) {
+                serviceEmployee.getById($routeParams.id, function (data) {
+                    $scope.person = data;
 
-            template.isApplied = true;
+                    commonUtils.setCounts($scope.person);
+                });
+
+                template.isApplied = true;
+                toastr.success(data + 'Tasks Were Added');
+            });
         };
     }]);
