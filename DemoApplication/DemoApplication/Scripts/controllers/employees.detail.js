@@ -68,6 +68,8 @@
                     period.count += 1;
                 });
 
+                if (!$scope.assignables || $scope.assignables.length == 0) return;
+
                 // Handle assignees counts
                 var assignee = _.findWhere(result, { id: item.principalId });
                 if (assignee) {
