@@ -146,6 +146,7 @@
     <Build Include="dbo\Stored Procedures\Department_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Template_DeleteDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_AddDepartment.sql" />
+    <Build Include="dbo\Stored Procedures\Template_ApplyToDepartment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

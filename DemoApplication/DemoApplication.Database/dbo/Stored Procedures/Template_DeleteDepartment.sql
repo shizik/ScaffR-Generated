@@ -4,7 +4,7 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE Template_DeleteDepartment 
-	@Id int OUTPUT,
+	@Id int,
 	@DepartmentId char(5)
 AS
 BEGIN

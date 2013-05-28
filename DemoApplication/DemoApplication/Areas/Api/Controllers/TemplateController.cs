@@ -62,6 +62,17 @@
         }
 
         [HttpGet]
+        public void ApplyToDepartment(int id, string departmentId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_ApplyToDepartment",
+                                      new { Id = id, DepartmentId = departmentId },
+                                      commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpGet]
         public void AddDepartment(int id, string departmentId)
         {
             using (var db = new DapperDatabase())

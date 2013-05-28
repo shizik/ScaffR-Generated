@@ -183,6 +183,13 @@
             });
         };
 
+        $scope.applyTemplate = function (department) {
+            serviceTemplate.applyToDepartment($scope.template.id, department.id, function () {
+                toastr.success('Applied Successfully')
+                department.isApplied = true;
+            });
+        };
+
         //
         // Global Actions
 

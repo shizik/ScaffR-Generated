@@ -3,13 +3,13 @@
 -- Create date: 5/28/2013
 -- Description:	
 -- =============================================
-CREATE PROCEDURE Template_AddDepartment 
+CREATE PROCEDURE Template_ApplyToDepartment 
 	@Id int,
 	@DepartmentId char(5)
 AS
 BEGIN
-	insert into Department_Template 
-		(TemplateId, Department_Cd)
-	values 
-		(@Id, @DepartmentId)
+	-- TODO: apply it
+	
+	-- TODO: Return task count SELECT {Number}
+	SELECT 1
 END

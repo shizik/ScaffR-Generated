@@ -26,7 +26,10 @@
         <ul class="inline">
             <li data-ng-repeat="assignable in template.departments">
                 <div class="btn-group">
-                    <button class="btn btn-success">{{assignable.name}}</button>
+                    <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTemplate(assignable)">
+                        <i class="icon-ok" data-ng-show="assignable.isApplied"></i>
+                        {{assignable.name}}
+                    </button>
                     <button class="btn" data-ng-click="removeTemplateAssignable(assignable, $index)"><i class="icon-remove"></i></button>
                 </div>
             </li>
