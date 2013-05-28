@@ -25,8 +25,9 @@
                 $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
             }, true);
 
+            $scope.task = serviceTask.getEmpty();
+
             if ($scope.isNew) {
-                $scope.task = serviceTask.getEmpty();
                 if ($routeParams.templateId)
                     $scope.task.templateId = $routeParams.templateId;
             } else {
