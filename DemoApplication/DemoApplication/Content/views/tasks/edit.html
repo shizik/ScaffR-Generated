@@ -1,8 +1,9 @@
 ﻿<div class="row-fluid">
     <div class="span8">
-        <input type="text" data-ng-model="task.name" />
-        <br />
-        <textarea data-ng-model="task.description" rows="4"></textarea>
+        <label>Name:</label>
+        <input class="input-xxlarge" type="text" data-ng-model="task.name" />
+        <label>Description:</label>
+        <textarea class="input-xxlarge" data-ng-model="task.description" rows="4"></textarea>
     </div>
     <div class="span4">
         <button class="btn" data-ng-click="cancel()">Cancel</button>

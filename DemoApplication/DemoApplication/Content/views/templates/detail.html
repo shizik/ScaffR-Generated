@@ -54,7 +54,7 @@
         <div class="row-fluid">
             <div class="span8">
                 <div data-ng-repeat="category in categories">
-                    <h4>{{ category.name }} <span class="text-info">({{ (template.tasks | taskInCategoryFilter:category.id).length }})</span></h4>
+                    <h4>{{ category.name }} <span class="text-info">({{ (template.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
                     <ul class="unstyled">
                         <template-task task="task"
                             assignables="assignables"
@@ -64,7 +64,7 @@
                     </ul>
                     <ul class="unstyled">
                         <template-task task="task"
-                            available="availableTasks.group[category.id]"
+                            available="availableTasks"
                             assignables="assignables"
                             milestones="milestones"
                             save-fn="saveTask(task)"
@@ -87,7 +87,7 @@
                         <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
                         <ul class="dropdown-menu">
                             <li data-complex-menu>
-                                <checkbox-filter list="assignees" filter="filter.assignees" value="name" />
+                                <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
                             </li>
                         </ul>
                     </div>

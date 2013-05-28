@@ -1,8 +1,8 @@
 ﻿<li class="task" data-ng-class="{completed:task.isDone}">
     <div>
         <input class="task-checkbox" type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
-        <span data-ng-switch="" data-on="taskMode">
-            <span class="dropdown" data-ng-switch-when="new">
+        <span data-ng-switch="" data-on="task.name">
+            <span class="dropdown" data-ng-switch-when="null">
                 <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
                 <ul class="dropdown-menu">
                     <li data-complex-menu="">
@@ -13,7 +13,7 @@
                             </div>
                         </div>
                     </li>
-                    <li data-ng-repeat="task in available | orderBy:'name' | searchFilter:'name':query">
+                    <li data-ng-repeat="task in available | taskInCategoryFilter:task.categoryId | orderBy:'name' | searchFilter:'name':query">
                         <a data-ng-click="assignment.selectedOption=task.name">{{ task.name }}
                             <i class="icon-tag" data-ng-show="task.prebuilt"></i>
                         </a>
@@ -24,9 +24,6 @@
                     </li>
                 </ul>
             </span>
-            <span data-ng-switch-when="edit">
-                <input type="text" class="input-task input-large" data-ng-model="task.name" placeholder="Type the task name..." />
-            </span>
             <span data-ng-switch-default="">
                 <span data-ng-switch="" data-on="newCreated">
                     <span data-ng-switch-when="true">{{task.name}}</span>
@@ -36,7 +33,7 @@
         </span>
         | <i class="icon-user"></i>
         <span data-ng-switch="" data-on="task.isDone">
-            <span data-ng-switch-when="true">{{task.assignee}}</span>
+            <span data-ng-switch-when="true">{{principal.name}}</span>
             <span class="dropdown" data-ng-switch-default="">
                 <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.principalId">
                     <span data-ng-switch-when="null" class="muted">Assign This Task</span>
@@ -57,14 +54,14 @@
                                 <label class="checkbox">
                                     <input type="checkbox"
                                         data-ng-checked="principal.isTeam && principal.id==team.id"
-                                        data-ng-click="assign(team,true)" />
+                                        data-ng-click="assign(team.id,true)" />
                                     (Assign to Team)
                                 </label>
                             </li>
                             <li data-ng-repeat="member in assignables | conditional:'teamId':team.id | searchFilter:'name':query ">
                                 <label class="checkbox">
                                     <input type="checkbox"
-                                        data-ng-click="assign(member,false)"
+                                        data-ng-click="assign(member.id,false)"
                                         data-ng-checked="(principal.isTeam && principal.id==team.id) || principal.id==member.id"
                                         data-ng-disabled="principal.isTeam && principal.id==team.id" />
                                     {{ member.name }}

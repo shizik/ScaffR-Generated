@@ -1,19 +1,19 @@
-﻿Application.Directives.directive('templateTask', function factory() {
+﻿Application.Directives.directive('task', function factory() {
     return {
         restrict: 'E',
-        templateUrl: '/content/templates/directives/templateTask.html',
+        templateUrl: '/content/templates/directives/assignPrincipal.html',
         scope: {
             task: '=',
             available: '=',
             assignables: '=',
-            milestones: '=',
             saveFn: '&',
-            deleteFn: '&'
+            deleteFn: '&',
+            detailsFn: '&'
         },
         replace: true,
-        controller: function ($scope, $location, toastr) {
+        controller: ['$scope', function ($scope) {
             $scope.editMode = function () {
-                $location.path('/tasks/edit/' + $scope.task.id);
+                $location.path('/tasks/' + $scope.task.id);
             };
 
             $scope.assignment = { selectedOption: undefined };
@@ -36,39 +36,18 @@
                 }
 
                 $scope.isTeam = isTeam;
-                $scope.task.principalId = principalId || '';
+                $scope.task.principalId = principalId || $scope.$parent.person.id;
             };
 
             $scope.$watch('task.principalId', function (value) {
                 if (value == null)
                     $scope.principal = null;
-                else if (value == '')
-                    $scope.principal = { id: 0, name: 'On-boarding Employee' };
                 else
                     $scope.principal = _.find($scope.assignables, function (item) { return item.id == value; });
             });
 
-            $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
-            $scope.$watch('task.milestoneId', function (value) {
-                if (!value) return;
-
-                $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
-            }, true);
-
             $scope.isNew = function () {
-                return $scope.task.name == null ||
-                       $scope.task.principalId == null ||
-                       $scope.task.interval == null ||
-                       $scope.task.isBefore == null ||
-                       $scope.task.milestoneValue == null ||
-                       $scope.task.milestoneId == null;
-            };
-
-            $scope.isDueDateChosen = function () {
-                return $scope.task.interval != null &&
-                       $scope.task.isBefore != null &&
-                       $scope.task.milestoneValue != null &&
-                       $scope.task.milestoneId != null;
+                return $scope.task.name == null || $scope.task.principalId == null || $scope.task.dueDate == null;
             };
 
             $scope.newCreated = $scope.isNew();
@@ -83,6 +62,10 @@
                 toastr.success("Saved");
             };
 
+            $scope.details = function () {
+                $scope.detailsFn({ task: $scope.task });
+            };
+
             $scope.deleteTask = function () {
                 $scope.deleteFn({ task: $scope.task, isNew: $scope.newCreated });
             };
@@ -90,6 +73,6 @@
             $scope.editTask = function () {
                 // TODO: Open the details page
             };
-        }
+        }]
     };
 });

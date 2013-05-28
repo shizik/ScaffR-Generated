@@ -132,6 +132,10 @@
     <Build Include="dbo\Views\TeamBriefs.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Task_GetAvailable.sql" />
+    <Build Include="dbo\Stored Procedures\Milestone_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Task_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Task_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Task_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

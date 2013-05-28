@@ -4,7 +4,7 @@
 
         $scope.isEdit = $routeParams.id == 0;
 
-        $scope.switchMode = function() {
+        $scope.switchMode = function () {
             $scope.isEdit = !$scope.isEdit;
         };
 
@@ -12,23 +12,29 @@
 
         $scope.team = { tasks: [] };
 
-        serviceTeam.individual(function (data) {
-            if ($routeParams.id == 0) {
-                $scope.team = {
-                    name: '',
-                    description: '',
-                    activity: [],
-                    members: [],
-                    tasks: []
-                };
-            }
-            else
+        if ($routeParams.id == 0) {
+            $scope.team = {
+                name: '',
+                description: '',
+                activity: [],
+                members: [],
+                tasks: []
+            };
+        } else {
+            serviceTeam.getById($routeParams.id, function (data) {
                 $scope.team = data;
 
-            commonUtils.setCounts($scope.team);
+                commonUtils.setCounts($scope.team);
+            });
+        }
 
-            $scope.departments = data.departments;
-        });
+        //serviceTeam.individual(function (data) {
+
+
+        //    commonUtils.setCounts($scope.team);
+
+        //    $scope.departments = data.departments;
+        //});
 
         //
         // Filtering
@@ -58,19 +64,19 @@
 
                 // Handle period counts
                 _.forEach($scope.periods, function (period) {
-                    if (moment()[period.func]() != moment(item.due)[period.func]()) return;
+                    if (moment()[period.func]() != moment(item.dueDate)[period.func]()) return;
 
                     period.count += 1;
                 });
 
                 // Handle assignees counts
-                var assignee = _.findWhere(result, { name: item.assignee });
+                var assignee = _.findWhere(result, { id: item.principalId });
                 if (assignee) {
                     assignee.count += 1;
                     return;
                 }
 
-                result.push({ name: item.assignee, count: 1 });
+                result.push({ id: item.principalId, name: item.principalName, count: 1 });
             });
 
             $scope.assignees = result;
@@ -99,16 +105,16 @@
         //
         // Global Actions
 
-        $scope.switchMode = function() {
+        $scope.switchMode = function () {
             $scope.isEdit = !$scope.isEdit;
         };
 
-        $scope.saveChanges = function() {
+        $scope.saveChanges = function () {
             toastr.success('Saved.');
             $scope.isEdit = false;
         };
 
-        $scope.goBack = function() {
+        $scope.goBack = function () {
             window.history.back();
         };
     }]);
