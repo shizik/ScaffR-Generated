@@ -31,6 +31,10 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/employees/index.html',
                         controller: 'employees.index'
                     })
+                    .when('/employees/mytasks', {
+                        templateUrl: rootFolder + '/employees/detail.html',
+                        controller: 'employees.mytasks'
+                    })
                     .when('/employees/:id', {
                         templateUrl: rootFolder + '/employees/detail.html',
                         controller: 'employees.detail'

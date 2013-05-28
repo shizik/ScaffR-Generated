@@ -473,6 +473,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
     <Content Include="Scripts\controllers\bundle.txt" />
+    <Content Include="Scripts\controllers\employees.mytasks.js" />
     <Content Include="Scripts\controllers\templates.index.js" />
     <Content Include="Scripts\controllers\teams.index.js" />
     <Content Include="Scripts\controllers\employees.index.js" />
