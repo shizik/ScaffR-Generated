@@ -24,21 +24,20 @@
             <strong>Template applies to:</strong>
         </p>
         <ul class="inline">
-            <li data-ng-repeat="assignable in templateAppliesTo">
+            <li data-ng-repeat="assignable in template.departments">
                 <div class="btn-group">
-                    <button class="btn btn-success">{{assignable.name}}</button>
-                    <button class="btn" data-ng-click="removeTemplateAssignable($index)"><i class="icon-remove"></i></button>
+                    <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTemplate(assignable)">
+                        <i class="icon-ok" data-ng-show="assignable.isApplied"></i>
+                        {{assignable.name}}
+                    </button>
+                    <button class="btn" data-ng-click="removeTemplateAssignable(assignable, $index)"><i class="icon-remove"></i></button>
                 </div>
             </li>
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Add Value <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <ul class="collapsible" data-title="{{category}}" data-ng-repeat="category in templateAssignables.categories">
-                            <li data-ng-repeat="assignable in templateAssignables.group[category] | searchFilter:'name':query ">
-                                <a href="" data-ng-click="setTemplateAssignable(assignable)">{{ assignable.name }}</a>
-                            </li>
-                        </ul>
+                    <li data-ng-repeat="department in departments">
+                        <a href="" data-ng-click="setTemplateAssignable(department)">{{ department.name }}</a>
                     </li>
                 </ul>
             </li>
