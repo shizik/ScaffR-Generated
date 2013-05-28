@@ -47,5 +47,17 @@
                 db.Connection.Execute("Template_AddTask", entity, commandType: CommandType.StoredProcedure);
             }
         }
+
+        [HttpGet]
+        public int Apply(int id, string employeeId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return (int)db.Connection.Query<decimal>("Template_Apply",
+                                                         new { Id = id, EmployeeId = employeeId },
+                                                         commandType: CommandType.StoredProcedure)
+                                         .First();
+            }
+        }
     }
 }

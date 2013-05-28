@@ -142,10 +142,15 @@
         $scope.applyTemplate = function (template) {
             if (template.isApplied) return;
 
-            _.forEach(template.assignments, function (item) {
-                $scope.saveTask(item);
-            });
+            serviceTemplate.apply(template.id, $scope.person.id, function (data) {
+                serviceEmployee.getById($routeParams.id, function (data) {
+                    $scope.person = data;
 
-            template.isApplied = true;
+                    commonUtils.setCounts($scope.person);
+                });
+
+                template.isApplied = true;
+                toastr.success(data + 'Tasks Were Added');
+            });
         };
     }]);

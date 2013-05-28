@@ -10,6 +10,10 @@
 
         getById: function (id, callback) {
             $http.get('/api/template/' + id).success(callback);
+        },
+
+        apply: function (id, employeeId, callback) {
+            $http.get('/api/template/apply?id=' + id + '&employeeId=' + employeeId).success(callback);
         }
     };
 }]);
