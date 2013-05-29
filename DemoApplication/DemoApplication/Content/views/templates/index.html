@@ -1,5 +1,5 @@
 ﻿<div class="btn-toolbar form-inline">
-    <a class="btn btn-success" href="#/templates/0">Add <i class="icon-plus"></i></a>
+    <a class="btn btn-success" href="#/templates/detail/new">Add <i class="icon-plus"></i></a>
     <div data-layout-change="" data-display="display">
     </div>
     <div class="btn-group">
@@ -52,11 +52,11 @@
         </ul>
     </div>
     <div class="btn-group">
-        <input type="text" class="input-xxlarge" placeholder="Type to search..." ng-model="query" />
+        <input type="text" class="input-xxlarge" placeholder="Type to search..." data-ng-model="query" />
     </div>
 </div>
 <div data-ng-switch="" data-on="display">
-    <table class="table table-striped table-hover table-clickable" ng-switch-when="list">
+    <table class="table table-striped table-hover table-clickable" data-ng-switch-when="list">
         <thead>
             <tr>
                 <th>Template Name</th>
@@ -77,7 +77,7 @@
         </tbody>
     </table>
 
-    <div class="span12 tiles" ng-switch-when="tiles">
+    <div class="span12 tiles" data-ng-switch-when="tiles">
         <div class="tile well tile-list" data-ng-click="goToDetails(item)" data-ng-repeat="item in templates | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
             <ul class="nav nav-list">
                 <li>

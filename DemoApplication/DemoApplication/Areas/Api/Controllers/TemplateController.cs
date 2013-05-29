@@ -93,5 +93,29 @@
                                       commandType: CommandType.StoredProcedure);
             }
         }
+
+        public int Put(Template entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return (int)db.Connection.Query<decimal>("Template_Add", entity, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
+        public int Post(Template entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Execute("Template_Update", entity, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

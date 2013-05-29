@@ -2,106 +2,110 @@
     <div class="span8" data-ng-switch="" data-on="isEdit">
         <div data-ng-switch-when="false">
             <h1>{{team.name}}
-                <button class="btn-link btn-small" data-ng-click="switchMode()">edit</button></h1>
+                <button class="btn-link btn-small" data-ng-click="editMode()">edit</button></h1>
             <p>{{team.description}}</p>
         </div>
         <div data-ng-switch-when="true">
             <label>Team Name:</label>
             <input class="input-xxlarge" type="text" data-ng-model="team.name" />
-            <button class="btn-link" data-ng-click="switchMode()">close</button>
             <label>Team Description:</label>
             <textarea class="input-xxlarge" data-ng-model="team.description" rows="4"></textarea>
         </div>
     </div>
-    <div class="span4">
-        <button class="btn btn-success" data-ng-click="saveChanges()">Save Team Changes</button>
-        <button class="btn" data-ng-click="goBack()">Cancel</button>
+    <div class="span4" data-ng-show="isEdit">
+        <button class="btn btn-success" data-ng-click="saveChanges()">Save Team</button>
+        <button class="btn" data-ng-click="cancel()" data-ng-show="!isNew">Cancel</button>
     </div>
 </div>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#tasks" data-toggle="tab"><i class="icon-tasks"></i>Members / Tasks</a></li>
-    <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
-</ul>
-<div class="tab-content allow-overflow">
-    <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="listView">
-        <div class="row-fluid" data-ng-switch-default="">
-            <div class="span8">
-                <h4>Members <span class="text-info">({{ team.members.length }})</span></h4>
-                <ul class="unstyled">
-                    <li class="task" data-ng-repeat="member in team.members | orderBy:'name'">{{ member.name }} 
+<div class="row-fluid" data-ng-show="!isNew">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tasks" data-toggle="tab"><i class="icon-tasks"></i>Members / Tasks</a></li>
+        <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
+    </ul>
+    <div class="tab-content allow-overflow">
+        <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="listView">
+            <div class="row-fluid" data-ng-switch-default="">
+                <div class="span8">
+                    <h4>Members <span class="text-info">({{ team.members.length }})</span></h4>
+                    <ul class="unstyled">
+                        <li class="task" data-ng-repeat="member in team.members | orderBy:'name'">{{ member.name }} 
                         <span class="badge{{member.isActive && ' badge-success' || ''}}">{{ member.isActive && 'Active' || 'Inactive' }}</span>
-                        <span class="edit-controls single-btn">
-                            <button class="btn btn-mini" data-ng-click="deleteMember($index)"><i class="icon-trash"></i></button>
-                        </span>
-                    </li>
-                </ul>
-                <div class="dropdown">
-                    <a class="btn dropdown-toggle" data-toggle="dropdown">Add Member <i class="icon-plus"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <ul class="collapsible" data-title="{{d.name}}" data-ng-repeat="d in departments">
-                                <li>
-                                    <div>
-                                        <ul class="collapsible" data-title="Teams">
-                                            <li data-ng-repeat="t in d.teams | searchFilter:'name':query ">
-                                                <a data-ng-click="addMember(t, true)">{{ t.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul class="collapsible" data-title="Individuals">
-                                            <li data-ng-repeat="p in d.people | searchFilter:'name':query ">
-                                                <a data-ng-click="addMember(p, false)">{{ p.name }}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
+                            <span class="edit-controls single-btn">
+                                <button class="btn btn-mini" data-ng-click="deleteMember($index)"><i class="icon-trash"></i></button>
+                            </span>
                         </li>
                     </ul>
-                </div>
-                <h4>Assigned Tasks <span class="text-info">({{ (team.tasks | taskFilter:filter).length }})</span></h4>
-                <ul class="unstyled">
-                    <li class="task" data-ng-class="{completed:task.isDone}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'dueDate'">
-                        <a href="#/tasks/edit?assignmentId={{task.id}}">{{ task.name }}</a>
-                        | <i class="icon-user"></i>
-                        {{task.principalName}}
-                        | <i class="icon-calendar"></i>
-                        {{task.dueDate | date:'MM/dd/yy'}}
-                        | <span data-task-badge="" data-task="task"></span>
-                    </li>
-                </ul>
-            </div>
-            <div class="span4">
-                <div class="control-group">
-                    <tile data-entity="team" data-filter="filter.status" data-mode="detail" />
-                </div>
-                <div class="control-group">
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                            Add Member 
+                        <i class="icon-plus"></i>
+                        </button>
                         <ul class="dropdown-menu">
-                            <li data-complex-menu="">
-                                <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
+                            <li>
+                                <ul class="collapsible" data-title="{{d.name}}" data-ng-repeat="d in departments">
+                                    <li>
+                                        <div>
+                                            <ul class="collapsible" data-title="Teams">
+                                                <li data-ng-repeat="t in d.teams | searchFilter:'name':query ">
+                                                    <a data-ng-click="addMember(t, true)">{{ t.name }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <ul class="collapsible" data-title="Individuals">
+                                                <li data-ng-repeat="p in d.people | searchFilter:'name':query ">
+                                                    <a data-ng-click="addMember(p, false)">{{ p.name }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
+                    <h4>Assigned Tasks <span class="text-info">({{ (team.tasks | taskFilter:filter).length }})</span></h4>
+                    <ul class="unstyled">
+                        <li class="task" data-ng-class="{completed:task.isDone}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'dueDate'">
+                            <a href="#/tasks/edit?assignmentId={{task.id}}">{{ task.name }}</a>
+                            | <i class="icon-user"></i>
+                            {{task.principalName}}
+                        | <i class="icon-calendar"></i>
+                            {{task.dueDate | date:'MM/dd/yy'}}
+                        | <span data-task-badge="" data-task="task"></span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="control-group">
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
-                        <ul class="dropdown-menu">
-                            <li data-complex-menu="">
-                                <radio-filter list="periods" filter="filter.period" value="func" />
-                            </li>
-                        </ul>
+                <div class="span4">
+                    <div class="control-group">
+                        <tile data-entity="team" data-filter="filter.status" data-mode="detail" />
+                    </div>
+                    <div class="control-group">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown">Show Tasks by Assigned <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                                <li data-complex-menu="">
+                                    <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                                <li data-complex-menu="">
+                                    <radio-filter list="periods" filter="filter.period" value="func" />
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="tab-pane" id="activity">
-        <ul class="unstyled">
-            <li class="muted" data-ng-repeat="item in team.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
-        </ul>
+        <div class="tab-pane" id="activity">
+            <ul class="unstyled">
+                <li class="muted" data-ng-repeat="item in team.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+            </ul>
+        </div>
     </div>
 </div>

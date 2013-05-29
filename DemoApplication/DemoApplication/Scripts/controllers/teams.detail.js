@@ -1,19 +1,15 @@
 ﻿Application.Controllers.controller('teams.detail',
-            ['$scope', '$routeParams', 'service.team', 'commonUtils', 'toastr',
-    function ($scope, $routeParams, serviceTeam, commonUtils, toastr) {
-
-        $scope.isEdit = $routeParams.id == 0;
-
-        $scope.switchMode = function () {
-            $scope.isEdit = !$scope.isEdit;
-        };
-
+            ['$scope', '$location', '$routeParams', 'service.team', 'commonUtils', 'toastr',
+    function ($scope, $location, $routeParams, serviceTeam, commonUtils, toastr) {
+        $scope.isEdit = false;
+        $scope.isNew = false;
         $scope.$parent.backLinkText = 'Dashboard';
 
-        $scope.team = { tasks: [] };
-
-        if ($routeParams.id == 0) {
+        if ($routeParams.id == 'new') {
+            $scope.isEdit = true;
+            $scope.isNew = true;
             $scope.team = {
+                id: '',
                 name: '',
                 description: '',
                 activity: [],
@@ -53,7 +49,7 @@
         ];
 
         $scope.$watch('team.tasks', function (newValue) {
-            if (newValue.length == 0) return;
+            if (!newValue || newValue.length == 0) return;
 
             var result = [];
             _.forEach($scope.periods, function (item) {
@@ -105,16 +101,36 @@
         //
         // Global Actions
 
-        $scope.switchMode = function () {
-            $scope.isEdit = !$scope.isEdit;
+        var teamClone = {};
+        $scope.editMode = function () {
+            $scope.isEdit = true;
+            cloneTeam($scope.team, teamClone);
         };
 
         $scope.saveChanges = function () {
-            toastr.success('Saved.');
-            $scope.isEdit = false;
+            cloneTeam($scope.team, teamClone);
+
+            if (teamClone.id == '')
+                serviceTeam.add(teamClone, function (id) {
+                    //HACK: The returned string has double double-quotes
+                    $location.path('/teams/detail/' + id.substring(1, id.length - 1));
+                    toastr.success('Saved');
+                });
+            else
+                serviceTeam.update(teamClone, function () {
+                    $scope.isEdit = false;
+                    toastr.success('Updated');
+                });
         };
 
-        $scope.goBack = function () {
-            window.history.back();
+        $scope.cancel = function () {
+            $scope.isEdit = false;
+            cloneTeam(teamClone, $scope.team);
         };
+
+        function cloneTeam(input, output) {
+            output.id = input.id;
+            output.name = input.name;
+            output.description = input.description;
+        }
     }]);

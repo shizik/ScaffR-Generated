@@ -26,6 +26,18 @@
 
         deleteDepartment: function (id, departmentId, callback) {
             $http.get('/api/template/deleteDepartment?id=' + id + '&departmentId=' + departmentId).success(callback);
+        },
+        
+        add: function (entity, callback) {
+            $http.put('/api/template', entity).success(callback);
+        },
+
+        update: function (entity, callback) {
+            $http.post('/api/template', entity).success(callback);
+        },
+
+        delete: function (id, callback) {
+            $http.delete('/api/template/?id=' + id).success(callback);
         }
     };
 }]);

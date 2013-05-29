@@ -1,16 +1,18 @@
 ﻿Application.Controllers.controller('templates.detail',
-            ['$scope', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
-    function ($scope, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, serviceCategory, serviceMilestone, commonUtils, toastr) {
-
-        $scope.isEdit = $routeParams.id == 0;
-
+            ['$scope', '$location', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+    function ($scope, $location, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, serviceCategory, serviceMilestone, commonUtils, toastr) {
+        $scope.isEdit = false;
+        $scope.isNew = false;
         $scope.$parent.backLinkText = 'Dashboard';
 
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
 
-            if ($routeParams.id == 0) {
+            if ($routeParams.id == 'new') {
+                $scope.isEdit = true;
+                $scope.isNew = true;
                 $scope.template = {
+                    id: 0,
                     name: '',
                     description: '',
                     activity: [],
@@ -203,17 +205,35 @@
         //
         // Global Actions
 
-        $scope.switchMode = function () {
-            $scope.isEdit = !$scope.isEdit;
+        var templateClone = {};
+        $scope.editMode = function () {
+            $scope.isEdit = true;
+            cloneTemplate($scope.template, templateClone);
         };
 
         $scope.saveChanges = function () {
-            toastr.success('Saved.');
+            cloneTemplate($scope.template, templateClone);
+
+            if (templateClone.id == 0)
+                serviceTemplate.add(templateClone, function (id) {
+                    $location.path('/templates/detail/' + id);
+                    toastr.success('Saved');
+                });
+            else
+                serviceTemplate.update(templateClone, function () {
+                    $scope.isEdit = false;
+                    toastr.success('Updated');
+                });
+        };
+
+        $scope.cancel = function () {
             $scope.isEdit = false;
+            cloneTemplate(templateClone, $scope.template);
         };
 
-        $scope.goBack = function () {
-            window.history.back();
-        };
-
+        function cloneTemplate(input, output) {
+            output.id = input.id;
+            output.name = input.name;
+            output.description = input.description;
+        }
     }]);

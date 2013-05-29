@@ -1,5 +1,5 @@
 ﻿<div class="btn-toolbar form-inline">
-    <a class="btn btn-success" href="#/teams/0">Add <i class="icon-plus"></i></a>
+    <a class="btn btn-success" href="#/teams/detail/new">Add <i class="icon-plus"></i></a>
     <div data-layout-change="" data-display="display"></div>
     <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: <strong>{{ sortLabel }}</strong>
@@ -87,7 +87,7 @@
     <div class="span12 tiles" ng-switch-when="tiles">
         <tile data-mode="list"
             data-entity="item"
-            data-details-url="/teams/"
+            data-details-url="/teams/detail/"
             data-filter="nofilter"
             data-ng-repeat="item in teams | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />
     </div>

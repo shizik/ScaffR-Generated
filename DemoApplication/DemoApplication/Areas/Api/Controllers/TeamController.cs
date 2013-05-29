@@ -1,5 +1,6 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -9,9 +10,6 @@
 
     public class TeamController : ApiController
     {
-        //
-        // GET ~/api/Team
-
         public IEnumerable<dynamic> Get()
         {
             using (var db = new DapperDatabase())
@@ -19,9 +17,6 @@
                 return db.Connection.Query("Template_GetAll", commandType: CommandType.StoredProcedure);
             }
         }
-
-        //
-        // GET ~/api/Team/Brief
 
         [HttpGet]
         public IEnumerable<TeamBrief> Brief()
@@ -31,9 +26,6 @@
                 return db.Connection.Query<TeamBrief>("Team_GetBrief", commandType: CommandType.StoredProcedure);
             }
         }
-        
-        //
-        // GET ~/api/Team/Get/1
 
         public Team Get(string id)
         {
@@ -46,6 +38,34 @@
                 team.Tasks = result.Read<Team.Assignment>().ToList();
 
                 return team;
+            }
+        }
+
+        public string Put(Team entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                entity.Id = Guid.NewGuid().ToString().Substring(0, 30);
+
+                db.Connection.Execute("Team_Add", entity, commandType: CommandType.StoredProcedure);
+
+                return entity.Id;
+            }
+        }
+
+        public int Post(Team entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Execute("Team_Update", entity, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Team_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
             }
         }
     }

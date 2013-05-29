@@ -147,6 +147,12 @@
     <Build Include="dbo\Stored Procedures\Template_DeleteDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_AddDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_ApplyToDepartment.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

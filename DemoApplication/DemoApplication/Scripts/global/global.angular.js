@@ -43,7 +43,7 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/templates/index.html',
                         controller: 'templates.index'
                     })
-                    .when('/templates/:id', {
+                    .when('/templates/detail/:id', {
                         templateUrl: rootFolder + '/templates/detail.html',
                         controller: 'templates.detail'
                     })
@@ -51,7 +51,7 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/teams/index.html',
                         controller: 'teams.index'
                     })
-                    .when('/teams/:id', {
+                    .when('/teams/detail/:id', {
                         templateUrl: rootFolder + '/teams/detail.html',
                         controller: 'teams.detail'
                     })
