@@ -41,6 +41,46 @@
             }
         }
 
+        [HttpGet]
+        public dynamic GetAvailableMembers(string id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                var result = db.Connection.QueryMultiple("Team_GetAvailableMembers", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+                var teams = result.Read<dynamic>().ToList();
+                var departments = result.Read<dynamic>().ToList();
+                var employees = result.Read<dynamic>().ToList();
+
+                return new
+                    {
+                        Teams = teams,
+                        Departments = departments,
+                        Employees = employees
+                    };
+            }
+        }
+        
+        [HttpPut]
+        public IEnumerable<Team.Member> AddMembers(TeamAddMember entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Team.Member>("Team_AddMembers", entity, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpDelete]
+        public int DeleteMember(string id, string employeeId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Execute("Team_DeleteMember", 
+                                             new { Id = id, EmployeeId=employeeId}, 
+                                             commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public string Put(Team entity)
         {
             using (var db = new DapperDatabase())

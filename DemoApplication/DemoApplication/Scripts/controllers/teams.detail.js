@@ -22,15 +22,13 @@
 
                 commonUtils.setCounts($scope.team);
             });
+
+            serviceTeam.getAvailableMembers($routeParams.id, function (data) {
+                $scope.departments = data.departments;
+                $scope.teams = data.teams;
+                $scope.employees = data.employees;
+            });
         }
-
-        //serviceTeam.individual(function (data) {
-
-
-        //    commonUtils.setCounts($scope.team);
-
-        //    $scope.departments = data.departments;
-        //});
 
         //
         // Filtering
@@ -82,20 +80,23 @@
         // Add new member
 
         $scope.addMember = function (item, isTeam) {
-            if (isTeam) {
-                _.forEach(item.people, function (p) {
-                    p.isActive = true;
-                    $scope.team.members.push(p);
-                });
-            }
-            else {
-                item.isActive = true;
-                $scope.team.members.push(item);
-            }
+            var request = {
+                id: $scope.team.id,
+                principalId: item.id,
+                isTeam: isTeam
+            };
+
+            serviceTeam.addMembers(request, function (data) {
+                toastr.success('Members Added');
+                $scope.team.members = data;
+            });
         };
 
-        $scope.deleteMember = function (index) {
-            $scope.team.members.splice(index, 1);
+        $scope.deleteMember = function (member) {
+            serviceTeam.deleteMember($scope.team.id, member.id, function () {
+                commonUtils.removeFromList(member, $scope.team.members);
+                toastr.success('Member Deleted');
+            });
         };
 
         //

@@ -4,7 +4,6 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE Team_GetById 
-	-- Add the parameters for the stored procedure here
 	@Id char(30)
 AS
 BEGIN
@@ -16,9 +15,7 @@ BEGIN
 	SELECT * FROM Teams WHERE Id = @Id
 
 	-- Get all team members
-	SELECT e.Id, e.LastName + ' ' + e.FirstName AS Name, 1 AS IsActive 
-	FROM Employees e inner join Person_Team p on e.Id = p.Employee_Cd
-	WHERE p.Team_Cd = @Id
+	EXECUTE dbo.Team_GetMembers @Id
 
 	-- Getting all tasks for the team
 	SELECT Assignment.TaskId AS Id,

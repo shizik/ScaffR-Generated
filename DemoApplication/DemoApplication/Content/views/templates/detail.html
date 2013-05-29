@@ -12,7 +12,7 @@
             <textarea class="input-xxlarge" data-ng-model="template.description" rows="4"></textarea>
         </div>
     </div>
-    <div class="span4">
+    <div class="span4" data-ng-show="isEdit">
         <button class="btn btn-success" data-ng-click="saveChanges()">Save Template</button>
         <button class="btn" data-ng-click="cancel()" data-ng-show="!isNew">Cancel</button>
     </div>

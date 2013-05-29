@@ -231,6 +231,7 @@
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
+    <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
     <Compile Include="Areas\Api\Models\Department.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
     <Compile Include="Areas\Api\Models\Task.cs" />

@@ -75,6 +75,14 @@ Application.Filters.filter('taskInCategoryFilter', function () {
     };
 });
 
+Application.Filters.filter('employeeInDepartment', function () {
+    return function (items, departmentId) {
+        return _.filter(items, function (item) {
+            return item.departmentId == departmentId;
+        });
+    };
+});
+
 Application.Filters.filter('searchFilter', function () {
     return function (items, propName, query) {
         if (!query) return items;
