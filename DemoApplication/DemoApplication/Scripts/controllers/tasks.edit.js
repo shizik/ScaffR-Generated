@@ -3,8 +3,20 @@
         function ($scope, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 
-            $scope.isNew = $routeParams.templateId != undefined || $routeParams.employeeId != undefined;
-            $scope.isFromEmployee = $routeParams.assignmentId != undefined || $routeParams.employeeId != undefined;
+            $scope.isNew = $routeParams.templateId != undefined ||
+                           $routeParams.employeeId != undefined ||
+                          ($routeParams.assignmentId == undefined &&
+                           $routeParams.taskId == undefined);
+            $scope.isFromEmployee = $routeParams.assignmentId != undefined ||
+                                    $routeParams.employeeId != undefined;
+
+            // Build the proper save command name
+            var command = $scope.isNew ? 'new' : 'update';
+            if ($scope.isFromEmployee) command += 'Assignment';
+            else if (command == 'new' && $routeParams.templateId != undefined) command += 'InTemplate';
+            else command += 'Task';
+
+            console.log('command', command);
 
             serviceCategory.getAll(function (data) {
                 $scope.categories = data;
@@ -18,18 +30,8 @@
                 $scope.assignables = data;
             });
 
-            $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
-            $scope.$watch('task.milestoneId', function (value) {
-                if (!value) return;
-
-                $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
-            }, true);
-
-            $scope.task = serviceTask.getEmpty();
-
             if ($scope.isNew) {
-                if ($routeParams.templateId)
-                    $scope.task.templateId = $routeParams.templateId;
+                $scope.task = serviceTask.getEmpty();
             } else {
                 if ($scope.isFromEmployee)
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
@@ -41,43 +43,64 @@
                     });
             }
 
-            $scope.isDueDateChosen = function () {
-                if (!$scope.task) return false;
+            if (command != 'updateAssignment') {
+                $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
+                $scope.$watch('task.milestoneId', function (value) {
+                    if (!value) return;
 
-                return $scope.task.interval != null &&
-                    $scope.task.isBefore != null &&
-                    $scope.task.milestoneValue != null &&
-                    $scope.task.milestoneId != null;
-            };
+                    $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
+                }, true);
+
+                $scope.isDueDateChosen = function () {
+                    if (!$scope.task) return false;
+
+                    return $scope.task.interval != null &&
+                        $scope.task.isBefore != null &&
+                        $scope.task.milestoneValue != null &&
+                        $scope.task.milestoneId != null;
+                };
+            }
 
             $scope.save = function () {
-                if ($scope.isNew) {
-                    if ($scope.isFromEmployee) {
-                        $scope.task.employeeId = $routeParams.employeeId;
-                        serviceTask.getDueDateFromMilestone($scope.task.employeeId, $scope.task, function (data) {
-                            $scope.task.dueDate = data;
+                saveCommands[command]();
+            };
 
-                            serviceAssignment.addFromTask($scope.task, function () {
-                                window.history.back();
-                                toastr.success('Saved.');
-                            });
-                        });
-                    } else
-                        serviceTask.addInTemplate($scope.task, function () {
+            var saveCommands = {
+                'newAssignment': function () {
+                    $scope.task.employeeId = $routeParams.employeeId;
+                    serviceTask.getDueDateFromMilestone($scope.task.employeeId, $scope.task, function (data) {
+                        $scope.task.dueDate = data;
+
+                        serviceAssignment.addFromTask($scope.task, function () {
                             window.history.back();
                             toastr.success('Saved.');
                         });
-                } else {
-                    if ($scope.isFromEmployee)
-                        serviceAssignment.update($scope.task, function () {
-                            window.history.back();
-                            toastr.success('Saved.');
-                        });
-                    else
-                        serviceTask.update($scope.task, function () {
-                            window.history.back();
-                            toastr.success('Saved.');
-                        });
+                    });
+                },
+                'newInTemplate': function () {
+                    $scope.task.templateId = $routeParams.templateId;
+                    serviceTask.addInTemplate($scope.task, function () {
+                        window.history.back();
+                        toastr.success('Saved.');
+                    });
+                },
+                'newTask': function () {
+                    serviceTask.add($scope.task, function () {
+                        window.history.back();
+                        toastr.success('Saved.');
+                    });
+                },
+                'updateAssignment': function () {
+                    serviceAssignment.update($scope.task, function () {
+                        window.history.back();
+                        toastr.success('Saved.');
+                    });
+                },
+                'updateTask': function () {
+                    serviceTask.update($scope.task, function () {
+                        window.history.back();
+                        toastr.success('Saved.');
+                    });
                 }
             };
 

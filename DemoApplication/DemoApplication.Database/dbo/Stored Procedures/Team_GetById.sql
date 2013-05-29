@@ -18,7 +18,7 @@ BEGIN
 	EXECUTE dbo.Team_GetMembers @Id
 
 	-- Getting all tasks for the team
-	SELECT Assignment.TaskId AS Id,
+	SELECT Assignment.AssignmentId AS Id,
 		   Assignment.IsDone,
 		   Assignment.Name AS Name,  
 		   Person_Main.Employee_Cd AS PrincipalId, 		   

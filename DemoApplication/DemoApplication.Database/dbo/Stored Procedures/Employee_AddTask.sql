@@ -20,9 +20,9 @@ CREATE PROCEDURE [dbo].[Employee_AddTask]
 AS
 BEGIN
 	insert into Task 
-		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, CategoryId)
+		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, CategoryId)
 	values 
-		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @CategoryId)
+		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @CategoryId)
 
 	insert into Assignment 
 		([Name], [Description], TaskId, DueDate, [Status], Principal_Cd, Employee_Cd, CategoryId, ResolvedByOne, Reocurring)

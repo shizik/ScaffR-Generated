@@ -4,7 +4,7 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE Template_AddTask 
-	@Id int OUTPUT,
+	@Id int,
 	@Name varchar(50),
 	@Description varchar(500),
 	@ParentTaskId int,
@@ -20,15 +20,15 @@ CREATE PROCEDURE Template_AddTask
 AS
 BEGIN
 	insert into Task 
-		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, CategoryId)
+		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, ResolvedByOne, CategoryId)
 	values 
-		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @CategoryId)
+		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @CategoryId)
 
 	insert into Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, TemplateId, CategoryId)
+		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, ResolvedByOne, TemplateId, CategoryId)
 	values 
-		(@Name, @Description, SCOPE_IDENTITY(), @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @TemplateId, @CategoryId)
+		(@Name, @Description, SCOPE_IDENTITY(), @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
 
 
-	SELECT @Id = SCOPE_IDENTITY()
+	SELECT SCOPE_IDENTITY()
 END

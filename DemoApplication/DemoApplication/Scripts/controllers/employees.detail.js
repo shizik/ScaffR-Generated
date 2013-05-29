@@ -78,6 +78,8 @@
                 }
 
                 var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
+                if (!principal) return;
+
                 result.push({ id: principal.id, name: principal.name, count: 1 });
             });
 
