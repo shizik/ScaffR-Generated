@@ -15,19 +15,20 @@ CREATE PROCEDURE [dbo].[Employee_AddTask]
 	@TemplateId int,
 	@CategoryId int,
 	@DueDate datetime,
+	@ResolvedByOne bit,
 	@PrincipalId CHAR(30),
 	@EmployeeId CHAR(30)
 AS
 BEGIN
 	insert into Task 
-		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, CategoryId)
+		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, ResolvedByOne, Principal_Cd, CategoryId)
 	values 
-		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @CategoryId)
+		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @ResolvedByOne, @PrincipalId, @CategoryId)
 
 	insert into Assignment 
 		([Name], [Description], TaskId, DueDate, [Status], Principal_Cd, Employee_Cd, CategoryId, ResolvedByOne, Reocurring)
 	values 
-		(@Name, @Description, SCOPE_IDENTITY(), @DueDate, 0, @PrincipalId, @EmployeeId, @CategoryId, 0, 0)
+		(@Name, @Description, SCOPE_IDENTITY(), @DueDate, 0, @PrincipalId, @EmployeeId, @CategoryId, @ResolvedByOne, 0)
 
 	SELECT SCOPE_IDENTITY()
 END

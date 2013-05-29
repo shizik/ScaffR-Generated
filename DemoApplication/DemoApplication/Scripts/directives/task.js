@@ -18,37 +18,14 @@
                 $scope.task.name = task.name;
                 $scope.task.description = task.description;
                 $scope.task.taskId = task.id;
+                $scope.task.principalIsTeam = task.principalIsTeam;
                 $scope.task.principalId = task.principalId;
                 $scope.task.resolveByOne = task.resolveByOne;
                 $scope.task.employeeId = $scope.employeeId;
-                $scope.isTeam = task.principalIsTeam;
                 serviceTask.getDueDateFromMilestone($scope.employeeId, task, function (data) {
                     $scope.task.dueDate = data;
                 });
             };
-
-            $scope.isTeam = false;
-            $scope.resolveByAll = null;
-            $scope.assign = function (principalId, isTeam) {
-                $scope.resolveByAll = null;
-
-                // Handle deselecting an item
-                if (principalId && $scope.task.principalId == principalId) {
-                    $scope.task.principalId = null;
-                    $scope.isTeam = false;
-                    return;
-                }
-
-                $scope.isTeam = isTeam;
-                $scope.task.principalId = principalId || $scope.$parent.person.id;
-            };
-
-            $scope.$watch('task.principalId', function (value) {
-                if (value == null)
-                    $scope.principal = null;
-                else
-                    $scope.principal = _.find($scope.assignables, function (item) { return item.id == value; });
-            });
 
             $scope.isNew = function () {
                 return $scope.task.name == null || $scope.task.principalId == null || $scope.task.dueDate == null;

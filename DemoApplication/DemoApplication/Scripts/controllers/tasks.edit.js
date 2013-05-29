@@ -108,29 +108,6 @@
                 window.history.back();
             };
 
-            $scope.isTeam = false;
-            $scope.resolveByAll = null;
-            $scope.assign = function (principalId, isTeam) {
-                $scope.resolveByAll = null;
-
-                // Handle deselecting an item
-                if (principalId && $scope.task.principalId == principalId) {
-                    $scope.task.principalId = null;
-                    $scope.isTeam = false;
-                    return;
-                }
-
-                $scope.isTeam = isTeam;
-                $scope.task.principalId = principalId || $scope.$parent.person.id;
-            };
-
-            $scope.$watch('task.principalId', function (value) {
-                if (value == null)
-                    $scope.principal = null;
-                else
-                    $scope.principal = _.find($scope.assignables, function (item) { return item.id == value; });
-            });
-
             //
             // Attachments / Actions
 

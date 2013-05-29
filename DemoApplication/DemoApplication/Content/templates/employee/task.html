@@ -32,67 +32,7 @@
             </span>
         </span>
         | <i class="icon-user"></i>
-        <span data-ng-switch="" data-on="task.isDone">
-            <span data-ng-switch-when="true">{{principal.name}}</span>
-            <span class="dropdown" data-ng-switch-default="">
-                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="task.principalId">
-                    <span data-ng-switch-when="null" class="muted">Assign This Task</span>
-                    <span data-ng-switch-default="">{{principal.name}}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li data-complex-menu="">
-                        <div>
-                            <div class="input-prepend">
-                                <span class="add-on"><i class="icon-search"></i></span>
-                                <input type="text" placeholder="Filter..." data-ng-model="query" />
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <ul class="collapsible" data-title="{{team.name}}" data-ng-repeat="team in assignables | conditional:'isTeam':true">
-                            <li>
-                                <label class="checkbox">
-                                    <input type="checkbox"
-                                        data-ng-checked="principal.isTeam && principal.id==team.id"
-                                        data-ng-click="assign(team.id,true)" />
-                                    (Assign to Team)
-                                </label>
-                            </li>
-                            <li data-ng-repeat="member in assignables | conditional:'teamId':team.id | searchFilter:'name':query ">
-                                <label class="checkbox">
-                                    <input type="checkbox"
-                                        data-ng-click="assign(member.id,false)"
-                                        data-ng-checked="(principal.isTeam && principal.id==team.id) || principal.id==member.id"
-                                        data-ng-disabled="principal.isTeam && principal.id==team.id" />
-                                    {{ member.name }}
-                                </label>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a data-ng-click="assign(undefined,false)">Assign to this Employee</a>
-                    </li>
-                </ul>
-            </span>
-        </span>
-        <span data-ng-show="isTeam">|
-            <strong>resolution: </strong>
-            <span class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="resolveByAll">
-                    <span data-ng-switch-when="null" class="muted">Choose</span>
-                    <span data-ng-switch-default="">{{resolveByAll && 'by All' || 'by One'}}</span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a data-ng-click="resolveByAll=false">One Team Member</a>
-                    </li>
-                    <li>
-                        <a data-ng-click="resolveByAll=true">All Team Members</a>
-                    </li>
-                </ul>
-            </span>
-        </span>
+        <span data-assign-principal="" data-default-id="person.id" data-task="task" data-assignables="assignables"></span>
         | <i class="icon-calendar"></i>
         <span data-ng-switch="" data-on="task.isDone">
             <span data-ng-switch-when="true">{{task.dueDate | date:'MM/dd/yy'}}</span>

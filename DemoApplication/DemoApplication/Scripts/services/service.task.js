@@ -12,6 +12,8 @@
                 isBefore: null,
                 templateId: null,
                 categoryId: null,
+                resolvedByOne: false,
+                principalIsTeam: false,
                 principalId: null
             };
         },

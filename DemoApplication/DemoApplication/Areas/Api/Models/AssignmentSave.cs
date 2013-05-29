@@ -15,6 +15,7 @@ namespace DemoApplication.Areas.Api.Models
         public int TemplateId { get; set; }
         public int CategoryId { get; set; }
         public DateTime DueDate { get; set; }
+        public bool ResolvedByOne { get; set; }
         public string PrincipalId { get; set; }
         public string EmployeeId { get; set; }
     }
