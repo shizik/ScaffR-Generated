@@ -222,6 +222,7 @@
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\ApproverController.cs" />
     <Compile Include="Areas\Api\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Api\Controllers\MilestoneController.cs" />
     <Compile Include="Areas\Api\Controllers\PrincipalController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
+    <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
     <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
     <Compile Include="Areas\Api\Models\Department.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
@@ -467,6 +469,8 @@
     <Content Include="Content\templates\tooltip\tooltip-html-unsafe-popup.html" />
     <Content Include="Content\templates\tooltip\tooltip-popup.html" />
     <Content Include="Content\templates\typeahead\typeahead.html" />
+    <Content Include="Content\views\approvers\detail.html" />
+    <Content Include="Content\views\approvers\index.html" />
     <Content Include="Content\views\teams\detail.html" />
     <Content Include="Content\views\teams\index.html" />
     <Content Include="Content\views\templates\detail.html" />
@@ -477,6 +481,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
     <Content Include="Scripts\controllers\bundle.txt" />
+    <Content Include="Scripts\controllers\approvers.index.js" />
+    <Content Include="Scripts\controllers\approvers.detail.js" />
     <Content Include="Scripts\controllers\employees.mytasks.js" />
     <Content Include="Scripts\controllers\templates.index.js" />
     <Content Include="Scripts\controllers\teams.index.js" />
@@ -761,6 +767,7 @@
     <Content Include="Scripts\models\templateBrief.js" />
     <Content Include="Scripts\models\employee.js" />
     <Content Include="Scripts\models\task.js" />
+    <Content Include="Scripts\services\service.approver.js" />
     <Content Include="Scripts\services\service.department.js" />
     <Content Include="Scripts\services\service.assignment.js" />
     <Content Include="Scripts\services\service.category.js" />
