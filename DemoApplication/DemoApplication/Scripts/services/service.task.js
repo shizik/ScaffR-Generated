@@ -14,7 +14,7 @@
                 categoryId: null,
                 resolvedByOne: false,
                 principalIsTeam: false,
-                principalId: null
+                principalId: undefined
             };
         },
 

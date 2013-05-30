@@ -38,7 +38,7 @@
 
             $scope.isNew = function () {
                 return $scope.task.name == null ||
-                       $scope.task.principalId == null ||
+                       $scope.task.principalId === undefined ||
                        $scope.task.interval == null ||
                        $scope.task.isBefore == null ||
                        $scope.task.milestoneValue == null ||

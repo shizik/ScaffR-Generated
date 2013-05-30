@@ -16,7 +16,7 @@
 
                 // Handle deselecting an item
                 if (principal && $scope.task.principalId == principal.id) {
-                    $scope.task.principalId = null;
+                    $scope.task.principalId = undefined;
                     $scope.task.principalIsTeam = false;
                     $scope.principal = null;
                     return;
@@ -32,23 +32,37 @@
                     $scope.task.principalId = $scope.defaultId;
                 } else {
                     $scope.task.principalIsTeam = false;
-                    $scope.task.principalId = undefined;
+                    $scope.task.principalId = null;
                     $scope.principal = { id: 0, name: 'On-boarding Employee' };
                 }
             };
 
             $scope.$watch('task.principalId', function (value) {
-                if (!value) return;
+                if (value === undefined) return;
 
                 if ($scope.principal == null || $scope.principal.id != value)
                     $scope.principal = findPrincipal();
+            }, true);
+
+            // Handles the case when assignables are loaded after the task
+            $scope.$watch('assignables', function (value) {
+                if (!value || $scope.task.principalId === undefined || value.length == 0) return;
+
+                $scope.principal = findPrincipal();
             });
 
             function findPrincipal() {
+                if ($scope.task.principalId == null) {
+                    if (!$scope.defaultId) return { id: 0, name: 'On-boarding Employee' };
+
+                    $scope.task.principalIsTeam = false;
+                    $scope.task.principalId = $scope.defaultId;
+                }
+
                 return _.find($scope.assignables,
                     function (item) {
                         return item.id == $scope.task.principalId &&
-                            item.isTeam == $scope.task.principalIsTeam;
+                               item.isTeam == $scope.task.principalIsTeam;
                     });
             }
         }

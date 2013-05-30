@@ -8,6 +8,7 @@
     [DueDate]        DATETIME      NOT NULL,
     [CompletedDate]  DATETIME      NULL,
 	[ResolvedByOne]  BIT		   NULL,
+	[PrincipalIsTeam]  BIT		   NOT NULL,
     [Principal_Cd]   CHAR (30)     NOT NULL,
     [Status]         TINYINT       CONSTRAINT [DF_Assignment_Status] DEFAULT ((0)) NOT NULL,
     [Order]          INT           CONSTRAINT [DF_Assignment_Order] DEFAULT ((0)) NOT NULL,

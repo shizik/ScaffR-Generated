@@ -17,6 +17,7 @@ namespace DemoApplication.Areas.Api.Models
         public DateTime DueDate { get; set; }
         public bool ResolvedByOne { get; set; }
         public string PrincipalId { get; set; }
+        public bool PrincipalIsTeam { get; set; }
         public string EmployeeId { get; set; }
     }
 }

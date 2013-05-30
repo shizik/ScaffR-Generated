@@ -28,7 +28,7 @@
             };
 
             $scope.isNew = function () {
-                return $scope.task.name == null || $scope.task.principalId == null || $scope.task.dueDate == null;
+                return $scope.task.name == null || $scope.task.principalId === undefined || $scope.task.dueDate == null;
             };
 
             $scope.newCreated = $scope.isNew();

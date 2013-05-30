@@ -36,6 +36,7 @@
                 if ($scope.isFromEmployee)
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
                         $scope.task = data;
+                        $scope.employeeId = $scope.task.employeeId;
                     });
                 else
                     serviceTask.getById($routeParams.taskId, function (data) {

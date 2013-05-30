@@ -25,6 +25,7 @@ BEGIN
 		  ,CompletedDate = @CompletedDate
 		  ,[Status] = @IsDone
   		  ,[Principal_Cd] = @PrincipalId
+		  ,[PrincipalIsTeam] = @PrincipalIsTeam
 		  ,[ResolvedByOne] = @ResolvedByOne
 		  ,Employee_Cd = @EmployeeId
 		  ,TaskId = @TaskId

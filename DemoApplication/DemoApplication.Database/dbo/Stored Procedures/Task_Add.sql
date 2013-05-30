@@ -20,9 +20,9 @@ CREATE PROCEDURE Task_Add
 AS
 BEGIN
 	INSERT INTO Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, ResolvedByOne, TemplateId, CategoryId)
+		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, PrincipalIsTeam, Principal_Cd, ResolvedByOne, TemplateId, CategoryId)
 	VALUES
-		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
+		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalIsTeam, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
 
 	SELECT SCOPE_IDENTITY()
 END

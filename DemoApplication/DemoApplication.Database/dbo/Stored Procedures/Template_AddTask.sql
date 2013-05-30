@@ -20,14 +20,14 @@ CREATE PROCEDURE Template_AddTask
 AS
 BEGIN
 	insert into Task 
-		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, ResolvedByOne, CategoryId)
+		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, PrincipalIsTeam, ResolvedByOne, CategoryId)
 	values 
-		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @CategoryId)
+		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @PrincipalIsTeam, @ResolvedByOne, @CategoryId)
 
 	insert into Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, ResolvedByOne, TemplateId, CategoryId)
+		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, PrincipalIsTeam, ResolvedByOne, TemplateId, CategoryId)
 	values 
-		(@Name, @Description, SCOPE_IDENTITY(), @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
+		(@Name, @Description, SCOPE_IDENTITY(), @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @PrincipalIsTeam, @ResolvedByOne, @TemplateId, @CategoryId)
 
 
 	SELECT SCOPE_IDENTITY()
