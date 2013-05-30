@@ -156,6 +156,7 @@
     <Build Include="dbo\Stored Procedures\Team_GetMembers.sql" />
     <Build Include="dbo\Stored Procedures\Team_DeleteMembers.sql" />
     <Build Include="dbo\Stored Procedures\Approver_GetBrief.sql" />
+    <Build Include="dbo\Stored Procedures\Approver_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

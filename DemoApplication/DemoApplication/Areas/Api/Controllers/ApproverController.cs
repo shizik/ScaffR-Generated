@@ -19,33 +19,24 @@
             }
         }
 
-        public Employee Get(string id)
+        public Approver Get(string id)
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Employee_GetById", new { EmployeeId = id }, commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Approver_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
 
-                var employee = result.Read<Employee>().Single();
-                //TODO: These fields are not in the database
-                employee.Title = "This is a title";
-                employee.Email = "email@example.com";
+                var approver = result.Read<Approver>().Single();
+                approver.Tasks = result.Read<Approver.Assignment>().ToList();
 
-                employee.Tasks = result.Read<Assignment>().ToList();
-
-                return employee;
+                return approver;
             }
         }
 
         [HttpGet]
-        public string GetMilestoneValue(string id, int milestoneId)
+        public Approver MyTasks()
         {
-            using (var db = new DapperDatabase())
-            {
-                return db.Connection.Query<DateTime>("Employee_GetMilestoneValue",
-                                                     new { Id = id, MilestoneId = milestoneId },
-                                                     commandType: CommandType.StoredProcedure)
-                                    .First().ToShortDateString();
-            }
+            // TODO: Get the Id from the logged in user
+            return Get("D1BKRHX3X5A3GJI3QARHFUKRC4VYTF");
         }
     }
 }

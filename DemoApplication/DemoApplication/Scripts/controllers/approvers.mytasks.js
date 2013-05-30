@@ -1,14 +1,12 @@
-﻿Application.Controllers.controller('approvers.detail',
+﻿Application.Controllers.controller('approvers.mytasks',
             ['$scope', '$routeParams', 'service.approver', 'service.assignment', 'service.category', 'commonUtils',
     function ($scope, $routeParams, serviceApprover, serviceAssignment, serviceCategory, commonUtils) {
-
-        $scope.$parent.backLinkText = 'Dashboard';
 
         serviceCategory.getAll(function (data) {
             $scope.categories = data;
         });
 
-        serviceApprover.getById($routeParams.id, function (data) {
+        serviceApprover.getMyTasks(function (data) {
             $scope.person = data;
 
             commonUtils.setCounts($scope.person);

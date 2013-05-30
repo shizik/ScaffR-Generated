@@ -233,6 +233,7 @@
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
+    <Compile Include="Areas\Api\Models\Approver.cs" />
     <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
     <Compile Include="Areas\Api\Models\Department.cs" />
     <Compile Include="Areas\Api\Models\Team.cs" />
@@ -483,7 +484,7 @@
     <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\controllers\approvers.index.js" />
     <Content Include="Scripts\controllers\approvers.detail.js" />
-    <Content Include="Scripts\controllers\employees.mytasks.js" />
+    <Content Include="Scripts\controllers\approvers.mytasks.js" />
     <Content Include="Scripts\controllers\templates.index.js" />
     <Content Include="Scripts\controllers\teams.index.js" />
     <Content Include="Scripts\controllers\employees.index.js" />

@@ -34,10 +34,6 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/employees/index.html',
                         controller: 'employees.index'
                     })
-                    .when('/employees/mytasks', {
-                        templateUrl: rootFolder + '/employees/detail.html',
-                        controller: 'employees.mytasks'
-                    })
                     .when('/employees/:id', {
                         templateUrl: rootFolder + '/employees/detail.html',
                         controller: 'employees.detail'
@@ -53,6 +49,10 @@ angular.module('application', ['ui.bootstrap',
                     .when('/approvers/:id', {
                         templateUrl: rootFolder + '/approvers/detail.html',
                         controller: 'approvers.detail'
+                    })
+                    .when('/mytasks', {
+                        templateUrl: rootFolder + '/approvers/detail.html',
+                        controller: 'approvers.mytasks'
                     })
 
                     //
