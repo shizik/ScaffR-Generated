@@ -14,12 +14,20 @@
         controller: function ($scope, $location, toastr) {
             $scope.templateId = $scope.$parent.template.id;
 
-            $scope.assignment = { selectedOption: undefined };
-            $scope.$watch('assignment', function (newValue) {
-                if (!newValue.selectedOption) return;
+            $scope.setTask = function (task) {
+                $scope.task.name = task.name;
+                $scope.task.description = task.description;
+                $scope.task.parentTaskId = task.id;
 
-                $scope.task.name = newValue.selectedOption;
-            }, true);
+                $scope.task.milestoneId = task.milestoneId;
+                $scope.task.milestoneValue = task.milestoneValue;
+                $scope.task.interval = task.interval;
+                $scope.task.isBefore = task.isBefore;
+
+                $scope.task.principalIsTeam = task.principalIsTeam;
+                $scope.task.principalId = task.principalId;
+                $scope.task.resolvedByOne = task.resolvedByOne;
+            };
 
             $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
             $scope.$watch('task.milestoneId', function (value) {

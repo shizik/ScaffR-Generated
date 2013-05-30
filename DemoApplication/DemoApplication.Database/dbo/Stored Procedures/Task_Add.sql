@@ -24,4 +24,5 @@ BEGIN
 	VALUES
 		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
 
-	SELECT SCOPE_IDENTITY()END
+	SELECT SCOPE_IDENTITY()
+END

@@ -4,7 +4,7 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE [dbo].[Employee_AddTask] 
-	@Id int OUTPUT,
+	@Id int,
 	@Name varchar(50),
 	@Description varchar(500),
 	@ParentTaskId int,

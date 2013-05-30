@@ -140,22 +140,22 @@
         $scope.addNewTask = function (categoryId) {
             $scope.isAddingTask = true;
 
-            $scope.newTasks[categoryId].push(
-                {
-                    "name": null,
-                    "categoryId": categoryId,
-                    "principalId": null,
-                    "interval": null,
-                    "value": null,
-                    "isBefore": null,
-                    "milestone": null,
-                    "templateId": $scope.template.id
-                });
+            var task = serviceTask.getEmpty();
+            task.templateId = $scope.template.id;
+            task.categoryId = categoryId;
+
+            $scope.newTasks[categoryId].push(task);
         };
 
         $scope.saveTask = function (task) {
-            $scope.template.tasks.push(task);
-            $scope.deleteTask(task, true);
+            serviceTask.add(task, function (id) {
+                $scope.deleteTask(task, true);
+
+                task.id = id;
+                $scope.template.tasks.push(task);
+
+                toastr.success("New Task Added");
+            });
         };
 
         $scope.deleteTask = function (task, isNew) {
@@ -165,8 +165,6 @@
             } else {
                 serviceTask.delete(task.id, function () {
                     commonUtils.removeFromList(task, $scope.template.tasks);
-                    $scope.isAddingTask = false;
-
                     toastr.success('Deleted.');
                 });
             }

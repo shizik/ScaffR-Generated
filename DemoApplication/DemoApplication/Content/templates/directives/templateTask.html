@@ -14,7 +14,7 @@
                         </div>
                     </li>
                     <li data-ng-repeat="task in available | taskInCategoryFilter:task.categoryId | orderBy:'name' | searchFilter:'name':query">
-                        <a data-ng-click="assignment.selectedOption=task.name">{{ task.name }}
+                        <a data-ng-click="setTask(task)">{{ task.name }}
                             <i class="icon-tag" data-ng-show="task.prebuilt"></i>
                         </a>
                     </li>

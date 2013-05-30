@@ -20,7 +20,7 @@
                 $scope.task.taskId = task.id;
                 $scope.task.principalIsTeam = task.principalIsTeam;
                 $scope.task.principalId = task.principalId;
-                $scope.task.resolveByOne = task.resolveByOne;
+                $scope.task.resolvedByOne = task.resolvedByOne;
                 $scope.task.employeeId = $scope.employeeId;
                 serviceTask.getDueDateFromMilestone($scope.employeeId, task, function (data) {
                     $scope.task.dueDate = data;

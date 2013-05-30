@@ -115,8 +115,6 @@
             } else {
                 serviceAssignment.delete(task.id, function () {
                     commonUtils.removeFromList(task, $scope.person.tasks);
-                    $scope.isAddingTask = false;
-
                     toastr.success('Deleted.');
                 });
             }
