@@ -26,11 +26,8 @@
                 var result = db.Connection.QueryMultiple("Employee_GetById", new { EmployeeId = id }, commandType: CommandType.StoredProcedure);
 
                 var employee = result.Read<Employee>().Single();
-                //TODO: These fields are not in the database
-                employee.Title = "This is a title";
-                employee.Email = "email@example.com";
-
                 employee.Tasks = result.Read<Assignment>().ToList();
+                employee.AppliedTemplates = result.Read<int>().ToList();
 
                 return employee;
             }

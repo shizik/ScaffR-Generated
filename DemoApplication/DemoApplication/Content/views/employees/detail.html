@@ -20,9 +20,9 @@
                         </div>
                     </div>
                 </li>
-                <li data-ng-class="{disabled:item.isApplied}" data-ng-repeat="item in templates | orderBy:'isApplied':true | orderBy:'name' | searchFilter:'name':templateQuery">
+                <li data-ng-class="{disabled:isTemplateApplied(item.id)}" data-ng-repeat="item in templates | orderBy:'name' | searchFilter:'name':templateQuery">
                     <a data-ng-click="applyTemplate(item)">
-                        <i data-ng-class="{'icon-ok':item.isApplied}"></i>
+                        <i data-ng-class="{'icon-ok':isTemplateApplied(item.id)}"></i>
                         {{item.name}}
                     </a>
                 </li>

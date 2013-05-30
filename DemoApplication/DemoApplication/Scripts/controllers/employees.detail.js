@@ -19,6 +19,7 @@
             $scope.templates = data;
         });
 
+
         serviceTask.getAvailable(function (data) {
             $scope.availableTasks = data;
         });
@@ -139,8 +140,14 @@
         //
         // Templates
 
+        $scope.isTemplateApplied = function (id) {
+            if (!$scope.person) return false;
+
+            return _.contains($scope.person.appliedTemplates, id);
+        };
+
         $scope.applyTemplate = function (template) {
-            if (template.isApplied) return;
+            if ($scope.isTemplateApplied(template.id)) return;
 
             serviceTemplate.apply(template.id, $scope.person.id, function (data) {
                 serviceEmployee.getById($routeParams.id, function (data) {
@@ -149,7 +156,6 @@
                     commonUtils.setCounts($scope.person);
                 });
 
-                template.isApplied = true;
                 toastr.success(data + 'Tasks Were Added');
             });
         };
