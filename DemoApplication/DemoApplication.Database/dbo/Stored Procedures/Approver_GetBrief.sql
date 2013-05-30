@@ -27,4 +27,10 @@ BEGIN
 	FROM dbo.Person_Main 
 	GROUP BY dbo.Person_Main.Employee_Cd, Department_Cd, First_Name_Txt, Last_Name_Txt--, OriginalHire_Dt
 			
+	SELECT d.Department_Cd as 'Id', 
+		   d.Department_Desc as 'Name', 
+   		   (SELECT COUNT(1) FROM Assignment as a INNER JOIN Person_Main as p ON a.Principal_Cd = p.Employee_Cd
+		    WHERE a.Status = 0 AND p.Department_Cd = d.Department_Cd) AS 'Count'
+	FROM Department as d
+	ORDER BY d.Department_Desc
 END

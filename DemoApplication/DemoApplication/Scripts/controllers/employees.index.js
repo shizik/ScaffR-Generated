@@ -30,7 +30,8 @@
             };
 
             serviceEmployee.getBrief(function (data) {
-                $scope.employees = data;
+                $scope.employees = data.employees;
+                $scope.departments = data.departments;
 
                 _.forEach($scope.employees, function (item) {
                     $scope.statuses[0].count += item.open;

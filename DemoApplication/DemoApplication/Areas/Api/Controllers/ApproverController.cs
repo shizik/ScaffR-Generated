@@ -11,11 +11,17 @@
     public class ApproverController : ApiController
     {
         [HttpGet]
-        public IEnumerable<ApproverBrief> Brief()
+        public dynamic Brief()
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<ApproverBrief>("Approver_GetBrief", commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Approver_GetBrief", commandType: CommandType.StoredProcedure);
+
+                return new
+                {
+                    Approvers = result.Read<ApproverBrief>().ToList(),
+                    Departments = result.Read<dynamic>().ToList()
+                };
             }
         }
 
