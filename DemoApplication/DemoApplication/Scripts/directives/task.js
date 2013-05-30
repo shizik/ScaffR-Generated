@@ -34,16 +34,26 @@
             $scope.newCreated = $scope.isNew();
 
             //
+            // Automatic saving changes
+
+            var firstLoad = true;
+            $scope.$watch('task', function (value) {
+                if (!value || $scope.task.id == 0) return;
+
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+
+                serviceAssignment.update($scope.task, function () {
+                    toastr.success("Changes Saved");
+                });
+            }, true);
+
+            //
             // Button actions
 
-            //$scope.$watch('task.dueDate', function (value) {
-            //    serviceAssignment.update($scope.task, function () {
-            //        toastr.success("Changes Saved");
-            //    });
-            //});
-
             $scope.saveTask = function () {
-                // TODO: Add logic for saving
                 $scope.newCreated = false;
                 $scope.saveFn({ task: $scope.task });
             };
@@ -54,10 +64,6 @@
 
             $scope.deleteTask = function () {
                 $scope.deleteFn({ task: $scope.task, isNew: $scope.newCreated });
-            };
-
-            $scope.editTask = function () {
-                // TODO: Open the details page
             };
         }]
     };

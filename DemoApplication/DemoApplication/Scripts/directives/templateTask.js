@@ -11,7 +11,7 @@
             deleteFn: '&'
         },
         replace: true,
-        controller: function ($scope, $location, toastr) {
+        controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
             $scope.templateId = $scope.$parent.template.id;
 
             $scope.setTask = function (task) {
@@ -55,22 +55,33 @@
             $scope.newCreated = $scope.isNew();
 
             //
+            // Automatic saving changes
+
+            var firstLoad = true;
+            $scope.$watch('task', function (value) {
+                if (!value || $scope.task.id == 0) return;
+
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+
+                serviceTask.update($scope.task, function () {
+                    toastr.success("Changes Saved");
+                });
+            }, true);
+
+            //
             // Button actions
 
             $scope.saveTask = function () {
-                // TODO: Add logic for saving
                 $scope.newCreated = false;
                 $scope.saveFn({ task: $scope.task });
-                toastr.success("Saved");
             };
 
             $scope.deleteTask = function () {
                 $scope.deleteFn({ task: $scope.task, isNew: $scope.newCreated });
             };
-
-            $scope.editTask = function () {
-                // TODO: Open the details page
-            };
-        }
+        }]
     };
 });
