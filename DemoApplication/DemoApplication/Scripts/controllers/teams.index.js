@@ -43,7 +43,7 @@
             //});
 
             $scope.goToDetails = function (team) {
-                $location.path('/teams/' + team.id);
+                $location.path('/teams/detail/' + team.id);
             };
 
             $scope.containsStatus = function (status) {

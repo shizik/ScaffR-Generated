@@ -19,6 +19,7 @@
             $scope.templates = data;
         });
 
+
         serviceTask.getAvailable(function (data) {
             $scope.availableTasks = data;
         });
@@ -78,6 +79,8 @@
                 }
 
                 var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
+                if (!principal) return;
+
                 result.push({ id: principal.id, name: principal.name, count: 1 });
             });
 
@@ -113,8 +116,6 @@
             } else {
                 serviceAssignment.delete(task.id, function () {
                     commonUtils.removeFromList(task, $scope.person.tasks);
-                    $scope.isAddingTask = false;
-
                     toastr.success('Deleted.');
                 });
             }
@@ -139,8 +140,14 @@
         //
         // Templates
 
+        $scope.isTemplateApplied = function (id) {
+            if (!$scope.person) return false;
+
+            return _.contains($scope.person.appliedTemplates, id);
+        };
+
         $scope.applyTemplate = function (template) {
-            if (template.isApplied) return;
+            if ($scope.isTemplateApplied(template.id)) return;
 
             serviceTemplate.apply(template.id, $scope.person.id, function (data) {
                 serviceEmployee.getById($routeParams.id, function (data) {
@@ -149,7 +156,6 @@
                     commonUtils.setCounts($scope.person);
                 });
 
-                template.isApplied = true;
                 toastr.success(data + 'Tasks Were Added');
             });
         };

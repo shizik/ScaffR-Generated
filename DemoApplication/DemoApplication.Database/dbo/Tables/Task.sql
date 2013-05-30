@@ -11,6 +11,7 @@
     [Recurring]      BIT           CONSTRAINT [DF_Task_Recurring] DEFAULT ((0)) NOT NULL,
     [ReminderInfo]   VARCHAR (50)  NULL,
 	[ResolvedByOne]  BIT		   NULL,
+	[PrincipalIsTeam]  BIT		   NULL,
 	[Principal_Cd]     CHAR(30)    NULL,
     [CategoryId]     INT           NOT NULL,
     CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED ([TaskId] ASC),

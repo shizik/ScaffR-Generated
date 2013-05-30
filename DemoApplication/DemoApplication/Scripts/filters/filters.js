@@ -36,10 +36,12 @@
 Application.Filters.filter('taskFilter', function () {
     return function (items, filter) {
         return _.filter(items, function (item) {
+            var id = item.principalId || item.employeeId;
+
             if (filter.status && !checkStatus(item, filter.status)) return false;
 
             if (filter.assignees.length > 0 &&
-                !_.contains(filter.assignees, item.principalId)) return false;
+                !_.contains(filter.assignees, id)) return false;
 
             if (filter.period &&
                 moment()[filter.period]() != moment(item.dueDate)[filter.period]()) return false;
@@ -71,6 +73,14 @@ Application.Filters.filter('taskInCategoryFilter', function () {
     return function (items, categoryId) {
         return _.filter(items, function (item) {
             return item.categoryId == categoryId;
+        });
+    };
+});
+
+Application.Filters.filter('employeeInDepartment', function () {
+    return function (items, departmentId) {
+        return _.filter(items, function (item) {
+            return item.departmentId == departmentId;
         });
     };
 });

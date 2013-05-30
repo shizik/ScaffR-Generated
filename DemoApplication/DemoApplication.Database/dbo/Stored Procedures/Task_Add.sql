@@ -4,8 +4,7 @@
 -- Description:	
 -- =============================================
 CREATE PROCEDURE Task_Add 
-	-- Add the parameters for the stored procedure here
-	@Id int OUTPUT,
+	@Id int,
 	@Name varchar(50),
 	@Description varchar(500),
 	@ParentTaskId int,
@@ -14,19 +13,16 @@ CREATE PROCEDURE Task_Add
 	@Interval int,
 	@IsBefore bit,
 	@TemplateId int,
+	@PrincipalIsTeam bit,
+	@ResolvedByOne bit,
 	@CategoryId int,
 	@PrincipalId CHAR(30)
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+	INSERT INTO Task 
+		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, PrincipalIsTeam, Principal_Cd, ResolvedByOne, TemplateId, CategoryId)
+	VALUES
+		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalIsTeam, @PrincipalId, @ResolvedByOne, @TemplateId, @CategoryId)
 
-    -- Insert statements for procedure here
-	insert into Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, TemplateId, CategoryId)
-	values 
-		(@Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @TemplateId, @CategoryId)
-
-	SELECT @Id = SCOPE_IDENTITY()
+	SELECT SCOPE_IDENTITY()
 END

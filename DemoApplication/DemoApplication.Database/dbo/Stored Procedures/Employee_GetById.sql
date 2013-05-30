@@ -11,11 +11,13 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT 
-		*
+	SELECT *
 	FROM Employees
 	WHERE Id=@EmployeeId
 
 	SELECT  * From Assignments
 	WHERE EmployeeId = @EmployeeId
+
+	SELECT TemplateId From Person_Template
+	WHERE Employee_Cd = @EmployeeId
 END

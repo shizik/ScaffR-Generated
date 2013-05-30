@@ -11,40 +11,23 @@
             deleteFn: '&'
         },
         replace: true,
-        controller: function ($scope, $location, toastr) {
+        controller: ['$scope', '$location', 'service.task', 'toastr', function ($scope, $location, serviceTask, toastr) {
             $scope.templateId = $scope.$parent.template.id;
 
-            $scope.assignment = { selectedOption: undefined };
-            $scope.$watch('assignment', function (newValue) {
-                if (!newValue.selectedOption) return;
+            $scope.setTask = function (task) {
+                $scope.task.name = task.name;
+                $scope.task.description = task.description;
+                $scope.task.parentTaskId = task.id;
 
-                $scope.task.name = newValue.selectedOption;
-            }, true);
+                $scope.task.milestoneId = task.milestoneId;
+                $scope.task.milestoneValue = task.milestoneValue;
+                $scope.task.interval = task.interval;
+                $scope.task.isBefore = task.isBefore;
 
-            $scope.isTeam = false;
-            $scope.resolveByAll = null;
-            $scope.assign = function (principalId, isTeam) {
-                $scope.resolveByAll = null;
-
-                // Handle deselecting an item
-                if (principalId && $scope.task.principalId == principalId) {
-                    $scope.task.principalId = null;
-                    $scope.isTeam = false;
-                    return;
-                }
-
-                $scope.isTeam = isTeam;
-                $scope.task.principalId = principalId || '';
+                $scope.task.principalIsTeam = task.principalIsTeam;
+                $scope.task.principalId = task.principalId;
+                $scope.task.resolvedByOne = task.resolvedByOne;
             };
-
-            $scope.$watch('task.principalId', function (value) {
-                if (value == null)
-                    $scope.principal = null;
-                else if (value == '')
-                    $scope.principal = { id: 0, name: 'On-boarding Employee' };
-                else
-                    $scope.principal = _.find($scope.assignables, function (item) { return item.id == value; });
-            });
 
             $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];
             $scope.$watch('task.milestoneId', function (value) {
@@ -55,7 +38,7 @@
 
             $scope.isNew = function () {
                 return $scope.task.name == null ||
-                       $scope.task.principalId == null ||
+                       $scope.task.principalId === undefined ||
                        $scope.task.interval == null ||
                        $scope.task.isBefore == null ||
                        $scope.task.milestoneValue == null ||
@@ -72,22 +55,33 @@
             $scope.newCreated = $scope.isNew();
 
             //
+            // Automatic saving changes
+
+            var firstLoad = true;
+            $scope.$watch('task', function (value) {
+                if (!value || $scope.task.id == 0) return;
+
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+
+                serviceTask.update($scope.task, function () {
+                    toastr.success("Changes Saved");
+                });
+            }, true);
+
+            //
             // Button actions
 
             $scope.saveTask = function () {
-                // TODO: Add logic for saving
                 $scope.newCreated = false;
                 $scope.saveFn({ task: $scope.task });
-                toastr.success("Saved");
             };
 
             $scope.deleteTask = function () {
                 $scope.deleteFn({ task: $scope.task, isNew: $scope.newCreated });
             };
-
-            $scope.editTask = function () {
-                // TODO: Open the details page
-            };
-        }
+        }]
     };
 });

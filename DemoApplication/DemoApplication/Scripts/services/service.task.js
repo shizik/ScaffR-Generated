@@ -12,7 +12,9 @@
                 isBefore: null,
                 templateId: null,
                 categoryId: null,
-                principalId: null
+                resolvedByOne: false,
+                principalIsTeam: false,
+                principalId: undefined
             };
         },
 

@@ -11,11 +11,17 @@
     public class EmployeeController : ApiController
     {
         [HttpGet]
-        public IEnumerable<EmployeeBrief> Brief()
+        public dynamic Brief()
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<EmployeeBrief>("Employee_GetBrief", commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Employee_GetBrief", commandType: CommandType.StoredProcedure);
+
+                return new
+                {
+                    Employees = result.Read<EmployeeBrief>().ToList(),
+                    Departments = result.Read<dynamic>().ToList()
+                };
             }
         }
 
@@ -26,11 +32,8 @@
                 var result = db.Connection.QueryMultiple("Employee_GetById", new { EmployeeId = id }, commandType: CommandType.StoredProcedure);
 
                 var employee = result.Read<Employee>().Single();
-                //TODO: These fields are not in the database
-                employee.Title = "This is a title";
-                employee.Email = "email@example.com";
-
                 employee.Tasks = result.Read<Assignment>().ToList();
+                employee.AppliedTemplates = result.Read<int>().ToList();
 
                 return employee;
             }

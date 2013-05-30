@@ -93,7 +93,6 @@
     <Build Include="dbo\Tables\Task_Category.sql" />
     <Build Include="dbo\Tables\Task_Template.sql" />
     <Build Include="dbo\Tables\Team.sql" />
-    <Build Include="dbo\Tables\Team_Employee.sql" />
     <Build Include="dbo\Tables\Template.sql" />
     <Build Include="dbo\Views\Assignments.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
@@ -116,7 +115,7 @@
     <Build Include="dbo\Stored Procedures\Principal_GetAvailable.sql" />
     <Build Include="dbo\Stored Procedures\Task_Add.sql" />
     <Build Include="dbo\Stored Procedures\Task_Category_GetAll.sql" />
-    <Build Include="dbo\Stored Procedures\Team_AddEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\Team_AddMembers.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetBrief.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetBrief.sql" />
@@ -147,6 +146,24 @@
     <Build Include="dbo\Stored Procedures\Template_DeleteDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_AddDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_ApplyToDepartment.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Team_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Team_GetAvailableMembers.sql" />
+    <Build Include="dbo\Stored Procedures\Team_GetMembers.sql" />
+    <Build Include="dbo\Stored Procedures\Team_DeleteMembers.sql" />
+    <Build Include="dbo\Stored Procedures\Approver_GetBrief.sql" />
+    <Build Include="dbo\Stored Procedures\Approver_GetById.sql" />
+    <Build Include="dbo\Tables\Position.sql" />
+    <Build Include="dbo\Tables\Position_Template.sql" />
+    <Build Include="dbo\Stored Procedures\Template_AddPosition.sql" />
+    <Build Include="dbo\Stored Procedures\Template_DeletePosition.sql" />
+    <Build Include="dbo\Views\Positions.sql" />
+    <Build Include="dbo\Stored Procedures\Position_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Template_ApplyToPosition.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

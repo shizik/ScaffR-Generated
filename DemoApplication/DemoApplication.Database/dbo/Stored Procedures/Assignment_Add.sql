@@ -23,9 +23,9 @@ AS BEGIN
 
     -- Insert statements for procedure here
 	insert into Assignment 
-		([Name], [Description], DueDate, [Status], Principal_Cd, ResolvedByOne, Employee_Cd, TaskId, CategoryId,Reocurring)
+		([Name], [Description], DueDate, [Status], PrincipalIsTeam, Principal_Cd, ResolvedByOne, Employee_Cd, TaskId, CategoryId,Reocurring)
 	values 
-		(@Name, @Description, @DueDate, 0, @PrincipalId, @ResolvedByOne, @EmployeeId, @TaskId, @CategoryId,0)
+		(@Name, @Description, @DueDate, 0, @PrincipalIsTeam, @PrincipalId, @ResolvedByOne, @EmployeeId, @TaskId, @CategoryId,0)
 
 	SELECT SCOPE_IDENTITY()
 END

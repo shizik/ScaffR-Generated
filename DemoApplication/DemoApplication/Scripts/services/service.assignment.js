@@ -8,7 +8,7 @@
                 dueDate: null,
                 completedDate: null,
                 isDone: null,
-                principalId: null,
+                principalId: undefined,
                 principalIsTeam: null,
                 resolvedByOne: null,
                 employeeId: null,

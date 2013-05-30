@@ -18,6 +18,10 @@ BEGIN
 	FROM Departments INNER JOIN Department_Template ON Departments.Id = Department_Template.Department_Cd
 	WHERE Department_Template.TemplateId = @Id
 
+	SELECT Positions.*
+	FROM Positions INNER JOIN Position_Template ON Positions.Id = Position_Template.Position_Cd
+	WHERE Position_Template.TemplateId = @Id
+
 	SELECT Tasks.*
 	FROM Tasks
 	WHERE Tasks.TemplateId = @Id

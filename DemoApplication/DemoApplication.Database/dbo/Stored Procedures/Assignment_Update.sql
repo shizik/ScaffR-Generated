@@ -24,8 +24,9 @@ BEGIN
 		  ,DueDate = @DueDate
 		  ,CompletedDate = @CompletedDate
 		  ,[Status] = @IsDone
-		  ,ResolvedByOne = 0
-		  ,Principal_Cd = @PrincipalId
+  		  ,[Principal_Cd] = @PrincipalId
+		  ,[PrincipalIsTeam] = @PrincipalIsTeam
+		  ,[ResolvedByOne] = @ResolvedByOne
 		  ,Employee_Cd = @EmployeeId
 		  ,TaskId = @TaskId
 		  ,CategoryId = @CategoryId

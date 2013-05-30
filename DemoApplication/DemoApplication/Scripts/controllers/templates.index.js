@@ -19,7 +19,7 @@
             //});
 
             $scope.goToDetails = function (template) {
-                $location.path('/templates/' + template.id);
+                $location.path('/templates/detail/' + template.id);
             };
 
             $scope.containsStatus = function (status) {

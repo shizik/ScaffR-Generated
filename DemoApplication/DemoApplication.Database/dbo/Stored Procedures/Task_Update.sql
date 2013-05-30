@@ -26,6 +26,9 @@ BEGIN
 		  ,[MilestoneValue] = @MilestoneValue
 		  ,[Interval] = @Interval
 		  ,[IsBefore] = @IsBefore
+		  ,[Principal_Cd] = @PrincipalId
+		  ,[PrincipalIsTeam] = @PrincipalIsTeam
+		  ,[ResolvedByOne] = @ResolvedByOne
 		  ,[ParentTaskId] = @ParentTaskId
 		  ,[TemplateId] = @TemplateId
 		  ,[CategoryId] = @CategoryId

@@ -25,40 +25,72 @@ angular.module('application', ['ui.bootstrap',
         ['$routeProvider', '$httpProvider',
             function ($routeProvider, $httpProvider) {
                 var rootFolder = '/content/views';
-
+                
                 $routeProvider
+                    //
+                    // Employee Routes
+
                     .when('/employees', {
                         templateUrl: rootFolder + '/employees/index.html',
                         controller: 'employees.index'
-                    })
-                    .when('/employees/mytasks', {
-                        templateUrl: rootFolder + '/employees/detail.html',
-                        controller: 'employees.mytasks'
                     })
                     .when('/employees/:id', {
                         templateUrl: rootFolder + '/employees/detail.html',
                         controller: 'employees.detail'
                     })
+
+                    //
+                    // Approver Routes
+
+                    .when('/approvers', {
+                        templateUrl: rootFolder + '/approvers/index.html',
+                        controller: 'approvers.index'
+                    })
+                    .when('/approvers/:id', {
+                        templateUrl: rootFolder + '/approvers/detail.html',
+                        controller: 'approvers.detail'
+                    })
+                    .when('/mytasks', {
+                        templateUrl: rootFolder + '/approvers/detail.html',
+                        controller: 'approvers.mytasks'
+                    })
+
+                    //
+                    // Template Routes
+
+
                     .when('/templates', {
                         templateUrl: rootFolder + '/templates/index.html',
                         controller: 'templates.index'
                     })
-                    .when('/templates/:id', {
+                    .when('/templates/detail/:id', {
                         templateUrl: rootFolder + '/templates/detail.html',
                         controller: 'templates.detail'
                     })
+
+                    //
+                    // Team Routes
+
                     .when('/teams', {
                         templateUrl: rootFolder + '/teams/index.html',
                         controller: 'teams.index'
                     })
-                    .when('/teams/:id', {
+                    .when('/teams/detail/:id', {
                         templateUrl: rootFolder + '/teams/detail.html',
                         controller: 'teams.detail'
                     })
+
+                    //
+                    // Task Routes
+
                     .when('/tasks/edit/', {
                         templateUrl: rootFolder + '/tasks/edit.html',
                         controller: 'tasks.edit'
                     })
+
+                    //
+                    // Default Route
+
                     .otherwise({
                         redirectTo: '/employees'
                     });

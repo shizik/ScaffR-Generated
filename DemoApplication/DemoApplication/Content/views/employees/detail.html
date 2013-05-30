@@ -20,9 +20,9 @@
                         </div>
                     </div>
                 </li>
-                <li data-ng-class="{disabled:item.isApplied}" data-ng-repeat="item in templates | orderBy:'isApplied':true | orderBy:'name' | searchFilter:'name':templateQuery">
+                <li data-ng-class="{disabled:isTemplateApplied(item.id)}" data-ng-repeat="item in templates | orderBy:'name' | searchFilter:'name':templateQuery">
                     <a data-ng-click="applyTemplate(item)">
-                        <i data-ng-class="{'icon-ok':item.isApplied}"></i>
+                        <i data-ng-class="{'icon-ok':isTemplateApplied(item.id)}"></i>
                         {{item.name}}
                     </a>
                 </li>
@@ -107,7 +107,7 @@
                     <strong>Instructions:</strong>
                 </p>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu est nulla, fringilla adipiscing odio. In tellus nibh, tempor at fermentum sit amet, tempus at odio. Vestibulum lacinia lacus sit amet velit facilisis sed auctor est blandit. Sed ullamcorper pulvinar eleifend. Suspendisse vel ligula orci, eu porta ipsum. Duis in odio id diam tincidunt semper vitae vel sapien. Maecenas sit amet magna ut ante vulputate faucibus.
+                    {{activeTask.description}}
                 </p>
                 <p>
                     <button class="btn">Download Form</button>
