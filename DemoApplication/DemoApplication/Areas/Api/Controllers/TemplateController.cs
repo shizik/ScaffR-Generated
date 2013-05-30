@@ -34,6 +34,7 @@
 
                 var template = result.Read<Template>().Single();
                 template.Departments = result.Read<Department>().ToList();
+                template.Positions = result.Read<Position>().ToList();
                 template.Tasks = result.Read<Task>().ToList();
 
                 return template;
@@ -60,6 +61,33 @@
                                          .First();
             }
         }
+
+        public int Put(Template entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return (int)db.Connection.Query<decimal>("Template_Add", entity, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
+        public int Post(Template entity)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Execute("Template_Update", entity, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Template_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        //
+        // Departments
 
         [HttpGet]
         public void ApplyToDepartment(int id, string departmentId)
@@ -94,27 +122,39 @@
             }
         }
 
-        public int Put(Template entity)
+        //
+        // Positions
+
+        [HttpGet]
+        public void ApplyToPosition(int id, string positionId)
         {
             using (var db = new DapperDatabase())
             {
-                return (int)db.Connection.Query<decimal>("Template_Add", entity, commandType: CommandType.StoredProcedure).First();
+                db.Connection.Execute("Template_ApplyToPosition",
+                                      new { Id = id, PositionId = positionId },
+                                      commandType: CommandType.StoredProcedure);
             }
         }
 
-        public int Post(Template entity)
+        [HttpGet]
+        public void AddPosition(int id, string positionId)
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Template_Update", entity, commandType: CommandType.StoredProcedure);
+                db.Connection.Execute("Template_AddPosition",
+                                      new { Id = id, PositionId = positionId },
+                                      commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void Delete(int id)
+        [HttpGet]
+        public void DeletePosition(int id, string positionId)
         {
             using (var db = new DapperDatabase())
             {
-                db.Connection.Execute("Template_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+                db.Connection.Execute("Template_DeletePosition",
+                                      new { Id = id, PositionId = positionId },
+                                      commandType: CommandType.StoredProcedure);
             }
         }
     }

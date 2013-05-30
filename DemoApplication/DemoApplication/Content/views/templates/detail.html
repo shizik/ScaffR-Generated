@@ -23,39 +23,39 @@
             <strong>Template applies to:</strong>
         </p>
         <ul class="inline">
-            <li data-ng-repeat="assignable in template.departments">
+            <li data-ng-repeat="department in template.departments">
                 <div class="btn-group">
-                    <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTemplate(assignable)">
-                        <i class="icon-ok" data-ng-show="assignable.isApplied"></i>
-                        {{assignable.name}}
+                    <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTo(department, 'Department')">
+                        <i class="icon-ok" data-ng-show="department.isApplied"></i>
+                        {{department.name}}
                     </button>
-                    <button class="btn" data-ng-click="removeTemplateAssignable(assignable, $index)"><i class="icon-remove"></i></button>
+                    <button class="btn" data-ng-click="removeApplicable(department, 'Department', template.departments)"><i class="icon-remove"></i></button>
                 </div>
             </li>
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Add Department <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
                     <li data-ng-repeat="department in departments">
-                        <a href="" data-ng-click="setTemplateAssignable(department)">{{ department.name }}</a>
+                        <a href="" data-ng-click="setApplicable(department,'Department', template.departments)">{{ department.name }}</a>
                     </li>
                 </ul>
             </li>
         </ul>
-        <ul class="inline">
-            <li data-ng-repeat="assignable in template.positions">
+                <ul class="inline">
+            <li data-ng-repeat="position in template.positions">
                 <div class="btn-group">
-                    <button class="btn btn-success" title="Click to apply the template">
-                        <i class="icon-ok" data-ng-show="assignable.isApplied"></i>
-                        {{assignable}}
+                    <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTo(position, 'Position')">
+                        <i class="icon-ok" data-ng-show="position.isApplied"></i>
+                        {{position.name}}
                     </button>
-                    <button class="btn" data-ng-click="removePosition(assignable, $index)"><i class="icon-remove"></i></button>
+                    <button class="btn" data-ng-click="removeApplicable(position, 'Position', template.positions)"><i class="icon-remove"></i></button>
                 </div>
             </li>
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Add Position <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
                     <li data-ng-repeat="position in positions">
-                        <a href="" data-ng-click="setPosition(position)">{{ position }}</a>
+                        <a href="" data-ng-click="setApplicable(position,'Position', template.positions)">{{ position.name }}</a>
                     </li>
                 </ul>
             </li>

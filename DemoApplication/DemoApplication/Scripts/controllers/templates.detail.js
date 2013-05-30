@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('templates.detail',
-            ['$scope', '$location', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
-    function ($scope, $location, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, serviceCategory, serviceMilestone, commonUtils, toastr) {
+            ['$scope', '$location', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.position', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+    function ($scope, $location, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, servicePosition, serviceCategory, serviceMilestone, commonUtils, toastr) {
         $scope.isEdit = false;
         $scope.isNew = false;
         $scope.$parent.backLinkText = 'Dashboard';
@@ -21,15 +21,16 @@
             } else {
                 serviceTemplate.getById($routeParams.id, function (data) {
                     $scope.template = data;
-                    $scope.template.positions = [];
                 });
             }
         });
 
-        $scope.positions = ['IT Manager', 'Sales Representative', 'Sales Manager', 'Web Developer'];
-
         serviceDepartment.getAll(function (data) {
             $scope.departments = data;
+        });
+
+        servicePosition.getAll(function (data) {
+            $scope.positions = data;
         });
 
         serviceCategory.getAll(function (data) {
@@ -50,37 +51,6 @@
         serviceTask.getAvailable(function (data) {
             $scope.availableTasks = data;
         });
-
-        //templates.individual(function (data) {
-
-        //    $scope.availableTasks = groupItems(data.availableTasks, 'categoryId');
-        //    $scope.assignables = groupItems(data.assignables, 'department');
-        //    $scope.milestones = data.milestones;
-        //    $scope.templateAssignables = groupItems(data.templateAssignables, 'department');
-
-        //    console.log('milestones', $scope.milestones);
-        //});
-
-        function groupItems(taskList, group) {
-            group = group || 'category';
-
-            var result = {
-                categories: [],
-                group: {}
-            };
-
-            _.forEach(taskList, function (item) {
-
-                if (!result.group[item[group]]) {
-                    result.group[item[group]] = [];
-                    result.categories.push(item[group]);
-                }
-
-                result.group[item[group]].push(item);
-            });
-
-            return result;
-        }
 
         //
         // Filtering
@@ -173,30 +143,22 @@
         //
         // Template Assignables
 
-        $scope.setTemplateAssignable = function (assignable) {
-            serviceTemplate.addDepartment($scope.template.id, assignable.id, function () {
-                $scope.template.departments.push(assignable);
+        $scope.setApplicable = function (item, action, list) {
+            serviceTemplate['add' + action]($scope.template.id, item.id, function () {
+                list.push(item);
             });
         };
 
-        $scope.removeTemplateAssignable = function (assignable, index) {
-            serviceTemplate.deleteDepartment($scope.template.id, assignable.id, function () {
-                $scope.template.departments.splice(index, 1);
+        $scope.removeApplicable = function (item, action, list) {
+            serviceTemplate['delete' + action]($scope.template.id, item.id, function () {
+                commonUtils.removeFromList(item, list);
             });
         };
 
-        $scope.setPosition = function (position) {
-            $scope.template.positions.push(position);
-        };
-
-        $scope.removePosition = function (position, index) {
-            $scope.template.positions.splice(index, 1);
-        };
-
-        $scope.applyTemplate = function (department) {
-            serviceTemplate.applyToDepartment($scope.template.id, department.id, function () {
+        $scope.applyTo = function (item, action) {
+            serviceTemplate['applyTo' + action]($scope.template.id, item.id, function () {
                 toastr.success('Applied Successfully');
-                department.isApplied = true;
+                item.isApplied = true;
             });
         };
 
