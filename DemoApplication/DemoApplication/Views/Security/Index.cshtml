@@ -20,35 +20,34 @@
             <ul class="nav nav-pills pull-left" data-ng-show="showBackLink()">
                 <li><a href="" data-ng-click="goBack()">Back to {{backLinkText}}</a></li>
             </ul>
-            <ul class="nav nav-pills pull-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+            <div class="pull-right">
+                <div class="dropdown">
+                    <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">Create <i class="icon-plus"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/tasks/edit">Task</a></li>
                         <li><a href="#/templates/detail/new">Template</a></li>
                         <li><a href="#/teams/detail/new">Team</a></li>
                     </ul>
-                </li>
+                </div>
+            </div>
+            <ul class="nav nav-pills pull-right">
+                <li><a href="#/mytasks">My Tasks</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboard <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/employees">Employees</a></li>
                         <li><a href="#/teams">Teams</a></li>
-                        <li><a href="#/approvers">Approvers</a></li>
+                        @*<li><a href="#/approvers">Approvers</a></li>*@
                     </ul>
                 </li>
-                <li><a href="#/templates">Templates</a></li>
-                <li><a href="#/mytasks">My Tasks</a></li>
-                <li><a>Reports</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a>Company</a></li>
-                        <li><a>Templates</a></li>
-                        <li><a>Emails</a></li>
+                        <li><a href="#/templates">Templates</a></li>
+                        <li><a href="#/teams">Teams</a></li>
+                        <li><a href="#/tasks">Tasks</a></li>
                     </ul>
                 </li>
-                <li><a class="muted">Need help? <i class="icon-question-sign"></i></a></li>
             </ul>
             <div class="clearfix"></div>
             <div data-ng-view=""></div>

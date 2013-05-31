@@ -31,6 +31,10 @@
             $http.get('/api/task/?id=' + id).success(callback);
         },
 
+        getBrief: function (callback) {
+            $http.get('/api/task/brief').success(callback);
+        },
+
         getAvailable: function (callback) {
             $http.get('/api/task/available').success(callback);
         },

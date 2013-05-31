@@ -237,6 +237,7 @@
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
     <Compile Include="Areas\Api\Models\Approver.cs" />
+    <Compile Include="Areas\Api\Models\TaskBrief.cs" />
     <Compile Include="Areas\Api\Models\Position.cs" />
     <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
     <Compile Include="Areas\Api\Models\Department.cs" />
@@ -476,6 +477,7 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="Content\views\approvers\detail.html" />
     <Content Include="Content\views\approvers\index.html" />
+    <Content Include="Content\views\tasks\index.html" />
     <Content Include="Content\views\teams\detail.html" />
     <Content Include="Content\views\teams\index.html" />
     <Content Include="Content\views\templates\detail.html" />
@@ -489,6 +491,7 @@
     <Content Include="Scripts\controllers\approvers.index.js" />
     <Content Include="Scripts\controllers\approvers.detail.js" />
     <Content Include="Scripts\controllers\approvers.mytasks.js" />
+    <Content Include="Scripts\controllers\tasks.index.js" />
     <Content Include="Scripts\controllers\templates.index.js" />
     <Content Include="Scripts\controllers\teams.index.js" />
     <Content Include="Scripts\controllers\employees.index.js" />
