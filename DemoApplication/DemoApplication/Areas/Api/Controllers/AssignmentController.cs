@@ -1,11 +1,11 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
-    using System.Data;
-    using System.Web.Http;
     using Infrastructure.Data;
     using Models;
-    using System.Linq;
     using Newtonsoft.Json.Linq;
+    using System.Data;
+    using System.Linq;
+    using System.Web.Http;
 
     public class AssignmentController : ApiController
     {

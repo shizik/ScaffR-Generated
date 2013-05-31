@@ -231,6 +231,8 @@
     <Compile Include="Areas\Api\Controllers\TeamController.cs" />
     <Compile Include="Areas\Api\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Api\Helpers\ActivityLogger.cs" />
+    <Compile Include="Areas\Api\Models\Activity.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
