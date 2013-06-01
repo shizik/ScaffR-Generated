@@ -12,8 +12,6 @@
             $scope.principal = null;
 
             $scope.assign = function (principal) {
-                $scope.resolveByAll = null;
-
                 // Handle deselecting an item
                 if (principal && $scope.task.principalId == principal.id) {
                     $scope.task.principalId = undefined;
@@ -46,7 +44,7 @@
 
             // Handles the case when assignables are loaded after the task
             $scope.$watch('assignables', function (value) {
-                if (!value || $scope.task.principalId === undefined || value.length == 0) return;
+                if (!value || !$scope.task || $scope.task.principalId === undefined || value.length == 0) return;
 
                 $scope.principal = findPrincipal();
             });

@@ -33,8 +33,11 @@
         </span>
         | <i class="icon-user"></i>
         <span data-assign-principal="" data-default-id="{{employeeId}}" data-task="task" data-assignables="assignables"></span>
+        <span data-ng-show="task.approverId">| Approver:
+            <span data-assign-approver="" data-task="task" data-assignables="assignables"></span>
+        </span>
         | <i class="icon-calendar"></i>
-        <span data-ng-switch="" data-on="task.isDone">
+        <span data-ng-switch="" data-on="task.status > 1">
             <span data-ng-switch-when="true">{{task.dueDate | date:'MM/dd/yy'}}</span>
             <span data-ng-switch-default="">
                 <a data-ng-switch="" data-on="task.dueDate" data-b-datepicker="" data-ng-model="task.dueDate">

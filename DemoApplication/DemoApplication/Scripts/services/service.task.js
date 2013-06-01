@@ -14,7 +14,7 @@
                 principalIsTeam: false,
                 resolvedByOne: false,
                 principalId: undefined,
-                approverId: undefined,
+                approverId: null,
 
                 requiresSignature: false,
                 recurring: false,

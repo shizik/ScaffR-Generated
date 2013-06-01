@@ -13,7 +13,7 @@
                 principalIsTeam: null,
                 resolvedByOne: null,
                 principalId: undefined,
-                approverId: undefined,
+                approverId: null,
                 employeeId: null,
 
                 requiresSignature: false,

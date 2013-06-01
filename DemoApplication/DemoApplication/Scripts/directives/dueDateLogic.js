@@ -39,6 +39,17 @@
 
                 $scope.task.isBefore = newValue === 'true';
             }, true);
+
+            var taskLoaded = false;
+            $scope.$watch('task.milestoneId', function (newValue) {
+                if (newValue === undefined) return;
+                if (!taskLoaded) {
+                    taskLoaded = true;
+                    return;
+                }
+
+                $scope.task.recurring = _.find($scope.milestones, function (item) { return item.id == newValue }).recurring;
+            }, true);
         }
     };
 });

@@ -3,6 +3,7 @@
         function ($scope, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 
+            $scope.hasApprover = false;
             $scope.isNew = $routeParams.templateId != undefined ||
                            $routeParams.employeeId != undefined ||
                           ($routeParams.assignmentId == undefined &&
@@ -37,10 +38,12 @@
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
                         $scope.task = data;
                         $scope.employeeId = $scope.task.employeeId;
+                        $scope.hasApprover = data.approverId != null;
                     });
                 else
                     serviceTask.getById($routeParams.taskId, function (data) {
                         $scope.task = data;
+                        $scope.hasApprover = data.approverId != null;
                     });
             }
 
