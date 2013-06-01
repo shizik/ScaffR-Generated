@@ -19,7 +19,7 @@ BEGIN
 
 	-- Getting all tasks for the team
 	SELECT Assignment.AssignmentId AS Id,
-		   Assignment.IsDone,
+		   Assignment.Status,
 		   Assignment.Name AS Name,  
 		   Person_Main.Employee_Cd AS PrincipalId, 		   
 		   Last_Name_Txt + ' ' + First_Name_Txt AS PrincipalName, 

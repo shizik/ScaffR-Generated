@@ -5,16 +5,23 @@
                 id: 0,
                 name: null,
                 description: null,
-                parentTaskId: null,
+
                 milestoneId: null,
                 milestoneValue: null,
                 interval: null,
                 isBefore: null,
-                templateId: null,
-                categoryId: null,
-                resolvedByOne: false,
+
                 principalIsTeam: false,
-                principalId: undefined
+                resolvedByOne: false,
+                principalId: undefined,
+                approverId: undefined,
+
+                requiresSignature: false,
+                recurring: false,
+
+                parentTaskId: null,
+                templateId: null,
+                categoryId: null
             };
         },
 

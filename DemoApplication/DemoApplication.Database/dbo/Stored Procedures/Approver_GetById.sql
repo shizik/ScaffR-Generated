@@ -15,7 +15,7 @@ BEGIN
 
 	-- Getting all tasks for the approver
 	SELECT Assignment.AssignmentId AS Id,
-		   Assignment.IsDone,
+		   Assignment.Status,
 		   Assignment.Name AS Name,  
 		   Description,
 		   Person_Main.Employee_Cd AS EmployeeId, 		   

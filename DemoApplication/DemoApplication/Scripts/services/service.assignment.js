@@ -5,13 +5,20 @@
                 id: 0,
                 name: null,
                 description: null,
+
+                status: 1,
                 dueDate: null,
                 completedDate: null,
-                isDone: null,
-                principalId: undefined,
+
                 principalIsTeam: null,
                 resolvedByOne: null,
+                principalId: undefined,
+                approverId: undefined,
                 employeeId: null,
+
+                requiresSignature: false,
+                recurring: false,
+
                 taskId: null,
                 categoryId: categoryId
             };

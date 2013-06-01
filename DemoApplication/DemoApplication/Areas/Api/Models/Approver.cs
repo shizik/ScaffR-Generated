@@ -16,7 +16,7 @@ namespace DemoApplication.Areas.Api.Models
         public class Assignment
         {
             public int Id { get; set; }
-            public bool IsDone { get; set; }
+            public int Status { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
             public string EmployeeId { get; set; }

@@ -1,6 +1,6 @@
-﻿<li class="task" data-ng-class="{completed:task.isDone}">
+﻿<li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}">
     <div>
-        <input class="task-checkbox" type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
+        <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
         <span data-ng-switch="" data-on="task.name">
             <span class="dropdown" data-ng-switch-when="null">
                 <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>

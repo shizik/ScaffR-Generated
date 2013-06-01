@@ -40,7 +40,7 @@
     </table>
 
     <div class="span12 tiles" data-ng-switch-when="tiles">
-        <div class="tile well tile-list" data-ng-click="goToDetails(item)" data-ng-repeat="item in tasks | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse">
+        <div class="tile well tile-list" data-ng-click="goToDetails(item)" data-ng-repeat="item in tasks | searchFilter:'name':query | orderBy:predicate:reverse">
             <ul class="nav nav-list">
                 <li>
                     <h4>{{item.name}}</h4>

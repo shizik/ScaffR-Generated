@@ -7,13 +7,20 @@ CREATE PROCEDURE Assignment_Update
 	@Id int,
 	@Name varchar(50),
 	@Description varchar(500),
+	
+	@Status tinyint,
 	@DueDate datetime,
 	@CompletedDate datetime,
-	@IsDone bit,
-	@PrincipalId CHAR(30),
+	
 	@PrincipalIsTeam bit,
 	@ResolvedByOne bit,
-	@EmployeeId CHAR(30),
+	@PrincipalId CHAR(30),
+	@ApproverId CHAR(30),
+	@EmployeeId CHAR (30),
+
+	@RequiresSignature BIT,
+    @Recurring BIT,
+
 	@TaskId int,
 	@CategoryId int
 AS
@@ -21,14 +28,17 @@ BEGIN
 	UPDATE [dbo].[Assignment]
 	   SET [Name] = @Name
 		  ,[Description] = @Description
-		  ,DueDate = @DueDate
-		  ,CompletedDate = @CompletedDate
-		  ,[Status] = @IsDone
-  		  ,[Principal_Cd] = @PrincipalId
+		  ,[DueDate] = @DueDate
+
 		  ,[PrincipalIsTeam] = @PrincipalIsTeam
 		  ,[ResolvedByOne] = @ResolvedByOne
-		  ,Employee_Cd = @EmployeeId
-		  ,TaskId = @TaskId
+  		  ,[Principal_Cd] = @PrincipalId
+		  ,[Approver_Cd] = @ApproverId
+		  ,[Employee_Cd] = @EmployeeId
+
+		  ,[RequiresSignature] = @RequiresSignature
+		  ,[Recurring] = @Recurring
+
 		  ,CategoryId = @CategoryId
 	 WHERE AssignmentId = @Id
 END

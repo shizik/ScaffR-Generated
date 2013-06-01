@@ -63,20 +63,6 @@
         }, true);
 
         //
-        // Add new task
-
-        $scope.saveTask = function (task) {
-            serviceAssignment.add(task, function (id) {
-                $scope.deleteTask(task, true);
-
-                task.id = id;
-                $scope.person.tasks.push(task);
-
-                toastr.success("New Task Added");
-            });
-        };
-
-        //
         // Individual task view
 
         $scope.listView = true;
