@@ -168,6 +168,7 @@
     <Build Include="dbo\Stored Procedures\Activity_Log.sql" />
     <Build Include="dbo\Stored Procedures\Task_GetBrief.sql" />
     <Build Include="dbo\Views\TaskBriefs.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_Complete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

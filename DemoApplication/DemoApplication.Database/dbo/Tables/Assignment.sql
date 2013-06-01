@@ -16,6 +16,7 @@
 	[RequiresSignature]	BIT		   NOT NULL,
     [Recurring]      BIT           NOT NULL,
 
+	[AssignmentApprovalId] INT	   NULL,
     [TaskId]         INT           NOT NULL,
     [CategoryId]	 INT NOT NULL, 
 
@@ -24,5 +25,6 @@
     CONSTRAINT [FK_Assignment_Principal] FOREIGN KEY ([Principal_Cd]) REFERENCES [dbo].[Principal] ([Principal_Cd]),
     CONSTRAINT [FK_Assignment_Approver] FOREIGN KEY ([Approver_Cd]) REFERENCES [dbo].[Person_Main] ([Employee_Cd]),
     CONSTRAINT [FK_Assignment_Task] FOREIGN KEY ([TaskId]) REFERENCES [dbo].[Task] ([TaskId]), 
-    CONSTRAINT [FK_Assignment_Task_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Task_Category] ([CategoryId])
+    CONSTRAINT [FK_Assignment_Task_Category] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Task_Category] ([CategoryId]),
+    CONSTRAINT [FK_Assignment_AssignmentApproval] FOREIGN KEY ([AssignmentApprovalId]) REFERENCES [dbo].[Assignment] ([AssignmentId])
 );

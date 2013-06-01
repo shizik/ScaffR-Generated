@@ -65,16 +65,13 @@
         //
         // Individual task view
 
-        $scope.listView = true;
-        $scope.activeTask = undefined;
-
+        $scope.activeTaskId = undefined;
         $scope.showTask = function (task) {
-            $scope.activeTask = task;
-            $scope.listView = false;
+            $scope.activeTaskId = task.id;
         };
 
         $scope.backToList = function () {
-            $scope.activeTask = undefined;
-            $scope.listView = true;
+            $scope.activeTaskId = undefined;
         };
+
     }]);

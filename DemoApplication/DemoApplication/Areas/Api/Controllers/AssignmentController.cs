@@ -53,5 +53,15 @@
                 db.Connection.Execute("Assignment_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        [HttpPost]
+        public Assignment Complete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Assignment>("Assignment_Complete", new { Id = id }, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
     }
 }

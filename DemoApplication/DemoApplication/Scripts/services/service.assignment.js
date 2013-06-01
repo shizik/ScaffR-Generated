@@ -42,6 +42,10 @@
 
         delete: function (id, callback) {
             $http.delete('/api/assignment/?id=' + id).success(callback);
+        },
+
+        complete: function (id, callback) {
+            $http.post('/api/assignment/complete?id=' + id).success(callback);
         }
     };
 }]);

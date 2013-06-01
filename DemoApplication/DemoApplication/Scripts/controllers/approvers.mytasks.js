@@ -61,32 +61,10 @@
         }, true);
 
         //
-        // Add new task
-
-        $scope.saveTask = function (task) {
-            serviceAssignment.add(task, function (id) {
-                $scope.deleteTask(task, true);
-
-                task.id = id;
-                $scope.person.tasks.push(task);
-
-                toastr.success("New Task Added");
-            });
-        };
-
-        //
         // Individual task view
 
-        $scope.listView = true;
-        $scope.activeTask = undefined;
-
+        $scope.activeTaskId = undefined;
         $scope.showTask = function (task) {
-            $scope.activeTask = task;
-            $scope.listView = false;
-        };
-
-        $scope.backToList = function () {
-            $scope.activeTask = undefined;
-            $scope.listView = true;
+            $scope.activeTaskId = task.id;
         };
     }]);

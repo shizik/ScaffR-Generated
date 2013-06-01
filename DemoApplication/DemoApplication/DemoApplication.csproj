@@ -458,6 +458,7 @@
     <Content Include="Content\templates\dialog\message.html" />
     <Content Include="Content\templates\directives\assignPrincipal.html" />
     <Content Include="Content\templates\directives\assignApprover.html" />
+    <Content Include="Content\templates\directives\assignmentDetail.html" />
     <Content Include="Content\templates\directives\dueDateLogic.html" />
     <Content Include="Content\templates\directives\layoutChange.html" />
     <Content Include="Content\templates\directives\templateTask.html" />
@@ -501,6 +502,7 @@
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
     <Content Include="Scripts\directives\assignPrincipal.js" />
     <Content Include="Scripts\directives\assignApprover.js" />
+    <Content Include="Scripts\directives\assignmentDetail.js" />
     <Content Include="Scripts\directives\dueDateLogic.js" />
     <Content Include="Scripts\directives\templateTask.js" />
     <Content Include="Scripts\directives\task.js" />

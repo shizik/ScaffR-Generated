@@ -1,0 +1,29 @@
+﻿<div>
+    <div class="span8">
+        <h4><a data-ng-click="backToList()">Back to Task List</a></h4>
+        <div data-ng-class="{'completed':assignment.status==3, 'muted':assignment.status==2}">
+            <i data-ng-class="{'icon-edit':assignment.status==1, 'icon-share':assignment.status==2, 'icon-check':assignment.status==3}"></i>
+            {{assignment.name}}
+            | <i class="icon-calendar"></i>
+            {{assignment.dueDate | date:'MM/dd/yy'}}
+            <button data-ng-show="assignment.status==1" class="btn btn-success" data-ng-click="complete()">Complete Task</button>
+        </div>
+        <p>
+            <strong>Instructions:</strong>
+        </p>
+        <p>
+            {{assignment.description}}
+        </p>
+        <!--<p>
+            <button class="btn">Download Form</button>
+            <button class="btn btn-success">Upload Completed Form</button>
+        </p>-->
+        <!--<hr />
+        <ul class="unstyled">
+            <li class="muted">04/12/13 Viewed by You</li>
+            <li class="muted">04/12/13 Viewed by George Washington</li>
+            <li class="muted">04/12/13 Viewed by Christine Washington</li>
+            <li class="muted">04/12/13 Downloaded by George Washington</li>
+        </ul>-->
+    </div>
+</div>
