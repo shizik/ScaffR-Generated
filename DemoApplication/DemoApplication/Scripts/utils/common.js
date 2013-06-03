@@ -33,7 +33,7 @@
                 { "status": "open", "count": 0 },
                 { "status": "overdue", "count": 0 },
                 { "status": "pending", "count": 0 },
-                { "status": "closed", "count": 0 },
+                { "status": "closed", "count": 0 }
             ];
 
             _.forEach(items, function (item) {
@@ -46,6 +46,59 @@
             });
 
             return statuses;
+        },
+
+        setPeriods: function (tasks, $scope) {
+            if (!$scope.periods) {
+                $scope.periods = [
+                    { name: 'Today', func: 'dayOfYear', count: 0 },
+                    { name: 'This Week', func: 'week', count: 0 },
+                    { name: 'This Month', func: 'month', count: 0 }
+                ];
+            }
+
+            _.forEach($scope.periods, function (item) {
+                item.count = 0;
+            });
+
+            _.forEach(tasks, function (item) {
+                _.forEach($scope.periods, function (period) {
+                    if (moment()[period.func]() != moment(item.dueDate)[period.func]()) return;
+
+                    period.count += 1;
+                });
+            });
+        },
+
+        setAssignees: function (tasks, $scope, useExternal) {
+            var result = [];
+
+            _.forEach(tasks, function (item) {
+
+                if (useExternal && (!$scope.assignables || $scope.assignables.length == 0)) return;
+
+                var prefix = item.principalId ? 'principal' : 'employee',
+                    id = item.principalId || item.employeeId;
+
+                // Handle assignees counts
+                var assignee = _.findWhere(result, { id: id });
+                if (assignee) {
+                    assignee.count += 1;
+                    return;
+                }
+
+                if (!useExternal) {
+                    result.push({ id: id, name: item[prefix + 'Name'], count: 1 });
+                    return;
+                }
+
+                var principal = _.find($scope.assignables, function (p) { return p.id == id; });
+                if (!principal) return;
+
+                result.push({ id: id, name: principal.name, count: 1 });
+            });
+
+            $scope.assignees = result;
         },
 
         removeFromList: function (item, list) {

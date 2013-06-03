@@ -43,48 +43,12 @@
             period: undefined
         };
 
-        $scope.assignees = [];
-        $scope.periods = [
-            { name: 'Today', func: 'dayOfYear', count: 0 },
-            { name: 'This Week', func: 'week', count: 0 },
-            { name: 'This Month', func: 'month', count: 0 }
-        ];
-
         $scope.$watch('person.tasks', function (newValue) {
             if (!newValue || newValue.length == 0) return;
 
             commonUtils.setCounts($scope.person);
-
-            var result = [];
-            _.forEach($scope.periods, function (item) {
-                item.count = 0;
-            });
-
-            _.forEach(newValue, function (item) {
-
-                // Handle period counts
-                _.forEach($scope.periods, function (period) {
-                    if (moment()[period.func]() != moment(item.dueDate)[period.func]()) return;
-
-                    period.count += 1;
-                });
-
-                if (!$scope.assignables || $scope.assignables.length == 0) return;
-
-                // Handle assignees counts
-                var assignee = _.findWhere(result, { id: item.principalId });
-                if (assignee) {
-                    assignee.count += 1;
-                    return;
-                }
-
-                var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
-                if (!principal) return;
-
-                result.push({ id: principal.id, name: principal.name, count: 1 });
-            });
-
-            $scope.assignees = result;
+            commonUtils.setPeriods(newValue, $scope);
+            commonUtils.setAssignees(newValue, $scope, true);
         }, true);
 
         //
