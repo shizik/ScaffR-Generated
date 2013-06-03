@@ -41,6 +41,13 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
+                            <ul class="collapsible" data-title="Admins">
+                                <li data-ng-repeat="a in admins | searchFilter:'name':query | orderBy:'name'">
+                                    <a data-ng-click="addMember(a, false)">{{ a.name }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <ul class="collapsible" data-title="Teams">
                                 <li data-ng-repeat="t in teams | searchFilter:'name':query | orderBy:'name'">
                                     <a data-ng-click="addMember(t, true)">{{ t.name }}</a>

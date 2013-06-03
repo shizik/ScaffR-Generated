@@ -27,6 +27,7 @@
                 $scope.departments = data.departments;
                 $scope.teams = data.teams;
                 $scope.employees = data.employees;
+                $scope.admins = data.admins;
             });
         }
 
