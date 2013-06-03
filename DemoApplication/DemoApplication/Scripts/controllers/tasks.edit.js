@@ -31,6 +31,7 @@
                 $scope.assignables = data;
             });
 
+            var numberOfRelatedTasks = 0;
             if ($scope.isNew) {
                 var task = serviceTask.getEmpty();
                 if ($routeParams.categoryId)
@@ -48,6 +49,11 @@
                     serviceTask.getById($routeParams.taskId, function (data) {
                         $scope.task = data;
                         $scope.hasApprover = data.approverId != null;
+                        if ($scope.task.parentTaskId) return;
+
+                        serviceTask.getNumberOfRelatedTasks($routeParams.taskId, function (num) {
+                            numberOfRelatedTasks = num;
+                        });
                     });
             }
 
@@ -105,6 +111,9 @@
                     });
                 },
                 'updateTask': function () {
+                    if (numberOfRelatedTasks > 0)
+                        $scope.task.updateRelated = confirm("Apply changes to " + numberOfRelatedTasks + " related tasks?");
+
                     serviceTask.update($scope.task, function () {
                         window.history.back();
                         toastr.success('Saved.');

@@ -42,6 +42,10 @@
             $http.get('/api/task/brief').success(callback);
         },
 
+        getNumberOfRelatedTasks: function (id, callback) {
+            $http.get('/api/task/numberOfRelatedTasks?id=' + id).success(callback);
+        },
+
         getAvailable: function (callback) {
             $http.get('/api/task/available').success(callback);
         },

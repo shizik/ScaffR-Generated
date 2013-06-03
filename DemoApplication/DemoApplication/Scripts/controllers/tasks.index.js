@@ -8,6 +8,6 @@
             });
 
             $scope.goToDetails = function (task) {
-                $location.path('/task/edit/?taskId=' + task.id);
+                $location.path('/tasks/edit/').search('taskId', task.id);
             };
         }]);

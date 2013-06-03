@@ -42,6 +42,7 @@ AS BEGIN
 		 [RequiresSignature],
 		 [Recurring],
 
+		 [ParentTaskId],
 		 [TemplateId],
 		 [CategoryId])
 	values 
@@ -57,9 +58,11 @@ AS BEGIN
 		 @ResolvedByOne, 
 		 @PrincipalId, 
 		 @ApproverId,
+
 		 @RequiresSignature,
 		 @Recurring,
 
+		 @ParentTaskId,
 		 @TemplateId,
 		 @CategoryId)
 

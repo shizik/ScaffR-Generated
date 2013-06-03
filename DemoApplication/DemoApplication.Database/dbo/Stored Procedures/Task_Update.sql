@@ -23,7 +23,9 @@ CREATE PROCEDURE Task_Update
 
 	@ParentTaskId int,
 	@TemplateId int,
-	@CategoryId int
+	@CategoryId int,
+
+	@UpdateRelated bit
 AS
 BEGIN
 	UPDATE [dbo].[Task]
@@ -47,4 +49,27 @@ BEGIN
 		  ,[TemplateId] = @TemplateId
 		  ,[CategoryId] = @CategoryId
 	 WHERE TaskId = @Id
+
+	 IF(@UpdateRelated = 1)
+	 BEGIN
+			UPDATE [dbo].[Task]
+			   SET [Name] = @Name
+				  ,[Description] = @Description
+
+				  ,[MilestoneId] = @MilestoneId
+				  ,[MilestoneValue] = @MilestoneValue
+				  ,[Interval] = @Interval
+				  ,[IsBefore] = @IsBefore
+
+				  ,[PrincipalIsTeam] = @PrincipalIsTeam
+				  ,[ResolvedByOne] = @ResolvedByOne
+  				  ,[Principal_Cd] = @PrincipalId
+  				  ,[Approver_Cd] = @ApproverId
+
+  				  ,[RequiresSignature] = @RequiresSignature
+				  ,[Recurring] = @Recurring
+
+				  ,[CategoryId] = @CategoryId
+			 WHERE ParentTaskId = @Id
+	END
 END

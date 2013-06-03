@@ -237,6 +237,7 @@
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
     <Compile Include="Areas\Api\Models\Approver.cs" />
+    <Compile Include="Areas\Api\Models\TaskUpdate.cs" />
     <Compile Include="Areas\Api\Models\TaskBrief.cs" />
     <Compile Include="Areas\Api\Models\Position.cs" />
     <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
