@@ -39,6 +39,10 @@
             $http.get('/api/template/addDepartment?id=' + id + '&departmentId=' + departmentId).success(callback);
         },
 
+        addAllDepartment: function (id, callback) {
+            $http.post('/api/template/addAllDepartment?id=' + id).success(callback);
+        },
+
         deleteDepartment: function (id, departmentId, callback) {
             $http.get('/api/template/deleteDepartment?id=' + id + '&departmentId=' + departmentId).success(callback);
         },
@@ -52,6 +56,10 @@
 
         addPosition: function (id, positionId, callback) {
             $http.get('/api/template/addPosition?id=' + id + '&positionId=' + positionId).success(callback);
+        },
+
+        addAllPosition: function (id, callback) {
+            $http.post('/api/template/addAllPosition?id=' + id).success(callback);
         },
 
         deletePosition: function (id, positionId, callback) {

@@ -144,9 +144,17 @@
         // Template Assignables
 
         $scope.setApplicable = function (item, action, list) {
-            serviceTemplate['add' + action]($scope.template.id, item.id, function () {
-                list.push(item);
-            });
+            if (item == null)
+                serviceTemplate['addAll' + action]($scope.template.id, function (data) {
+                    list.length = 0;
+                    _.forEach(data, function (x) {
+                        list.push(x);
+                    });
+                });
+            else
+                serviceTemplate['add' + action]($scope.template.id, item.id, function () {
+                    list.push(item);
+                });
         };
 
         $scope.removeApplicable = function (item, action, list) {

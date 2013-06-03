@@ -35,6 +35,9 @@
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Add Department <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
+                    <li>
+                        <a href="" data-ng-click="setApplicable(null,'Department', template.departments)">All</a>
+                    </li>
                     <li data-ng-repeat="department in departments">
                         <a href="" data-ng-click="setApplicable(department,'Department', template.departments)">{{ department.name }}</a>
                     </li>
@@ -54,6 +57,9 @@
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown">Add Position <i class="icon-plus"></i></a>
                 <ul class="dropdown-menu">
+                    <li>
+                        <a href="" data-ng-click="setApplicable(null,'Position', template.positions)">All</a>
+                    </li>
                     <li data-ng-repeat="position in positions">
                         <a href="" data-ng-click="setApplicable(position,'Position', template.positions)">{{ position.name }}</a>
                     </li>
