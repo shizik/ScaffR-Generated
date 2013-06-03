@@ -32,7 +32,11 @@
             });
 
             if ($scope.isNew) {
-                $scope.task = serviceTask.getEmpty();
+                var task = serviceTask.getEmpty();
+                if ($routeParams.categoryId)
+                    task.categoryId = parseInt($routeParams.categoryId);
+
+                $scope.task = task;
             } else {
                 if ($scope.isFromEmployee)
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
