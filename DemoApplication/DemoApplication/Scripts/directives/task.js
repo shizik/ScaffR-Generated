@@ -18,10 +18,16 @@
                 $scope.task.name = task.name;
                 $scope.task.description = task.description;
                 $scope.task.taskId = task.id;
+
                 $scope.task.principalIsTeam = task.principalIsTeam;
-                $scope.task.principalId = task.principalId;
                 $scope.task.resolvedByOne = task.resolvedByOne;
+                $scope.task.principalId = task.principalId;
+                $scope.task.approverId = task.approverId;
                 $scope.task.employeeId = $scope.employeeId;
+
+                $scope.task.requiresSignature = task.requiresSignature;
+                $scope.task.recurring = task.recurring;
+
                 serviceTask.getDueDateFromMilestone($scope.employeeId, task, function (data) {
                     $scope.task.dueDate = data;
                 });

@@ -1,11 +1,11 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
-    using System.Data;
-    using System.Web.Http;
     using Infrastructure.Data;
     using Models;
-    using System.Linq;
     using Newtonsoft.Json.Linq;
+    using System.Data;
+    using System.Linq;
+    using System.Web.Http;
 
     public class AssignmentController : ApiController
     {
@@ -53,5 +53,15 @@
                 db.Connection.Execute("Assignment_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        [HttpPost]
+        public Assignment Complete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Assignment>("Assignment_Complete", new { Id = id }, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
     }
 }

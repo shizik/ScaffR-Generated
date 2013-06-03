@@ -1,0 +1,28 @@
+﻿<span class="dropdown">
+    <a class="dropdown-toggle {{css}}" data-toggle="dropdown" data-ng-switch="" data-on="task.approverId">
+        <span data-ng-switch-when="null" class="muted">Set Approver</span>
+        <span data-ng-switch-default="">{{approver.name}}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li data-complex-menu="">
+            <div>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-search"></i></span>
+                    <input type="text" placeholder="Filter..." data-ng-model="query" />
+                </div>
+            </div>
+        </li>
+        <li>
+            <ul class="collapsible" data-title="{{team.name}}" data-ng-repeat="team in assignables | conditional:'isTeam':true">
+                <li data-ng-repeat="member in assignables | conditional:'teamId':team.id | searchFilter:'name':query ">
+                    <label class="checkbox">
+                        <input type="checkbox"
+                            data-ng-click="assign(member)"
+                            data-ng-checked="principal.id==member.id" />
+                        {{ member.name }}
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</span>

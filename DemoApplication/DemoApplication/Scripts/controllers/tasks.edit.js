@@ -3,6 +3,7 @@
         function ($scope, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 
+            $scope.hasApprover = false;
             $scope.isNew = $routeParams.templateId != undefined ||
                            $routeParams.employeeId != undefined ||
                           ($routeParams.assignmentId == undefined &&
@@ -30,17 +31,29 @@
                 $scope.assignables = data;
             });
 
+            var numberOfRelatedTasks = 0;
             if ($scope.isNew) {
-                $scope.task = serviceTask.getEmpty();
+                var task = serviceTask.getEmpty();
+                if ($routeParams.categoryId)
+                    task.categoryId = parseInt($routeParams.categoryId);
+
+                $scope.task = task;
             } else {
                 if ($scope.isFromEmployee)
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
                         $scope.task = data;
                         $scope.employeeId = $scope.task.employeeId;
+                        $scope.hasApprover = data.approverId != null;
                     });
                 else
                     serviceTask.getById($routeParams.taskId, function (data) {
                         $scope.task = data;
+                        $scope.hasApprover = data.approverId != null;
+                        if ($scope.task.parentTaskId) return;
+
+                        serviceTask.getNumberOfRelatedTasks($routeParams.taskId, function (num) {
+                            numberOfRelatedTasks = num;
+                        });
                     });
             }
 
@@ -98,6 +111,9 @@
                     });
                 },
                 'updateTask': function () {
+                    if (numberOfRelatedTasks > 0)
+                        $scope.task.updateRelated = confirm("Apply changes to " + numberOfRelatedTasks + " related tasks?");
+
                     serviceTask.update($scope.task, function () {
                         window.history.back();
                         toastr.success('Saved.');

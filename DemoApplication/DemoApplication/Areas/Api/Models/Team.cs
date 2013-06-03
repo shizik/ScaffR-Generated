@@ -22,7 +22,7 @@ namespace DemoApplication.Areas.Api.Models
         public class Assignment
         {
             public int Id { get; set; }
-            public bool IsDone { get; set; }
+            public int Status { get; set; }
             public string Name { get; set; }
             public string PrincipalId { get; set; }
             public string PrincipalName { get; set; }

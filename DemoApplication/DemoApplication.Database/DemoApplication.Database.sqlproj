@@ -164,6 +164,14 @@
     <Build Include="dbo\Views\Positions.sql" />
     <Build Include="dbo\Stored Procedures\Position_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\Template_ApplyToPosition.sql" />
+    <Build Include="dbo\Tables\Activity.sql" />
+    <Build Include="dbo\Stored Procedures\Activity_Log.sql" />
+    <Build Include="dbo\Stored Procedures\Task_GetBrief.sql" />
+    <Build Include="dbo\Views\TaskBriefs.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_Complete.sql" />
+    <Build Include="dbo\Stored Procedures\Template_AddAllDepartment.sql" />
+    <Build Include="dbo\Stored Procedures\Template_AddAllPosition.sql" />
+    <Build Include="dbo\Stored Procedures\Task_GetNumberOfRelatedTasks.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

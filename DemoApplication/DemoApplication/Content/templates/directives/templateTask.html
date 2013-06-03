@@ -1,6 +1,6 @@
 ﻿<li class="task">
     <div>
-        <input class="task-checkbox" type="checkbox" disabled="disabled" />
+        <i class="icon-edit"></i>
         <span data-ng-switch="" data-on="task.name">
             <span class="dropdown" data-ng-switch-when="null">
                 <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
@@ -20,7 +20,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#/tasks/edit/?templateId={{templateId}}">Create a Custom Task</a>
+                        <a href="#/tasks/edit/?templateId={{templateId}}&categoryId={{task.categoryId}}">Create a Custom Task</a>
                     </li>
                 </ul>
             </span>
@@ -28,6 +28,9 @@
         </span>
         | <i class="icon-user"></i>
         <span data-assign-principal="" data-task="task" data-assignables="assignables"></span>
+        <span data-ng-show="task.approverId">| Approver:
+            <span data-assign-approver="" data-task="task" data-assignables="assignables"></span>
+        </span>
         | <i class="icon-calendar"></i>
         <span class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" data-ng-switch="" data-on="isDueDateChosen()">

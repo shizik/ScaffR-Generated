@@ -22,6 +22,24 @@
         }
 
         [HttpGet]
+        public IEnumerable<TaskBrief> Brief()
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<TaskBrief>("Task_GetBrief", commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpGet]
+        public int NumberOfRelatedTasks(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<int>("Task_GetNumberOfRelatedTasks", new { Id = id }, commandType: CommandType.StoredProcedure).First();
+            }
+        }
+
+        [HttpGet]
         public IEnumerable<Task> Available()
         {
             using (var db = new DapperDatabase())
@@ -38,7 +56,7 @@
             }
         }
 
-        public int Post(Task entity)
+        public int Post(TaskUpdate entity)
         {
             using (var db = new DapperDatabase())
             {

@@ -11,5 +11,5 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT MilestoneId AS Id, Name FROM dbo.Milestone ORDER BY Name
+	SELECT MilestoneId AS Id, Name, Recurring FROM dbo.Milestone ORDER BY Name
 END

@@ -21,17 +21,16 @@ DECLARE @ParentTaskId int
 DECLARE @MilestoneId int
 DECLARE @MilestoneValue int
 DECLARE @Recurring bit
-DECLARE @ReminderInfo varchar(50)
 
 DECLARE @Order int = 0
 
 DECLARE  task_cursor CURSOR FOR 
-	SELECT TaskId, Name, [Description], ParentTaskId, MilestoneId, MilestoneValue, Recurring, ReminderInfo FROM Task WHERE TemplateId = @TemplateId
+	SELECT TaskId, Name, [Description], ParentTaskId, MilestoneId, MilestoneValue, Recurring FROM Task WHERE TemplateId = @TemplateId
 
 OPEN task_cursor
 
 FETCH NEXT FROM task_cursor
-INTO @TaskId, @Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Recurring, @ReminderInfo
+INTO @TaskId, @Name, @Description, @ParentTaskId, @MilestoneId, @MilestoneValue, @Recurring
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
@@ -50,7 +49,7 @@ BEGIN
 				End
 		END
 	FETCH NEXT FROM task_cursor
-	INTO @TaskId, @Name, @Description, @ListId, @ParentTaskId, @MilestoneId, @MilestoneValue, @Recurring, @ReminderInfo 
+	INTO @TaskId, @Name, @Description, @ListId, @ParentTaskId, @MilestoneId, @MilestoneValue, @Recurring 
 END
 
 CLOSE task_cursor

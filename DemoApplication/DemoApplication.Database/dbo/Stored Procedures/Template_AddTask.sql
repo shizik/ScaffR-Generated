@@ -7,28 +7,102 @@ CREATE PROCEDURE Template_AddTask
 	@Id int,
 	@Name varchar(50),
 	@Description varchar(500),
-	@ParentTaskId int,
+	
 	@MilestoneId int,
 	@MilestoneValue int,
 	@Interval int,
 	@IsBefore bit,
-	@TemplateId int,
+	
 	@PrincipalIsTeam bit,
 	@ResolvedByOne bit,
-	@CategoryId int,
-	@PrincipalId CHAR(30)
+	@PrincipalId CHAR(30),
+	@ApproverId CHAR(30),
+
+	@RequiresSignature BIT,
+    @Recurring BIT,
+
+	@ParentTaskId int,
+	@TemplateId int,
+	@CategoryId int
 AS
 BEGIN
 	insert into Task 
-		([Name], [Description], MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, PrincipalIsTeam, ResolvedByOne, CategoryId)
+		([Name], 
+		 [Description], 
+		
+		 [MilestoneId],
+		 [MilestoneValue],
+		 [Interval],
+		 [IsBefore],
+
+		 [PrincipalIsTeam],  
+		 [ResolvedByOne],
+ 		 [Principal_Cd],
+		 [Approver_Cd],
+
+		 [RequiresSignature],
+		 [Recurring],
+
+		 [CategoryId])
 	values 
-		(@Name, @Description, @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @PrincipalIsTeam, @ResolvedByOne, @CategoryId)
+		(@Name,  
+		 @Description,  
+
+		 @MilestoneId, 
+		 @MilestoneValue, 
+		 @Interval, 
+		 @IsBefore, 
+		 
+		 @PrincipalIsTeam, 
+		 @ResolvedByOne, 
+		 @PrincipalId, 
+		 @ApproverId,
+
+		 @RequiresSignature,
+		 @Recurring,
+
+		 @CategoryId)
 
 	insert into Task 
-		([Name], [Description], ParentTaskId, MilestoneId, MilestoneValue, Interval, IsBefore, Principal_Cd, PrincipalIsTeam, ResolvedByOne, TemplateId, CategoryId)
-	values 
-		(@Name, @Description, SCOPE_IDENTITY(), @MilestoneId, @MilestoneValue, @Interval, @IsBefore, @PrincipalId, @PrincipalIsTeam, @ResolvedByOne, @TemplateId, @CategoryId)
+		([Name], 
+		 [Description], 
+		
+		 [MilestoneId],
+		 [MilestoneValue],
+		 [Interval],
+		 [IsBefore],
 
+		 [PrincipalIsTeam],  
+		 [ResolvedByOne],
+ 		 [Principal_Cd],
+		 [Approver_Cd],
+
+		 [RequiresSignature],
+		 [Recurring],
+
+		 [ParentTaskId],
+		 [TemplateId],
+		 [CategoryId])
+	values 
+		(@Name,  
+		 @Description,  
+
+		 @MilestoneId, 
+		 @MilestoneValue, 
+		 @Interval, 
+		 @IsBefore, 
+		 
+		 @PrincipalIsTeam, 
+		 @ResolvedByOne, 
+		 @PrincipalId, 
+		 @ApproverId,
+
+		 @RequiresSignature,
+		 @Recurring,
+
+		 SCOPE_IDENTITY(),
+		 @TemplateId,
+		 @CategoryId)
 
 	SELECT SCOPE_IDENTITY()
 END

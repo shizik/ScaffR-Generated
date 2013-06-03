@@ -51,16 +51,18 @@
                 var teams = result.Read<dynamic>().ToList();
                 var departments = result.Read<dynamic>().ToList();
                 var employees = result.Read<dynamic>().ToList();
+                var admins = result.Read<dynamic>().ToList();
 
                 return new
                     {
                         Teams = teams,
                         Departments = departments,
-                        Employees = employees
+                        Employees = employees,
+                        Admins = admins
                     };
             }
         }
-        
+
         [HttpPut]
         public IEnumerable<Team.Member> AddMembers(TeamAddMember entity)
         {
@@ -75,8 +77,8 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Team_DeleteMember", 
-                                             new { Id = id, EmployeeId=employeeId}, 
+                return db.Connection.Execute("Team_DeleteMember",
+                                             new { Id = id, EmployeeId = employeeId },
                                              commandType: CommandType.StoredProcedure);
             }
         }

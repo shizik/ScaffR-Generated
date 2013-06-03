@@ -27,6 +27,7 @@
                 $scope.departments = data.departments;
                 $scope.teams = data.teams;
                 $scope.employees = data.employees;
+                $scope.admins = data.admins;
             });
         }
 
@@ -39,41 +40,11 @@
             period: undefined
         };
 
-        $scope.assignees = [];
-        $scope.periods = [
-            { name: 'Today', func: 'dayOfYear' },
-            { name: 'This Week', func: 'week' },
-            { name: 'This Month', func: 'month' }
-        ];
-
         $scope.$watch('team.tasks', function (newValue) {
             if (!newValue || newValue.length == 0) return;
 
-            var result = [];
-            _.forEach($scope.periods, function (item) {
-                item.count = 0;
-            });
-
-            _.forEach(newValue, function (item) {
-
-                // Handle period counts
-                _.forEach($scope.periods, function (period) {
-                    if (moment()[period.func]() != moment(item.dueDate)[period.func]()) return;
-
-                    period.count += 1;
-                });
-
-                // Handle assignees counts
-                var assignee = _.findWhere(result, { id: item.principalId });
-                if (assignee) {
-                    assignee.count += 1;
-                    return;
-                }
-
-                result.push({ id: item.principalId, name: item.principalName, count: 1 });
-            });
-
-            $scope.assignees = result;
+            commonUtils.setPeriods(newValue, $scope);
+            commonUtils.setAssignees(newValue, $scope, false);
         }, true);
 
         //

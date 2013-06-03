@@ -41,6 +41,13 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li>
+                            <ul class="collapsible" data-title="Admins">
+                                <li data-ng-repeat="a in admins | searchFilter:'name':query | orderBy:'name'">
+                                    <a data-ng-click="addMember(a, false)">{{ a.name }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <ul class="collapsible" data-title="Teams">
                                 <li data-ng-repeat="t in teams | searchFilter:'name':query | orderBy:'name'">
                                     <a data-ng-click="addMember(t, true)">{{ t.name }}</a>
@@ -58,7 +65,8 @@
                 </div>
                 <h4>Assigned Tasks <span class="text-info">({{ (team.tasks | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
-                    <li class="task" data-ng-class="{completed:task.isDone}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'dueDate'">
+                    <li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}" data-ng-repeat="task in team.tasks | taskFilter:filter | orderBy:'dueDate'">
+                        <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
                         <a href="#/tasks/edit?assignmentId={{task.id}}">{{ task.name }}</a>
                         | <i class="icon-user"></i>
                         {{task.principalName}}

@@ -58,13 +58,15 @@ Application.Filters.filter('taskFilter', function () {
 
         switch (status) {
             case 'closed':
-                return task.isDone;
+                return task.status == 3;
+            case 'pending':
+                return task.status == 2;
             case 'overdue':
-                return !task.isDone && isOverdue;
+                return task.status == 1 && isOverdue;
             case 'open':
-                return !task.isDone && !isOverdue;
+                return task.status == 1 && !isOverdue;
             default:
-                return !task.isDone;
+                return task.status < 3;
         }
     }
 });

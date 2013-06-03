@@ -5,16 +5,23 @@
                 id: 0,
                 name: null,
                 description: null,
-                parentTaskId: null,
+
                 milestoneId: null,
                 milestoneValue: null,
                 interval: null,
                 isBefore: null,
-                templateId: null,
-                categoryId: null,
-                resolvedByOne: false,
+
                 principalIsTeam: false,
-                principalId: undefined
+                resolvedByOne: false,
+                principalId: undefined,
+                approverId: null,
+
+                requiresSignature: false,
+                recurring: false,
+
+                parentTaskId: null,
+                templateId: null,
+                categoryId: null
             };
         },
 
@@ -29,6 +36,14 @@
 
         getById: function (id, callback) {
             $http.get('/api/task/?id=' + id).success(callback);
+        },
+
+        getBrief: function (callback) {
+            $http.get('/api/task/brief').success(callback);
+        },
+
+        getNumberOfRelatedTasks: function (id, callback) {
+            $http.get('/api/task/numberOfRelatedTasks?id=' + id).success(callback);
         },
 
         getAvailable: function (callback) {

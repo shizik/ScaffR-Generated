@@ -5,14 +5,10 @@
         <p><a href="#">{{person.email}}</a></p>
     </div>
     <div class="span4">
-        <p>
-            <img src="/Files/seire-logo.jpg" alt="Seire Logo" />
-        </p>
-
         <div class="btn-group dropdown">
             <a class="btn dropdown-toggle" data-toggle="dropdown">Apply Template <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li complex-menu>
+                <li data-complex-menu="">
                     <div>
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-search"></i></span>
@@ -31,101 +27,122 @@
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#tasks" data-toggle="tab"><i class="icon-tasks"></i>Tasks</a></li>
-    <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
+    <li data-ng-class="{'active':view=='tasks'}"><a data-ng-click="view='tasks'"><i class="icon-tasks"></i>Tasks</a></li>
+    <li data-ng-class="{'active':view=='todos'}"><a data-ng-click="view='todos'"><i class="icon-list"></i>To-Do List</a></li>
+    <li data-ng-class="{'active':view=='activity'}"><a data-ng-click="view='activity'"><i class="icon-bullhorn"></i>Activity</a></li>
 </ul>
-<div class="tab-content allow-overflow">
-    <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="listView">
-        <div class="row-fluid" data-ng-switch-default="">
-            <div class="span8">
-                <div data-ng-repeat="category in categories">
-                    <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
-                    <ul class="unstyled">
-                        <task task="task"
-                            assignables="assignables"
-                            details-fn="showTask(task)"
-                            delete-fn="deleteTask(task,isNew)"
-                            data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
-                    </ul>
-                    <ul class="unstyled">
-                        <task task="task"
-                            available="availableTasks"
-                            assignables="assignables"
-                            save-fn="saveTask(task)"
-                            delete-fn="deleteTask(task,isNew)"
-                            data-ng-repeat="task in newTasks[category.id]" />
-                    </ul>
-                    <p>
-                        <button class="btn"
-                            data-ng-click="addNewTask(category.id)"
-                            data-ng-show="newTasks[category.id].length == 0"
-                            data-ng-disabled="isAddingTask">
-                            Add New Task <i class="icon-plus"></i>
-                        </button>
-                    </p>
-                </div>
-            </div>
-            <div class="span4">
-                <div class="control-group">
-                    <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
-                </div>
-                <div class="control-group">
-                    <div class="btn-group">
-                        <button class="btn dropdown-toggle" data-toggle="dropdown" data-ng-disabled="assignees.length==0">
-                            Show Tasks by Assigned <i class="caret"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li data-complex-menu>
-                                <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="btn-group">
-                        <button class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></button>
-                        <ul class="dropdown-menu">
-                            <li data-complex-menu>
-                                <radio-filter list="periods" filter="filter.period" value="func" />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row-fluid" data-ng-switch-when="false">
-            <div class="span8">
-                <h4><a data-ng-click="backToList()">Back to Task List</a></h4>
+<div data-ng-switch="" data-on="view">
+    <div data-ng-controller="employees.detail.tasks" class="row-fluid" data-ng-switch-when="tasks">
+        <div class="span8">
+            <div data-ng-repeat="category in categories">
+                <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
-                    <task task="activeTask"
-                        available="availableTasks"
+                    <task task="task"
                         assignables="assignables"
                         details-fn="showTask(task)"
-                        delete-fn="deleteTask(task,isNew)" />
+                        delete-fn="deleteTask(task,isNew)"
+                        data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
                 </ul>
-                <p>
-                    <strong>Instructions:</strong>
-                </p>
-                <p>
-                    {{activeTask.description}}
-                </p>
-                <p>
-                    <button class="btn">Download Form</button>
-                    <button class="btn btn-success">Upload Completed Form</button>
-                </p>
-                <hr />
                 <ul class="unstyled">
-                    <li class="muted">04/12/13 Viewed by You</li>
-                    <li class="muted">04/12/13 Viewed by George Washington</li>
-                    <li class="muted">04/12/13 Viewed by Christine Washington</li>
-                    <li class="muted">04/12/13 Downloaded by George Washington</li>
+                    <task task="task"
+                        available="availableTasks"
+                        assignables="assignables"
+                        save-fn="saveTask(task)"
+                        delete-fn="deleteTask(task,isNew)"
+                        data-ng-repeat="task in newTasks[category.id]" />
                 </ul>
+                <p>
+                    <button class="btn"
+                        data-ng-click="addNewTask(category.id)"
+                        data-ng-show="newTasks[category.id].length == 0"
+                        data-ng-disabled="isAddingTask">
+                        Add New Task <i class="icon-plus"></i>
+                    </button>
+                </p>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="control-group">
+                <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" data-ng-disabled="assignees.length==0">
+                        Show Tasks by Assigned <i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-complex-menu>
+                            <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></button>
+                    <ul class="dropdown-menu">
+                        <li data-complex-menu>
+                            <radio-filter list="periods" filter="filter.period" value="func" />
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="tab-pane" id="activity">
+    <div data-ng-controller="employees.detail.approver" class="row-fluid" data-ng-switch-when="todos">
+        <div class="span8">
+            <div data-ng-repeat="category in categories">
+                <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
+                <ul class="unstyled">
+                    <li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}" data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'">
+                        <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
+                        <a data-ng-click="showTask(task)">{{task.name}}</a>
+                        | <i class="icon-user"></i>
+                        {{task.employeeName}}
+                            | <i class="icon-calendar"></i>
+                        {{task.dueDate | date:'MM/dd/yy'}}
+                            | <span data-task-badge="" data-task="task"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="control-group">
+                <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        Show Tasks by Employee <i class="caret"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-complex-menu="">
+                            <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></button>
+                    <ul class="dropdown-menu">
+                        <li data-complex-menu="">
+                            <radio-filter list="periods" filter="filter.period" value="func" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-ng-switch-when="activity">
         <ul class="unstyled">
             <li class="muted" data-ng-repeat="item in person.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
         </ul>
+    </div>
+    <div data-assignment-detail=""
+        data-assignment-id="activeTaskId"
+        data-back-fn="backToList()"
+        class="row-fluid"
+        data-ng-switch-default="">
     </div>
 </div>

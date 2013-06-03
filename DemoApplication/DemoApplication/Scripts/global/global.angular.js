@@ -83,6 +83,10 @@ angular.module('application', ['ui.bootstrap',
                     //
                     // Task Routes
 
+                    .when('/tasks', {
+                        templateUrl: rootFolder + '/tasks/index.html',
+                        controller: 'tasks.index'
+                    })
                     .when('/tasks/edit/', {
                         templateUrl: rootFolder + '/tasks/edit.html',
                         controller: 'tasks.edit'

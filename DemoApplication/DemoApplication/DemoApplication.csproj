@@ -231,10 +231,14 @@
     <Compile Include="Areas\Api\Controllers\TeamController.cs" />
     <Compile Include="Areas\Api\Controllers\TemplateController.cs" />
     <Compile Include="Areas\Api\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Api\Helpers\ActivityLogger.cs" />
+    <Compile Include="Areas\Api\Models\Activity.cs" />
     <Compile Include="Areas\Api\Models\Assignment.cs" />
     <Compile Include="Areas\Api\Models\AssignmentSave.cs" />
     <Compile Include="Areas\Api\Models\ApproverBrief.cs" />
     <Compile Include="Areas\Api\Models\Approver.cs" />
+    <Compile Include="Areas\Api\Models\TaskUpdate.cs" />
+    <Compile Include="Areas\Api\Models\TaskBrief.cs" />
     <Compile Include="Areas\Api\Models\Position.cs" />
     <Compile Include="Areas\Api\Models\TeamAddMember.cs" />
     <Compile Include="Areas\Api\Models\Department.cs" />
@@ -454,6 +458,8 @@
     <Content Include="Content\templates\carousel\slide.html" />
     <Content Include="Content\templates\dialog\message.html" />
     <Content Include="Content\templates\directives\assignPrincipal.html" />
+    <Content Include="Content\templates\directives\assignApprover.html" />
+    <Content Include="Content\templates\directives\assignmentDetail.html" />
     <Content Include="Content\templates\directives\dueDateLogic.html" />
     <Content Include="Content\templates\directives\layoutChange.html" />
     <Content Include="Content\templates\directives\templateTask.html" />
@@ -474,6 +480,7 @@
     <Content Include="Content\templates\typeahead\typeahead.html" />
     <Content Include="Content\views\approvers\detail.html" />
     <Content Include="Content\views\approvers\index.html" />
+    <Content Include="Content\views\tasks\index.html" />
     <Content Include="Content\views\teams\detail.html" />
     <Content Include="Content\views\teams\index.html" />
     <Content Include="Content\views\templates\detail.html" />
@@ -487,6 +494,9 @@
     <Content Include="Scripts\controllers\approvers.index.js" />
     <Content Include="Scripts\controllers\approvers.detail.js" />
     <Content Include="Scripts\controllers\approvers.mytasks.js" />
+    <Content Include="Scripts\controllers\employees.detail.approver.js" />
+    <Content Include="Scripts\controllers\employees.detail.tasks.js" />
+    <Content Include="Scripts\controllers\tasks.index.js" />
     <Content Include="Scripts\controllers\templates.index.js" />
     <Content Include="Scripts\controllers\teams.index.js" />
     <Content Include="Scripts\controllers\employees.index.js" />
@@ -494,6 +504,8 @@
     <Content Include="Scripts\controllers\main.js" />
     <Content Include="Scripts\directives\bootstrap-datepicker.js" />
     <Content Include="Scripts\directives\assignPrincipal.js" />
+    <Content Include="Scripts\directives\assignApprover.js" />
+    <Content Include="Scripts\directives\assignmentDetail.js" />
     <Content Include="Scripts\directives\dueDateLogic.js" />
     <Content Include="Scripts\directives\templateTask.js" />
     <Content Include="Scripts\directives\task.js" />

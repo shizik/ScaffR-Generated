@@ -10,21 +10,6 @@
                 department: undefined
             };
 
-            $scope.statuses = [
-                {
-                    "status": "open",
-                    "count": 0
-                },
-                {
-                    "status": "closed",
-                    "count": 0
-                },
-                {
-                    "status": "overdue",
-                    "count": 0
-                }
-            ];
-
             $scope.goToDetails = function (employee) {
                 $location.path('/employees/' + employee.id);
             };
@@ -32,35 +17,6 @@
             serviceEmployee.getBrief(function (data) {
                 $scope.employees = data.employees;
                 $scope.departments = data.departments;
-
-                _.forEach($scope.employees, function (item) {
-                    $scope.statuses[0].count += item.open;
-                    $scope.statuses[1].count += item.closed;
-                    $scope.statuses[2].count += item.overdue;
-
-                    item.total = item.open + item.overdue;
-                });
-
+                $scope.statuses = commonUtils.setStatuses($scope.employees);
             });
-
-            //serviceEmployee.summaryOld(function (data) {
-            //    $scope.assignables = data.assignables;
-            //    $scope.departments = data.departments;
-            //    $scope.teams = getTeamSummary(data.assignables);
-            //});
-
-            function getTeamSummary(ass) {
-                var summary = [];
-                for (var i = 0; i < ass.length; i++) {
-                    var assignable = ass[i];
-                    if (assignable.type == 'team') {
-                        summary.push(assignable);
-                    }
-                }
-                return summary;
-            }
-
-            $scope.containsStatus = function (status) {
-                return _.contains($scope.filter.status, status);
-            };
         }]);

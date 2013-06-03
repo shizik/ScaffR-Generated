@@ -25,8 +25,12 @@
                 $scope.task.isBefore = task.isBefore;
 
                 $scope.task.principalIsTeam = task.principalIsTeam;
-                $scope.task.principalId = task.principalId;
                 $scope.task.resolvedByOne = task.resolvedByOne;
+                $scope.task.principalId = task.principalId;
+                $scope.task.approverId = task.approverId;
+
+                $scope.task.requiresSignature = task.requiresSignature;
+                $scope.task.recurring = task.recurring;
             };
 
             $scope.intervals = [undefined, "Days", "Weeks", "Months", "Quarters"];

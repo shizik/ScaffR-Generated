@@ -14,6 +14,5 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT AssignmentId,Name,Employee_Cd,TaskId,[Description],DueDate,Principal_Cd,[Status],[Order] from Assignment 
-	where Employee_Cd=@EmployeeCd
+	SELECT * from Assignments where Id = @EmployeeCd
 END

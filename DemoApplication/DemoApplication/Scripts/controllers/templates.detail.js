@@ -60,46 +60,10 @@
             period: undefined
         };
 
-        $scope.assignees = [];
-        $scope.periods = [
-            { name: 'Today', func: 'dayOfYear' },
-            { name: 'This Week', func: 'week' },
-            { name: 'This Month', func: 'month' }
-        ];
-
         $scope.$watch('template.tasks', function (newValue) {
             if (!newValue || newValue.length == 0) return;
 
-            var result = [];
-            _.forEach($scope.periods, function (item) {
-                item.count = 0;
-            });
-
-            _.forEach(newValue, function (item) {
-
-                // Handle period counts
-                _.forEach($scope.periods, function (period) {
-                    if (moment()[period.func]() != moment(item.due)[period.func]()) return;
-
-                    period.count += 1;
-                });
-
-                // Handle assignees counts
-                var assignee = _.findWhere(result, { id: item.principalId });
-                if (assignee) {
-                    assignee.count += 1;
-                    return;
-                }
-
-                if (!$scope.assignables) return;
-
-                var principal = _.find($scope.assignables, function (p) { return p.id == item.principalId; });
-                if (!principal) return;
-
-                result.push({ id: principal.id, name: principal.name, count: 1 });
-            });
-
-            $scope.assignees = result;
+            commonUtils.setAssignees(newValue, $scope, true);
         }, true);
 
         //
@@ -144,9 +108,17 @@
         // Template Assignables
 
         $scope.setApplicable = function (item, action, list) {
-            serviceTemplate['add' + action]($scope.template.id, item.id, function () {
-                list.push(item);
-            });
+            if (item == null)
+                serviceTemplate['addAll' + action]($scope.template.id, function (data) {
+                    list.length = 0;
+                    _.forEach(data, function (x) {
+                        list.push(x);
+                    });
+                });
+            else
+                serviceTemplate['add' + action]($scope.template.id, item.id, function () {
+                    list.push(item);
+                });
         };
 
         $scope.removeApplicable = function (item, action, list) {

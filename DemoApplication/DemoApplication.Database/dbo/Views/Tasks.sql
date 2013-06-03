@@ -1,16 +1,23 @@
 ﻿CREATE VIEW [dbo].[Tasks]
-	AS SELECT 
-		TaskId as 'Id',
-		[Name],
-		[Description],
-		[Interval],
-		[IsBefore],
-		[MilestoneId],
-		[MilestoneValue],
-		[ParentTaskId],
-		[PrincipalIsTeam],
-		[ResolvedByOne],
-		[Principal_Cd] AS PrincipalId,
-		[CategoryId],
-		[TemplateId]
-	 FROM [Task] 
+AS SELECT 
+    [TaskId] as Id,
+    [Name],
+    [Description],
+
+    [MilestoneId],
+    [MilestoneValue],
+    [Interval],
+    [IsBefore],
+	
+	[PrincipalIsTeam],
+	[ResolvedByOne],
+    [Principal_Cd] as PrincipalId,
+	[Approver_Cd] as ApproverId,
+	
+	[RequiresSignature],
+    [Recurring],
+
+    [ParentTaskId],
+    [TemplateId],
+    [CategoryId]
+FROM [Task] 

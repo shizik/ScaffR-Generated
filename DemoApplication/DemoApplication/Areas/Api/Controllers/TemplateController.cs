@@ -111,6 +111,17 @@
             }
         }
 
+        [HttpPost]
+        public IEnumerable<Department> AddAllDepartment(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Department>("Template_AddAllDepartment",
+                                                       new { Id = id },
+                                                       commandType: CommandType.StoredProcedure);
+            }
+        }
+
         [HttpGet]
         public void DeleteDepartment(int id, string departmentId)
         {
@@ -144,6 +155,17 @@
                 db.Connection.Execute("Template_AddPosition",
                                       new { Id = id, PositionId = positionId },
                                       commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpPost]
+        public IEnumerable<Position> AddAllPosition(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Position>("Template_AddAllPosition",
+                                                       new { Id = id },
+                                                       commandType: CommandType.StoredProcedure);
             }
         }
 

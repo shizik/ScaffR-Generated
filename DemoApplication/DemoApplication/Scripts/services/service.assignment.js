@@ -5,13 +5,20 @@
                 id: 0,
                 name: null,
                 description: null,
+
+                status: 1,
                 dueDate: null,
                 completedDate: null,
-                isDone: null,
-                principalId: undefined,
+
                 principalIsTeam: null,
                 resolvedByOne: null,
+                principalId: undefined,
+                approverId: null,
                 employeeId: null,
+
+                requiresSignature: false,
+                recurring: false,
+
                 taskId: null,
                 categoryId: categoryId
             };
@@ -35,6 +42,10 @@
 
         delete: function (id, callback) {
             $http.delete('/api/assignment/?id=' + id).success(callback);
+        },
+
+        complete: function (id, callback) {
+            $http.post('/api/assignment/complete?id=' + id).success(callback);
         }
     };
 }]);

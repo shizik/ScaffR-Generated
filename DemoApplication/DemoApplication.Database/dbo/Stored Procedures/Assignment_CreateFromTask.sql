@@ -9,7 +9,6 @@ CREATE PROCEDURE [dbo].[Assignment_CreateFromTask]
 	@TaskId int,
 	@description varchar(50),
 	@Name varchar(50),
-	@Order int = 0,
 	@AssignmentID int OUTPUT
 AS
 BEGIN
@@ -37,8 +36,8 @@ BEGIN
 									-- Exec Employee_GetMilestoneDate @milesId,@milesvalue,@EmployeeCd,@dueDate output
 									set @dueDate=GETDATE()+365 --Tempraory
 
-									Insert into Assignment ([Description],DueDate,Employee_Cd,Name,[Order],Principal_Cd,[Status],TaskId,Reocurring)
-									values(@description,@dueDate,@EmployeeCode,@Name,@Order,@EmployeeCode,'0',@TaskId,0)	
+									Insert into Assignment ([Description],DueDate,Employee_Cd,Name,Principal_Cd,[Status],TaskId,Recurring)
+									values(@description,@dueDate,@EmployeeCode,@Name,@EmployeeCode,'0',@TaskId,0)	
 									set @AssignID=@@IDENTITY
 											declare attCur cursor for 
 											Select Task_Attachment.TaskId From Task_Attachment where Task_Attachment.TaskId=@TaskId
@@ -65,8 +64,8 @@ BEGIN
 				deallocate cur		
 			-- Apply these to user		
 
-			Insert into Assignment ([Description],DueDate,Employee_Cd,Name,[Order],Principal_Cd,[Status],TaskId,Reocurring)
-			values(@description,@dueDate,@EmployeeCode,@Name,@Order,@EmployeeCode,'0',@TaskId,0)			
+			Insert into Assignment ([Description],DueDate,Employee_Cd,Name,Principal_Cd,[Status],TaskId,Recurring)
+			values(@description,@dueDate,@EmployeeCode,@Name,@EmployeeCode,'0',@TaskId,0)			
 			set @AssignID=@@IDENTITY
 			--Get All attachments with parent id and add those as well 
 			declare attCur cursor for 

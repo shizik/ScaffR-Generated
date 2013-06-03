@@ -18,6 +18,7 @@ namespace DemoApplication.Areas.Api.Models
 
         public int Open { get; set; }
         public int Overdue { get; set; }
+        public int Pending { get; set; }
         public int Closed { get; set; }
     }
 }

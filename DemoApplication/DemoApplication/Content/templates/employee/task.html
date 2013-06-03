@@ -1,6 +1,6 @@
-﻿<li class="task" data-ng-class="{completed:task.isDone}">
+﻿<li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}">
     <div>
-        <input class="task-checkbox" type="checkbox" data-ng-model="task.isDone" data-ng-disabled="newCreated" />
+        <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
         <span data-ng-switch="" data-on="task.name">
             <span class="dropdown" data-ng-switch-when="null">
                 <a class="dropdown-toggle muted" data-toggle="dropdown">Click to Add a Task</a>
@@ -20,7 +20,7 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#/tasks/edit/?employeeId={{employeeId}}">Create a Custom Task</a>
+                        <a href="#/tasks/edit/?employeeId={{employeeId}}&categoryId={{task.categoryId}}">Create a Custom Task</a>
                     </li>
                 </ul>
             </span>
@@ -33,8 +33,11 @@
         </span>
         | <i class="icon-user"></i>
         <span data-assign-principal="" data-default-id="{{employeeId}}" data-task="task" data-assignables="assignables"></span>
+        <span data-ng-show="task.approverId">| Approver:
+            <span data-assign-approver="" data-task="task" data-assignables="assignables"></span>
+        </span>
         | <i class="icon-calendar"></i>
-        <span data-ng-switch="" data-on="task.isDone">
+        <span data-ng-switch="" data-on="task.status > 1">
             <span data-ng-switch-when="true">{{task.dueDate | date:'MM/dd/yy'}}</span>
             <span data-ng-switch-default="">
                 <a data-ng-switch="" data-on="task.dueDate" data-b-datepicker="" data-ng-model="task.dueDate">
