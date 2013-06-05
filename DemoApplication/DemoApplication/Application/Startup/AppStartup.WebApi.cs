@@ -4,8 +4,8 @@
 // Author	: Rod Johnson
 // Created	: 03-09-2013
 // 
-// Last Modified By : Rod Johnson
-// Last Modified On : 03-28-2013
+// Last Modified By : Marko Ilievski
+// Last Modified On : 06-05-2013
 // ***********************************************************************
 #endregion
 #region
@@ -23,7 +23,7 @@ namespace DemoApplication.Application.Startup
     using System.Net.Http;
     using System.Web.Http;
     using System.Web.Http.Routing;
-    using Newtonsoft.Json.Serialization;
+    using Extensions.WebApi;
 
     #endregion
 
@@ -34,11 +34,7 @@ namespace DemoApplication.Application.Startup
             // 
             // Json.Net settings
 
-            GlobalConfiguration.Configuration.Formatters.Remove(
-                                GlobalConfiguration.Configuration.Formatters.XmlFormatter);
-
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.
-                                SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            GlobalConfiguration.Configuration.Formatters.Insert(0, new AreaSpecificCamelCaseJsonFormatter("api"));
 
             //
             // Routes
