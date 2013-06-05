@@ -273,6 +273,8 @@
     <Compile Include="Extensions\ErrorHandlingHelpers\ErrorResult.cs" />
     <Compile Include="Extensions\HtmlHelpers\DisposableHelper.cs" />
     <Compile Include="Extensions\HtmlHelpers\HtmlExtensions.AngularJS.cs" />
+    <Compile Include="Extensions\WebApi\AreaSpecificCamelCaseJsonFormatter.cs" />
+    <Compile Include="Extensions\WebApi\CamelCaseJsonAttribute.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\CustomHandleErrorAttribute.cs" />
     <Compile Include="Models\Account\ChangePasswordFromResetKeyModel.cs" />
