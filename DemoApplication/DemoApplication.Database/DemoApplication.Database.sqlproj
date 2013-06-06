@@ -96,10 +96,8 @@
     <Build Include="dbo\Tables\Template.sql" />
     <Build Include="dbo\Views\Assignments.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
-    <Build Include="dbo\Stored Procedures\Assignment_AddDueDate_Exact.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_AddPrincipal.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_CreateFromTask.sql" />
-    <Build Include="dbo\Stored Procedures\Assignment_GetByEmployee.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Attachment_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Employee_AddComment.sql" />
@@ -110,8 +108,6 @@
     <Build Include="dbo\Stored Procedures\Employee_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetMilestoneDate.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetPrincipals.sql" />
-    <Build Include="dbo\Stored Procedures\Employee_Tasks.sql" />
-    <Build Include="dbo\Stored Procedures\List_GetByEmployee.sql" />
     <Build Include="dbo\Stored Procedures\Principal_GetAvailable.sql" />
     <Build Include="dbo\Stored Procedures\Task_Add.sql" />
     <Build Include="dbo\Stored Procedures\Task_Category_GetAll.sql" />
@@ -172,6 +168,8 @@
     <Build Include="dbo\Stored Procedures\Template_AddAllDepartment.sql" />
     <Build Include="dbo\Stored Procedures\Template_AddAllPosition.sql" />
     <Build Include="dbo\Stored Procedures\Task_GetNumberOfRelatedTasks.sql" />
+    <Build Include="dbo\Tables\Assignment_TeamResolution.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_GetByIdEmployeeId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

@@ -99,7 +99,8 @@
                         <a data-ng-click="showTask(task)">{{task.name}}</a>
                         | <i class="icon-user"></i>
                         {{task.employeeName}}
-                            | <i class="icon-calendar"></i>
+                        <span data-ng-show="task.approverName != null">| Approver: {{task.approverName}}</span>
+                        | <i class="icon-calendar"></i>
                         {{task.dueDate | date:'MM/dd/yy'}}
                             | <span data-task-badge="" data-task="task"></span>
                     </li>
@@ -141,6 +142,7 @@
     </div>
     <div data-assignment-detail=""
         data-assignment-id="activeTaskId"
+        data-user-id="{{person.id}}"
         data-back-fn="backToList()"
         class="row-fluid"
         data-ng-switch-default="">

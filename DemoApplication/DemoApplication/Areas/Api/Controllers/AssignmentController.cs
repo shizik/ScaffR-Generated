@@ -2,7 +2,6 @@
 {
     using Infrastructure.Data;
     using Models;
-    using Newtonsoft.Json.Linq;
     using System.Data;
     using System.Linq;
     using System.Web.Http;
@@ -14,6 +13,20 @@
             using (var db = new DapperDatabase())
             {
                 var result = db.Connection.QueryMultiple("Assignment_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+                var assignment = result.Read<Assignment>().Single();
+
+                return assignment;
+            }
+        }
+
+        public Assignment Get(int id, string employeeId)
+        {
+            using (var db = new DapperDatabase())
+            {
+                var result = db.Connection.QueryMultiple("Assignment_GetByIdEmployeeId",
+                                                         new { Id = id, EmployeeId = employeeId }, 
+                                                         commandType: CommandType.StoredProcedure);
 
                 var assignment = result.Read<Assignment>().Single();
 
@@ -55,11 +68,13 @@
         }
 
         [HttpPost]
-        public Assignment Complete(int id)
+        public Assignment Complete(int id, string employeeId)
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<Assignment>("Assignment_Complete", new { Id = id }, commandType: CommandType.StoredProcedure).First();
+                return db.Connection.Query<Assignment>("Assignment_Complete",
+                                                       new { Id = id, EmployeeId = employeeId },
+                                                       commandType: CommandType.StoredProcedure).First();
             }
         }
 

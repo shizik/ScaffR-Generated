@@ -6,11 +6,16 @@
             $scope.categories = data;
         });
 
-        serviceApprover.getById($routeParams.id, function (data) {
+        if ($routeParams.id)
+            serviceApprover.getById($routeParams.id, handler);
+        else
+            serviceApprover.getMyTasks(handler);
+
+        function handler(data) {
             $scope.person = data;
 
             commonUtils.setCounts($scope.person);
-        });
+        }
 
         //
         // Filtering

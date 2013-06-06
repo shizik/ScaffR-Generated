@@ -3,6 +3,7 @@
         templateUrl: '/content/templates/directives/assignmentDetail.html',
         scope: {
             assignmentId: '=',
+            userId: '@',
             backFn: '&'
         },
         replace: true,
@@ -11,13 +12,13 @@
             $scope.$watch('assignmentId', function (value) {
                 if (!value) return;
 
-                serviceAssignment.getById(value, function (data) {
+                serviceAssignment.getByIdEmployeeId(value, $scope.userId, function (data) {
                     $scope.assignment = data;
                 });
             }, true);
 
             $scope.complete = function () {
-                serviceAssignment.complete($scope.assignmentId, function (data) {
+                serviceAssignment.complete($scope.assignmentId, $scope.userId, function (data) {
                     $scope.assignment = data;
                 });
             };
