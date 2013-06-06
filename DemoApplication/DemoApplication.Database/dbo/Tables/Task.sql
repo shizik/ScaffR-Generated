@@ -10,7 +10,7 @@
 	
 	[PrincipalIsTeam]  BIT		   NOT NULL,
 	[ResolvedByOne]  BIT		   NULL,
-	[Principal_Cd]     CHAR(30)    NOT NULL,
+	[Principal_Cd]     CHAR(30)    NULL,
 	[Approver_Cd]     CHAR(30)     NULL,
 	
 	[RequiresSignature]	BIT		   NOT NULL,
