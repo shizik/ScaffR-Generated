@@ -28,6 +28,10 @@
             $http.get('/api/assignment/?id=' + id).success(callback);
         },
 
+        getByIdEmployeeId: function (id, employeeId, callback) {
+            $http.get('/api/assignment/?id=' + id + '&employeeId=' + employeeId).success(callback);
+        },
+
         add: function (entity, callback) {
             $http.put('/api/assignment', entity).success(callback);
         },
@@ -44,8 +48,8 @@
             $http.delete('/api/assignment/?id=' + id).success(callback);
         },
 
-        complete: function (id, callback) {
-            $http.post('/api/assignment/complete?id=' + id).success(callback);
+        complete: function (id, employeeId, callback) {
+            $http.post('/api/assignment/complete?id=' + id + '&employeeId=' + employeeId).success(callback);
         }
     };
 }]);

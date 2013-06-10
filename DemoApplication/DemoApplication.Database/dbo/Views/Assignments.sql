@@ -3,8 +3,13 @@ SELECT
 	[AssignmentId] as Id,
     [Name],
     [Description],
-
-    [Status],
+	CASE
+		WHEN [Status] = 1 AND [PrincipalIsTeam] = 1 AND
+			 (SELECT COUNT(1)
+				FROM Assignment_TeamResolution AS AT 
+				WHERE AT.AssignmentId = [Assignment].AssignmentId) > 0 THEN 2
+		ELSE [Status]
+	END AS 'Status',
     [DueDate],
     [CompletedDate],
 
@@ -19,4 +24,4 @@ SELECT
 
     [TaskId],
     [CategoryId]
-FROM [dbo].[Assignment]
+FROM [Assignment]

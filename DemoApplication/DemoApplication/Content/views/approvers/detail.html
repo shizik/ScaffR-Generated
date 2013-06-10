@@ -11,7 +11,7 @@
 </ul>
 <div class="tab-content allow-overflow">
     <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="activeTaskId">
-        <div class="row-fluid" data-ng-switch-when="undefined">
+        <div data-ng-controller="employees.detail.approver" class="row-fluid" data-ng-switch-when="undefined">
             <div class="span8">
                 <div data-ng-repeat="category in categories">
                     <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
@@ -21,6 +21,7 @@
                             <a data-ng-click="showTask(task)">{{task.name}}</a>
                             | <i class="icon-user"></i>
                             {{task.employeeName}}
+                            <span data-ng-show="task.approverName != null">| Approver: {{task.approverName}}</span>
                             | <i class="icon-calendar"></i>
                             {{task.dueDate | date:'MM/dd/yy'}}
                             | <span data-task-badge="" data-task="task"></span>
@@ -58,14 +59,15 @@
         </div>
         <div data-assignment-detail=""
             data-assignment-id="activeTaskId"
+            data-user-id="{{person.id}}"
             data-back-fn="backToList()"
             class="row-fluid"
             data-ng-switch-default="">
         </div>
     </div>
-    <div class="tab-pane" id="activity">
-        <ul class="unstyled">
-            <li class="muted" data-ng-repeat="item in person.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
-        </ul>
-    </div>
+</div>
+<div class="tab-pane" id="activity">
+    <ul class="unstyled">
+        <li class="muted" data-ng-repeat="item in person.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+    </ul>
 </div>

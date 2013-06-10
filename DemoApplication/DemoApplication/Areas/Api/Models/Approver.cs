@@ -21,6 +21,7 @@ namespace DemoApplication.Areas.Api.Models
             public string Description { get; set; }
             public string EmployeeId { get; set; }
             public string EmployeeName { get; set; }
+            public string ApproverName { get; set; }
             public DateTime DueDate { get; set; }
             public int CategoryId { get; set; }
         }
