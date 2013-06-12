@@ -45,6 +45,15 @@
         }
 
         [HttpGet]
+        public IEnumerable<Activity> GetActivity(string id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Activity>("Team_GetActivity", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpGet]
         public dynamic GetAvailableMembers(string id)
         {
             using (var db = new DapperDatabase())

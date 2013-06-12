@@ -12,6 +12,10 @@
             $http.get('/api/template/' + id).success(callback);
         },
 
+        getActivity: function (id, callback) {
+            $http.post('/api/template/getActivity?id=' + id).success(callback);
+        },
+
         apply: function (id, employeeId, callback) {
             $http.get('/api/template/apply?id=' + id + '&employeeId=' + employeeId).success(callback);
         },

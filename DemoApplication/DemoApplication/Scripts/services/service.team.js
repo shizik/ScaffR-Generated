@@ -8,6 +8,10 @@
             $http.get('/api/team/?id=' + id).success(callback);
         },
 
+        getActivity: function (id, callback) {
+            $http.get('/api/team/getActivity?id=' + id).success(callback);
+        },
+
         getAvailableMembers: function (id, callback) {
             $http.get('/api/team/getAvailableMembers/?id=' + id).success(callback);
         },

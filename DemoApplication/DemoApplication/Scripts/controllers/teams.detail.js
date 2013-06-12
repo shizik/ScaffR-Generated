@@ -31,6 +31,14 @@
             });
         }
 
+        $scope.loadActivity = function () {
+            if ($routeParams.id == 'new') return;
+
+            serviceTeam.getActivity($routeParams.id, function (data) {
+                $scope.activity = data;
+            });
+        };
+
         //
         // Filtering
 

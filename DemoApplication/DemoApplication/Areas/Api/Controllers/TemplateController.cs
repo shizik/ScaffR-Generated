@@ -45,6 +45,15 @@
         }
 
         [HttpPost]
+        public IEnumerable<Activity> GetActivity(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Activity>("Template_GetActivity", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpPost]
         public void AddTask(Task entity)
         {
             using (var db = new DapperDatabase())

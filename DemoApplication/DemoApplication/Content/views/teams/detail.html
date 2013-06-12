@@ -2,6 +2,7 @@
     <div class="span8" data-ng-switch="" data-on="isEdit">
         <div data-ng-switch-when="false">
             <h1>{{team.name}}
+               
                 <button class="btn-link btn-small" data-ng-click="editMode()">edit</button></h1>
             <p>{{team.description}}</p>
         </div>
@@ -20,7 +21,7 @@
 <div class="row-fluid" data-ng-show="!isNew">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#members" data-toggle="tab"><i class="icon-tasks"></i>Members / Tasks</a></li>
-        <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
+        <li><a href="#activity" data-toggle="tab" data-ng-click="loadActivity()"><i class="icon-bullhorn"></i>Activity</a></li>
     </ul>
     <div class="tab-content allow-overflow">
         <div class="tab-pane active" id="members">
@@ -28,6 +29,7 @@
                 <h4>Members <span class="text-info">({{ team.members.length }})</span></h4>
                 <ul class="unstyled">
                     <li class="task" data-ng-repeat="member in team.members | orderBy:'name'">{{ member.name }} 
+                       
                         <span class="badge{{member.isActive && ' badge-success' || ''}}">{{ member.isActive && 'Active' || 'Inactive' }}</span>
                         <span class="edit-controls single-btn">
                             <button class="btn btn-mini" data-ng-click="deleteMember(member, $index)"><i class="icon-trash"></i></button>
@@ -37,6 +39,7 @@
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         Add Member 
+                       
                         <i class="icon-plus"></i>
                     </button>
                     <ul class="dropdown-menu">
@@ -104,7 +107,7 @@
         </div>
         <div class="tab-pane" id="activity">
             <ul class="unstyled">
-                <li class="muted" data-ng-repeat="item in team.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+                <li class="muted" data-ng-repeat="item in activity">{{item.dateTime | date:'MM/dd/yy'}} {{item.action}}</li>
             </ul>
         </div>
     </div>

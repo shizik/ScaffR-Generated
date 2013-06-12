@@ -2,6 +2,7 @@
     <div class="span8" data-ng-switch="" data-on="isEdit">
         <div data-ng-switch-default="false">
             <h1>{{template.name}}
+               
                 <button class="btn-link btn-small" data-ng-click="editMode()">edit</button></h1>
             <p>{{template.description}}</p>
         </div>
@@ -28,6 +29,7 @@
                     <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTo(department, 'Department')">
                         <i class="icon-ok" data-ng-show="department.isApplied"></i>
                         {{department.name}}
+                   
                     </button>
                     <button class="btn" data-ng-click="removeApplicable(department, 'Department', template.departments)"><i class="icon-remove"></i></button>
                 </div>
@@ -50,6 +52,7 @@
                     <button class="btn btn-success" title="Click to apply the template" data-ng-click="applyTo(position, 'Position')">
                         <i class="icon-ok" data-ng-show="position.isApplied"></i>
                         {{position.name}}
+                   
                     </button>
                     <button class="btn" data-ng-click="removeApplicable(position, 'Position', template.positions)"><i class="icon-remove"></i></button>
                 </div>
@@ -71,7 +74,7 @@
 <div class="row-fluid" data-ng-show="!isNew">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#tasks" data-toggle="tab"><i class="icon-tasks"></i>Tasks</a></li>
-        <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
+        <li><a href="#activity" data-toggle="tab" data-ng-click="loadActivity()"><i class="icon-bullhorn"></i>Activity</a></li>
     </ul>
     <div class="tab-content allow-overflow">
         <div class="tab-pane active" id="tasks">
@@ -131,7 +134,7 @@
         </div>
         <div class="tab-pane" id="activity">
             <ul class="unstyled">
-                <li class="muted" data-ng-repeat="item in template.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+                <li class="muted" data-ng-repeat="item in activity">{{item.dateTime | date:'MM/dd/yy'}} {{item.action}}</li>
             </ul>
         </div>
     </div>

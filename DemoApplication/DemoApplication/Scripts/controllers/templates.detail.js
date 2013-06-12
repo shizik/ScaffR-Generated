@@ -52,6 +52,14 @@
             $scope.availableTasks = data;
         });
 
+        $scope.loadActivity = function () {
+            if ($routeParams.id == 'new') return;
+
+            serviceTemplate.getActivity($routeParams.id, function (data) {
+                $scope.activity = data;
+            });
+        };
+
         //
         // Filtering
 
