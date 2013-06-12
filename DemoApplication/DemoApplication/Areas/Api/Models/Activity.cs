@@ -1,5 +1,12 @@
-﻿namespace DemoApplication.Areas.Api.Models
+﻿using System;
+namespace DemoApplication.Areas.Api.Models
 {
+    public class Activity
+    {
+        public DateTime DateTime { get; set; }
+        public string Action { get; set; }
+    }
+
     public class ActivitySave
     {
         public string Action { get; set; }

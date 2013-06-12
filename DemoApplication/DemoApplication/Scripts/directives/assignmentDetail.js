@@ -13,7 +13,8 @@
                 if (!value) return;
 
                 serviceAssignment.getByIdEmployeeId(value, $scope.userId, function (data) {
-                    $scope.assignment = data;
+                    $scope.assignment = data.assignment;
+                    $scope.activity = data.activity;
                 });
             }, true);
 

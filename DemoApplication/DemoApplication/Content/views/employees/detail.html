@@ -29,7 +29,7 @@
 <ul class="nav nav-tabs">
     <li data-ng-class="{'active':view=='tasks'}"><a data-ng-click="view='tasks'"><i class="icon-tasks"></i>Tasks</a></li>
     <li data-ng-class="{'active':view=='todos'}"><a data-ng-click="view='todos'"><i class="icon-list"></i>To-Do List</a></li>
-    <li data-ng-class="{'active':view=='activity'}"><a data-ng-click="view='activity'"><i class="icon-bullhorn"></i>Activity</a></li>
+    <li data-ng-class="{'active':view=='activity'}"><a data-ng-click="showActivity()"><i class="icon-bullhorn"></i>Activity</a></li>
 </ul>
 <div data-ng-switch="" data-on="view">
     <div data-ng-controller="employees.detail.tasks" class="row-fluid" data-ng-switch-when="tasks">
@@ -137,7 +137,7 @@
     </div>
     <div data-ng-switch-when="activity">
         <ul class="unstyled">
-            <li class="muted" data-ng-repeat="item in person.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+            <li class="muted" data-ng-repeat="item in activity">{{item.dateTime | date:'MM/dd/yy'}} {{item.action}}</li>
         </ul>
     </div>
     <div data-assignment-detail=""

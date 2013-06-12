@@ -35,4 +35,9 @@ BEGIN
 			[CategoryId] 
 	FROM Assignment WHERE AssignmentId = @Id
 
+	SELECT Activity.DateTime, Activity.Action + ' by ' + Employees.FirstName + ' ' + Employees.LastName AS 'Action'
+	FROM Activity INNER JOIN Employees ON Activity.UserId = Employees.Id
+	WHERE Activity.AssignmentId = @Id
+	ORDER BY [DateTime]
+
 END

@@ -6,6 +6,7 @@
             {{assignment.name}}
             | <i class="icon-calendar"></i>
             {{assignment.dueDate | date:'MM/dd/yy'}}
+           
             <button data-ng-show="assignment.status==1" class="btn btn-success" data-ng-click="complete()">Complete Task</button>
         </div>
         <p>
@@ -13,17 +14,15 @@
         </p>
         <p>
             {{assignment.description}}
+       
         </p>
         <!--<p>
             <button class="btn">Download Form</button>
             <button class="btn btn-success">Upload Completed Form</button>
         </p>-->
-        <!--<hr />
+        <hr />
         <ul class="unstyled">
-            <li class="muted">04/12/13 Viewed by You</li>
-            <li class="muted">04/12/13 Viewed by George Washington</li>
-            <li class="muted">04/12/13 Viewed by Christine Washington</li>
-            <li class="muted">04/12/13 Downloaded by George Washington</li>
-        </ul>-->
+            <li class="muted" data-ng-repeat="item in activity">{{item.dateTime | date:'MM/dd/yy'}} {{item.action}}</li>
+        </ul>
     </div>
 </div>

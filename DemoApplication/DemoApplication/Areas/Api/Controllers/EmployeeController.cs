@@ -50,5 +50,14 @@
                                     .First().ToShortDateString();
             }
         }
+
+        [HttpGet]
+        public IEnumerable<Activity> GetActivity(string id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Activity>("Employee_GetActivity", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

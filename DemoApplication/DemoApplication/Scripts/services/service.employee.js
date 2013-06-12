@@ -6,6 +6,10 @@
 
         getById: function (id, callback) {
             $http.get('/api/employee/?id=' + id).success(callback);
+        },
+        
+        getActivity: function (id, callback) {
+            $http.get('/api/employee/getActivity?id=' + id).success(callback);
         }
     };
 }]);

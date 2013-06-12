@@ -12,9 +12,9 @@
             // TODO: Get ID from the logged in user
             var activity = new ActivitySave
             {
-                Action = ActivityActions.View,
+                Action = action,
                 AssignmentId = assignmentId,
-                UserId = "D1BKRHX3X5A3GJI3QARHFUKRC4VYTF"
+                UserId = "KVQE0AP835ET10S8W7EB94EEDTO69A"
             };
 
             try

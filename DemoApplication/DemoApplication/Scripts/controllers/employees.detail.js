@@ -15,6 +15,14 @@
             commonUtils.setCounts($scope.person);
         });
 
+        $scope.showActivity = function () {
+            $scope.view = 'activity';
+            
+            serviceEmployee.getActivity($scope.person.id, function(data) {
+                $scope.activity = data;
+            });
+        };
+        
         //
         // Individual task view
 

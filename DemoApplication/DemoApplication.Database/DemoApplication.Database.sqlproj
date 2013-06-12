@@ -170,6 +170,8 @@
     <Build Include="dbo\Stored Procedures\Task_GetNumberOfRelatedTasks.sql" />
     <Build Include="dbo\Tables\Assignment_TeamResolution.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_GetByIdEmployeeId.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetActivity.sql" />
+    <Build Include="dbo\Views\EmployeeActivity.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

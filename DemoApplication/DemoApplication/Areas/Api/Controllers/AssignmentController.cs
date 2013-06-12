@@ -5,6 +5,7 @@
     using System.Data;
     using System.Linq;
     using System.Web.Http;
+    using Helpers;
 
     public class AssignmentController : ApiController
     {
@@ -16,11 +17,13 @@
 
                 var assignment = result.Read<Assignment>().Single();
 
+                db.Connection.LogActivity(ActivityActions.View, id);
+
                 return assignment;
             }
         }
 
-        public Assignment Get(int id, string employeeId)
+        public dynamic Get(int id, string employeeId)
         {
             using (var db = new DapperDatabase())
             {
@@ -28,9 +31,16 @@
                                                          new { Id = id, EmployeeId = employeeId }, 
                                                          commandType: CommandType.StoredProcedure);
 
-                var assignment = result.Read<Assignment>().Single();
+                var dataResult =  new
+                {
+                    Assignment = result.Read<Assignment>().Single(),
+                    Activity = result.Read<Activity>().ToList()
+                };
 
-                return assignment;
+
+                db.Connection.LogActivity(ActivityActions.View, id);
+
+                return dataResult;
             }
         }
 
@@ -38,7 +48,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                return (int)db.Connection.Query<decimal>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).First();
+                int id = (int)db.Connection.Query<decimal>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).First();
+
+                db.Connection.LogActivity(ActivityActions.Create, id);
+
+                return id;
             }
         }
 
@@ -47,7 +61,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                return (int)db.Connection.Query<decimal>("Employee_AddTask", entity, commandType: CommandType.StoredProcedure).First();
+                int id = (int)db.Connection.Query<decimal>("Employee_AddTask", entity, commandType: CommandType.StoredProcedure).First();
+
+                db.Connection.LogActivity(ActivityActions.Create, id);
+
+                return id;
             }
         }
 
@@ -55,7 +73,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Assignment_Update", entity, commandType: CommandType.StoredProcedure);
+                int id = db.Connection.Execute("Assignment_Update", entity, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Update, entity.Id);
+
+                return id;
             }
         }
 
@@ -64,6 +86,8 @@
             using (var db = new DapperDatabase())
             {
                 db.Connection.Execute("Assignment_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Delete, id);
             }
         }
 
@@ -72,11 +96,14 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<Assignment>("Assignment_Complete",
+                var assignment = db.Connection.Query<Assignment>("Assignment_Complete",
                                                        new { Id = id, EmployeeId = employeeId },
                                                        commandType: CommandType.StoredProcedure).First();
+
+                db.Connection.LogActivity(ActivityActions.Complete, id);
+
+                return assignment;
             }
         }
-
     }
 }
