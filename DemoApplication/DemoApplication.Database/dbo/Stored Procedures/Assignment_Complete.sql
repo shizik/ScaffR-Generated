@@ -48,6 +48,21 @@ BEGIN
 			IF(@AssignmentApprovalId IS NOT NULL)
 				UPDATE [dbo].[Assignment] SET [CompletedDate] = GETDATE(), [Status] = 3 
 				WHERE AssignmentId = @AssignmentApprovalId
+
+			DECLARE @AssignmentId INT = (CASE WHEN @AssignmentApprovalId IS NOT NULL THEN @AssignmentApprovalId ELSE @Id END)
+
+			IF(EXISTS (SELECT 1 FROM Assignment WHERE AssignmentId = @AssignmentId AND Recurring = 1))
+				INSERT INTO Assignment 
+					([Name], [Description], [DueDate],
+					 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
+					 [RequiresSignature], [Recurring],
+					 [AssignmentApprovalId], [TaskId], [CategoryId])
+				SELECT 
+					 [Name], [Description], DATEADD(YEAR, 1, [DueDate]),
+					 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
+					 [RequiresSignature], [Recurring],
+					 [AssignmentApprovalId], [TaskId], [CategoryId] 
+				FROM Assignment WHERE AssignmentId = @AssignmentId
 		END
 	ELSE
 		BEGIN
