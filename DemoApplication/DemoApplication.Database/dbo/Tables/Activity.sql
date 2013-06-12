@@ -7,5 +7,6 @@
     [AssignmentId] INT NULL, 
     [TemplateId] INT NULL, 
     [TaskId] INT NULL, 
+    [TeamId] CHAR(30) NULL, 
     CONSTRAINT [FK_Activity_Person_Main] FOREIGN KEY ([UserId]) REFERENCES Person_Main(Employee_Cd)
 )

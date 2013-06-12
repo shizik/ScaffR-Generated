@@ -7,6 +7,7 @@
     using System.Web.Http;
     using Infrastructure.Data;
     using Models;
+    using Helpers;
 
     public class TeamController : ApiController
     {
@@ -36,6 +37,8 @@
                 var team = result.Read<Team>().Single();
                 team.Members = result.Read<Team.Member>().ToList();
                 team.Tasks = result.Read<Team.Assignment>().ToList();
+
+                db.Connection.LogActivity(ActivityActions.View, teamId: id);
 
                 return team;
             }
@@ -91,6 +94,8 @@
 
                 db.Connection.Execute("Team_Add", entity, commandType: CommandType.StoredProcedure);
 
+                db.Connection.LogActivity(ActivityActions.Create, teamId: entity.Id);
+
                 return entity.Id;
             }
         }
@@ -99,15 +104,21 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Team_Update", entity, commandType: CommandType.StoredProcedure);
+                int id = db.Connection.Execute("Team_Update", entity, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Update, teamId: entity.Id);
+
+                return id;
             }
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             using (var db = new DapperDatabase())
             {
                 db.Connection.Execute("Team_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Delete, teamId: id);
             }
         }
     }

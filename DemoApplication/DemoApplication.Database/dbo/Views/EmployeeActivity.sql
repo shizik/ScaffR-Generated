@@ -16,3 +16,9 @@ AS
 	SELECT Activity.DateTime, Activity.Action + ' Task ' + Task.Name as 'Action', UserId
 	FROM Activity INNER JOIN Task ON Activity.TaskId = Task.TaskId
 	WHERE Activity.TaskId IS NOT NULL
+		
+	UNION
+
+	SELECT Activity.DateTime, Activity.Action + ' Task ' + Team.Name as 'Action', UserId
+	FROM Activity INNER JOIN Team ON Activity.TeamId = Team.Team_Cd
+	WHERE Activity.TeamId IS NOT NULL

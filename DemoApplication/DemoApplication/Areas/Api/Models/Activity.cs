@@ -12,13 +12,14 @@ namespace DemoApplication.Areas.Api.Models
         public string Action { get; set; }
         public string UserId { get; set; }
 
-        //public int? TaskId { get; set; }
         public int? AssignmentId { get; set; }
+        public int? TaskId { get; set; }
+        public int? TemplateId { get; set; }
+        public string TeamId { get; set; }
 
         //public string EmployeeId { get; set; }
         //public string PrincipalId { get; set; }
 
-        //public int? TemplateId { get; set; }
         //public string DepartmentId { get; set; }
         //public string PositionId { get; set; }
     }

@@ -4,7 +4,7 @@ namespace DemoApplication.Areas.Api.Models
 {
     public class Template
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

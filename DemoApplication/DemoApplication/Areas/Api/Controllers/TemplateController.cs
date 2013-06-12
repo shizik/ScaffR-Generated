@@ -6,6 +6,7 @@
     using System.Web.Http;
     using Infrastructure.Data;
     using Models;
+    using Helpers;
 
     public class TemplateController : ApiController
     {
@@ -37,6 +38,8 @@
                 template.Positions = result.Read<Position>().ToList();
                 template.Tasks = result.Read<Task>().ToList();
 
+                db.Connection.LogActivity(ActivityActions.View, templateId: id);
+
                 return template;
             }
         }
@@ -66,7 +69,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                return (int)db.Connection.Query<decimal>("Template_Add", entity, commandType: CommandType.StoredProcedure).First();
+                int id = (int)db.Connection.Query<decimal>("Template_Add", entity, commandType: CommandType.StoredProcedure).First();
+
+                db.Connection.LogActivity(ActivityActions.Create, templateId: id);
+
+                return id;
             }
         }
 
@@ -74,7 +81,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Execute("Template_Update", entity, commandType: CommandType.StoredProcedure);
+                int id = db.Connection.Execute("Template_Update", entity, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Update, templateId: entity.Id);
+
+                return id;
             }
         }
 
@@ -83,6 +94,8 @@
             using (var db = new DapperDatabase())
             {
                 db.Connection.Execute("Template_Delete", new { Id = id }, commandType: CommandType.StoredProcedure);
+
+                db.Connection.LogActivity(ActivityActions.Delete, templateId: id);
             }
         }
 
