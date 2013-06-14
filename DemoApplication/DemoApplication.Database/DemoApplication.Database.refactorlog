@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Recurring" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5cb7aee7-b6ec-4c44-9e35-971527dc74ef" ChangeDateTime="06/14/2013 11:25:23">
+    <Property Name="ElementName" Value="[dbo].[Attachment].[MineType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Attachment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MimeType" />
+  </Operation>
 </Operations>

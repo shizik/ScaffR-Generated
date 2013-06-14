@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('tasks.edit',
-                ['$scope', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'toastr',
-        function ($scope, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
+                ['$scope', '$http', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'toastr',
+        function ($scope, $http, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 
             $scope.hasApprover = false;
@@ -127,6 +127,23 @@
 
             //
             // Attachments / Actions
+
+            var url = 'api/attachment';
+            $scope.loadingFiles = true;
+            $scope.options = {
+                url: url
+            };
+            $http.get(url)
+                .then(
+                    function (response) {
+                        $scope.loadingFiles = false;
+                        $scope.queue = response.data || [];
+                    },
+                    function () {
+                        $scope.loadingFiles = false;
+                    }
+                );
+
 
             $scope.attachments = [];
             $scope.actions = [];

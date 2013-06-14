@@ -21,7 +21,7 @@ namespace DemoApplication.Areas.Api.Controllers
         {
             var filename = HttpContext.Current.Request["f"];
             var filePath = _storageRoot + filename;
-            if (File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
             {
                 var response = new HttpResponseMessage(HttpStatusCode.OK);
                 response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));

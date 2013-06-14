@@ -26,7 +26,7 @@
             return WriteJsonIframeSafe(context, statuses);
         }
 
-        private HttpResponseMessage WriteJsonIframeSafe(HttpContext context, List<FilesStatus> statuses)
+        protected HttpResponseMessage WriteJsonIframeSafe(HttpContext context, List<FilesStatus> statuses)
         {
             context.Response.AddHeader("Vary", "Accept");
             var result = new
@@ -83,8 +83,17 @@
                 string fullPath = _storageRoot + Path.GetFileName(file.FileName);
                 Directory.CreateDirectory(_storageRoot);
                 file.SaveAs(fullPath);
+                
                 string fullName = Path.GetFileName(file.FileName);
                 statuses.Add(new FilesStatus(fullName, file.ContentLength, fullPath));
+            }
+        }
+
+        protected byte[] GetByteFromFile(HttpPostedFile file)
+        {
+            using (var binaryReader = new BinaryReader(file.InputStream))
+            {
+                return binaryReader.ReadBytes(file.ContentLength);
             }
         }
     }

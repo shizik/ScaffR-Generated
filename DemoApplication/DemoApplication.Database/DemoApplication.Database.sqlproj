@@ -176,6 +176,9 @@
     <Build Include="dbo\Views\TeamActivity.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetActivity.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetActivity.sql" />
+    <Build Include="dbo\Stored Procedures\File_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\File_Add.sql" />
+    <Build Include="dbo\Stored Procedures\File_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

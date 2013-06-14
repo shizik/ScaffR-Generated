@@ -6,7 +6,7 @@
 CREATE PROCEDURE [dbo].[Assignment_AddAttachment] 
 	-- Add the parameters for the stored procedure here
 	@AttachmentName varchar(50),
-	@mineType varchar(50),
+	@MimeType varchar(50),
 	@AssignmentId int,	 
 	@AttachmentId int OUTPUT
 AS
@@ -17,14 +17,14 @@ BEGIN
 	if  @AttachmentId IS NULL OR @AttachmentId=0
 	begin
 	--SET IDENTITY_INSERT [Attachment] ON
-	   Insert into Attachment (Name,MineType) values(@AttachmentName,@mineType) 
+	   Insert into Attachment (Name,MimeType) values(@AttachmentName,@MimeType) 
 	   set @AttachmentId=@@IDENTITY
 	   select @AttachmentId
 	   Insert into Assignment_Attachment(AssignmentId,AttachmentId,Name) values(@AssignmentId,@AttachmentId,@AttachmentName)	   
 	end
 	else
 	begin
-	   Update Attachment set Name=@AttachmentName,MineType=@mineType
+	   Update Attachment set Name=@AttachmentName,MimeType=@MimeType
 	   where AttachmentId=@AttachmentId
 	   select @AttachmentId	   
 	end

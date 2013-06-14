@@ -39,19 +39,19 @@
             type = "image/png";
             size = fileLength;
             progress = "1.0";
-            url = HandlerPath + "api/Upload?f=" + fileName;
-            delete_url = HandlerPath + "api/Upload?f=" + fileName;
+            url = HandlerPath + "api/Attachment?f=" + fileName;
+            delete_url = HandlerPath + "api/Attachment?f=" + fileName;
             delete_type = "DELETE";
-            var ext = Path.GetExtension(fullPath);
-            var fileSize = ConvertBytesToMegabytes(new FileInfo(fullPath).Length);
-            if (fileSize > 3 || !IsImage(ext))
-            {
+            //var ext = Path.GetExtension(fullPath);
+            //var fileSize = ConvertBytesToMegabytes(new FileInfo(fullPath).Length);
+            //if (fileSize > 3 || !IsImage(ext))
+            //{
                 thumbnail_url = "/Content/img/generalFile.png";
-            }
-            else
-            {
-                thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath);
-            }
+            //}
+            //else
+            //{
+            //    thumbnail_url = @"data:image/png;base64," + EncodeFile(fullPath);
+            //}
         }
 
         private static bool IsImage(string ext)

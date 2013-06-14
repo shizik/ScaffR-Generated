@@ -25,6 +25,7 @@
                     <button class="dropdown-toggle btn" data-toggle="dropdown">
                         <i class="icon-calendar"></i>
                         Set Due Date Logic
+                   
                     </button>
                     <ul class="dropdown-menu" data-due-date-logic="" data-task="task" data-milestones="milestones"></ul>
                 </div>
@@ -37,6 +38,7 @@
             <label class="checkbox">
                 <input type="checkbox" data-ng-model="task.recurring" />
                 Reccuring
+           
             </label>
         </div>
         <span data-ng-switch-when="true">
@@ -52,6 +54,7 @@
         <label class="checkbox">
             <input type="checkbox" data-ng-model="task.requiresSignature" />
             Requires Signature
+       
         </label>
     </div>
 </div>
@@ -62,6 +65,7 @@
         <label class="checkbox">
             <input type="checkbox" data-ng-model="hasApprover" />
             Has Approver
+       
         </label>
     </div>
     <div class="span4" data-ng-show="hasApprover">
@@ -69,6 +73,75 @@
         <span data-assign-approver="" data-task="task" data-assignables="assignables" data-css="btn"></span>
     </div>
 </div>
+
+<div class="row-fluid fileupload-buttonbar" data-fileupload="options" data-ng-class="{true: 'fileupload-processing'}[!!processing() || loadingFiles]">
+    <div class="span7">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Add files...</span>
+            <input type="file" name="files[]" multiple />
+        </span>
+        <button type="button" class="btn btn-primary start" data-ng-click="submit()">
+            <i class="icon-upload icon-white"></i>
+            <span>Start upload</span>
+        </button>
+        <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
+            <i class="icon-ban-circle icon-white"></i>
+            <span>Cancel upload</span>
+        </button>
+        <!-- The loading indicator is shown during file processing -->
+        <div class="fileupload-loading"></div>
+    </div>
+    <!-- The global progress information -->
+    <div class="span5 fade" data-ng-class="{true: 'in'}[!!active()]">
+        <!-- The global progress bar -->
+        <div class="progress progress-success progress-striped active" data-progress="progress()">
+            <div class="bar" data-ng-style="{width: num + '%'}"></div>
+        </div>
+        <!-- The extended global progress information -->
+        <div class="progress-extended">&nbsp;</div>
+    </div>
+</div>
+<!-- The table listing the files available for upload/download -->
+<table class="table table-striped files">
+    <tr data-ng-repeat="file in queue">
+        <!--<td data-ng-switch on="!!file.thumbnail_url">
+                        <div class="preview" data-ng-switch-when="true">
+                            <a data-ng-href="{{file.url}}" title="{{file.name}}" data-gallery="gallery" download="{{file.name}}">
+                                <img data-ng-src="{{file.thumbnail_url}}"></a>
+                        </div>
+                        <div class="preview" data-ng-switch-default data-preview="file"></div>
+                    </td>-->
+        <td>
+            <p class="name" data-ng-switch="" data-on="!!file.url">
+                <a data-ng-switch-when="true" data-ng-href="{{file.url}}" title="{{file.name}}" data-download="{{file.name}}">{{file.name}}</a>
+                <span data-ng-switch-default="">{{file.name}}</span>
+            </p>
+            <div data-ng-show="file.error"><span class="label label-important">Error</span> {{file.error}}</div>
+        </td>
+        <td>
+            <p class="size">{{file.size | formatFileSize}}</p>
+            <div class="progress progress-success progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]" data-progress="file.$progress()">
+                <div class="bar" data-ng-style="{width: num + '%'}"></div>
+            </div>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary start" data-ng-click="file.$submit()" data-ng-hide="!file.$submit">
+                <i class="icon-upload icon-white"></i>
+                <span>Start</span>
+            </button>
+            <button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()" data-ng-hide="!file.$cancel">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>Cancel</span>
+            </button>
+            <!--<button data-ng-controller="FileDestroyController" type="button" class="btn btn-danger destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
+                            <i class="icon-ban-circle icon-white"></i>
+                            <span>Delete</span>
+                        </button>-->
+        </td>
+    </tr>
+</table>
 <!--<div class="row-fluid">
         <div class="span6">
             <h4>Attach Resources</h4>
