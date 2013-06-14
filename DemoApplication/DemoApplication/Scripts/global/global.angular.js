@@ -6,12 +6,13 @@ var Application = Application || {};
 Application.Constants = angular.module('application.constants', []);
 Application.Utils = angular.module('application.utils', []);
 Application.Models = angular.module('application.models', []);
-Application.Services = angular.module('application.services', ['ngResource']);
+Application.Services = angular.module('application.services', []);
 Application.Controllers = angular.module('application.controllers', []);
 Application.Filters = angular.module('application.filters', []);
 Application.Directives = angular.module('application.directives', []);
 
 angular.module('application', ['ui.bootstrap',
+                               'blueimp.fileupload',
                                'application.utils',
                                'application.filters',
                                'application.services',

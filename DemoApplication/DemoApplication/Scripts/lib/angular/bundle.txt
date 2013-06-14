@@ -1,2 +1,4 @@
-﻿angular.js
-*
+﻿*
+
+[references]
+~/scripts/lib/jquery

@@ -3,16 +3,12 @@
 [references]
 ~/scripts/lib/angular
 ~/scripts/lib/angular-bootstrap
-~/scripts/lib/angular-resource
 ~/scripts/lib/bootstrap
 ~/scripts/lib/bootstrap-datepicker
-~/scripts/lib/breeze
 ~/scripts/lib/ckeditor
 ~/scripts/lib/jquery
 ~/scripts/lib/jquery-fileupload
 ~/scripts/lib/jquery-plugins
 ~/scripts/lib/jquery-tmpl
 ~/scripts/lib/jquery-ui
-~/scripts/lib/moment
-~/scripts/lib/toastr
-~/scripts/lib/underscore
+~/scripts/lib/utils
