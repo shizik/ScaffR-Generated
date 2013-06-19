@@ -55,10 +55,31 @@
         {
             using (var db = new DapperDatabase())
             {
-                int id = (int)db.Connection.Query<decimal>("Task_Add", entity, commandType: CommandType.StoredProcedure).First();
+                var fileIds = entity.Files;
 
-                db.Connection.LogActivity(ActivityActions.Update, taskId: id);
+                // Prevents too many arguments specified exception
+                entity.Files = null;
 
+                var transaction = db.Connection.BeginTransaction();
+
+                int id = (int)db.Connection.Query<decimal>("Task_Add",
+                                                           entity,
+                                                           commandType: CommandType.StoredProcedure,
+                                                           transaction: transaction).First();
+
+                foreach (var fileId in fileIds)
+                {
+                    db.Connection.Execute("Task_AddAttachment",
+                                          new { Id = id, AttachmentId = fileId },
+                                          commandType: CommandType.StoredProcedure,
+                                          transaction: transaction);
+                }
+
+                db.Connection.LogActivity(ActivityActions.Update, taskId: id, transaction: transaction);
+
+                transaction.Commit();
+                transaction.Dispose();
+                
                 return id;
             }
         }

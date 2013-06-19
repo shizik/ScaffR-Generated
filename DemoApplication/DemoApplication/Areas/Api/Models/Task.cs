@@ -1,4 +1,5 @@
-﻿namespace DemoApplication.Areas.Api.Models
+﻿using System.Collections.Generic;
+namespace DemoApplication.Areas.Api.Models
 {
     public class Task
     {
@@ -10,7 +11,7 @@
         public int MilestoneValue { get; set; }
         public int Interval { get; set; }
         public bool IsBefore { get; set; }
-        
+
         public bool PrincipalIsTeam { get; set; }
         public bool ResolvedByOne { get; set; }
         public string PrincipalId { get; set; }
@@ -22,5 +23,7 @@
         public int? ParentTaskId { get; set; }
         public int? TemplateId { get; set; }
         public int CategoryId { get; set; }
+
+        public List<int> Files { get; set; }  
     }
 }

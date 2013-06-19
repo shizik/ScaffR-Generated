@@ -11,7 +11,8 @@
                                        int? assignmentId = null,
                                        int? taskId = null,
                                        int? templateId = null,
-                                       string teamId = null)
+                                       string teamId = null,
+                                       DbTransaction transaction = null)
         {
             // TODO: Get ID from the logged in user
             var activity = new ActivitySave
@@ -26,7 +27,7 @@
 
             try
             {
-                connection.Execute("Activity_Log", activity, commandType: CommandType.StoredProcedure);
+                connection.Execute("Activity_Log", activity, commandType: CommandType.StoredProcedure, transaction: transaction);
             }
             catch { }
         }

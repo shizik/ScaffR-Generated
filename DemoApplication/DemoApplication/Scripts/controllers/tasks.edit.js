@@ -76,6 +76,8 @@
             }
 
             $scope.save = function () {
+                $scope.task.files = _.filter(_.pluck($scope.queue, 'id'), function (id) { return !!id; });
+
                 saveCommands[command]();
             };
 

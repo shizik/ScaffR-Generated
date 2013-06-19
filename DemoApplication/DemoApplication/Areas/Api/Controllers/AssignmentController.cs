@@ -28,10 +28,10 @@
             using (var db = new DapperDatabase())
             {
                 var result = db.Connection.QueryMultiple("Assignment_GetByIdEmployeeId",
-                                                         new { Id = id, EmployeeId = employeeId }, 
+                                                         new { Id = id, EmployeeId = employeeId },
                                                          commandType: CommandType.StoredProcedure);
 
-                var dataResult =  new
+                var dataResult = new
                 {
                     Assignment = result.Read<Assignment>().Single(),
                     Activity = result.Read<Activity>().ToList()
@@ -61,9 +61,16 @@
         {
             using (var db = new DapperDatabase())
             {
-                int id = (int)db.Connection.Query<decimal>("Employee_AddTask", entity, commandType: CommandType.StoredProcedure).First();
+                var transaction = db.Connection.BeginTransaction();
 
-                db.Connection.LogActivity(ActivityActions.Create, id);
+                int id = (int)db.Connection.Query<decimal>("Employee_AddTask",
+                                                           entity,
+                                                           commandType: CommandType.StoredProcedure,
+                                                           transaction: transaction).First();
+
+                db.Connection.LogActivity(ActivityActions.Create, id, transaction: transaction);
+
+                transaction.Commit();
 
                 return id;
             }
