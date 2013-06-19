@@ -30,7 +30,7 @@ BEGIN
 		   CategoryId,
 		   Assignment.DueDate AS DueDate
 	FROM Assignment INNER JOIN Person_Main as P ON Assignment.Employee_Cd = P.Employee_Cd
-					INNER JOIN Person_Main as A ON Assignment.Approver_Cd = A.Employee_Cd
+					LEFT OUTER JOIN Person_Main as A ON Assignment.Approver_Cd = A.Employee_Cd
 	WHERE Assignment.Principal_Cd = @Id OR 
 		  Assignment.Principal_Cd IN (SELECT Team_Cd FROM Person_Team WHERE Employee_Cd = @Id)
 

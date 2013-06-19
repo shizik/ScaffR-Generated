@@ -6,22 +6,24 @@
 
     public class FilesStatus
     {
-        private const string HandlerPath = "/";
+        private const string Endpoint = "/api/Attachment?id=";
 
-        public string group { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public int size { get; set; }
-        public string progress { get; set; }
-        public string url { get; set; }
-        public string thumbnail_url { get; set; }
-        public string delete_url { get; set; }
-        public string delete_type { get; set; }
-        public string error { get; set; }
+        public int Id { get; set; }
+        public string Group { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public int Size { get; set; }
 
-        public FilesStatus()
-        {
-        }
+        public string Progress { get { return "1.0"; } }
+
+        public string Url { get { return Endpoint + Id; } }
+        public string DeleteUrl { get { return Endpoint + Id; } }
+        public string DeleteType { get { return "DELETE"; } }
+        public string ThumbnailUrl { get { return "/Content/img/generalFile.png"; } }
+
+        public string Error { get; set; }
+
+        public FilesStatus() { }
 
         public FilesStatus(FileInfo fileInfo)
         {
@@ -35,18 +37,18 @@
 
         private void SetValues(string fileName, int fileLength, string fullPath)
         {
-            name = fileName;
-            type = "image/png";
-            size = fileLength;
-            progress = "1.0";
-            url = HandlerPath + "api/Attachment?f=" + fileName;
-            delete_url = HandlerPath + "api/Attachment?f=" + fileName;
-            delete_type = "DELETE";
+            Name = fileName;
+            //Type = "image/png";
+            Size = fileLength;
+            //Progress = "1.0";
+            //Url = Endpoint + Id;
+            //delete_url = Endpoint + Id;
+            //delete_type = "DELETE";
             //var ext = Path.GetExtension(fullPath);
             //var fileSize = ConvertBytesToMegabytes(new FileInfo(fullPath).Length);
             //if (fileSize > 3 || !IsImage(ext))
             //{
-                thumbnail_url = "/Content/img/generalFile.png";
+            //thumbnail_url = "/Content/img/generalFile.png";
             //}
             //else
             //{
