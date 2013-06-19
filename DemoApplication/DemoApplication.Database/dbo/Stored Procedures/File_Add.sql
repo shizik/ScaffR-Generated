@@ -6,4 +6,6 @@ AS
 BEGIN
     INSERT INTO Attachment (Name, MimeType, Content)
 	VALUES (@Name, @MimeType, @Content)
+
+	SELECT SCOPE_IDENTITY()
 END

@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Web.Mvc;
+using DemoApplication.Infrastructure.Data;
 
 namespace DemoApplication.Areas.Api.Controllers
 {
@@ -12,27 +15,28 @@ namespace DemoApplication.Areas.Api.Controllers
 
     public abstract partial class UploadControllerBase
     {
-        //protected HttpResponseMessage Download()
-        //{
-        //    return !string.IsNullOrEmpty(HttpContext.Current.Request["f"]) ? DownloadFileContent() : DownloadFileList();
-        //}
-
-        private HttpResponseMessage DownloadFileContent()
+        public HttpResponseMessage Get(int id)
         {
-            var filename = HttpContext.Current.Request["f"];
-            var filePath = _storageRoot + filename;
-            if (System.IO.File.Exists(filePath))
+            dynamic result;
+            using (var db = new DapperDatabase())
             {
-                var response = new HttpResponseMessage(HttpStatusCode.OK);
-                response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = filename
-                };
-                return response;
+                result = db.Connection.Query("File_GetById",
+                                             new { Id = id },
+                                             commandType: CommandType.StoredProcedure)
+                                      .SingleOrDefault();
             }
-            return ControllerContext.Request.CreateErrorResponse(HttpStatusCode.NotFound, "");
+
+            if (result == null) return Request.CreateErrorResponse(HttpStatusCode.NotFound, "");
+
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new ByteArrayContent(result.Content);
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue(result.MimeType);
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = result.Name
+            };
+
+            return response;
         }
 
         protected IEnumerable<FilesStatus> Download()//DownloadFileList()

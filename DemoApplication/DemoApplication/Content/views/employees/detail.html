@@ -27,8 +27,8 @@
     </div>
 </div>
 <ul class="nav nav-tabs">
-    <li data-ng-class="{'active':view=='tasks'}"><a data-ng-click="view='tasks'"><i class="icon-tasks"></i>Tasks</a></li>
-    <li data-ng-class="{'active':view=='todos'}"><a data-ng-click="view='todos'"><i class="icon-list"></i>To-Do List</a></li>
+    <li data-ng-class="{'active':view=='tasks'}"><a data-ng-click="view='tasks'"><i class="icon-tasks"></i>For {{person.firstName}}</a></li>
+    <li data-ng-class="{'active':view=='todos'}"><a data-ng-click="view='todos'"><i class="icon-list"></i>For Others</a></li>
     <li data-ng-class="{'active':view=='activity'}"><a data-ng-click="showActivity()"><i class="icon-bullhorn"></i>Activity</a></li>
 </ul>
 <div data-ng-switch="" data-on="view">

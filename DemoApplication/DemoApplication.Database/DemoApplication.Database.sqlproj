@@ -179,6 +179,8 @@
     <Build Include="dbo\Stored Procedures\File_GetById.sql" />
     <Build Include="dbo\Stored Procedures\File_Add.sql" />
     <Build Include="dbo\Stored Procedures\File_GetAll.sql" />
+    <Build Include="dbo\Tables\Assignment_Action.sql" />
+    <Build Include="dbo\Stored Procedures\File_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

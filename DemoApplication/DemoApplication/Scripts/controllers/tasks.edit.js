@@ -131,7 +131,8 @@
             var url = 'api/attachment';
             $scope.loadingFiles = true;
             $scope.options = {
-                url: url
+                url: url,
+                maxNumberOfFiles: 1
             };
             $http.get(url)
                 .then(

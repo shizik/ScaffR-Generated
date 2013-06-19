@@ -1,14 +1,12 @@
-﻿using System;
-using System.Data;
-using System.IO;
-using System.Linq;
-using DemoApplication.Infrastructure.Data;
-
-namespace DemoApplication.Areas.Api.Controllers
+﻿namespace DemoApplication.Areas.Api.Controllers
 {
-    using System.Web;
-    using System.Net.Http;
+    using System;
     using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Web;
+    using Infrastructure.Data;
     using Models;
 
     public class AttachmentController : UploadControllerBase
@@ -17,34 +15,52 @@ namespace DemoApplication.Areas.Api.Controllers
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.Query<File>("File_GetAll", commandType: CommandType.StoredProcedure);
+                var result = db.Connection.Query("File_GetAll", commandType: CommandType.StoredProcedure);
 
-                return result.Select(x => new FilesStatus(x.Name, x.Size, null));
+                return result.Select(x => new FilesStatus
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Type = x.MimeType,
+                        Size = (int)x.Size
+                    });
             }
         }
 
-        public HttpResponseMessage Post()
+        public dynamic Post()
         {
             var statuses = new List<FilesStatus>();
+            var files = HttpContext.Current.Request.Files;
 
-            for (int i = 0; i < HttpContext.Current.Request.Files.Count; i++)
+            for (int i = 0; i < files.Count; i++)
             {
-                var file = HttpContext.Current.Request.Files[i];
+                var file = files[i];
+                var fileRequest = new
+                    {
+                        Name = file.FileName,
+                        MimeType = file.ContentType,
+                        Content = GetByteFromFile(file)
+                    };
 
+                int id;
                 using (var db = new DapperDatabase())
                 {
-                    db.Connection.Execute("File_Add", new
-                        {
-                            Name = file.FileName,
-                            MimeType = file.ContentType,
-                            Content = GetByteFromFile(file)
-                        },
-                        commandType: CommandType.StoredProcedure);
+                    id = (int)db.Connection.Query<decimal>("File_Add", fileRequest, commandType: CommandType.StoredProcedure).First();
                 }
 
-                statuses.Add(new FilesStatus(file.FileName, file.ContentLength, null));
+                statuses.Add(new FilesStatus
+                {
+                    Id = id,
+                    Name = fileRequest.Name,
+                    Type = fileRequest.MimeType,
+                    Size = fileRequest.Content.Length
+                });
             }
-            return WriteJsonIframeSafe(HttpContext.Current, statuses);
+
+            return new
+            {
+                files = statuses
+            };
         }
 
         public HttpResponseMessage Put()

@@ -14,6 +14,8 @@
     [Employee_Cd]    CHAR (30)     NOT NULL,
 
 	[RequiresSignature]	BIT		   NOT NULL,
+	--[RequiresDownload]	BIT		   NOT NULL,
+	--[RequiresUpload]	BIT		   NOT NULL,
     [Recurring]      BIT           NOT NULL,
 
 	[AssignmentApprovalId] INT	   NULL,

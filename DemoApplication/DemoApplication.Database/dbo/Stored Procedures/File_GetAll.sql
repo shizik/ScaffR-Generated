@@ -3,6 +3,6 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-    select Name, MimeType, DATALENGTH(Content) as Size from Attachment
-
+    SELECT AttachmentId AS Id, Name, MimeType, DATALENGTH(Content) AS Size
+	FROM Attachment
 END

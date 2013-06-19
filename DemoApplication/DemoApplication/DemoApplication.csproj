@@ -503,6 +503,7 @@
     <Content Include="Scripts\controllers\approvers.index.js" />
     <Content Include="Scripts\controllers\approvers.detail.js" />
     <Content Include="Scripts\controllers\approvers.mytasks.js" />
+    <Content Include="Scripts\controllers\file.destroy.js" />
     <Content Include="Scripts\controllers\employees.detail.approver.js" />
     <Content Include="Scripts\controllers\employees.detail.tasks.js" />
     <Content Include="Scripts\controllers\tasks.index.js" />
