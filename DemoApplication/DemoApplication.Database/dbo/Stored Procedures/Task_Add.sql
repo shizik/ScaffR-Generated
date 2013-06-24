@@ -23,7 +23,9 @@ CREATE PROCEDURE Task_Add
 
 	@ParentTaskId int,
 	@TemplateId int,
-	@CategoryId int
+	@CategoryId int,
+
+	@Files varchar(200)
 AS BEGIN
 	insert into Task 
 		([Name], 
@@ -66,5 +68,16 @@ AS BEGIN
 		 @TemplateId,
 		 @CategoryId)
 
-	SELECT SCOPE_IDENTITY()
+	SET @Id = SCOPE_IDENTITY()
+
+	IF(@Files IS NOT NULL)
+		INSERT INTO Task_Attachment (TaskId, AttachmentId)
+		SELECT @Id, split.Item FROM dbo.DelimitedSplit8K(@Files, ',') as split
+
+	IF(@ParentTaskId IS NOT NULL)
+		INSERT INTO Task_Attachment (TaskId, AttachmentId)
+		SELECT @Id, AttachmentId 
+		FROM Task_Attachment WHERE TaskId = @ParentTaskId
+
+	SELECT @Id
 END

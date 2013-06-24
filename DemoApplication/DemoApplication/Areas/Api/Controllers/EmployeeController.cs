@@ -40,14 +40,16 @@
         }
 
         [HttpGet]
-        public string GetMilestoneValue(string id, int milestoneId)
+        public dynamic GetMilestoneValue(string id, int milestoneId)
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<DateTime>("Employee_GetMilestoneValue",
+                var date = db.Connection.Query<DateTime>("Employee_GetMilestoneValue",
                                                      new { Id = id, MilestoneId = milestoneId },
                                                      commandType: CommandType.StoredProcedure)
-                                    .First().ToShortDateString();
+                                    .First();
+
+                return new { Date = date };
             }
         }
 

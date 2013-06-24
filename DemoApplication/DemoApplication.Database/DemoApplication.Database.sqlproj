@@ -65,6 +65,7 @@
     <Folder Include="Ignored On Import\" />
     <Folder Include="Ignored On Import\Onboarding_20130522_04-36-56\" />
     <Folder Include="Snapshots" />
+    <Folder Include="dbo\Functions" />
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="Onboarding">
@@ -95,11 +96,9 @@
     <Build Include="dbo\Tables\Team.sql" />
     <Build Include="dbo\Tables\Template.sql" />
     <Build Include="dbo\Views\Assignments.sql" />
-    <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_AddPrincipal.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_CreateFromTask.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_GetById.sql" />
-    <Build Include="dbo\Stored Procedures\Attachment_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Employee_AddComment.sql" />
     <Build Include="dbo\Stored Procedures\Employee_AddTask.sql" />
     <Build Include="dbo\Stored Procedures\Employee_ApplyTemplate.sql" />
@@ -176,12 +175,17 @@
     <Build Include="dbo\Views\TeamActivity.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetActivity.sql" />
     <Build Include="dbo\Stored Procedures\Team_GetActivity.sql" />
-    <Build Include="dbo\Stored Procedures\File_GetById.sql" />
-    <Build Include="dbo\Stored Procedures\File_Add.sql" />
-    <Build Include="dbo\Stored Procedures\File_GetAll.sql" />
-    <Build Include="dbo\Tables\Assignment_Action.sql" />
-    <Build Include="dbo\Stored Procedures\File_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Attachment_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Attachment_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Attachment_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Attachment_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Task_AddAttachment.sql" />
+    <Build Include="dbo\Views\Attachments.sql" />
+    <Build Include="dbo\Stored Procedures\Task_GetAttachments.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_GetAttachments.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
+    <Build Include="dbo\Functions\DelimitedSplitN4K.sql" />
+    <Build Include="dbo\Functions\DelimitedSplit8K.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

@@ -14,13 +14,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Task_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
-
-                var team = result.Read<Task>().Single();
+                var task = db.Connection.Query<Task>("Task_GetById", new { Id = id }, commandType: CommandType.StoredProcedure).Single();
 
                 db.Connection.LogActivity(ActivityActions.View, taskId: id);
 
-                return team;
+                return task;
             }
         }
 
@@ -51,35 +49,31 @@
             }
         }
 
+        [HttpGet]
+        public IEnumerable<FilesStatus> Attachments(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<FilesStatus>("Task_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public int Put(Task entity)
         {
             using (var db = new DapperDatabase())
             {
-                var fileIds = entity.Files;
-
-                // Prevents too many arguments specified exception
-                entity.Files = null;
-
                 var transaction = db.Connection.BeginTransaction();
 
-                int id = (int)db.Connection.Query<decimal>("Task_Add",
-                                                           entity,
-                                                           commandType: CommandType.StoredProcedure,
-                                                           transaction: transaction).First();
+                int id = db.Connection.Query<int>("Task_Add",
+                                                  entity,
+                                                  commandType: CommandType.StoredProcedure,
+                                                  transaction: transaction).First();
 
-                foreach (var fileId in fileIds)
-                {
-                    db.Connection.Execute("Task_AddAttachment",
-                                          new { Id = id, AttachmentId = fileId },
-                                          commandType: CommandType.StoredProcedure,
-                                          transaction: transaction);
-                }
-
-                db.Connection.LogActivity(ActivityActions.Update, taskId: id, transaction: transaction);
+                db.Connection.LogActivity(ActivityActions.Create, taskId: id, transaction: transaction);
 
                 transaction.Commit();
                 transaction.Dispose();
-                
+
                 return id;
             }
         }

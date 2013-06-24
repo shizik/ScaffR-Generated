@@ -24,6 +24,6 @@ namespace DemoApplication.Areas.Api.Models
         public int? TemplateId { get; set; }
         public int CategoryId { get; set; }
 
-        public List<int> Files { get; set; }  
+        public string Files { get; set; }  
     }
 }

@@ -1,11 +1,12 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
-    using Infrastructure.Data;
-    using Models;
+    using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Web.Http;
     using Helpers;
+    using Infrastructure.Data;
+    using Models;
 
     public class AssignmentController : ApiController
     {
@@ -44,11 +45,20 @@
             }
         }
 
+        [HttpGet]
+        public IEnumerable<FilesStatus> Attachments(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<FilesStatus>("Assignment_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public int Put(Assignment entity)
         {
             using (var db = new DapperDatabase())
             {
-                int id = (int)db.Connection.Query<decimal>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).First();
+                int id = db.Connection.Query<int>("Assignment_Add", entity, commandType: CommandType.StoredProcedure).Single();
 
                 db.Connection.LogActivity(ActivityActions.Create, id);
 
@@ -63,10 +73,10 @@
             {
                 var transaction = db.Connection.BeginTransaction();
 
-                int id = (int)db.Connection.Query<decimal>("Employee_AddTask",
+                int id = db.Connection.Query<int>("Employee_AddTask",
                                                            entity,
                                                            commandType: CommandType.StoredProcedure,
-                                                           transaction: transaction).First();
+                                                           transaction: transaction).Single();
 
                 db.Connection.LogActivity(ActivityActions.Create, id, transaction: transaction);
 

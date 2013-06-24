@@ -1,6 +1,6 @@
 ﻿Application.Controllers.controller('tasks.edit',
-                ['$scope', '$http', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'toastr',
-        function ($scope, $http, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, toastr) {
+                ['$scope', '$http', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+        function ($scope, $http, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, commonUtils, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 
             $scope.hasApprover = false;
@@ -39,13 +39,17 @@
 
                 $scope.task = task;
             } else {
-                if ($scope.isFromEmployee)
+                if ($scope.isFromEmployee) {
                     serviceAssignment.getById($routeParams.assignmentId, function (data) {
                         $scope.task = data;
                         $scope.employeeId = $scope.task.employeeId;
                         $scope.hasApprover = data.approverId != null;
                     });
-                else
+
+                    serviceAssignment.getAttachments($routeParams.assignmentId, function (data) {
+                        $scope.queue = data;
+                    });
+                } else {
                     serviceTask.getById($routeParams.taskId, function (data) {
                         $scope.task = data;
                         $scope.hasApprover = data.approverId != null;
@@ -55,6 +59,11 @@
                             numberOfRelatedTasks = num;
                         });
                     });
+
+                    serviceTask.getAttachments($routeParams.taskId, function (data) {
+                        $scope.queue = data;
+                    });
+                }
             }
 
             if (command != 'updateAssignment') {
@@ -76,7 +85,9 @@
             }
 
             $scope.save = function () {
-                $scope.task.files = _.filter(_.pluck($scope.queue, 'id'), function (id) { return !!id; });
+                var files = _.filter(_.pluck($scope.queue, 'id'), function (id) { return !!id; });
+                if (files.length > 0)
+                    $scope.task.files = files.join();
 
                 saveCommands[command]();
             };
@@ -128,82 +139,22 @@
             };
 
             //
-            // Attachments / Actions
+            // Attachments
 
-            var url = 'api/attachment';
-            $scope.loadingFiles = true;
             $scope.options = {
-                url: url,
-                maxNumberOfFiles: 1
+                url: 'api/attachment',
+                maxNumberOfFiles: 2
             };
-            $http.get(url)
-                .then(
-                    function (response) {
-                        $scope.loadingFiles = false;
-                        $scope.queue = response.data || [];
-                    },
-                    function () {
-                        $scope.loadingFiles = false;
-                    }
-                );
 
-
-            $scope.attachments = [];
-            $scope.actions = [];
-
-            function clearAttachment() {
-                $scope.title = '';
-                $scope.fileName = '';
-                $scope.signatureRequired = false;
-                $scope.downloadRequired = false;
-                $scope.attachmentMode = false;
-            }
-
-            function clearAction() {
-                $scope.actionName = '';
-                $scope.actionMode = false;
-            }
-
-            $scope.createAttachment = function () {
-
-                var attachment = {
-                    title: $scope.title,
-                    fileName: $scope.fileName,
-                    downloadRequired: $scope.downloadRequired,
-                    signatureRequired: $scope.signatureRequired,
-                    actions: []
-                };
-
-                if (attachment.signatureRequired) {
-                    var signAction = {
-                        title: 'Sign Form ' + attachment.title
-                    };
-                    $scope.actions.push(signAction);
+            $scope.deleteFile = function (file) {
+                if (!$scope.isNew)
+                    commonUtils.removeFromList(file, $scope.queue);
+                else {
+                    $http.delete(file.deleteUrl).then(
+                        function () {
+                            $scope.clear(file);
+                        }
+                    );
                 }
-
-                if (attachment.downloadRequired) {
-                    var downloadAction = {
-                        title: 'Download Form ' + attachment.title
-                    };
-                    $scope.actions.push(downloadAction);
-                }
-
-                $scope.attachments.push(attachment);
-
-                clearAttachment();
             };
-
-            $scope.removeAttachment = function (index) {
-                $scope.attachments.splice(index, 1);
-            };
-
-            $scope.removeAction = function (index) {
-                $scope.actions.splice(index, 1);
-            };
-
-            $scope.createAction = function (name) {
-                $scope.actions.push({ title: name });
-                clearAction();
-            };
-
         }]);

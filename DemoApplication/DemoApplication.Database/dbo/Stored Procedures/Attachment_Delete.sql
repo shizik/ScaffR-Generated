@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE File_Delete 
+﻿CREATE PROCEDURE Attachment_Delete 
 	@Id int
 AS
 BEGIN

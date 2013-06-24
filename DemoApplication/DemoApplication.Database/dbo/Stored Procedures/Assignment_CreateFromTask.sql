@@ -49,7 +49,7 @@ BEGIN
 
 														IF NOT EXISTS (SELECT Assignment_Attachment.AssignmentId FROM Assignment_Attachment WHERE Assignment_Attachment.AttachmentId=@atid) 
 															Begin
-																Insert into Assignment_Attachment (AssignmentId,AttachmentId,Name) values(@AssignID,@atid,'AttchmentDefaultName')
+																Insert into Assignment_Attachment (AssignmentId,AttachmentId) values(@AssignID,@atid)
 															End				
 					
 														fetch next from attCur into @atid
@@ -77,7 +77,7 @@ BEGIN
 
 							IF NOT EXISTS (SELECT Assignment_Attachment.AssignmentId FROM Assignment_Attachment WHERE Assignment_Attachment.AttachmentId=@atid) 
 								Begin
-									Insert into Assignment_Attachment (AssignmentId,AttachmentId,Name) values(@AssignID,@atid,'AttchmentDefaultName')
+									Insert into Assignment_Attachment (AssignmentId,AttachmentId) values(@AssignID,@atid)
 								End				
 					
 							fetch next from attCur into @atid
