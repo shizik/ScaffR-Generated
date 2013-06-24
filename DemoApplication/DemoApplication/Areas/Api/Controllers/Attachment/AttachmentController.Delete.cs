@@ -5,13 +5,13 @@
     using System.Data;
     using Infrastructure.Data;
 
-    public abstract partial class UploadControllerBase
+    public partial class AttachmentController
     {
         public HttpResponseMessage Delete(int id)
         {
             using (var db = new DapperDatabase())
             {
-                db.Connection.Execute("File_Delete",
+                db.Connection.Execute("Attachment_Delete",
                                       new { Id = id },
                                       commandType: CommandType.StoredProcedure);
             }

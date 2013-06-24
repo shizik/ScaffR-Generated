@@ -38,7 +38,6 @@
             <label class="checkbox">
                 <input type="checkbox" data-ng-model="task.recurring" />
                 Reccuring
-           
             </label>
         </div>
         <span data-ng-switch-when="true">
@@ -129,88 +128,10 @@
                 <i class="icon-ban-circle icon-white"></i>
                 <span>Cancel</span>
             </button>
-            <button data-ng-controller="file.destroy" type="button" class="btn btn-warning destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">
+            <button type="button" class="btn btn-warning destroy" data-ng-click="deleteFile(file)" data-ng-hide="!file.url">
                 <i class="icon-ban-circle icon-white"></i>
                 <span>Delete</span>
             </button>
         </td>
     </tr>
 </table>
-<!--<div class="row-fluid">
-        <div class="span6">
-            <h4>Attach Resources</h4>
-            <ul class="unstyled">
-                <li data-ng-repeat="attachment in attachments">
-                    <a class="btn btn-success" href="#">{{attachment.title}}</a>
-                    <button data-ng-click="removeAttachment($index)" class="close">&times;</button>
-                </li>
-                <li>
-                    <button class="btn" ng-click="attachmentMode=true">Add File</button>
-                </li>
-            </ul>
-            <div class="well" ng-class="{hidden:!attachmentMode}">
-                <h5>Attachment Mode</h5>
-                <form class="form-vertical">
-                    <div class="control-group">
-                        <div class="control-label">
-                            <label>Title</label>
-                        </div>
-                        <div class="controls">
-                            <input type="text" ng-model="title" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="control-label">
-                            <label>File</label>
-                        </div>
-                        <div class="controls">
-                            <input type="text" ng-model="fileName" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="downloadRequired" />
-                            Download Required
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" ng-model="signatureRequired" />
-                            Signature Required Required
-                        </label>
-                    </div>
-                    <div class="form-actions">
-                        <button class="btn" ng-click="createAttachment()">Upload</button>
-                        <button class="btn" ng-click="attachmentMode=false">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="span6">
-            <h4>Actions</h4>
-            <ul class="unstyled">
-                <li ng-repeat="action in actions">
-                    <button class="btn btn-success">{{action.title}}</button>
-                    <button data-ng-click="removeAction($index)" class="close">&times;</button>
-                </li>
-                <li>
-                    <a class="btn" ng-click="actionMode=true">Add Action</a>
-                </li>
-            </ul>
-            <div class="well" ng-class="{hidden:!actionMode}">
-                <h5>Add Action</h5>
-                <form class="form-vertical">
-                    <div class="control-group">
-                        <div class="control-label">
-                            <label>Description</label>
-                        </div>
-                        <div class="controls">
-                            <input type="text" ng-model="actionName" />
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button class="btn" ng-click="createAction(actionName)">Upload</button>
-                        <button class="btn" ng-click="actionMode=false">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>-->

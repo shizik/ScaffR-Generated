@@ -23,45 +23,17 @@ CREATE PROCEDURE Template_AddTask
 
 	@ParentTaskId int,
 	@TemplateId int,
-	@CategoryId int
+	@CategoryId int,
+
+	@Files varchar(200)
 AS
 BEGIN
-	insert into Task 
-		([Name], 
-		 [Description], 
-		
-		 [MilestoneId],
-		 [MilestoneValue],
-		 [Interval],
-		 [IsBefore],
-
-		 [PrincipalIsTeam],  
-		 [ResolvedByOne],
- 		 [Principal_Cd],
-		 [Approver_Cd],
-
-		 [RequiresSignature],
-		 [Recurring],
-
-		 [CategoryId])
-	values 
-		(@Name,  
-		 @Description,  
-
-		 @MilestoneId, 
-		 @MilestoneValue, 
-		 @Interval, 
-		 @IsBefore, 
-		 
-		 @PrincipalIsTeam, 
-		 @ResolvedByOne, 
-		 @PrincipalId, 
-		 @ApproverId,
-
-		 @RequiresSignature,
-		 @Recurring,
-
-		 @CategoryId)
+	DECLARE @TaskId INT
+	EXECUTE Task_Add @TaskId, @Name, @Description,
+					 @MilestoneId, @MilestoneValue, @Interval, @IsBefore,
+					 @PrincipalIsTeam, @ResolvedByOne, @PrincipalId, @ApproverId,
+					 @RequiresSignature, @Recurring,
+					 NULL, NULL, @CategoryId, @Files
 
 	insert into Task 
 		([Name], 
@@ -100,9 +72,15 @@ BEGIN
 		 @RequiresSignature,
 		 @Recurring,
 
-		 SCOPE_IDENTITY(),
+		 @TaskId,
 		 @TemplateId,
 		 @CategoryId)
 
-	SELECT SCOPE_IDENTITY()
+	SET @Id = SCOPE_IDENTITY()
+
+	INSERT INTO Task_Attachment (TaskId, AttachmentId)
+	SELECT @Id, AttachmentId 
+	FROM Task_Attachment WHERE TaskId = @TaskId
+
+	SELECT @Id
 END

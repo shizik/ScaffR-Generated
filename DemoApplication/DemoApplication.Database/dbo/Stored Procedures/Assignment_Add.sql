@@ -59,5 +59,11 @@ AS BEGIN
 		 @TaskId,
 		 @CategoryId)
 
-	SELECT SCOPE_IDENTITY()
+	SET @Id = SCOPE_IDENTITY()
+
+	INSERT INTO Assignment_Attachment (AssignmentId, AttachmentId)
+	SELECT @Id, AttachmentId 
+	FROM Task_Attachment WHERE TaskId = @TaskId
+
+	SELECT @Id
 END

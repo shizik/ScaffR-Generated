@@ -14,13 +14,11 @@
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Task_GetById", new { Id = id }, commandType: CommandType.StoredProcedure);
-
-                var team = result.Read<Task>().Single();
+                var task = db.Connection.Query<Task>("Task_GetById", new { Id = id }, commandType: CommandType.StoredProcedure).Single();
 
                 db.Connection.LogActivity(ActivityActions.View, taskId: id);
 
-                return team;
+                return task;
             }
         }
 
@@ -51,13 +49,30 @@
             }
         }
 
+        [HttpGet]
+        public IEnumerable<FilesStatus> Attachments(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<FilesStatus>("Task_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public int Put(Task entity)
         {
             using (var db = new DapperDatabase())
             {
-                int id = (int)db.Connection.Query<decimal>("Task_Add", entity, commandType: CommandType.StoredProcedure).First();
+                var transaction = db.Connection.BeginTransaction();
 
-                db.Connection.LogActivity(ActivityActions.Update, taskId: id);
+                int id = db.Connection.Query<int>("Task_Add",
+                                                  entity,
+                                                  commandType: CommandType.StoredProcedure,
+                                                  transaction: transaction).First();
+
+                db.Connection.LogActivity(ActivityActions.Create, taskId: id, transaction: transaction);
+
+                transaction.Commit();
+                transaction.Dispose();
 
                 return id;
             }

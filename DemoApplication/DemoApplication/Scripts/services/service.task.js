@@ -29,7 +29,7 @@
             $http.get('/api/employee/getMilestoneValue?id=' + employeeId + '&milestoneId=' + task.milestoneId).success(function (data) {
                 var intervals = [undefined, "days", "weeks", "months", "quarters"];
                 var func = task.isBefore ? 'subtract' : 'add';
-                var date = moment(data)[func](intervals[task.interval], task.milestoneValue);
+                var date = moment(data.date)[func](intervals[task.interval], task.milestoneValue);
                 callback(date._d);
             });
         },
@@ -48,6 +48,10 @@
 
         getAvailable: function (callback) {
             $http.get('/api/task/available').success(callback);
+        },
+
+        getAttachments: function (id, callback) {
+            $http.get('/api/task/attachments?id=' + id).success(callback);
         },
 
         add: function (entity, callback) {

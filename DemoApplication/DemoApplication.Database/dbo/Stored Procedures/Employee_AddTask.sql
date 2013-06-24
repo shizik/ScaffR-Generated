@@ -26,79 +26,22 @@ CREATE PROCEDURE [dbo].[Employee_AddTask]
 	@CategoryId int,
 	
 	@DueDate datetime,
-	@EmployeeId CHAR(30)
+	@EmployeeId CHAR(30),
+
+	@Files varchar(200)
 AS
 BEGIN
-	insert into Task 
-		([Name], 
-		 [Description], 
-		
-		 [MilestoneId],
-		 [MilestoneValue],
-		 [Interval],
-		 [IsBefore],
+	DECLARE @TaskId INT
+	EXECUTE Task_Add @TaskId, @Name, @Description,
+					 @MilestoneId, @MilestoneValue, @Interval, @IsBefore,
+					 @PrincipalIsTeam, @ResolvedByOne, @PrincipalId, @ApproverId,
+					 @RequiresSignature, @Recurring,
+					 NULL, NULL, @CategoryId, @Files
+					 
+	EXECUTE dbo.Assignment_Add @Id, @Name, @Description, 1, @DueDate, NULL,
+							   @PrincipalIsTeam, @ResolvedByOne, @PrincipalId, @ApproverId, @EmployeeId,
+							   @RequiresSignature, @Recurring,
+							   @TaskId, @CategoryId
 
-		 [PrincipalIsTeam],  
-		 [ResolvedByOne],
- 		 [Principal_Cd],
-		 [Approver_Cd],
-		 [RequiresSignature],
-		 [Recurring],
-
-		 [CategoryId])
-	values 
-		(@Name,  
-		 @Description,  
-
-		 @MilestoneId, 
-		 @MilestoneValue, 
-		 @Interval, 
-		 @IsBefore, 
-		 
-		 @PrincipalIsTeam, 
-		 @ResolvedByOne, 
-		 @PrincipalId, 
-		 @ApproverId,
-
-		 @RequiresSignature,
-		 @Recurring,
-
-		 @CategoryId)
-
-	insert into Assignment 
-		([Name], 
-		 [Description], 
-		
-		 [DueDate],
-
-		 [PrincipalIsTeam],  
-		 [ResolvedByOne],
- 		 [Principal_Cd],
-		 [Approver_Cd],
-		 [Employee_Cd],
-
-		 [RequiresSignature],
-		 [Recurring],
-
-		 [TaskId],
-		 [CategoryId])
-	values 
-		(@Name,  
-		 @Description,  
-		
-		 @DueDate,
-				 
-		 @PrincipalIsTeam, 
-		 @ResolvedByOne, 
-		 @PrincipalId, 
-		 @ApproverId,
-		 @EmployeeId,
-
-		 @RequiresSignature,
-		 @Recurring,
-
-		 SCOPE_IDENTITY(),
-		 @CategoryId)
-
-	SELECT SCOPE_IDENTITY()
+	SELECT @Id
 END

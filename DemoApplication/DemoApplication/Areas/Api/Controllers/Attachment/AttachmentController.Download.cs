@@ -1,26 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Web.Mvc;
-using DemoApplication.Infrastructure.Data;
-
-namespace DemoApplication.Areas.Api.Controllers
+﻿namespace DemoApplication.Areas.Api.Controllers
 {
     using System.Linq;
-    using System.Web;
-    using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using Models;
+    using System.Collections.Generic;
+    using System.Data;
+    using Infrastructure.Data;
 
-    public abstract partial class UploadControllerBase
+    public partial class AttachmentController
     {
+        public IEnumerable<FilesStatus> Get()
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<FilesStatus>("Attachment_GetAll", commandType: CommandType.StoredProcedure);
+            }
+        }
+
         public HttpResponseMessage Get(int id)
         {
             dynamic result;
             using (var db = new DapperDatabase())
             {
-                result = db.Connection.Query("File_GetById",
+                result = db.Connection.Query("Attachment_GetById",
                                              new { Id = id },
                                              commandType: CommandType.StoredProcedure)
                                       .SingleOrDefault();
@@ -37,20 +41,6 @@ namespace DemoApplication.Areas.Api.Controllers
             };
 
             return response;
-        }
-
-        protected IEnumerable<FilesStatus> Download()//DownloadFileList()
-        {
-            return
-            new DirectoryInfo(_storageRoot)
-                .GetFiles("*", SearchOption.TopDirectoryOnly)
-                .Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden))
-                .Select(f => new FilesStatus(f))
-                .ToArray();
-
-            //HttpContext.Current.Response.ContentType = "application/json";
-            //HttpContext.Current.Response.AppendHeader("Content-Disposition", "inline; filename=\"files.json\"");
-            //return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, _js.Serialize(files));
         }
     }
 }

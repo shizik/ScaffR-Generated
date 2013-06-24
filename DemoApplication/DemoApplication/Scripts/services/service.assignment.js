@@ -32,6 +32,10 @@
             $http.get('/api/assignment/?id=' + id + '&employeeId=' + employeeId).success(callback);
         },
 
+        getAttachments: function (id, callback) {
+            $http.get('/api/assignment/attachments?id=' + id).success(callback);
+        },
+
         add: function (entity, callback) {
             $http.put('/api/assignment', entity).success(callback);
         },

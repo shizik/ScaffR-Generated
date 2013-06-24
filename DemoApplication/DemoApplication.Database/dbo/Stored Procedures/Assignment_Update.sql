@@ -22,23 +22,34 @@ CREATE PROCEDURE Assignment_Update
     @Recurring BIT,
 
 	@TaskId int,
-	@CategoryId int
+	@CategoryId int,
+
+	@Files varchar(200)
 AS
 BEGIN
 	UPDATE [dbo].[Assignment]
-	   SET [Name] = @Name
-		  ,[Description] = @Description
-		  ,[DueDate] = @DueDate
+		SET [Name] = @Name
+			,[Description] = @Description
+			,[DueDate] = @DueDate
 
-		  ,[PrincipalIsTeam] = @PrincipalIsTeam
-		  ,[ResolvedByOne] = @ResolvedByOne
-  		  ,[Principal_Cd] = @PrincipalId
-		  ,[Approver_Cd] = @ApproverId
-		  ,[Employee_Cd] = @EmployeeId
+			,[PrincipalIsTeam] = @PrincipalIsTeam
+			,[ResolvedByOne] = @ResolvedByOne
+  			,[Principal_Cd] = @PrincipalId
+			,[Approver_Cd] = @ApproverId
+			,[Employee_Cd] = @EmployeeId
 
-		  ,[RequiresSignature] = @RequiresSignature
-		  ,[Recurring] = @Recurring
+			,[RequiresSignature] = @RequiresSignature
+			,[Recurring] = @Recurring
 
-		  ,CategoryId = @CategoryId
-	 WHERE AssignmentId = @Id
+			,CategoryId = @CategoryId
+		WHERE AssignmentId = @Id
+
+	INSERT INTO Assignment_Attachment (AssignmentId, AttachmentId)
+	SELECT @Id, split.Item
+	FROM dbo.DelimitedSplit8K(@Files, ',') as split
+	WHERE split.Item NOT IN (SELECT AttachmentId FROM Assignment_Attachment WHERE AssignmentId = @Id)
+
+	DELETE FROM Assignment_Attachment
+	WHERE AssignmentId = @Id AND
+		  AttachmentId NOT IN(SELECT split.Item FROM dbo.DelimitedSplit8K(@Files, ',') as split)
 END
