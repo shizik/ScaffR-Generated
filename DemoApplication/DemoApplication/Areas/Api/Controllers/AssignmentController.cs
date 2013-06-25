@@ -123,11 +123,16 @@
         {
             using (var db = new DapperDatabase())
             {
+                var transaction = db.Connection.BeginTransaction();
                 var assignment = db.Connection.Query<Assignment>("Assignment_Complete",
                                                        new { Id = id, EmployeeId = employeeId },
-                                                       commandType: CommandType.StoredProcedure).First();
+                                                       commandType: CommandType.StoredProcedure,
+                                                       transaction: transaction).Single();
 
-                db.Connection.LogActivity(ActivityActions.Complete, id);
+                db.Connection.LogActivity(ActivityActions.Complete, id, transaction: transaction);
+
+                transaction.Commit();
+                transaction.Dispose();
 
                 return assignment;
             }

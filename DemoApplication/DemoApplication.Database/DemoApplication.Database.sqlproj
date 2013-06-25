@@ -120,7 +120,6 @@
     <Build Include="dbo\Views\TemplateBriefs.sql" />
     <Build Include="dbo\Views\Departments.sql" />
     <Build Include="dbo\Views\Employees.sql" />
-    <Build Include="dbo\Views\Milestones.sql" />
     <Build Include="dbo\Views\Teams.sql" />
     <Build Include="dbo\Views\TeamBriefs.sql" />
     <Build Include="dbo\Stored Procedures\Template_GetAll.sql" />
@@ -184,6 +183,7 @@
     <Build Include="dbo\Stored Procedures\Assignment_AddAttachment.sql" />
     <Build Include="dbo\Functions\DelimitedSplitN4K.sql" />
     <Build Include="dbo\Functions\DelimitedSplit8K.sql" />
+    <Build Include="dbo\Stored Procedures\Assignment_CreateRecurring.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

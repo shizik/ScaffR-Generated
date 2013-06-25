@@ -32,10 +32,10 @@
                 <span class="badge badge-success" data-ng-show="isDueDateChosen()">{{task.milestoneValue}} 
                     {{intervals[task.interval]}} 
                     {{task.isBefore && 'Before' || 'After'}} 
-                    {{milestone}}
+                    {{milestone.name}}
                 </span>
             </div>
-            <label class="checkbox">
+            <label class="checkbox" data-ng-show="milestone && milestone.interval && milestone.value">
                 <input type="checkbox" data-ng-model="task.recurring" />
                 Reccuring
             </label>

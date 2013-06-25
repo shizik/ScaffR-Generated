@@ -48,7 +48,7 @@
                     return;
                 }
 
-                $scope.task.recurring = _.find($scope.milestones, function (item) { return item.id == newValue }).recurring;
+                $scope.task.recurring = _.find($scope.milestones, function (item) { return item.id == newValue; }).recurring;
             }, true);
         }
     };
