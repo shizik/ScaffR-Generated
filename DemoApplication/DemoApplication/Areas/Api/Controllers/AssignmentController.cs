@@ -73,14 +73,24 @@
             {
                 var transaction = db.Connection.BeginTransaction();
 
-                int id = db.Connection.Query<int>("Employee_AddTask",
-                                                           entity,
-                                                           commandType: CommandType.StoredProcedure,
-                                                           transaction: transaction).Single();
+                int id = db.Connection.Query<int>("Task_Add",
+                                                  Task.FromAssignmentSave(entity),
+                                                  commandType: CommandType.StoredProcedure,
+                                                  transaction: transaction).Single();
+
+                var assignment = Assignment.FromAssignmentSave(entity);
+                assignment.TaskId = id;
+
+                id = db.Connection.Query<int>("Assignment_Add",
+                                                  assignment,
+                                                  commandType: CommandType.StoredProcedure,
+                                                  transaction: transaction).Single();
+
 
                 db.Connection.LogActivity(ActivityActions.Create, id, transaction: transaction);
 
                 transaction.Commit();
+                transaction.Dispose();
 
                 return id;
             }

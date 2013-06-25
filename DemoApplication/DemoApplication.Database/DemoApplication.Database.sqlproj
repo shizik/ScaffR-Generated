@@ -100,7 +100,6 @@
     <Build Include="dbo\Stored Procedures\Assignment_CreateFromTask.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_GetById.sql" />
     <Build Include="dbo\Stored Procedures\Employee_AddComment.sql" />
-    <Build Include="dbo\Stored Procedures\Employee_AddTask.sql" />
     <Build Include="dbo\Stored Procedures\Employee_ApplyTemplate.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetBrief.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetByCompany.sql" />
@@ -132,7 +131,6 @@
     <Build Include="dbo\Stored Procedures\Task_Delete.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Update.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Delete.sql" />
-    <Build Include="dbo\Stored Procedures\Template_AddTask.sql" />
     <Build Include="dbo\Tables\Person_Milestone.sql" />
     <Build Include="dbo\Stored Procedures\Employee_GetMilestoneValue.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_Add.sql" />
