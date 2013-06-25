@@ -496,7 +496,6 @@
     <Content Include="Content\views\templates\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="Files\rod-fireworks.png" />
-    <Content Include="Files\seire-logo.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\less\bootstrap\datepicker.less" />
     <Content Include="Scripts\controllers\bundle.txt" />
@@ -771,12 +770,6 @@
     <Content Include="Scripts\utils\common.js" />
     <Content Include="Scripts\utils\employee.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -796,12 +789,6 @@
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Tasks\OnDemand.cshtml" />
     <Content Include="Views\Tasks\Templates.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
