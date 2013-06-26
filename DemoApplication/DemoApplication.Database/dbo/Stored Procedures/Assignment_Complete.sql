@@ -51,18 +51,7 @@ BEGIN
 
 			DECLARE @AssignmentId INT = (CASE WHEN @AssignmentApprovalId IS NOT NULL THEN @AssignmentApprovalId ELSE @Id END)
 
-			IF(EXISTS (SELECT 1 FROM Assignment WHERE AssignmentId = @AssignmentId AND Recurring = 1))
-				INSERT INTO Assignment 
-					([Name], [Description], [DueDate],
-					 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-					 [RequiresSignature], [Recurring],
-					 [AssignmentApprovalId], [TaskId], [CategoryId])
-				SELECT 
-					 [Name], [Description], DATEADD(YEAR, 1, [DueDate]),
-					 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-					 [RequiresSignature], [Recurring],
-					 [AssignmentApprovalId], [TaskId], [CategoryId] 
-				FROM Assignment WHERE AssignmentId = @AssignmentId
+			EXECUTE Assignment_CreateRecurring @AssignmentId
 		END
 	ELSE
 		BEGIN
@@ -74,12 +63,12 @@ BEGIN
 			 INSERT INTO Assignment 
 				([Name], [Description], [DueDate],
 				 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-				 [RequiresSignature], [Recurring],
+				 [RequiresSignature], [RequiresDownload], [RequiresUpload], [Recurring],
 				 [AssignmentApprovalId], [TaskId], [CategoryId])
 			 SELECT 
 				 'APPROVE: ' + [Name], [Description], [DueDate],
 				 0, NULL, @ApproverId, NULL, [Employee_Cd],
-				 [RequiresSignature], 0,
+				 [RequiresSignature], [RequiresDownload], [RequiresUpload], 0,
 				 @Id, [TaskId], [CategoryId] 
 			 FROM Assignment WHERE AssignmentId = @Id
 		END

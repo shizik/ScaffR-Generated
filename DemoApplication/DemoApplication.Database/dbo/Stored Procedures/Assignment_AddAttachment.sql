@@ -5,8 +5,9 @@
 -- =============================================
 CREATE PROCEDURE Assignment_AddAttachment 
 	@Id int,
-	@AttachmentId int
+	@AttachmentId int,
+	@IsUpload bit
 AS BEGIN
-	insert into Assignment_Attachment (AssignmentId, AttachmentId)
-	values (@Id, @AttachmentId)
+	INSERT INTO Assignment_Attachment (AssignmentId, AttachmentId, IsUpload)
+	VALUES (@Id, @AttachmentId, @IsUpload)
 END

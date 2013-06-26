@@ -1,21 +1,21 @@
 ﻿namespace DemoApplication.Areas.Api.Controllers
 {
+    using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
-    using Models;
-    using System.Collections.Generic;
-    using System.Data;
     using Infrastructure.Data;
+    using Models;
 
-    public partial class AttachmentController
+    public class AttachmentController : UploadControllerBase
     {
-        public IEnumerable<FilesStatus> Get()
+        public IEnumerable<File> Get()
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<FilesStatus>("Attachment_GetAll", commandType: CommandType.StoredProcedure);
+                return db.Connection.Query<File>("Attachment_GetAll", commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -42,5 +42,34 @@
 
             return response;
         }
+
+        public dynamic Post()
+        {
+            return new
+            {
+                Files = UploadFile()
+            };
+        }
+
+        public dynamic Put()
+        {
+            return new
+            {
+                Files = UploadFile()
+            };
+        }
+
+        public HttpResponseMessage Delete(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                db.Connection.Execute("Attachment_Delete",
+                                      new { Id = id },
+                                      commandType: CommandType.StoredProcedure);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, "");
+        }
+
     }
 }

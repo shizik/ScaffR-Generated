@@ -14,6 +14,8 @@
 	[Approver_Cd]     CHAR(30)     NULL,
 	
 	[RequiresSignature]	BIT		   NOT NULL,
+	[RequiresDownload]	BIT		   NOT NULL ,
+	[RequiresUpload]	BIT		   NOT NULL ,
     [Recurring]      BIT           NOT NULL,
 
     [ParentTaskId]   INT           NULL,

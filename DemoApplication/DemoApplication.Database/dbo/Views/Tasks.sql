@@ -15,6 +15,8 @@ AS SELECT
 	[Approver_Cd] as ApproverId,
 	
 	[RequiresSignature],
+	[RequiresDownload],
+	[RequiresUpload],
     [Recurring],
 
     [ParentTaskId],

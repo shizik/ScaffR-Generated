@@ -17,6 +17,9 @@
                 approverId: null,
 
                 requiresSignature: false,
+                requiresDownload: false,
+                requiresUpload: false,
+
                 recurring: false,
 
                 parentTaskId: null,

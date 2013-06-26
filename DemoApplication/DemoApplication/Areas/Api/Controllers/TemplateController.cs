@@ -58,7 +58,25 @@
         {
             using (var db = new DapperDatabase())
             {
-                db.Connection.Execute("Template_AddTask", entity, commandType: CommandType.StoredProcedure);
+                var clone = entity.Copy<Task>();
+                var transaction = db.Connection.BeginTransaction();
+
+                entity.TemplateId = null;
+                int baseId = db.Connection.Query<int>("Task_Add", entity, 
+                                                      commandType: CommandType.StoredProcedure, 
+                                                      transaction: transaction).Single();
+                
+                clone.Files = null;
+                clone.ParentTaskId = baseId;
+
+                int cloneId = db.Connection.Query<int>("Task_Add", clone,
+                                                       commandType: CommandType.StoredProcedure,
+                                                       transaction: transaction).Single();
+
+                db.Connection.LogActivity(ActivityActions.Create, taskId: cloneId, transaction: transaction);
+
+                transaction.Commit();
+                transaction.Dispose();
             }
         }
 

@@ -71,7 +71,7 @@
                 $scope.$watch('task.milestoneId', function (value) {
                     if (!value) return;
 
-                    $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; }).name;
+                    $scope.milestone = _.find($scope.milestones, function (item) { return item.id == value; });
                 }, true);
 
                 $scope.isDueDateChosen = function () {
@@ -143,8 +143,16 @@
 
             $scope.options = {
                 url: 'api/attachment',
-                maxNumberOfFiles: 2
+                maxNumberOfFiles: 1
             };
+
+            $scope.$watch('task.requiresDownload', function (value) {
+                if (!value) {
+                    _.forEach($scope.queue, function (item) {
+                        $scope.deleteFile(item);
+                    });
+                }
+            });
 
             $scope.deleteFile = function (file) {
                 if (!$scope.isNew)

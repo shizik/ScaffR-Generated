@@ -19,6 +19,8 @@ CREATE PROCEDURE Assignment_Update
 	@EmployeeId CHAR (30),
 
 	@RequiresSignature BIT,
+	@RequiresDownload BIT,
+	@RequiresUpload BIT,
     @Recurring BIT,
 
 	@TaskId int,
@@ -38,18 +40,25 @@ BEGIN
 			,[Approver_Cd] = @ApproverId
 			,[Employee_Cd] = @EmployeeId
 
-			,[RequiresSignature] = @RequiresSignature
+  			,[RequiresSignature] = @RequiresSignature
+			,[RequiresDownload] = @RequiresDownload
+			,[RequiresUpload] = @RequiresUpload
 			,[Recurring] = @Recurring
 
 			,CategoryId = @CategoryId
 		WHERE AssignmentId = @Id
 
-	INSERT INTO Assignment_Attachment (AssignmentId, AttachmentId)
-	SELECT @Id, split.Item
-	FROM dbo.DelimitedSplit8K(@Files, ',') as split
-	WHERE split.Item NOT IN (SELECT AttachmentId FROM Assignment_Attachment WHERE AssignmentId = @Id)
+	IF(@Files IS NULL)
+		DELETE FROM Assignment_Attachment WHERE AssignmentId = @Id
+	ELSE
+		BEGIN
+			INSERT INTO Assignment_Attachment (AssignmentId, AttachmentId)
+			SELECT @Id, split.Item
+			FROM dbo.DelimitedSplit8K(@Files, ',') as split
+			WHERE split.Item NOT IN (SELECT AttachmentId FROM Assignment_Attachment WHERE AssignmentId = @Id)
 
-	DELETE FROM Assignment_Attachment
-	WHERE AssignmentId = @Id AND
-		  AttachmentId NOT IN(SELECT split.Item FROM dbo.DelimitedSplit8K(@Files, ',') as split)
+			DELETE FROM Assignment_Attachment
+			WHERE AssignmentId = @Id AND
+				  AttachmentId NOT IN(SELECT split.Item FROM dbo.DelimitedSplit8K(@Files, ',') as split)
+		END
 END

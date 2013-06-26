@@ -50,11 +50,11 @@
         }
 
         [HttpGet]
-        public IEnumerable<FilesStatus> Attachments(int id)
+        public IEnumerable<File> Attachments(int id)
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<FilesStatus>("Task_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
+                return db.Connection.Query<File>("Task_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
             }
         }
 

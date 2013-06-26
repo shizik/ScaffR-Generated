@@ -3,45 +3,33 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.IO;
+    using System.Data.Common;
     using System.Linq;
     using System.Web;
+    using System.Web.Http;
     using Infrastructure.Data;
     using Models;
 
-    public partial class AttachmentController
+    public abstract class UploadControllerBase : ApiController
     {
-        public dynamic Post()
-        {
-            return UploadFile();
-        }
-
-        public dynamic Put()
-        {
-            return UploadFile();
-        }
-
-        private static dynamic UploadFile()
+        protected static List<File> UploadFile(DbConnection connection = null, DbTransaction transaction = null)
         {
             var context = HttpContext.Current;
-            var statuses = new List<FilesStatus>();
+            var statuses = new List<File>();
 
             if (string.IsNullOrEmpty(context.Request.Headers["X-File-Name"]))
             {
-                UploadWholeFile(context, statuses);
+                UploadWholeFile(context, statuses, connection, transaction);
             }
             else
             {
                 UploadPartialFile(context.Request.Headers["X-File-Name"], context, statuses);
             }
 
-            return new
-            {
-                files = statuses
-            };
+            return statuses;
         }
 
-        private static void UploadPartialFile(string fileName, HttpContext context, List<FilesStatus> statuses)
+        private static void UploadPartialFile(string fileName, HttpContext context, List<File> statuses)
         {
             // TODO: Need to figure out how to implement this with SQL database
 
@@ -68,8 +56,10 @@
             */
         }
 
-        private static void UploadWholeFile(HttpContext context, List<FilesStatus> statuses)
+        private static void UploadWholeFile(HttpContext context, List<File> statuses, DbConnection connection, DbTransaction transaction)
         {
+            var conn = connection ?? (new DapperDatabase()).Connection;
+            var tran = connection == null ? conn.BeginTransaction() : transaction;
             var files = context.Request.Files;
 
             for (int i = 0; i < files.Count; i++)
@@ -82,13 +72,11 @@
                     Content = GetByteFromFile(file)
                 };
 
-                int id;
-                using (var db = new DapperDatabase())
-                {
-                    id = (int)db.Connection.Query<decimal>("Attachment_Add", fileRequest, commandType: CommandType.StoredProcedure).First();
-                }
+                int id = (int)conn.Query<decimal>("Attachment_Add", fileRequest,
+                                                  commandType: CommandType.StoredProcedure,
+                                                  transaction: tran).Single();
 
-                statuses.Add(new FilesStatus
+                statuses.Add(new File
                 {
                     Id = id,
                     Name = fileRequest.Name,
@@ -96,11 +84,18 @@
                     Size = fileRequest.Content.Length
                 });
             }
+
+            if (connection != null) return;
+
+            // If there was no passed connection we need to dispose of the local instances
+            tran.Commit();
+            tran.Dispose();
+            conn.Close();
         }
 
         private static byte[] GetByteFromFile(HttpPostedFile file)
         {
-            using (var binaryReader = new BinaryReader(file.InputStream))
+            using (var binaryReader = new System.IO.BinaryReader(file.InputStream))
             {
                 return binaryReader.ReadBytes(file.ContentLength);
             }

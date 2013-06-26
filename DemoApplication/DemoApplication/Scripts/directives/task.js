@@ -26,6 +26,8 @@
                 $scope.task.employeeId = $scope.employeeId;
 
                 $scope.task.requiresSignature = task.requiresSignature;
+                $scope.task.requiresDownload = task.requiresDownload;
+                $scope.task.requiresUpload = task.requiresUpload;
                 $scope.task.recurring = task.recurring;
 
                 serviceTask.getDueDateFromMilestone($scope.employeeId, task, function (data) {

@@ -20,6 +20,8 @@ SELECT
     [Employee_Cd] as EmployeeId,
 
 	[RequiresSignature],
+	[RequiresDownload],
+	[RequiresUpload],
     [Recurring],
 
     [TaskId],

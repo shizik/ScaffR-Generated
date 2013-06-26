@@ -19,6 +19,8 @@ CREATE PROCEDURE Task_Add
 	@ApproverId CHAR(30),
 
 	@RequiresSignature BIT,
+	@RequiresDownload BIT,
+	@RequiresUpload BIT,
     @Recurring BIT,
 
 	@ParentTaskId int,
@@ -42,6 +44,8 @@ AS BEGIN
 		 [Approver_Cd],
 
 		 [RequiresSignature],
+		 [RequiresDownload],
+		 [RequiresUpload],
 		 [Recurring],
 
 		 [ParentTaskId],
@@ -62,6 +66,8 @@ AS BEGIN
 		 @ApproverId,
 
 		 @RequiresSignature,
+		 @RequiresDownload,
+		 @RequiresUpload,
 		 @Recurring,
 
 		 @ParentTaskId,

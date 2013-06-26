@@ -19,10 +19,14 @@ CREATE PROCEDURE Assignment_Add
 	@EmployeeId CHAR (30),
 
 	@RequiresSignature BIT,
+	@RequiresDownload BIT,
+	@RequiresUpload BIT,
     @Recurring BIT,
 
 	@TaskId int,
-	@CategoryId int
+	@CategoryId int,
+
+	@Files varchar(200) -- used for proper handling of arguments
 AS BEGIN
 	insert into Assignment 
 		([Name], 
@@ -37,6 +41,8 @@ AS BEGIN
 		 [Employee_Cd],
 
 		 [RequiresSignature],
+		 [RequiresDownload],
+		 [RequiresUpload],
 		 [Recurring],
 
 		 [TaskId],
@@ -54,6 +60,8 @@ AS BEGIN
 		 @EmployeeId,
 
 		 @RequiresSignature,
+		 @RequiresDownload,
+		 @RequiresUpload,
 		 @Recurring,
 
 		 @TaskId,
