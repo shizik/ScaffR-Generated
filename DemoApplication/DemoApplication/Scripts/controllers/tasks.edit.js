@@ -143,8 +143,16 @@
 
             $scope.options = {
                 url: 'api/attachment',
-                maxNumberOfFiles: 2
+                maxNumberOfFiles: 1
             };
+
+            $scope.$watch('task.requiresDownload', function (value) {
+                if (!value) {
+                    _.forEach($scope.queue, function (item) {
+                        $scope.deleteFile(item);
+                    });
+                }
+            });
 
             $scope.deleteFile = function (file) {
                 if (!$scope.isNew)

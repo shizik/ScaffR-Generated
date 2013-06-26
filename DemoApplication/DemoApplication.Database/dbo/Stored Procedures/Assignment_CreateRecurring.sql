@@ -21,7 +21,7 @@ BEGIN
 				 [DueDate],
 				
 				 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-				 [RequiresSignature], [Recurring],
+				 [RequiresSignature], [RequiresDownload], [RequiresUpload], [Recurring],
 				 [AssignmentApprovalId], [TaskId], [CategoryId])
 			SELECT 	[Name], [Description], 
 					
@@ -34,7 +34,7 @@ BEGIN
 					END,				
 					
 					[PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-					[RequiresSignature], [Recurring],
+					[RequiresSignature], [RequiresDownload], [RequiresUpload], [Recurring],
 					[AssignmentApprovalId], [TaskId], [CategoryId] 
 			FROM Assignment WHERE AssignmentId = @Id
 		END

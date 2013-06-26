@@ -220,13 +220,11 @@
     <Compile Include="Application\Startup\AppStartup.Routes.cs" />
     <Compile Include="Application\Startup\AppStartup.Validators.cs" />
     <Compile Include="Application\Startup\AppStartup.WebApi.cs" />
+    <Compile Include="Areas\Api\Controllers\UploadControllerBase.cs" />
     <Compile Include="Areas\Api\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Api\Controllers\AssignmentController.cs" />
     <Compile Include="Areas\Api\Controllers\ApproverController.cs" />
-    <Compile Include="Areas\Api\Controllers\Attachment\AttachmentController.Delete.cs" />
-    <Compile Include="Areas\Api\Controllers\Attachment\AttachmentController.Upload.cs" />
-    <Compile Include="Areas\Api\Controllers\Attachment\AttachmentController.Download.cs" />
-    <Compile Include="Areas\Api\Controllers\Attachment\AttachmentController.cs" />
+    <Compile Include="Areas\Api\Controllers\AttachmentController.cs" />
     <Compile Include="Areas\Api\Controllers\PositionController.cs" />
     <Compile Include="Areas\Api\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Api\Controllers\MilestoneController.cs" />
@@ -243,7 +241,6 @@
     <Compile Include="Areas\Api\Models\Approver.cs" />
     <Compile Include="Areas\Api\Models\TaskBase.cs" />
     <Compile Include="Areas\Api\Models\File.cs" />
-    <Compile Include="Areas\Api\Models\FilesStatus.cs" />
     <Compile Include="Areas\Api\Models\TaskUpdate.cs" />
     <Compile Include="Areas\Api\Models\TaskBrief.cs" />
     <Compile Include="Areas\Api\Models\Position.cs" />

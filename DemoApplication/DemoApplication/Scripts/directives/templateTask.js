@@ -30,6 +30,8 @@
                 $scope.task.approverId = task.approverId;
 
                 $scope.task.requiresSignature = task.requiresSignature;
+                $scope.task.requiresDownload = task.requiresDownload;
+                $scope.task.requiresUpload = task.requiresUpload;
                 $scope.task.recurring = task.recurring;
             };
 

@@ -10,8 +10,6 @@
         public int? ParentTaskId { get; set; }
         public int? TemplateId { get; set; }
 
-        public string Files { get; set; }
-
         public static Task FromAssignmentSave(AssignmentSave entity)
         {
             var task = new Task
@@ -23,8 +21,6 @@
 
                     ParentTaskId = entity.ParentTaskId,
                     TemplateId = entity.TemplateId,
-
-                    Files = entity.Files
                 };
 
             task.FillBaseProperties(entity);

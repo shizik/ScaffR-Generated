@@ -8,7 +8,7 @@
     using Infrastructure.Data;
     using Models;
 
-    public class AssignmentController : ApiController
+    public class AssignmentController : UploadControllerBase
     {
         public Assignment Get(int id)
         {
@@ -35,9 +35,9 @@
                 var dataResult = new
                 {
                     Assignment = result.Read<Assignment>().Single(),
+                    Attachments = result.Read<File>().ToList(),
                     Activity = result.Read<Activity>().ToList()
                 };
-
 
                 db.Connection.LogActivity(ActivityActions.View, id);
 
@@ -46,11 +46,11 @@
         }
 
         [HttpGet]
-        public IEnumerable<FilesStatus> Attachments(int id)
+        public IEnumerable<File> Attachments(int id)
         {
             using (var db = new DapperDatabase())
             {
-                return db.Connection.Query<FilesStatus>("Assignment_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
+                return db.Connection.Query<File>("Assignment_GetAttachments", new { Id = id }, commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -135,6 +135,37 @@
                 transaction.Dispose();
 
                 return assignment;
+            }
+        }
+
+        [HttpPost]
+        public dynamic Upload(int id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                var transaction = db.Connection.BeginTransaction();
+
+                var files = UploadFile(db.Connection, transaction);
+
+                foreach (var file in files)
+                {
+                    db.Connection.Execute("Assignment_AddAttachment",
+                                          new { Id = id, AttachmentId = file.Id, IsUpload = true },
+                                          commandType: CommandType.StoredProcedure,
+                                          transaction: transaction);
+
+                    file.IsUpload = true;
+                }
+
+                db.Connection.LogActivity(ActivityActions.Update, id, transaction: transaction);
+
+                transaction.Commit();
+                transaction.Dispose();
+
+                return new
+                {
+                    Files = files
+                };
             }
         }
     }

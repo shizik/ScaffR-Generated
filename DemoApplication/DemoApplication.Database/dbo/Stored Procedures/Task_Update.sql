@@ -19,6 +19,8 @@ CREATE PROCEDURE Task_Update
 	@ApproverId CHAR(30),
 
 	@RequiresSignature BIT,
+	@RequiresDownload BIT,
+	@RequiresUpload BIT,
     @Recurring BIT,
 
 	@ParentTaskId int,
@@ -45,6 +47,8 @@ BEGIN
   			,[Approver_Cd] = @ApproverId
 
   			,[RequiresSignature] = @RequiresSignature
+			,[RequiresDownload] = @RequiresDownload
+			,[RequiresUpload] = @RequiresUpload
 			,[Recurring] = @Recurring
 
 			,[ParentTaskId] = @ParentTaskId
@@ -78,6 +82,8 @@ BEGIN
   				,[Approver_Cd] = @ApproverId
 
   				,[RequiresSignature] = @RequiresSignature
+				,[RequiresDownload] = @RequiresDownload
+				,[RequiresUpload] = @RequiresUpload
 				,[Recurring] = @Recurring
 
 				,[CategoryId] = @CategoryId

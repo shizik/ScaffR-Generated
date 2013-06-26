@@ -63,12 +63,12 @@ BEGIN
 			 INSERT INTO Assignment 
 				([Name], [Description], [DueDate],
 				 [PrincipalIsTeam], [ResolvedByOne], [Principal_Cd], [Approver_Cd], [Employee_Cd],
-				 [RequiresSignature], [Recurring],
+				 [RequiresSignature], [RequiresDownload], [RequiresUpload], [Recurring],
 				 [AssignmentApprovalId], [TaskId], [CategoryId])
 			 SELECT 
 				 'APPROVE: ' + [Name], [Description], [DueDate],
 				 0, NULL, @ApproverId, NULL, [Employee_Cd],
-				 [RequiresSignature], 0,
+				 [RequiresSignature], [RequiresDownload], [RequiresUpload], 0,
 				 @Id, [TaskId], [CategoryId] 
 			 FROM Assignment WHERE AssignmentId = @Id
 		END

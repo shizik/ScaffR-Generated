@@ -19,6 +19,8 @@ CREATE PROCEDURE Assignment_Update
 	@EmployeeId CHAR (30),
 
 	@RequiresSignature BIT,
+	@RequiresDownload BIT,
+	@RequiresUpload BIT,
     @Recurring BIT,
 
 	@TaskId int,
@@ -38,7 +40,9 @@ BEGIN
 			,[Approver_Cd] = @ApproverId
 			,[Employee_Cd] = @EmployeeId
 
-			,[RequiresSignature] = @RequiresSignature
+  			,[RequiresSignature] = @RequiresSignature
+			,[RequiresDownload] = @RequiresDownload
+			,[RequiresUpload] = @RequiresUpload
 			,[Recurring] = @Recurring
 
 			,CategoryId = @CategoryId

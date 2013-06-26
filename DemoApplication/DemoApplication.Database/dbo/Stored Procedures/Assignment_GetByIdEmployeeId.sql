@@ -29,11 +29,17 @@ BEGIN
 			[Employee_Cd] as EmployeeId,
 
 			[RequiresSignature],
+			[RequiresDownload],
+			[RequiresUpload],
 			[Recurring],
 
 			[TaskId],
 			[CategoryId] 
 	FROM Assignment WHERE AssignmentId = @Id
+
+	SELECT A.*, AA.IsUpload FROM Attachments AS A 
+				INNER JOIN Assignment_Attachment AS AA ON A.Id = AA.AttachmentId
+	WHERE AA.AssignmentId = @Id
 
 	SELECT Activity.DateTime, Activity.Action + ' by ' + Employees.FirstName + ' ' + Employees.LastName AS 'Action'
 	FROM Activity INNER JOIN Employees ON Activity.UserId = Employees.Id

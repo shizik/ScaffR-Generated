@@ -17,6 +17,9 @@
                 employeeId: null,
 
                 requiresSignature: false,
+                requiresDownload: false,
+                requiresUpload: false,
+
                 recurring: false,
 
                 taskId: null,
