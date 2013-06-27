@@ -1,0 +1,97 @@
+﻿<div class="btn-toolbar form-inline">
+    <div data-layout-change="" data-display="display">
+    </div>
+
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort by: <strong>{{ sortLabel }}</strong>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a data-ng-click="predicate = 'lastName'; reverse=false; sortLabel='Name A-Z'">Name A-Z</a>
+                <a data-ng-click="predicate = 'lastName'; reverse=true; sortLabel='Name Z-A'">Name Z-A</a>
+                <a data-ng-click="predicate = 'overdue'; reverse=true; sortLabel='Overdue First'">Overdue First</a>
+                <a data-ng-click="predicate = 'dateInitiated'; reverse=false; sortLabel='Date Initiated'">Date Initiated</a>
+                <a data-ng-click="predicate = 'latestDueDate'; reverse=false; sortLabel='Date Due'">Date Due</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Filter By:
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <!--<div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-search"></i></span>
+                        <input type="text" placeholder="Filter..." />
+                    </div>
+                </div>-->
+                <ul class="collapsible" data-title="Status">
+                    <li>
+                        <radio-filter list="statuses" filter="filter.status" display="status" value="status" />
+                    </li>
+                </ul>
+                <!--<ul class="collapsible" data-title="Assigned To">
+                    <li>
+                        <radio-filter list="assignables" filter="filter.assignedTo" />
+                    </li>
+                </ul>
+                <ul class="collapsible" data-title="Team">
+                    <li>
+                        <radio-filter list="teams" filter="filter.team" />
+                    </li>
+                </ul>-->
+                <ul class="collapsible" data-title="Department">
+                    <li>
+                        <radio-filter list="departments" filter="filter.department" />
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <input type="text" class="input-xxlarge" placeholder="Type to search..." ng-model="query" />
+    </div>
+</div>
+
+<div data-ng-switch="" data-on="display">
+    <table class="table table-striped table-hover table-clickable" ng-switch-when="list">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <!--<th>Manager</th>-->
+                <th>Open</th>
+                <th>Overdue</th>
+                <th>Closed</th>
+                <th>Tasks</th>
+                <!--<th>Date Initiated</th>
+                <th>Last Action</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-click="goToDetails(item)" data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse">
+                <td>{{item.firstName}} {{item.lastName}}</td>
+                <!--<td>{{item.manager}}</td>-->
+                <td>{{item.open}}</td>
+                <td>{{item.overdue}}</td>
+                <td>{{item.closed}}</td>
+                <td>{{item.total}}</td>
+                <!--<td>{{item.dateInitiated | date:'MM/dd/yyyy'}}</td>
+                <td>{{item.dateLastAction | date:'MM/dd/yyyy'}}</td>-->
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="span12 tiles" ng-switch-when="tiles">
+        <tile data-mode="list"
+            data-entity="item"
+            data-counts="item"
+            data-details-url="/employees/"
+            data-filter="nofilter"
+            data-ng-repeat="item in employees | employeeFilter:filter | searchFilter:'lastName':query | orderBy:predicate:reverse" />
+    </div>
+</div>
+

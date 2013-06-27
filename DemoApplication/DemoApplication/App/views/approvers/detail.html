@@ -1,0 +1,73 @@
+﻿<div class="row-fluid">
+    <div class="span8">
+        <h1>{{person.firstName}} {{person.lastName}}</h1>
+        <p>{{person.title}}</p>
+        <p><a href="#">{{person.email}}</a></p>
+    </div>
+</div>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#tasks" data-toggle="tab"><i class="icon-tasks"></i>Tasks</a></li>
+    <li><a href="#activity" data-toggle="tab"><i class="icon-bullhorn"></i>Activity</a></li>
+</ul>
+<div class="tab-content allow-overflow">
+    <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="activeTaskId">
+        <div class="row-fluid" data-ng-switch-when="undefined">
+            <div class="span8">
+                <div data-ng-repeat="category in categories">
+                    <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
+                    <ul class="unstyled">
+                        <li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}" data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'">
+                            <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
+                            <a data-ng-click="showTask(task)">{{task.name}}</a>
+                            | <i class="icon-user"></i>
+                            {{task.employeeName}}
+                            <span data-ng-show="task.approverName != null">| Approver: {{task.approverName}}</span>
+                            | <i class="icon-calendar"></i>
+                            {{task.dueDate | date:'MM/dd/yy'}}
+                            | <span data-task-badge="" data-task="task"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
+                </div>
+                <div class="control-group">
+                    <div class="btn-group">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                            Show Tasks by Employee <i class="caret"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li data-complex-menu="">
+                                <checkbox-filter list="assignees" filter="filter.assignees" value="id" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="btn-group">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">View Tasks Due <i class="caret"></i></button>
+                        <ul class="dropdown-menu">
+                            <li data-complex-menu="">
+                                <radio-filter list="periods" filter="filter.period" value="func" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-assignment-detail=""
+            data-assignment-id="activeTaskId"
+            data-user-id="{{person.id}}"
+            data-back-fn="backToList()"
+            class="row-fluid"
+            data-ng-switch-default="">
+        </div>
+    </div>
+</div>
+<div class="tab-pane" id="activity">
+    <ul class="unstyled">
+        <li class="muted" data-ng-repeat="item in person.activity">{{item.date | date:'MM/dd/yy'}} {{item.name}}</li>
+    </ul>
+</div>

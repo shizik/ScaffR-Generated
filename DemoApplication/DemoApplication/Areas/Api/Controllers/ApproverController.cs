@@ -39,6 +39,16 @@
         }
 
         [HttpGet]
+        public IEnumerable<Approver.Assignment> GetTasks(string id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Approver.Assignment>("Approver_GetTasksForOther", new { Id = id },
+                                                                commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        [HttpGet]
         public Approver MyTasks()
         {
             // TODO: Get the Id from the logged in user

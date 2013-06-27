@@ -29,13 +29,23 @@
         {
             using (var db = new DapperDatabase())
             {
-                var result = db.Connection.QueryMultiple("Employee_GetById", new { EmployeeId = id }, commandType: CommandType.StoredProcedure);
+                var result = db.Connection.QueryMultiple("Employee_GetById", new { Id = id },
+                                                         commandType: CommandType.StoredProcedure);
 
                 var employee = result.Read<Employee>().Single();
-                employee.Tasks = result.Read<Assignment>().ToList();
                 employee.AppliedTemplates = result.Read<int>().ToList();
 
                 return employee;
+            }
+        }
+
+        [HttpGet]
+        public IEnumerable<Assignment> GetTasks(string id)
+        {
+            using (var db = new DapperDatabase())
+            {
+                return db.Connection.Query<Assignment>("Employee_GetTasks", new { Id = id },
+                                                       commandType: CommandType.StoredProcedure);
             }
         }
 
