@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('tasks.edit',
-                ['$scope', '$http', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+                ['$scope', '$http', '$routeParams', 'service.task', 'service.assignment', 'service.principal', 'service.category', 'service.milestone', 'utils.common', 'toastr',
         function ($scope, $http, $routeParams, serviceTask, serviceAssignment, servicePrincipal, serviceCategory, serviceMilestone, commonUtils, toastr) {
             $scope.$parent.backLinkText = 'Task List';
 

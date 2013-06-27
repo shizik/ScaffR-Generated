@@ -1,9 +1,10 @@
-﻿Application.Directives.directive('tile', function factory(employeeUtils) {
+﻿Application.Directives.directive('tile', function factory() {
     return {
         restrict: 'E',
         templateUrl: '/content/templates/employee/tile.html',
         scope: {
             entity: '=',
+            counts: '=',
             filter: '=',
             detailsUrl: '@',
             mode: '@'
@@ -40,11 +41,11 @@
 
             $scope.badgeClass = '';
             $scope.badgeCount = function () {
-                if (!$scope.entity) return 0;
+                if (!$scope.counts) return 0;
 
-                $scope.badgeClass = $scope.entity.overdue > 0 ? 'badge-warning' : 'badge-info';
+                $scope.badgeClass = $scope.counts.overdue > 0 ? 'badge-warning' : 'badge-info';
 
-                return $scope.entity.overdue + $scope.entity.open;
+                return $scope.counts.overdue + $scope.counts.open;
             };
         }
     };

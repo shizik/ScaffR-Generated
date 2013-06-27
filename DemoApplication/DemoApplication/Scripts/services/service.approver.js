@@ -10,6 +10,10 @@
 
         getMyTasks: function (callback) {
             $http.get('/api/approver/myTasks').success(callback);
+        },
+        
+        getTasks: function (id, callback) {
+            $http.get('/api/approver/getTasks?id=' + id).success(callback);
         }
     };
 }]);

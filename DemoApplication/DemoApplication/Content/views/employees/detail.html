@@ -35,13 +35,13 @@
     <div data-ng-controller="employees.detail.tasks" class="row-fluid" data-ng-switch-when="tasks">
         <div class="span8">
             <div data-ng-repeat="category in categories">
-                <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
+                <h4>{{ category.name }} <span class="text-info">({{ (tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
                     <task task="task"
                         assignables="assignables"
                         details-fn="showTask(task)"
                         delete-fn="deleteTask(task,isNew)"
-                        data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
+                        data-ng-repeat="task in tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'" />
                 </ul>
                 <ul class="unstyled">
                     <task task="task"
@@ -63,7 +63,7 @@
         </div>
         <div class="span4">
             <div class="control-group">
-                <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
+                <tile data-entity="person" data-counts="counts" data-filter="filter.status" data-mode="detail" />
             </div>
             <div class="control-group">
                 <div class="btn-group">
@@ -92,9 +92,9 @@
     <div data-ng-controller="employees.detail.approver" class="row-fluid" data-ng-switch-when="todos">
         <div class="span8">
             <div data-ng-repeat="category in categories">
-                <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
+                <h4>{{ category.name }} <span class="text-info">({{ (tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>
                 <ul class="unstyled">
-                    <li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}" data-ng-repeat="task in person.tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'">
+                    <li class="task" data-ng-class="{'completed':task.status==3, 'muted':task.status==2}" data-ng-repeat="task in tasks | taskInCategoryFilter:category.id | taskFilter:filter | orderBy:'dueDate'">
                         <i data-ng-class="{'icon-edit':task.status==1, 'icon-share':task.status==2, 'icon-check':task.status==3}"></i>
                         <a data-ng-click="showTask(task)">{{task.name}}</a>
                         | <i class="icon-user"></i>
@@ -109,7 +109,7 @@
         </div>
         <div class="span4">
             <div class="control-group">
-                <tile data-entity="person" data-filter="filter.status" data-mode="detail" />
+                <tile data-entity="person" data-counts="counts" data-filter="filter.status" data-mode="detail" />
             </div>
             <div class="control-group">
                 <div class="btn-group">

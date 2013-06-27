@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('employees.detail',
-            ['$scope', '$routeParams', 'service.employee', 'service.template', 'commonUtils',
+            ['$scope', '$routeParams', 'service.employee', 'service.template', 'utils.common',
     function ($scope, $routeParams, serviceEmployee, serviceTemplate, commonUtils) {
 
         $scope.view = 'tasks';
@@ -11,18 +11,16 @@
 
         serviceEmployee.getById($routeParams.id, function (data) {
             $scope.person = data;
-
-            commonUtils.setCounts($scope.person);
         });
 
         $scope.showActivity = function () {
             $scope.view = 'activity';
-            
-            serviceEmployee.getActivity($scope.person.id, function(data) {
+
+            serviceEmployee.getActivity($scope.person.id, function (data) {
                 $scope.activity = data;
             });
         };
-        
+
         //
         // Individual task view
 
@@ -52,10 +50,10 @@
             if ($scope.isTemplateApplied(template.id)) return;
 
             serviceTemplate.apply(template.id, $scope.person.id, function (data) {
+                //TODO: This has changed, should broadcast the change
+
                 serviceEmployee.getById($routeParams.id, function (data) {
                     $scope.person = data;
-
-                    commonUtils.setCounts($scope.person);
                 });
 
                 toastr.success(data + ' Tasks Were Added');

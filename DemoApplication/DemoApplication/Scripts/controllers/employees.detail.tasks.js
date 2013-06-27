@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('employees.detail.tasks',
-            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.assignment', 'service.template', 'service.principal', 'service.category', 'commonUtils',
+            ['$scope', '$routeParams', 'service.employee', 'service.task', 'service.assignment', 'service.template', 'service.principal', 'service.category', 'utils.common',
     function ($scope, $routeParams, serviceEmployee, serviceTask, serviceAssignment, serviceTemplate, servicePrincipal, serviceCategory, commonUtils) {
 
         serviceCategory.getAll(function (data) {
@@ -20,26 +20,25 @@
         servicePrincipal.getAll(function (data) {
             $scope.assignables = data;
 
-            serviceEmployee.getById($routeParams.id, function (data) {
-                $scope.person = data;
-
-                commonUtils.setCounts($scope.person);
+            serviceEmployee.getTasks($routeParams.id, function (tasks) {
+                $scope.tasks = tasks;
             });
         });
 
         //
         // Filtering
 
+        $scope.counts = {};
         $scope.filter = {
             status: 'all',
             assignees: [],
             period: undefined
         };
 
-        $scope.$watch('person.tasks', function (newValue) {
+        $scope.$watch('tasks', function (newValue) {
             if (!newValue || newValue.length == 0) return;
 
-            commonUtils.setCounts($scope.person);
+            commonUtils.setCounts($scope.counts, $scope.tasks);
             commonUtils.setPeriods(newValue, $scope);
             commonUtils.setAssignees(newValue, $scope, true);
         }, true);
@@ -60,7 +59,7 @@
                 $scope.deleteTask(task, true);
 
                 task.id = id;
-                $scope.person.tasks.push(task);
+                $scope.tasks.push(task);
 
                 toastr.success("New Task Added");
             });
@@ -72,7 +71,7 @@
                 $scope.isAddingTask = false;
             } else {
                 serviceAssignment.delete(task.id, function () {
-                    commonUtils.removeFromList(task, $scope.person.tasks);
+                    commonUtils.removeFromList(task, $scope.tasks);
                     toastr.success('Deleted.');
                 });
             }

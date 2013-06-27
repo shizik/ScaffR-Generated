@@ -26,7 +26,7 @@ angular.module('application', ['ui.bootstrap',
         ['$routeProvider', '$httpProvider',
             function ($routeProvider, $httpProvider) {
                 var rootFolder = '/content/views';
-                
+
                 $routeProvider
                     //
                     // Employee Routes
@@ -39,26 +39,13 @@ angular.module('application', ['ui.bootstrap',
                         templateUrl: rootFolder + '/employees/detail.html',
                         controller: 'employees.detail'
                     })
-
-                    //
-                    // Approver Routes
-
-                    .when('/approvers', {
-                        templateUrl: rootFolder + '/approvers/index.html',
-                        controller: 'approvers.index'
-                    })
-                    .when('/approvers/:id', {
-                        templateUrl: rootFolder + '/approvers/detail.html',
-                        controller: 'approvers.detail'
-                    })
                     .when('/mytasks', {
-                        templateUrl: rootFolder + '/approvers/detail.html',
-                        controller: 'approvers.mytasks'
+                        templateUrl: rootFolder + '/employees/mytasks.html',
+                        controller: 'employees.mytasks'
                     })
 
                     //
                     // Template Routes
-
 
                     .when('/templates', {
                         templateUrl: rootFolder + '/templates/index.html',

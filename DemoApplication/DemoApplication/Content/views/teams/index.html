@@ -42,7 +42,7 @@
                         <radio-filter list="teams" filter="filter.team" />
                     </li>
                 </ul>-->
-              <!--  <ul class="collapsible" data-title="Department">
+                <!--  <ul class="collapsible" data-title="Department">
                     <li>
                         <radio-filter list="departments" filter="filter.department" />
                     </li>
@@ -87,6 +87,7 @@
     <div class="span12 tiles" ng-switch-when="tiles">
         <tile data-mode="list"
             data-entity="item"
+            data-counts="item"
             data-details-url="/teams/detail/"
             data-filter="nofilter"
             data-ng-repeat="item in teams | employeeFilter:filter | searchFilter:'name':query | orderBy:predicate:reverse" />

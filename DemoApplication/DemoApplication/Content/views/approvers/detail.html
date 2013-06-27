@@ -11,7 +11,7 @@
 </ul>
 <div class="tab-content allow-overflow">
     <div class="tab-pane active" id="tasks" data-ng-switch="" data-on="activeTaskId">
-        <div data-ng-controller="employees.detail.approver" class="row-fluid" data-ng-switch-when="undefined">
+        <div class="row-fluid" data-ng-switch-when="undefined">
             <div class="span8">
                 <div data-ng-repeat="category in categories">
                     <h4>{{ category.name }} <span class="text-info">({{ (person.tasks | taskInCategoryFilter:category.id | taskFilter:filter).length }})</span></h4>

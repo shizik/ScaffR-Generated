@@ -184,6 +184,10 @@
     <Build Include="dbo\Functions\DelimitedSplitN4K.sql" />
     <Build Include="dbo\Functions\DelimitedSplit8K.sql" />
     <Build Include="dbo\Stored Procedures\Assignment_CreateRecurring.sql" />
+    <Build Include="dbo\Stored Procedures\Approver_GetTasksForOther.sql" />
+    <Build Include="dbo\Stored Procedures\Employee_GetTasks.sql" />
+    <Build Include="dbo\Stored Procedures\Approver_GetTasksForMe.sql" />
+    <Build Include="dbo\Views\ApproverAssignments.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />

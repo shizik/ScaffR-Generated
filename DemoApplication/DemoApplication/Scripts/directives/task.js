@@ -12,7 +12,7 @@
         },
         replace: true,
         controller: ['$scope', '$location', 'service.task', 'service.assignment', 'toastr', function ($scope, $location, serviceTask, serviceAssignment, toastr) {
-            $scope.employeeId = $scope.$parent.person.id;
+            $scope.employeeId = $scope.$parent.$parent.person.id;
 
             $scope.setTask = function (task) {
                 $scope.task.name = task.name;

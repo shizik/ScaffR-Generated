@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('teams.detail',
-            ['$scope', '$location', '$routeParams', 'service.team', 'commonUtils', 'toastr',
+            ['$scope', '$location', '$routeParams', 'service.team', 'utils.common', 'toastr',
     function ($scope, $location, $routeParams, serviceTeam, commonUtils, toastr) {
         $scope.isEdit = false;
         $scope.isNew = false;
@@ -20,7 +20,7 @@
             serviceTeam.getById($routeParams.id, function (data) {
                 $scope.team = data;
 
-                commonUtils.setCounts($scope.team);
+                commonUtils.setCounts($scope.team, $scope.team.tasks);
             });
 
             serviceTeam.getAvailableMembers($routeParams.id, function (data) {

@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('templates.detail',
-            ['$scope', '$location', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.position', 'service.category', 'service.milestone', 'commonUtils', 'toastr',
+            ['$scope', '$location', '$routeParams', 'service.template', 'service.task', 'service.principal', 'service.department', 'service.position', 'service.category', 'service.milestone', 'utils.common', 'toastr',
     function ($scope, $location, $routeParams, serviceTemplate, serviceTask, servicePrincipal, serviceDepartment, servicePosition, serviceCategory, serviceMilestone, commonUtils, toastr) {
         $scope.isEdit = false;
         $scope.isNew = false;

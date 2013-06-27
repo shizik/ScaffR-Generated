@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('approvers.index',
-                ['$scope', '$location', 'service.approver', 'commonUtils', 'toastr',
+                ['$scope', '$location', 'service.approver', 'utils.common', 'toastr',
         function ($scope, $location, serviceApprover, commonUtils, toastr) {
             $scope.$parent.backLinkText = undefined;
 

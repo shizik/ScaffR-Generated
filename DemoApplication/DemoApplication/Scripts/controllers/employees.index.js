@@ -1,5 +1,5 @@
 ﻿Application.Controllers.controller('employees.index',
-                ['$scope', '$location', 'service.employee', 'commonUtils', 'toastr',
+                ['$scope', '$location', 'service.employee', 'utils.common', 'toastr',
         function ($scope, $location, serviceEmployee, commonUtils, toastr) {
             $scope.$parent.backLinkText = undefined;
 

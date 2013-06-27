@@ -10,6 +10,10 @@
         
         getActivity: function (id, callback) {
             $http.get('/api/employee/getActivity?id=' + id).success(callback);
+        },
+        
+        getTasks: function (id, callback) {
+            $http.get('/api/employee/getTasks?id=' + id).success(callback);
         }
     };
 }]);

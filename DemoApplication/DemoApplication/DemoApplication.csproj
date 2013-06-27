@@ -484,6 +484,7 @@
     <Content Include="Content\templates\tooltip\tooltip-html-unsafe-popup.html" />
     <Content Include="Content\templates\tooltip\tooltip-popup.html" />
     <Content Include="Content\templates\typeahead\typeahead.html" />
+    <Content Include="Content\views\employees\mytasks.html" />
     <Content Include="Content\views\approvers\detail.html" />
     <Content Include="Content\views\approvers\index.html" />
     <Content Include="Content\views\tasks\index.html" />
@@ -498,7 +499,7 @@
     <Content Include="Scripts\controllers\bundle.txt" />
     <Content Include="Scripts\controllers\approvers.index.js" />
     <Content Include="Scripts\controllers\approvers.detail.js" />
-    <Content Include="Scripts\controllers\approvers.mytasks.js" />
+    <Content Include="Scripts\controllers\employees.mytasks.js" />
     <Content Include="Scripts\controllers\file.destroy.js" />
     <Content Include="Scripts\controllers\employees.detail.approver.js" />
     <Content Include="Scripts\controllers\employees.detail.tasks.js" />
@@ -764,8 +765,7 @@
     <Content Include="Scripts\services\service.task.js" />
     <Content Include="Scripts\services\service.template.js" />
     <Content Include="Scripts\lib\utils\toastr.js" />
-    <Content Include="Scripts\utils\common.js" />
-    <Content Include="Scripts\utils\employee.js" />
+    <Content Include="Scripts\utils\utils.common.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -780,12 +780,6 @@
     <Content Include="Content\views\employees\detail.html" />
     <Content Include="Content\views\tasks\edit.html" />
     <Content Include="Content\views\employees\index.html" />
-    <Content Include="Views\Security\_Index.cshtml" />
-    <Content Include="Views\Employee\Detail.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
-    <Content Include="Views\Tasks\Index.cshtml" />
-    <Content Include="Views\Tasks\OnDemand.cshtml" />
-    <Content Include="Views\Tasks\Templates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

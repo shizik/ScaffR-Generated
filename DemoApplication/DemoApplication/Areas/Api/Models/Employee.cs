@@ -10,7 +10,6 @@ namespace DemoApplication.Areas.Api.Models
         public string Title { get; set; }
         public string Email { get; set; }
 
-        public List<Assignment> Tasks { get; set; }
         public List<int> AppliedTemplates { get; set; }
     }
 }

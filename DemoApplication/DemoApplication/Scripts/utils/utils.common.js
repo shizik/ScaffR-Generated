@@ -1,15 +1,15 @@
-﻿Application.Utils.factory('commonUtils', function () {
+﻿Application.Utils.factory('utils.common', function () {
     return {
-        setCounts: function (entity) {
+        setCounts: function (entity, tasks) {
             entity.open = 0;
             entity.overdue = 0;
             entity.pending = 0;
             entity.closed = 0;
             entity.total = 0;
 
-            if (!entity.tasks || entity.tasks.length == 0) return;
+            if (!tasks || tasks.length == 0) return;
 
-            _.forEach(entity.tasks, function (item) {
+            _.forEach(tasks, function (item) {
                 if (item.status == 3) {
                     entity.closed++;
                     return;
