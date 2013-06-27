@@ -1,0 +1,7 @@
+﻿*
+
+[references]
+~/scripts/lib/jquery
+~/scripts/lib/angular
+~/scripts/lib/jquery-fileupload
+~/scripts/lib/utils
