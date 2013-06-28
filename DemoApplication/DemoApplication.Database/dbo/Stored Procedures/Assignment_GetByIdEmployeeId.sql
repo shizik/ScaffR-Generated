@@ -8,7 +8,9 @@ CREATE PROCEDURE Assignment_GetByIdEmployeeId
 	@EmployeeId char(30)
 AS
 BEGIN
-	
+	DECLARE @AssignmentApprovalId INT
+	SELECT @AssignmentApprovalId = AssignmentApprovalId	FROM Assignment WHERE AssignmentId = @Id
+
 	SELECT 	[AssignmentId] as Id,
 			[Name],
 			[Description],
@@ -39,7 +41,8 @@ BEGIN
 
 	SELECT A.*, AA.IsUpload FROM Attachments AS A 
 				INNER JOIN Assignment_Attachment AS AA ON A.Id = AA.AttachmentId
-	WHERE AA.AssignmentId = @Id
+	WHERE (@AssignmentApprovalId IS NOT NULL AND AA.AssignmentId = @AssignmentApprovalId) 
+		  OR AA.AssignmentId = @Id
 
 	SELECT Activity.DateTime, Activity.Action + ' by ' + Employees.FirstName + ' ' + Employees.LastName AS 'Action'
 	FROM Activity INNER JOIN Employees ON Activity.UserId = Employees.Id
