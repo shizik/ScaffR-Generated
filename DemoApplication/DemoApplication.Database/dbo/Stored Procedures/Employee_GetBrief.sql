@@ -24,7 +24,8 @@ BEGIN
    		   (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] = 2 AND Person_Main.Employee_Cd = Assignment.Employee_Cd) AS 'Pending',
 		   (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] = 3 AND Person_Main.Employee_Cd = Assignment.Employee_Cd) AS 'Closed',
 		   (SELECT TOP 1 DueDate FROM dbo.Assignment WHERE Person_Main.Employee_Cd = Assignment.Employee_Cd ORDER BY DueDate DESC) AS 'LatestDueDate'
-	FROM dbo.Person_Main 
+	FROM dbo.Person_Main
+	WHERE  (SELECT COUNT(1) FROM dbo.Assignment WHERE [Status] < 3 AND Person_Main.Employee_Cd = Assignment.Employee_Cd) > 0
 	GROUP BY dbo.Person_Main.Employee_Cd, Department_Cd, First_Name_Txt, Last_Name_Txt--, OriginalHire_Dt
 
 	SELECT d.Department_Cd as 'Id', 

@@ -188,6 +188,7 @@
     <Build Include="dbo\Stored Procedures\Employee_GetTasks.sql" />
     <Build Include="dbo\Stored Procedures\Approver_GetTasksForMe.sql" />
     <Build Include="dbo\Views\ApproverAssignments.sql" />
+    <Build Include="dbo\Stored Procedures\Milestone_GetForTask.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Rod-Local.publish.xml" />
