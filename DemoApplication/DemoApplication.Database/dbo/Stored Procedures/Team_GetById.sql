@@ -18,13 +18,7 @@ BEGIN
 	EXECUTE dbo.Team_GetMembers @Id
 
 	-- Getting all tasks for the team
-	SELECT Assignment.AssignmentId AS Id,
-		   Assignment.Status,
-		   Assignment.Name AS Name,  
-		   Person_Main.Employee_Cd AS PrincipalId, 		   
-		   Last_Name_Txt + ' ' + First_Name_Txt AS PrincipalName, 
-		   Assignment.DueDate AS DueDate
-	FROM Assignment INNER JOIN Person_Main ON Assignment.Employee_Cd = Person_Main.Employee_Cd
-	WHERE Assignment.Principal_Cd = @Id
+	SELECT * FROM ApproverAssignments
+	WHERE PrincipalId = @Id
 
 END
